@@ -1,0 +1,37 @@
+
+-textures
+maze: ./resources/textures/maze.png
+end: ./resources/textures/end.jpg
+
+-blocks
+a: maze maze maze maze
+E: end end end end
+
+-size
+width: 20
+height: 20
+
+-map
+: aaaaaaaaaaaaaaaEaaaa
+: a  aa        a     a
+: aa   aa aaaa aaaaa a
+: a aa    a  a     a a
+: a   aaaaaa aa aa a a
+: a a a   a   aa   a a
+: a a   a  aa    aaa a
+: a aaaaaa    aaa    a
+: a     a aaaaa   aa a
+: aaaaa a       aa a a
+: a   a  aaa aaa   a a
+: a a  a     a aa a  a
+: a  a aaaa aa    a aa
+: aa a     a   a a   a
+: a   a a a  aa  a a a
+: a a  a a  aaa aa a a
+: a  aa    a a  a   aa
+: aa    a aa a aa a  a
+: a  a a     a     a a
+: aaaaaaaaaaaaaaaaaaaa
+
+-player
+spawn: 10.50 9.50

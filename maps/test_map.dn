@@ -1,0 +1,28 @@
+-textures
+concrete: resources/textures/concrete.jpg
+concrete2: resources/textures/concrete2.jpg
+plaster: resources/textures/plaster.jpg
+
+-blocks
+a: concrete concrete concrete concrete
+b: plaster plaster plaster plaster
+c: plaster concrete2 plaster concrete2
+
+-size
+height: 10
+width: 10
+
+-player
+spawn: 3.0 3.0
+
+-map
+: aaaaaaaaaa
+: a        a
+: aa       a
+: a        a
+: a        a
+: a        a
+: a bb  c aa
+: a   b    a
+: a   b   aa
+: aaaaaa aaa
