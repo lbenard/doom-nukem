@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_button_input.c                                  :+:      :+:    :+:   */
+/*   ft_button_event.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 16:50:25 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/28 16:51:25 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/01 16:22:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/input.h"
 
-t_input_type	ft_button_input(int joystick, int button, int flags)
+t_input_event	ft_button_event(int joystick, int button, int flags)
 {
-	t_input_type	ret;
+	t_input_event	ret;
 
 	ret.id = 0;
 	ret.code = button;

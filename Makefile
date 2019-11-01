@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2019/10/27 01:55:49 by lbenard          ###   ########.fr        #
+#    Updated: 2019/11/01 22:32:02 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRCS_LIST		=	main.c														\
 					engine/array/destroy.c										\
 																				\
 					engine/blend/add.c											\
+																				\
+					engine/controller/xbox/perpendicular_axis.c					\
 																				\
 					engine/cursor/cursor.c										\
 					engine/cursor/cursor_from_file.c							\
@@ -79,6 +81,21 @@ SRCS_LIST		=	main.c														\
 					engine/game/loop.c											\
 					engine/game/close.c											\
 					engine/game/stop.c											\
+																				\
+					engine/input/ft_key_event.c									\
+					engine/input/ft_mouse_event.c								\
+					engine/input/ft_stick_event.c								\
+					engine/input/ft_button_event.c								\
+					engine/input/ft_input_set.c									\
+					engine/input/input_set_get_uid.c							\
+					engine/input/input.c										\
+					engine/input/init.c											\
+					engine/input/register.c										\
+					engine/input/get_id.c										\
+					engine/input/attach.c										\
+					engine/input/get.c											\
+					engine/input/update.c										\
+					engine/input/destroy.c										\
 																				\
 					engine/sfml/image/image_from_file.c							\
 					engine/sfml/render_texture/render_texture.c					\

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 12:51:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/01 16:10:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "engine/module.h"
 # include "engine/window.h"
+# include "engine/input.h"
 # include "engine/scene.h"
 # include "types.h"
 # include "engine/event_handler.h"
@@ -27,6 +28,7 @@ typedef struct				s_game
 	t_module		module;
 	t_window		window;
 	t_scene			*scene;
+	t_input			input;
 	t_event_handler	event_handler;
 }							t_game;
 

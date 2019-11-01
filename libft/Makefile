@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 18:02:14 by lbenard           #+#    #+#              #
-#    Updated: 2019/10/10 21:43:40 by lbenard          ###   ########.fr        #
+#    Updated: 2019/11/01 16:02:43 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,6 +61,9 @@ SRCS_LIST		=	containers/list/init_list_head.c		\
 					maths/maths/ft_abs.c					\
 					maths/maths/ft_max.c					\
 					maths/maths/ft_min.c					\
+					maths/maths/ft_fabs.c					\
+					maths/maths/ft_fmax.c					\
+					maths/maths/ft_fmin.c					\
 					maths/maths/ft_atoi.c					\
 					maths/maths/ft_atof.c					\
 					maths/maths/ft_itoa.c					\

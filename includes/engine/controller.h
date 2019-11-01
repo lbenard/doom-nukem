@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/27 19:28:36 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/27 19:37:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/01 22:30:32 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 # define XBOX_DPAD_Y 7
 # define XBOX_LTRIGGER 2
 # define XBOX_RTRIGGER 3
+
+int	xbox_perpendicular_axis(int axis);
 
 /*
 ** Buttons

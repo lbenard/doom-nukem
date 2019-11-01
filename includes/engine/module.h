@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/29 00:44:54 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 15:50:25 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/10/30 22:58:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,10 @@ t_result				init_module(t_module *self);
 void					module_add_smodule(t_module *const self,
 							const t_smodule_factory factory,
 							void *const module);
-void					module_add_non_owned_smodule(t_module *const self,
-							const t_smodule_factory factory,
-							void *const module);
 void					module_remove_smodule(t_module *const self,
 							const void *const module_ref);
 
 void					module_add_hmodule(t_module *const self,
-							const t_hmodule_factory factory,
-							void **const module);
-void					module_add_non_owned_hmodule(t_module *const self,
 							const t_hmodule_factory factory,
 							void **const module);
 void					module_remove_hmodule(t_module *const self,

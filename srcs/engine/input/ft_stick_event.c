@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stick_input.c                                   :+:      :+:    :+:   */
+/*   ft_stick_event.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 16:46:18 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/28 16:49:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/01 16:22:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/input.h"
 
-t_input_type	ft_stick_input(int joystick,
+t_input_event	ft_stick_event(int joystick,
 					int stick,
 					float dead_zone,
 					int flags)
 {
-	t_input_type	ret;
+	t_input_event	ret;
 
 	ret.id = 0;
 	ret.code = stick;

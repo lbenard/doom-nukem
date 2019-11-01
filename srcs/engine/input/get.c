@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maths.h                                            :+:      :+:    :+:   */
+/*   get.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/19 17:47:43 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/01 16:00:54 by lbenard          ###   ########.fr       */
+/*   Created: 2019/10/30 22:06:59 by lbenard           #+#    #+#             */
+/*   Updated: 2019/11/01 16:43:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATHS_H
-# define MATHS_H
+#include "engine/input.h"
 
-# include <string.h>
+float	input_get(t_input *const self, const t_input_id id)
+{
+	size_t		i;
+	size_t		table_size;
+	t_input_set	*set;
 
-# define PI 3.14159265359
-# define LOG2 0.693147
-
-int		ft_abs(int i);
-int		ft_min(int a, int b);
-int		ft_max(int a, int b);
-
-float	ft_fabs(float i);
-float	ft_fmin(float a, float b);
-float	ft_fmax(float a, float b);
-
-int		ft_atoi(const char *str);
-double	ft_atof(const char *str);
-char	*ft_itoa(int n);
-
-size_t	ft_nblen(int n);
-
-#endif
+	i = 0;
+	table_size = self->table.size / sizeof(t_input_set);
+	while (i < table_size)
+	{
+		set = (t_input_set*)self->table.data + i;
+		if (set->id == id)
+			return (set->value);
+		i++;
+	}
+	return (0.0f);
+}

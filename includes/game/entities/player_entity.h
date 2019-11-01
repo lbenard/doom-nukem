@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/10 22:22:08 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/01 22:18:03 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "engine/entity_node.h"
 # include "engine/scene.h"
 # include "engine/map.h"
+# include "engine/input.h"
 
 /*
 ** Corners collision detection
@@ -42,6 +43,10 @@ typedef struct		s_player_entity
 	t_event_handler		event_handler;
 	const t_map			*map_ref;
 	float				speed;
+	t_input_id			forward;
+	t_input_id			backward;
+	t_input_id			left;
+	t_input_id			right;
 }					t_player_entity;
 
 typedef struct		s_player_entity_args
