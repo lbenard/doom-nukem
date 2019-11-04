@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 12:57:30 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/01 22:18:55 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/02 16:48:58 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_player_entity	*new_player_entity(const t_player_entity_args *const args)
 	ret->backward = input_get_id(&game_singleton()->input, "Backward");
 	ret->left = input_get_id(&game_singleton()->input, "Left");
 	ret->right = input_get_id(&game_singleton()->input, "Right");
+	ret->sprint = input_get_id(&game_singleton()->input, "Sprint");
 	if (ret->super.module.has_error)
 	{
 		free_player_entity(ret);

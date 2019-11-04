@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 16:50:53 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/27 01:22:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/04 01:57:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ typedef struct		s_ray
 {
 	t_vec2f			start;
 	t_vec2f			hit;
+	t_wall			*wall;
 	float			perpendicular_distance;
+	float			texture_ratio;
 	// const t_image	*texture;
-	// float			texture_ratio;
 }					t_ray;
 
 t_ray				ft_ray(const t_vec2f player_position,

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/02 00:04:15 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/04 03:51:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,48 +24,38 @@ void	register_inputs(t_game *const game)
 {
 	input_register(&game->input, "Forward");
 	int forward = input_get_id(&game->input, "Forward");
-	input_attach(&game->input,
-		forward,
-		ft_key_event(sfKeyW, KEY_HOLD));
-	input_attach(&game->input,
-		forward,
-		ft_key_event(sfKeyUp, KEY_HOLD));
-	input_attach(&game->input,
-		forward,
-		ft_stick_event(0, XBOX_LSTICK_Y, 15.0f, STICK_NEGATIVE | INVERT_INPUT));
+	input_attach(&game->input, forward, ft_key_event(sfKeyW, KEY_HOLD));
+	input_attach(&game->input, forward, ft_key_event(sfKeyUp, KEY_HOLD));
+	input_attach(&game->input, forward,
+		ft_stick_event(0, XBOX_LSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 
 
 	input_register(&game->input, "Backward");
 	int backward = input_get_id(&game->input, "Backward");
-	input_attach(&game->input,
-		backward,
-		ft_key_event(sfKeyS, KEY_HOLD));
-	input_attach(&game->input,
-		backward,
-		ft_key_event(sfKeyDown, KEY_HOLD));
-	input_attach(&game->input,
-		backward,
-		ft_stick_event(0, XBOX_LSTICK_Y, 15.0f, STICK_POSITIVE));
+	input_attach(&game->input, backward, ft_key_event(sfKeyS, KEY_HOLD));
+	input_attach(&game->input, backward, ft_key_event(sfKeyDown, KEY_HOLD));
+	input_attach(&game->input, backward,
+		ft_stick_event(0, XBOX_LSTICK_Y, 20.0f, STICK_POSITIVE));
 
 
 	input_register(&game->input, "Left");
 	int left = input_get_id(&game->input, "Left");
-	input_attach(&game->input,
-		left,
-		ft_key_event(sfKeyA, KEY_HOLD));
-	input_attach(&game->input,
-		left,
-		ft_stick_event(0, XBOX_LSTICK_X, 15.0f, STICK_NEGATIVE | INVERT_INPUT));
+	input_attach(&game->input, left, ft_key_event(sfKeyA, KEY_HOLD));
+	input_attach(&game->input, left,
+		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 
 
 	input_register(&game->input, "Right");
 	int right = input_get_id(&game->input, "Right");
-	input_attach(&game->input,
-		right,
-		ft_key_event(sfKeyD, KEY_HOLD));
-	input_attach(&game->input,
-		right,
-		ft_stick_event(0, XBOX_LSTICK_X, 15.0f, STICK_POSITIVE));
+	input_attach(&game->input, right, ft_key_event(sfKeyD, KEY_HOLD));
+	input_attach(&game->input, right,
+		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
+	
+	input_register(&game->input, "Sprint");
+	int	sprint = input_get_id(&game->input, "Sprint");
+	input_attach(&game->input, sprint, ft_key_event(sfKeyLShift, KEY_HOLD));
+	input_attach(&game->input, sprint,
+		ft_button_event(0, XBOX_A, INPUT_NO_FLAG));
 
 	input_register(&game->input, "Quit");
 	int	quit = input_get_id(&game->input, "Quit");
@@ -95,10 +85,11 @@ int	main(void)
 	t_game	*game;
 	
 	game = game_singleton();
-	if (start_game(game_args("Doom Nukem", ft_usize(640, 480))) == ERROR)
+	// if (start_game(game_args("Doom Nukem", ft_usize(640, 480))) == ERROR)
+	if (start_game(game_args("Doom Nukem", ft_usize(1200, 600))) == ERROR)
 		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
-	game_set_scene(menu_scene(&game->window));
+	game_set_scene(raycasting_scene(&game->window));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event(NULL)))
 	{

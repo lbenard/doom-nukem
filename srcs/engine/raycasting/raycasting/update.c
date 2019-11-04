@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:51:27 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/27 01:23:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/04 03:48:09 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@ static float	float_abs(float x)
 	return ((x < 0.0f) ? -x : x);
 }
 
+#include <stdio.h>
+
 void	raycasting_update(t_raycasting *const self)
 {
 	size_t	i;
+	t_ray	*ray;
 	float	camera_x;
 	t_vec2f	ray_dir;
 	t_vec2f	delta_dist;
@@ -34,6 +37,7 @@ void	raycasting_update(t_raycasting *const self)
 	i = 0;
 	while (i < self->columns_number)
 	{
+		ray = ((t_ray*)self->columns.array) + i;
 		camera_x = 2.0f * i / (float)self->columns_number - 1;
 		ray_dir = ft_vec2f(self->dir.x + self->plane.x * camera_x,
 			self->dir.y + self->plane.y * camera_x);
@@ -78,14 +82,31 @@ void	raycasting_update(t_raycasting *const self)
 			hit = self->map->map[map.y * self->map->size.x + map.x]
 				.north_texture_ref != NULL;
 		}
-		((t_ray*)self->columns.array)[i].start = self->pos;
+		ray->wall = &self->map->map[map.y * self->map->size.x + map.x];
+		ray->start = self->pos;
+
 		// self->columns.array)[i].hit = 
 		if (side == 0)
-			((t_ray*)self->columns.array)[i].perpendicular_distance =
+			ray->perpendicular_distance =
 				(map.x - self->pos.x + (1.0f - step.x) / 2.0f) / ray_dir.x;
 		else
-			((t_ray*)self->columns.array)[i].perpendicular_distance =
+			ray->perpendicular_distance =
 				(map.y - self->pos.y + (1.0f - step.y) / 2.0f) / ray_dir.y;
+		
+		// t_vec2f	wall = ft_vec2f(0.0f, 0.0f); //where exactly the wall was hit
+		float	wall;
+		if (side == 0)
+			wall = self->pos.y
+				+ ray->perpendicular_distance
+				* ray_dir.y;
+		else
+			wall = self->pos.x
+				+ ray->perpendicular_distance
+				* ray_dir.x;
+		wall -= (int)wall;
+		ray->texture_ratio = wall;
+		// printf("hit at %f %f\n", ray->hit.x, ray->hit.y);
+		
 		i++;
 	}
 }

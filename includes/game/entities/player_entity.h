@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/01 22:18:03 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/02 16:48:38 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_player_entity
 	t_input_id			backward;
 	t_input_id			left;
 	t_input_id			right;
+	t_input_id			sprint;
 }					t_player_entity;
 
 typedef struct		s_player_entity_args

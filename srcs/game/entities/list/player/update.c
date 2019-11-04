@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/01 22:56:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/02 16:49:40 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void			player_entity_update(t_player_entity *const self)
 	printf("velocity: %f %f %f\n", velocity.x, velocity.y, velocity.z);
 	velocity = vec3f_scalar(velocity, self->speed);
 	printf("velocity: %f %f %f\n", velocity.x, velocity.y, velocity.z);
-	if (sfKeyboard_isKeyPressed(sfKeyLShift))
+	if (input_get(&game_singleton()->input, self->sprint))
 		velocity = vec3f_scalar(velocity, 2.0f);
 	velocity = move(self->map_ref, self->super.transform.position, velocity);
 	self->super.transform.position.x += velocity.x;
