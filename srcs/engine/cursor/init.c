@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 23:45:23 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 12:51:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 04:50:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 t_result	init_cursor(t_cursor *const self, const t_cursor_args *const args)
 {
 	init_module(&self->module);
-	module_add_smodule(&self->module, frame(args->size, args->fill_color),
-		&self->cursor);
+	module_add(&self->module, &self->cursor,
+		frame(args->size, args->fill_color));
 	self->is_visible = TRUE;
 	if (self->module.has_error)
 	{

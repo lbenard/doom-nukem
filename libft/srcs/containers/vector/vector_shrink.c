@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 18:24:04 by lbenard           #+#    #+#             */
-/*   Updated: 2019/02/20 20:01:11 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 20:32:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "containers/vector.h"
 #include "ft/mem.h"
 
-t_result	vector_shrink(t_vector *vector)
+t_result	vector_shrink(t_vector *const vector)
 {
 	void	*new_data;
 

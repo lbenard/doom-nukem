@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 18:22:53 by lbenard           #+#    #+#             */
-/*   Updated: 2019/02/20 18:59:55 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 04:08:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 t_mat4f	ft_mat4f_identity(void)
 {
-	return ((t_mat4f)(struct s_mat4f_data) {
+	t_mat4f	mat;
+
+	mat.d = (struct s_mat4f_data) {
 		1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
 		0, 0, 0, 1
-	});
+	};
+	return (mat);
 }

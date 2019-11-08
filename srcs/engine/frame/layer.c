@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 20:39:19 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/26 22:59:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/07 19:39:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,16 @@ void			frame_layer(t_frame *const self,
 					t_u32 (*const blend)
 						(const t_rgba *const back, const t_rgba *const front))
 {
-	t_usize	start;
+	t_usize	shift;
 	t_usize	size;
+	size_t	position;
 	t_usize	i;
 
 	if (pos.x >= (ssize_t)self->size.x || pos.y >= (ssize_t)self->size.y
 		|| pos.x + (ssize_t)layer->size.x <= 0
 		|| pos.y + (ssize_t)layer->size.y <= 0)
 		return ;
-	start = ft_usize((pos.x < 0) ? -pos.x : 0, (pos.y < 0) ? -pos.y : 0);
+	shift = ft_usize((pos.x < 0) ? -pos.x : 0, (pos.y < 0) ? -pos.y : 0);
 	size = frame_size(self, layer, pos);
 	i.y = 0;
 	while (i.y < size.y)
@@ -46,12 +47,12 @@ void			frame_layer(t_frame *const self,
 		i.x = 0;
 		while (i.x < size.x)
 		{
-			((t_u32*)self->frame.array)[self->size.x * (pos.y + start.y + i.y)
-				+ (pos.x + start.x + i.x)] = blend(
-					(t_rgba*)(((t_u32*)self->frame.array) + self->size.x
-					* (pos.y + start.y + i.y) + (pos.x + start.x + i.x)),
-					(t_rgba*)(((t_u32*)layer->frame.array) + layer->size.x
-					* (start.y + i.y) + (start.x + i.x)));
+			position = self->size.x * (pos.y + shift.y + i.y)
+				+ (pos.x + shift.x + i.x);
+			((t_u32*)self->frame.array)[position] = blend(
+				(t_rgba*)self->frame.array + position,
+				(t_rgba*)layer->frame.array + layer->size.x * (shift.y + i.y)
+					+ (shift.x + i.x));
 			i.x++;
 		}
 		i.y++;

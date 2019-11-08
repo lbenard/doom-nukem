@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2019/11/01 22:32:02 by lbenard          ###   ########.fr        #
+#    Updated: 2019/11/06 20:03:00 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,8 +73,7 @@ SRCS_LIST		=	main.c														\
 					engine/frame/layer.c										\
 					engine/frame/destroy.c										\
 																				\
-					engine/game/args.c											\
-					engine/game/descriptor.c									\
+					engine/game/game.c											\
 					engine/game/singleton.c										\
 					engine/game/start.c											\
 					engine/game/set_scene.c										\
@@ -97,11 +96,15 @@ SRCS_LIST		=	main.c														\
 					engine/input/update.c										\
 					engine/input/destroy.c										\
 																				\
-					engine/sfml/image/image_from_file.c							\
+					engine/sfml/image/image.c									\
+					engine/sfml/image/init.c									\
+					engine/sfml/image/destroy.c									\
 					engine/sfml/render_texture/render_texture.c					\
-					engine/sfml/render_texture/new.c							\
-					engine/sfml/render_texture/free.c							\
+					engine/sfml/render_texture/init.c							\
+					engine/sfml/render_texture/destroy.c						\
 					engine/sfml/sprite/sprite.c									\
+					engine/sfml/sprite/init.c									\
+					engine/sfml/sprite/destroy.c								\
 																				\
 					engine/string/string.c										\
 					engine/string/init.c										\
@@ -113,12 +116,16 @@ SRCS_LIST		=	main.c														\
 					engine/lookup_table/sine.c									\
 					engine/lookup_table/tangent.c								\
 																				\
-					engine/map/new_block_node.c									\
-					engine/map/block_from_key.c									\
-					engine/map/free_block_list.c								\
-					engine/map/new_texture_node.c								\
+					engine/map/texture_node.c									\
+					engine/map/init_texture_node.c								\
 					engine/map/texture_from_key.c								\
+					engine/map/destroy_texture_node.c							\
 					engine/map/free_texture_list.c								\
+					engine/map/block_node.c										\
+					engine/map/init_block_node.c								\
+					engine/map/block_from_key.c									\
+					engine/map/destroy_block_node.c								\
+					engine/map/free_block_list.c								\
 					engine/map/map.c											\
 					engine/map/init.c											\
 					engine/map/parse_texture_list.c								\
@@ -127,21 +134,6 @@ SRCS_LIST		=	main.c														\
 					engine/map/parse_map.c										\
 					engine/map/parse_player.c									\
 					engine/map/destroy.c										\
-																				\
-					engine/module/smodule/ft_smodule_descriptor.c				\
-					engine/module/smodule/ft_smodule_factory.c					\
-					engine/module/smodule/new_smodule.c							\
-					engine/module/smodule/free_smodule.c						\
-					engine/module/hmodule/ft_hmodule_descriptor.c				\
-					engine/module/hmodule/ft_hmodule_factory.c					\
-					engine/module/hmodule/new_hmodule.c							\
-					engine/module/hmodule/free_hmodule.c						\
-					engine/module/init.c										\
-					engine/module/add_smodule.c									\
-					engine/module/remove_smodule.c								\
-					engine/module/add_hmodule.c									\
-					engine/module/remove_hmodule.c								\
-					engine/module/destroy_module.c								\
 																				\
 					engine/parsing/dn_read_file.c								\
 					engine/parsing/dn_is_flag_correct.c							\
@@ -179,7 +171,7 @@ SRCS_LIST		=	main.c														\
 																				\
 					game/entities/list/player/ft_corners.c						\
 					game/entities/list/player/player_entity.c					\
-					game/entities/list/player/new.c								\
+					game/entities/list/player/init.c							\
 					game/entities/list/player/update.c							\
 					game/entities/list/player/is_colliding.c					\
 					game/entities/list/player/is_vertical_collide.c				\
@@ -189,47 +181,47 @@ SRCS_LIST		=	main.c														\
 					game/entities/list/player/south_east_rebound.c				\
 					game/entities/list/player/south_west_rebound.c				\
 					game/entities/list/player/north_west_rebound.c				\
-					game/entities/list/player/free.c							\
+					game/entities/list/player/destroy.c							\
 																				\
 					game/entities/list/button/button_entity.c					\
 					game/entities/list/button/dynamic_button_entity.c			\
-					game/entities/list/button/new.c								\
-					game/entities/list/button/new_dynamic.c						\
+					game/entities/list/button/init.c							\
+					game/entities/list/button/init_dynamic.c					\
 					game/entities/list/button/update.c							\
 					game/entities/list/button/render.c							\
-					game/entities/list/button/free.c							\
+					game/entities/list/button/destroy.c							\
 																				\
 					game/entities/list/image/image_entity_from_file.c			\
-					game/entities/list/image/new_from_file.c					\
+					game/entities/list/image/init_from_file.c					\
 					game/entities/list/image/update.c							\
 					game/entities/list/image/render.c							\
-					game/entities/list/image/free.c								\
+					game/entities/list/image/destroy.c							\
 																				\
 					game/entities/list/minimap/minimap_entity.c					\
-					game/entities/list/minimap/new.c							\
+					game/entities/list/minimap/init.c							\
 					game/entities/list/minimap/update.c							\
 					game/entities/list/minimap/render.c							\
-					game/entities/list/minimap/free.c							\
+					game/entities/list/minimap/destroy.c						\
 																				\
 					game/events/close_game_event.c								\
 																				\
 					game/scenes/list/benchmark/benchmark_scene.c				\
-					game/scenes/list/benchmark/new.c							\
+					game/scenes/list/benchmark/init.c							\
 					game/scenes/list/benchmark/update.c							\
 					game/scenes/list/benchmark/render.c							\
-					game/scenes/list/benchmark/free.c							\
+					game/scenes/list/benchmark/destroy.c						\
 																				\
 					game/scenes/list/menu/menu_scene.c							\
-					game/scenes/list/menu/new.c									\
+					game/scenes/list/menu/init.c								\
 					game/scenes/list/menu/update.c								\
 					game/scenes/list/menu/render.c								\
-					game/scenes/list/menu/free.c								\
+					game/scenes/list/menu/destroy.c								\
 																				\
 					game/scenes/list/raycasting/raycasting_scene.c				\
-					game/scenes/list/raycasting/new.c							\
+					game/scenes/list/raycasting/init.c							\
 					game/scenes/list/raycasting/update.c						\
 					game/scenes/list/raycasting/render.c						\
-					game/scenes/list/raycasting/free.c
+					game/scenes/list/raycasting/destroy.c
 
 UNAME			=	$(shell uname)
 
@@ -269,7 +261,7 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -Wno-deprecated -g
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)

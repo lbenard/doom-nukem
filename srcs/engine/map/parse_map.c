@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:08:31 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 12:04:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 16:10:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ static t_result	wall_from_block(t_list_head *const textures,
 
 	if (!(texture = texture_from_key(textures, block->north_texture_name)))
 		return (throw_result_str("wall_from_block()", "bad north texture"));
-	wall->north_texture_ref = texture->image;
+	wall->north_texture_ref = &texture->image;
 	if (!(texture = texture_from_key(textures, block->east_texture_name)))
 		return (throw_result_str("wall_from_block()", "bad east texture"));
-	wall->east_texture_ref = texture->image;
+	wall->east_texture_ref = &texture->image;
 	if (!(texture = texture_from_key(textures, block->south_texture_name)))
 		return (throw_result_str("wall_from_block()", "bad south texture"));
-	wall->south_texture_ref = texture->image;
+	wall->south_texture_ref = &texture->image;
 	if (!(texture = texture_from_key(textures, block->west_texture_name)))
 		return (throw_result_str("wall_from_block()", "bad west texture"));
-	wall->west_texture_ref = texture->image;
+	wall->west_texture_ref = &texture->image;
 	return (OK);
 }
 

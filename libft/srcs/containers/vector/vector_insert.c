@@ -6,15 +6,17 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 18:37:54 by lbenard           #+#    #+#             */
-/*   Updated: 2019/02/20 21:16:27 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 20:32:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "containers/vector.h"
 #include "ft/mem.h"
 
-t_result	vector_insert(t_vector *vector, size_t pos, const void *data,
-	size_t size)
+t_result	vector_insert(t_vector *const vector,
+				size_t pos,
+				const void *data,
+				size_t size)
 {
 	size_t	new_capacity;
 

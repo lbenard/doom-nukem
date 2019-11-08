@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:02:30 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 12:04:27 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 19:57:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_result	map_parse_block_list(t_map *const self, char *blocks_flag_str)
 	p = ft_skipchr(blocks_flag_str, '\n');
 	while (*p)
 	{
-		if (!(new_node = new_block_node(dn_get_key(p),
-			dn_get_values(p, ' '))))
+		if (!(new_node = static_module_allocate(block_node(dn_get_key(p),
+			dn_get_values(p, ' ')))))
 		{
 			free(blocks_flag_str);
 			free_block_list(&self->blocks);

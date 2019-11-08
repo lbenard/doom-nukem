@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 04:36:35 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/27 01:37:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 16:12:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 
 static void	add_modules(t_window *const self, const t_window_args *const args)
 {
-	module_add_smodule(&self->module, string(args->name), &self->name);
-	module_add_smodule(&self->module,
-		frame(args->size, ft_rgba(0, 0, 0, 255)), &self->frame);
-	module_add_smodule(&self->module,
-		cursor_from_file("resources/cursors/cursor-upscale.png"),
-		&self->cursor);
+	module_add(&self->module, &self->name, string(args->name));
+	module_add(&self->module, &self->frame,
+		frame(args->size, ft_rgba(0, 0, 0, 255)));
+	module_add(&self->module, &self->cursor,
+		cursor_from_file("resources/cursors/cursor-upscale.png"));
 }
 
 static void	init_vars(t_window *const self, const t_window_args *const args)

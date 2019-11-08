@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 07:17:53 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 12:51:03 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 05:11:22 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,23 @@
 
 # include <SFML/Graphics.h>
 # include "sizes/usize.h"
-# include "engine/module.h"
+# include "containers/module.h"
 
-typedef sfRenderTexture	t_render_texture;
+typedef struct	s_render_texture
+{
+	sfRenderTexture	*texture;
+	t_usize			size;
+}				t_render_texture;
 
-typedef struct			s_render_texture_args
+typedef struct	s_render_texture_args
 {
 	t_usize	size;
-}						t_render_texture_args;
+}				t_render_texture_args;
 
-t_hmodule_factory	render_texture(const t_usize size);
+t_constructor	render_texture(const t_usize size);
 
-t_render_texture		*new_render_texture(
-							const t_render_texture_args *const args);
-void					free_render_texture(t_render_texture *const self);
+t_result		init_render_texture(t_render_texture *const self,
+					const t_render_texture_args *const args);
+void			destroy_render_texture(t_render_texture *const self);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 18:02:14 by lbenard           #+#    #+#              #
-#    Updated: 2019/11/01 16:02:43 by lbenard          ###   ########.fr        #
+#    Updated: 2019/11/06 20:35:21 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,17 @@ SRCS_LIST		=	containers/list/init_list_head.c		\
 					containers/list/lst_remove.c			\
 					containers/list/lst_strjoin.c			\
 					containers/list/free_lst.c				\
+					containers/module/ft_constructor.c		\
+					containers/module/init_module_node.c	\
+					containers/module/destroy_module_node.c	\
+					containers/module/init.c				\
+					containers/module/add.c					\
+					containers/module/remove.c				\
+					containers/module/allocate.c			\
+					containers/module/create.c				\
+					containers/module/destroy.c				\
+					containers/vector/vector.c				\
+					containers/vector/vector_data.c			\
 					containers/vector/init_vector.c			\
 					containers/vector/init_vector_data.c	\
 					containers/vector/vector_reserve.c		\
@@ -195,7 +206,7 @@ OBJS_LIST		=	$(SRCS_LIST:.c=.o)
 OBJS_FOLDER		=	./objs/
 OBJS			=	$(addprefix $(OBJS_FOLDER), $(OBJS_LIST))
 INCLUDES		=	-I includes/
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -pedantic
 
 # Colors
 BOLD			=	\e[1m

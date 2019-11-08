@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 17:27:20 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/30 19:57:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 20:48:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 t_result	init_input(t_input *const self)
 {
 	init_module(&self->module);
-	module_add_smodule(&self->module, event_handler(self), &self->handler);
-	init_vector(&self->table);
-	init_vector(&self->events);
+	module_add(&self->module, &self->handler, event_handler(self));
+	module_add(&self->module, &self->table, vector());
+	module_add(&self->module, &self->events, vector());
 	if (self->module.has_error)
 	{
 		destroy_input(self);

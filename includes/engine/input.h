@@ -6,24 +6,24 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 10:39:01 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/01 16:18:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 04:40:18 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INPUT_H
 # define INPUT_H
 
-# include "engine/module.h"
+# include "containers/module.h"
 # include "engine/event_handler.h"
 # include "containers/vector.h"
 
-typedef enum		e_input_type
+typedef enum	e_input_type
 {
 	KEY,
 	MOUSE,
 	BUTTON,
 	STICK
-}					t_input_type;
+}				t_input_type;
 
 # define INPUT_NO_FLAG (0)
 # define INVERT_INPUT (1 << 0)
@@ -32,10 +32,10 @@ typedef enum		e_input_type
 # define STICK_NEGATIVE (1 << 3)
 # define STICK_POSITIVE (1 << 4)
 
-typedef size_t		t_input_id;
+typedef size_t	t_input_id;
 # define INPUT_NULL_ID (t_input_id)0
 
-typedef struct		s_input_event
+typedef struct	s_input_event
 {
 	t_input_id			id;
 	int					code;
@@ -60,48 +60,48 @@ typedef struct		s_input_event
 		t_bool	negative;
 		t_bool	positive;
 	}					stick;
-}					t_input_event;
+}				t_input_event;
 
-t_input_event		ft_key_event(int input, int flags);
-t_input_event		ft_mouse_event(int input, int flags);
-t_input_event		ft_stick_event(int joystick,
-						int stick,
-						float dead_zone,
-						int flags);
-t_input_event		ft_button_event(int joystick,
-						int button,
-						int flags);
+t_input_event	ft_key_event(int input, int flags);
+t_input_event	ft_mouse_event(int input, int flags);
+t_input_event	ft_stick_event(int joystick,
+					int stick,
+					float dead_zone,
+					int flags);
+t_input_event	ft_button_event(int joystick,
+					int button,
+					int flags);
 
-typedef struct		s_input_set
+typedef struct	s_input_set
 {
 	const char	*key;
 	t_input_id	id;
 	float		value;
-}					t_input_set;
+}				t_input_set;
 
-t_input_set			ft_input_set(const char *const key, const t_input_id id);
-t_input_id			input_set_get_uid(void);
+t_input_set		ft_input_set(const char *const key, const t_input_id id);
+t_input_id		input_set_get_uid(void);
 
-typedef struct		s_input
+typedef struct	s_input
 {
 	t_module		module;
 	t_event_handler	handler;
 	t_vector		table;
 	t_vector		events;
-}					t_input;
+}				t_input;
 
-t_smodule_factory	input(void);
+t_constructor	input(void);
 
-t_result			init_input(t_input *const self);
+t_result		init_input(t_input *const self);
 
-void				input_register(t_input *const self, const char *const key);
-t_input_id			input_get_id(t_input *const self, const char *const key);
-void				input_attach(t_input *const self,
-						const t_input_id id,
-						t_input_event type);
-float				input_get(t_input *const self, const t_input_id id);
-void				input_update(t_input *const self);
+void			input_register(t_input *const self, const char *const key);
+t_input_id		input_get_id(t_input *const self, const char *const key);
+void			input_attach(t_input *const self,
+					const t_input_id id,
+					t_input_event type);
+float			input_get(t_input *const self, const t_input_id id);
+void			input_update(t_input *const self);
 
-void				destroy_input(t_input *const self);
+void			destroy_input(t_input *const self);
 
 #endif

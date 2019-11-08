@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 21:08:58 by lbenard           #+#    #+#             */
-/*   Updated: 2019/02/20 18:31:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 20:32:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "containers/vector.h"
 #include "ft/mem.h"
 
-t_result	vector_reserve(t_vector *vector, size_t capacity)
+t_result	vector_reserve(t_vector *const vector, size_t capacity)
 {
 	void	*new_data;
 

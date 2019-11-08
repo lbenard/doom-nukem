@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 12:09:19 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 12:51:02 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 04:38:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define BLOCK_ENTITY_H
 
 # include "engine/entity.h"
-# include "engine/module.h"
+# include "containers/module.h"
 # include "maths/vec2i.h"
 
 typedef struct	s_block_entity

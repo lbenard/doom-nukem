@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:22:43 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/27 00:51:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 16:16:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ t_result	init_scene(t_scene *const self,
 				void (*render_fn)())
 {
 	init_module(&self->module);
-	module_add_smodule(&self->module, string(name), &self->name);
-	module_add_smodule(&self->module, entity_list(), &self->entities);
-	module_add_smodule(&self->module, event_handler(self),
-		&self->input_manager);
+	module_add(&self->module, &self->name, string(name));
+	module_add(&self->module, &self->entities, entity_list());
+	module_add(&self->module, &self->input_manager, event_handler(self));
 	self->update_fn = update_fn;
 	self->render_fn = render_fn;
 	if (self->module.has_error)

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/04 03:51:44 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/07 18:37:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,17 @@ void	register_inputs(t_game *const game)
 	// input_get(&game->input, forward);
 }
 
-#include <stdio.h>
-
 int	main(void)
 {
 	t_game	*game;
 	
 	game = game_singleton();
-	// if (start_game(game_args("Doom Nukem", ft_usize(640, 480))) == ERROR)
-	if (start_game(game_args("Doom Nukem", ft_usize(1200, 600))) == ERROR)
+	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
+	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
 		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
-	game_set_scene(raycasting_scene(&game->window));
+	// game_set_scene(raycasting_scene(&game->window));
+	game_set_scene(menu_scene(&game->window));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event(NULL)))
 	{

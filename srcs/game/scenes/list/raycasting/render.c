@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/04 03:22:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 19:47:53 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ t_rgba	color(t_raycasting_scene *self,
 			int vertical_start)
 {
 	t_rgba			*texture;
-	sfVector2u		texture_size;
-	const t_image	*texture_used;
+	const t_image	*used_texture;
 	t_rgba			ret;
 
-	texture_used = (ray->wall->north_texture_ref) ? ray->wall->north_texture_ref : self->texture;
-	texture = (t_rgba*)sfImage_getPixelsPtr(texture_used);
-	texture_size = sfImage_getSize(texture_used);
-	ret.integer = texture[(int)(ray->texture_ratio * texture_size.x)
+	if (ray->wall->north_texture_ref)
+		used_texture = ray->wall->north_texture_ref;
+	else
+		used_texture = &self->texture;
+	texture = (t_rgba*)sfImage_getPixelsPtr(used_texture->image);
+	ret.integer = texture[(int)(ray->texture_ratio * used_texture->size.x)
 		+ (int)(((vertical_start) / (fb->size.y / ray->perpendicular_distance)
-		* texture_size.y)) * texture_size.x].integer;
+		* used_texture->size.y)) * used_texture->size.x].integer;
 	ret.c.r /= (ray->perpendicular_distance / 3.0f) + 1;
 	ret.c.g /= (ray->perpendicular_distance / 3.0f) + 1;
 	ret.c.b /= (ray->perpendicular_distance / 3.0f) + 1;

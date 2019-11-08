@@ -6,14 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/01 16:10:16 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 04:41:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
-# include "engine/module.h"
+# include "containers/module.h"
 # include "engine/window.h"
 # include "engine/input.h"
 # include "engine/scene.h"
@@ -23,33 +23,31 @@
 /*
 ** A module that represent the game instance, manages scenes and events
 */
-typedef struct				s_game
+typedef struct	s_game
 {
 	t_module		module;
 	t_window		window;
 	t_scene			*scene;
 	t_input			input;
 	t_event_handler	event_handler;
-}							t_game;
+}				t_game;
 
-typedef struct				s_game_args
+typedef struct	s_game_args
 {
 	const char	*name;
 	t_usize		window_size;
-}							t_game_args;
+}				t_game_args;
 
-t_game_args					*game_args(const char *const name,
-								const t_usize window_size);
-t_smodule_descriptor	game_descriptor(void);
+t_constructor	game(const char *const name, const t_usize window_size);
 
-t_game						*game_singleton(void);
+t_game			*game_singleton(void);
 
-t_result					start_game(const t_game_args *const args);
+t_result		start_game(const t_game_args *const args);
 
-t_result					game_set_scene(t_hmodule_factory factory);
-void						game_loop(void);
-void						game_close(void);
+t_result		game_set_scene(t_constructor constructor);
+void			game_loop(void);
+void			game_close(void);
 
-void						stop_game(void);
+void			stop_game(void);
 
 #endif

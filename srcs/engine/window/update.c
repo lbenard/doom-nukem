@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 00:13:32 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/27 01:34:29 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/07 15:10:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	window_update(t_window *const self)
 		frame_layer(&self->frame, &self->cursor.cursor, mouse_pos, blend_add);
 	}
 	frame_update(&self->frame);
-	sfRenderWindow_drawSprite(self->window, self->frame.sprite, NULL);
+	sfRenderWindow_drawSprite(self->window, self->frame.sprite.sprite, NULL);
 	sfRenderWindow_display(self->window);
 	frame_clear(&self->frame);
 }

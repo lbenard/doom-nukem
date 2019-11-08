@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 19:33:41 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/26 22:29:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/07 15:09:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	frame_update(t_frame *const self)
 	// sfText_setString(text, "test");
 	// sfText_setColor(text, sfColor_fromRGB(255, 255, 255));
 	sfTexture_updateFromPixels((sfTexture*)
-		sfRenderTexture_getTexture(self->render_texture),
+		sfRenderTexture_getTexture(self->render_texture.texture),
 		(sfUint8*)self->frame.array, self->size.x, self->size.y, 0, 0);
 	// sfRenderTexture_drawText(self->render_texture, text, NULL);
 	// sfRenderTexture_display(self->render_texture);

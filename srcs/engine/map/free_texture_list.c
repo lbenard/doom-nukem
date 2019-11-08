@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 19:51:06 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/03 17:27:54 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 16:07:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void	free_texture_list(t_list_head *list)
 	{
 		next = next->next;
 		node = (t_texture_node*)pos;
-		free((char*)node->key);
-		sfImage_destroy(node->image);
+		destroy_texture_node(node);
 		free(node);
 	}
 }

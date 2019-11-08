@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 23:01:37 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/10 22:19:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/06 04:38:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "types.h"
 # include "containers/vector.h"
-# include "engine/module.h"
+# include "containers/module.h"
 # include "engine/entity.h"
 
 typedef size_t		t_component_uid;
