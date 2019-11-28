@@ -6,22 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 00:28:41 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/04 13:04:30 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/18 18:30:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LOOKUP_TABLE_H
 # define LOOKUP_TABLE_H
 
-/*
-** Return the interpolated float result between the two float values
-*/
-float	lerp(float v0, float v1, float t);
-
-/*
-** Returns the percentage of value between start and end
-*/
-float	inverse_lerp(float v0, float v1, float value);
+# include "maths/maths.h"
 
 /*
 ** Lookup tables for costly mathematics operations

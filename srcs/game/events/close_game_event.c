@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 20:15:00 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/02 00:06:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/26 18:42:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 
 static void		close_game_event(t_game *game, sfEvent *event)
 {
-	(void)event;
 	if (input_get(&game_singleton()->input,
-			input_get_id(&game_singleton()->input, "Quit")) > 0.0f)
+			input_get_id(&game_singleton()->input, "Quit")) > 0.0f
+			|| event->type == sfEvtClosed)
 		window_close(&game->window);
 }
 
-t_callback_node	*new_close_game_event(void *params)
+t_callback_node	*new_close_game_event(void)
 {
 	t_callback_node	*node;
 
-	if (!(node = new_callback_node(close_game_event, params)))
+	if (!(node = new_callback_node(close_game_event, NULL)))
 	{
 		return (throw_error_str("new_close_game_event()",
 			"failed to create new close game event"));

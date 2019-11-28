@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.h                                           :+:      :+:    :+:   */
+/*   ft_ssabs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/17 20:15:19 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/26 18:42:40 by lbenard          ###   ########.fr       */
+/*   Created: 2019/11/18 21:23:08 by lbenard           #+#    #+#             */
+/*   Updated: 2019/11/18 21:23:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENTS_H
-# define EVENTS_H
+#include "maths/maths.h"
 
-# include "engine/game.h"
-# include <SFML/Window.h>
-
-t_callback_node	*new_close_game_event(void);
-
-#endif
+ssize_t	ft_ssabs(ssize_t i)
+{
+	return ((i < 0) ? -i : i);
+}

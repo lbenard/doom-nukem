@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lerp.c                                             :+:      :+:    :+:   */
+/*   ft_frame_transform_default.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/05 16:31:50 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/03 17:27:14 by lbenard          ###   ########.fr       */
+/*   Created: 2019/11/15 17:12:50 by lbenard           #+#    #+#             */
+/*   Updated: 2019/11/15 17:45:57 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine/lookup_table.h"
+#include "engine/frame.h"
 
-float	lerp(float v0, float v1, float t)
+t_frame_transform	ft_frame_transform_default(void)
 {
-	return ((1.0f - t) * v0 + t * v1);
+	t_frame_transform	ret;
+
+	ret.anchor = ft_vec2f(0.5f, 0.5f);
+	ret.position = ft_isize(0, 0);
+	ret.scale = ft_vec2f(1.0f, 1.0f);
+	ret.opacity = COLOR_OPAQUE;
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 16:15:26 by lbenard           #+#    #+#             */
-/*   Updated: 2019/07/21 15:38:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/15 17:14:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "types.h"
 # include "colors/hsv.h"
 # include "colors/rgb.h"
+
+# define COLOR_OPAQUE 255
 
 /*
 ** RGBA color

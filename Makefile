@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2019/11/06 20:03:00 by lbenard          ###   ########.fr        #
+#    Updated: 2019/11/18 19:03:01 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,12 @@ SRCS_LIST		=	main.c														\
 					engine/frame/clear.c										\
 					engine/frame/fill.c											\
 					engine/frame/layer.c										\
+					engine/frame/layer_opaque.c									\
+					engine/frame/coordinates.c									\
+					engine/frame/ft_frame_transform_default.c					\
+					engine/frame/ft_frame_transform_position.c					\
+					engine/frame/ft_frame_transform.c							\
+					engine/frame/layer_transform.c								\
 					engine/frame/destroy.c										\
 																				\
 					engine/game/game.c											\
@@ -112,7 +118,6 @@ SRCS_LIST		=	main.c														\
 					engine/string/destroy.c										\
 																				\
 					engine/lookup_table/cosine.c								\
-					engine/lookup_table/lerp.c									\
 					engine/lookup_table/sine.c									\
 					engine/lookup_table/tangent.c								\
 																				\

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   inverse_lerp.c                                     :+:      :+:    :+:   */
+/*   ft_smin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/06 12:11:10 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/03 17:27:05 by lbenard          ###   ########.fr       */
+/*   Created: 2019/11/18 21:22:03 by lbenard           #+#    #+#             */
+/*   Updated: 2019/11/18 21:23:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine/lookup_table.h"
+#include "maths/maths.h"
 
-float	inverse_lerp(float v0, float v1, float value)
+size_t	ft_smin(size_t a, size_t b)
 {
-	return ((value - v0) / (v1 - v0));
+	return ((a < b) ? a : b);
 }

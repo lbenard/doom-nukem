@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.h                                           :+:      :+:    :+:   */
+/*   ft_frame_transform_position.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/17 20:15:19 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/26 18:42:40 by lbenard          ###   ########.fr       */
+/*   Created: 2019/11/15 17:15:39 by lbenard           #+#    #+#             */
+/*   Updated: 2019/11/15 17:45:47 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENTS_H
-# define EVENTS_H
+#include "engine/frame.h"
 
-# include "engine/game.h"
-# include <SFML/Window.h>
+t_frame_transform	ft_frame_transform_position(const t_isize position)
+{
+	t_frame_transform	ret;
 
-t_callback_node	*new_close_game_event(void);
-
-#endif
+	ret.anchor = ft_vec2f(0.5f, 0.5f);
+	ret.position = position;
+	ret.scale = ft_vec2f(1.0f, 1.0f);
+	ret.opacity = COLOR_OPAQUE;
+	return (ret);
+}

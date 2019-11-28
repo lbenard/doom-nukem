@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events.h                                           :+:      :+:    :+:   */
+/*   inverse_lerp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/17 20:15:19 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/26 18:42:40 by lbenard          ###   ########.fr       */
+/*   Created: 2019/11/18 18:32:14 by lbenard           #+#    #+#             */
+/*   Updated: 2019/11/18 18:32:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EVENTS_H
-# define EVENTS_H
+#include "maths/maths.h"
 
-# include "engine/game.h"
-# include <SFML/Window.h>
-
-t_callback_node	*new_close_game_event(void);
-
-#endif
+float	inverse_lerp(float v0, float v1, float value)
+{
+	return ((value - v0) / (v1 - v0));
+}

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:47:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/15 17:32:05 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	raycasting_scene_render(t_raycasting_scene *const self,
 	size_t			wall_start;
 
 	raycasting_update(&self->renderer);
-	frame_layer(fb, &self->background, ft_isize(0, 0), blend_add);
+	frame_layer_opaque(fb, &self->background, ft_isize(0, 0));
 	i = ft_usize(0, 0);
 	while (i.x < self->renderer.columns_number)
 	{

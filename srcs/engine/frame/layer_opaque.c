@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   layer.c                                            :+:      :+:    :+:   */
+/*   layer_opaque.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/01 20:39:19 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/18 18:25:08 by lbenard          ###   ########.fr       */
+/*   Created: 2019/11/15 17:19:21 by lbenard           #+#    #+#             */
+/*   Updated: 2019/11/28 17:48:53 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/frame.h"
 #include "maths/maths.h"
+#include "ft/mem.h"
 
 static t_usize	frame_size(const t_frame *const self,
 					const t_frame *const layer,
@@ -33,35 +34,25 @@ static t_bool	is_visible(const t_frame *const bg,
 		|| pos.y + (ssize_t)fg->size.y <= 0));
 }
 
-void			frame_layer(t_frame *const bg,
+void			frame_layer_opaque(t_frame *const bg,
 					const t_frame *const fg,
-					const t_isize pos,
-					t_u32 (*const blend)
-						(const t_rgba *const back, const t_rgba *const front))
+					const t_isize pos)
 {
-	t_usize	i;
+	size_t	i;
 	t_usize	size;
 	t_usize	shift;
-	size_t	bg_pos;
-	size_t	fg_pos;
 
 	if (is_visible(bg, fg, pos) == FALSE)
 		return ;
 	size = frame_size(bg, fg, pos);
 	shift = ft_usize((pos.x < 0) ? -pos.x : 0, (pos.y < 0) ? -pos.y : 0);
-	i.y = 0;
-	while (i.y < size.y)
+	i = 0;
+	while (i < size.y)
 	{
-		i.x = 0;
-		while (i.x < size.x)
-		{
-			bg_pos = bg->size.x * (pos.y + shift.y + i.y)
-				+ (pos.x + shift.x + i.x);
-			fg_pos = fg->size.x * (shift.y + i.y) + (shift.x + i.x);
-			((t_u32*)bg->frame.array)[bg_pos] = blend((t_rgba*)bg->frame.array
-				+ bg_pos, (t_rgba*)fg->frame.array + fg_pos);
-			i.x++;
-		}
-		i.y++;
+		ft_memcpy((t_u32*)bg->frame.array + bg->size.x * (pos.y + shift.y + i)
+			+ pos.x + shift.x,
+			(t_u32*)fg->frame.array + fg->size.x * (shift.y + i) + shift.x,
+			sizeof(t_u32) * size.x);
+		i++;
 	}
 }
