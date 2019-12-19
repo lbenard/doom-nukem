@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 20:39:19 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/18 18:25:08 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/03 08:23:32 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ static t_bool	is_visible(const t_frame *const bg,
 void			frame_layer(t_frame *const bg,
 					const t_frame *const fg,
 					const t_isize pos,
-					t_u32 (*const blend)
-						(const t_rgba *const back, const t_rgba *const front))
+					t_rgba (*const blend)
+						(const t_rgba back, const t_rgba front))
 {
 	t_usize	i;
 	t_usize	size;
@@ -58,8 +58,8 @@ void			frame_layer(t_frame *const bg,
 			bg_pos = bg->size.x * (pos.y + shift.y + i.y)
 				+ (pos.x + shift.x + i.x);
 			fg_pos = fg->size.x * (shift.y + i.y) + (shift.x + i.x);
-			((t_u32*)bg->frame.array)[bg_pos] = blend((t_rgba*)bg->frame.array
-				+ bg_pos, (t_rgba*)fg->frame.array + fg_pos);
+			((t_rgba*)bg->frame.array)[bg_pos] = blend(((t_rgba*)
+				bg->frame.array)[bg_pos], ((t_rgba*)fg->frame.array)[fg_pos]);
 			i.x++;
 		}
 		i.y++;

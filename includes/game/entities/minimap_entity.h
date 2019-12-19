@@ -6,14 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 13:16:12 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:31:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/13 17:28:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIMAP_ENTITY_H
 # define MINIMAP_ENTITY_H
 
-# include "engine/classic_entity.h"
+# include "engine/entity.h"
 # include "sizes/usize.h"
 # include "engine/raycasting.h"
 # include "engine/frame.h"
@@ -23,7 +23,7 @@
 */
 typedef struct	s_minimap_entity
 {
-	t_classic_entity	super;
+	t_entity			super;
 	t_usize				size;
 	const t_raycasting	*raycasting_ref;
 	t_frame				minimap;

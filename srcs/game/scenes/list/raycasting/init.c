@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:45:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/29 18:48:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static void	add_modules(t_raycasting_scene *const self,
 		raycasting(args->window->size, &self->map));
 }
 
-static void	add_entities(t_raycasting_scene *const self)
+static void	add_entities(t_raycasting_scene *const self,
+				const t_usize window_size)
 {
 	self->player_ref = (t_player_entity*)entity_list_add_entity(
 		&self->super.entities, player_entity(&self->map));
@@ -66,7 +67,9 @@ static void	add_entities(t_raycasting_scene *const self)
 	// 	minimap_entity(&self->renderer, ft_usize(200, 200)));
 	self->vignette_ref = (t_image_entity*)entity_list_add_entity(
 		&self->super.entities,
-		image_entity_from_file("resources/textures/vignette-50.png"));
+		image_entity_from_file("resources/textures/vignette-50.png",
+			ft_frame_transform_position(ft_isize(window_size.x / 2,
+				window_size.y / 2))));
 }
 
 static void	init_vars(t_raycasting_scene *const self)
@@ -92,7 +95,7 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 	}
 	add_modules(self, args);
 	if (!self->super.module.has_error)
-		add_entities(self);
+		add_entities(self, args->window->size);
 	if (!self->super.module.has_error)
 		init_vars(self);
 	else

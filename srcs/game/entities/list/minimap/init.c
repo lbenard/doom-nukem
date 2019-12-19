@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 13:32:00 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:33:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/19 22:07:17 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_usize		minimap_size(const t_usize map_size, const t_usize max_size)
 t_result	init_minimap_entity(t_minimap_entity *const self,
 				const t_minimap_entity_args *const args)
 {
-	init_classic_entity_default(&self->super, minimap_entity_update);
+	init_entity_default(&self->super, entity_vtable(minimap_entity_update));
 	self->size = minimap_size(args->renderer->map->size, args->max_size);
 	module_add(&self->super.module, &self->minimap,
 		frame(self->size, ft_rgba(255, 255, 255, 64)));

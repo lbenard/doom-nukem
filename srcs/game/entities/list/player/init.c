@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 12:57:30 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 16:30:16 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/19 21:30:37 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 t_result	init_player_entity(t_player_entity *const self,
 				const t_player_entity_args *const args)
 {
-	init_classic_entity_default(&self->super, player_entity_update);
+	init_entity_default(&self->super, entity_vtable(player_entity_update));
 	module_add(&self->super.module, &self->event_handler, event_handler(self));
 	self->map_ref = args->map;
 	self->speed = 2.0f;

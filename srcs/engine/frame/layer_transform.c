@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 16:59:57 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/28 17:39:25 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/03 08:24:30 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ static size_t				position(const t_frame *const fg,
 void						frame_layer_transform(t_frame *const self,
 								const t_frame *const layer,
 								const t_frame_transform transform,
-								t_u32 (*const blend)(const t_rgba *const back,
-									const t_rgba *const front))
+								t_rgba (*const blend)(const t_rgba back,
+									const t_rgba front))
 {
 	t_frame_coordinates	layer_coordinates;
 	t_frame_coordinates	normalized;
@@ -89,9 +89,9 @@ void						frame_layer_transform(t_frame *const self,
 			fg_pixel = ((t_rgba*)layer->frame.array)
 				[position(layer, i, layer_coordinates)];
 			fg_pixel.c.a *= (float)transform.opacity / 255.0f;
-			((t_rgba*)self->frame.array)[self->size.x * i.y + i.x].integer =
-				blend((t_rgba*)self->frame.array + (self->size.x * i.y + i.x),
-					&fg_pixel);
+			((t_rgba*)self->frame.array)[self->size.x * i.y + i.x] =
+				blend(((t_rgba*)self->frame.array)[self->size.x * i.y + i.x],
+					fg_pixel);
 			i.x++;
 		}
 		i.y++;

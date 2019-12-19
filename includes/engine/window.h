@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 23:40:12 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 04:37:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/07 16:55:47 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "sizes/usize.h"
 # include "types.h"
 # include "engine/frame.h"
-# include "engine/string.h"
+# include "containers/string.h"
 # include "engine/cursor.h"
 
 /*

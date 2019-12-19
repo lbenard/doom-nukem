@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 19:18:03 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/04 12:50:30 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/19 18:48:12 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_result	event_handler_add_callback(t_event_handler *self,
 				t_callback_node *callback)
 {
 	if (!callback)
+	{
+		self->module.has_error = TRUE;
 		return (ERROR);
+	}
 	list_add_entry(&callback->node, &self->callbacks);
 	return (OK);
 }

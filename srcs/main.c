@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/28 17:42:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/19 18:36:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 #include "engine/game.h"
 #include "engine/lookup_table.h"
 #include "engine/delta.h"
+#include "engine/ascii_font.h"
+#include "engine/text.h"
 #include "game/scenes/menu_scene.h"
-#include "game/scenes/raycasting_scene.h"
-#include "game/scenes/benchmark_scene.h"
+#include "game/scenes/editor_scene.h"
 #include "game/events/events.h"
 
 void	register_inputs(t_game *const game)
@@ -51,6 +52,30 @@ void	register_inputs(t_game *const game)
 	input_attach(&game->input, right, ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&game->input, right,
 		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
+
+	input_register(&game->input, "CameraUp");
+	int camera_up = input_get_id(&game->input, "CameraUp");
+	input_attach(&game->input, camera_up, ft_key_event(sfKeyUp, KEY_HOLD));
+	input_attach(&game->input, camera_up,
+		ft_stick_event(0, XBOX_LSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
+
+	input_register(&game->input, "CameraRight");
+	int camera_right = input_get_id(&game->input, "CameraRight");
+	input_attach(&game->input, camera_right, ft_key_event(sfKeyRight, KEY_HOLD));
+	input_attach(&game->input, camera_right,
+		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
+
+	input_register(&game->input, "CameraDown");
+	int camera_down = input_get_id(&game->input, "CameraDown");
+	input_attach(&game->input, camera_down, ft_key_event(sfKeyDown, KEY_HOLD));
+	input_attach(&game->input, camera_down,
+		ft_stick_event(0, XBOX_LSTICK_Y, 20.0f, STICK_POSITIVE));
+
+	input_register(&game->input, "CameraLeft");
+	int camera_left = input_get_id(&game->input, "CameraLeft");
+	input_attach(&game->input, camera_left, ft_key_event(sfKeyLeft, KEY_HOLD));
+	input_attach(&game->input, camera_left,
+		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 	
 	input_register(&game->input, "Sprint");
 	int	sprint = input_get_id(&game->input, "Sprint");
@@ -79,89 +104,84 @@ void	register_inputs(t_game *const game)
 	// input_get(&game->input, forward);
 }
 
-#include <math.h>
-#include <stdio.h>
-
 int	main(void)
 {
-	t_module	main;
-	t_game		*game;
-	t_frame		m_bg;
-	t_frame		m_fg;
-	double		start_time;
-
-	init_module(&main);
-	module_add(&main, &m_bg,
-		frame(ft_usize(1200, 600), ft_rgba(0, 0, 255, 255)));
-	module_add(&main, &m_fg,
-		frame_from_file("resources/buttons/start-game.png"));
-	printf("pixel: %d %d %d %d\n",
-		((t_rgba*)m_fg.frame.array)->c.r,
-		((t_rgba*)m_fg.frame.array)->c.g,
-		((t_rgba*)m_fg.frame.array)->c.b,
-		((t_rgba*)m_fg.frame.array)->c.a);
-	start_game(&(t_game_args){"layer test", ft_usize(1200, 600)});
+	t_game	*game;
+	
 	game = game_singleton();
+	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
+	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
+		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
-	event_handler_add_callback(&game->event_handler, new_close_game_event());
-	start_time = get_wall_time();
-	while (window_is_running(&game->window))
+	// game_set_scene(menu_scene(&game->window));
+	game_set_scene(editor_scene(game->window.size));
+	if (!event_handler_add_callback(&game->event_handler,
+		new_close_game_event()))
 	{
-		frame_fill(&game->window.frame, ft_rgba(0, 0, 0, 255));
-		frame_layer_opaque(&game->window.frame, &m_bg, ft_isize(0, 0));
-		frame_layer_transform(
-			&game->window.frame,
-			&m_fg,
-			ft_frame_transform(
-				ft_vec2f(
-					.5f + ((cos(get_wall_time() - start_time)) * .5f),
-					.5f + ((sin(get_wall_time() - start_time)) * .5f)),
-				ft_isize(1200 / 2, 600 / 2),
-				ft_vec2f(
-					8.0f,// + ((cos(get_wall_time() - start_time)) * 8.0f),
-					8.0f),
-				COLOR_OPAQUE),
-			blend_add);
-		// frame_layer_transform(&game->window.frame, &m_fg,
-		// 	ft_frame_transform(ft_vec2f(0.5f, 0.5f),
-		// 		ft_isize(1200 / 2 + (int)((cos(get_wall_time() - start_time)) * 200.0f),
-		// 			600 / 2 + (int)((sin(get_wall_time() - start_time)) * 200.0f)),
-		// 		ft_vec2f(3.0f + (cos(get_wall_time() - start_time)) * 3.0f,
-		// 			3.0f + (sin(get_wall_time() - start_time)) * 3.0f),
-		// 		255),
-		// 		// (int)((cos(get_wall_time() - start_time) + 1.0f) * 127.0f)),
-		// 	blend_add);
-		game_loop();
+		stop_game();
+		return (!throw_error_str("main()", "failed to add exit callback"));
 	}
-	destroy_module(&main);
-
+	if (game->module.has_error)
+	{
+		stop_game();
+		return (!throw_error_str("main()", "failed to init game"));
+	}
+	while (window_is_running(&game->window))
+		game_loop();
+	stop_game();
 	return (0);
 }
 
+// #include <stdio.h>
+
 // int	main(void)
 // {
-// 	t_game	*game;
-	
+// 	t_module		module;
+// 	t_game			*game;
+// 	t_text			m_text;
+// 	t_string		m_string;
+// 	// double			wall;
+
+// 	start_game(&(t_game_args){"Test", ft_usize(1280, 720)});
 // 	game = game_singleton();
-// 	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
-// 	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
-// 		return (!throw_error_str("main()", "failed to start game"));
 // 	register_inputs(game);
-// 	// game_set_scene(raycasting_scene(&game->window));
-// 	game_set_scene(menu_scene(&game->window));
-// 	if (!event_handler_add_callback(&game->event_handler,
-// 		new_close_game_event(NULL)))
-// 	{
-// 		stop_game();
-// 		return (!throw_error_str("main()", "failed to add exit callback"));
-// 	}
-// 	if (game->module.has_error)
-// 	{
-// 		stop_game();
-// 		return (!throw_error_str("main()", "failed to init game"));
-// 	}
+// 	init_module(&module);
+// 	module_add(&module, &m_text, text("scream_when_youre_ready_to_die.png", ft_usize(1280, 720)));
+// 	// module_add(&module, &m_string, string("these are the signs of warning\n"
+// 	// 	"symbols of danger\n"
+// 	// 	"some are all too familiar\n"
+// 	// 	"this one, signals the most ominous threat	 of all\n"
+// 	// 	"by the time you see it, it may already be too late\n"));
+// 	module_add(&module, &m_string, string("Doom Nukem"));
+// 	event_handler_add_callback(&game->event_handler, new_close_game_event());
+// 	if (module.has_error)
+// 		return (0);
+// 	text_set_ref(&m_text, string_as_ref(&m_string));
+// 	frame_fill_blend(&m_text.font.raster, ft_rgba(0, 0, 0, 255), blend_colorize);
+// 	text_render(&m_text, ft_text_settings(ft_isize(0, 0), 100, ft_usize(0, 0)));
+// 	// wall = get_wall_time();
 // 	while (window_is_running(&game->window))
+// 	{
+// 		frame_fill(&game->window.frame, ft_rgba(255, 255, 255, 255));
+// 		// frame_layer_transform(&game->window.frame,
+// 		// 	&m_font.raster,
+// 		// 	ft_frame_transform(
+// 		// 		ft_vec2f(0.0f, 0.0f),
+// 		// 		ft_isize(0, 0),z
+// 		// 		ft_vec2f(1.0f / 10.0f, 1.0f / 10.0f),
+// 		// 		COLOR_OPAQUE),
+// 		// 	blend_add);
+// 		frame_layer_transform(&game->window.frame,
+// 			&m_text.target,
+// 			ft_frame_transform(
+// 				ft_vec2f(0.0f, 0.0f),
+// 				ft_isize(10, 10),
+// 				ft_vec2f(1.0f, 1.0f),
+// 				COLOR_OPAQUE),
+// 			blend_add);
 // 		game_loop();
+// 	}
 // 	stop_game();
+// 	destroy_module(&module);
 // 	return (0);
 // }

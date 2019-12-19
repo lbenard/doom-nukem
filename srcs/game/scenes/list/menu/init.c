@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:18 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:40:10 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/18 17:20:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,29 @@ static void	add_buttons(t_menu_scene *const scene,
 			args->window));
 }
 
-static void	add_images(t_menu_scene *const scene)
+static void	add_images(t_menu_scene *const scene, const t_usize window_size)
 {
 	scene->vignette_ref = (t_image_entity*)entity_list_add_entity(
 		&scene->super.entities,
-		image_entity_from_file("resources/textures/vignette.png"));
+		image_entity_from_file("resources/textures/vignette.png",
+			ft_frame_transform_position(ft_isize(window_size.x / 2,
+				window_size.y / 2))));
+	scene->background_ref = (t_image_entity*)entity_list_add_entity(
+		&scene->super.entities,
+		image_entity_from_file("resources/textures/blood-background.png",
+			ft_frame_transform_position(ft_isize(window_size.x / 2,
+				window_size.y / 2))));
 	scene->title_ref = (t_image_entity*)entity_list_add_entity(
 		&scene->super.entities,
-		image_entity_from_file("resources/texts/wolf3d-upscale.png"));
+		image_entity_from_file("resources/texts/wolf3d-upscale.png",
+			ft_frame_transform_default()));
 	scene->credits_ref = (t_image_entity*)entity_list_add_entity(
 		&scene->super.entities,
-		image_entity_from_file("resources/texts/credits-upscale.png"));
+		image_entity_from_file("resources/texts/credits-upscale.png",
+			ft_frame_transform(ft_vec2f(.0f, 1.0f),
+				ft_isize(5, window_size.y - 5),
+				ft_vec2f(1.0f, 1.0f),
+				COLOR_OPAQUE)));
 }
 
 t_result	init_menu_scene(t_menu_scene *const self,
@@ -57,12 +69,20 @@ t_result	init_menu_scene(t_menu_scene *const self,
 	}
 	self->window_size = args->window->size;
 	add_buttons(self, args);
-	add_images(self);
+	add_images(self, args->window->size);
 	if (self->super.module.has_error || self->super.entities.module.has_error)
 	{
 		destroy_menu_scene(self);
 		return (throw_result_str("init_menu_scene()",
 			"failed to create new menu scene"));
 	}
+	self->vignette_ref->transform.scale.x = args->window->size.x
+		/ (float)self->vignette_ref->image.size.x;
+	self->vignette_ref->transform.scale.y = args->window->size.y
+		/ (float)self->vignette_ref->image.size.y;
+	self->background_ref->transform.scale.x = args->window->size.x
+		/ (float)self->background_ref->image.size.x;
+	self->background_ref->transform.scale.y = args->window->size.y
+		/ (float)self->background_ref->image.size.y;
 	return (OK);
 }

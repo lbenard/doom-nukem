@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:58 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/04 00:28:40 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/11/29 20:03:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,11 @@ static void	update_images(t_menu_scene *const self)
 	wall = get_wall_time() / 5.0f;
 	mouse = sfMouse_getPositionRenderWindow(game_singleton()->window.window);
 	mid = ft_usize(self->window_size.x / 2, self->window_size.y / 2);
-	self->title_ref->super.transform.position = ft_vec3f(
+	self->title_ref->transform.position = ft_isize(
 		cosine_lookup(wall - (int)wall) * 5.0f + mid.x
-			- (mouse.x - (int)mid.x) / 200.0f
-			- (self->title_ref->image.size.x / 2),
+			- (mouse.x - (int)mid.x) / 200.0f,
 		sine_lookup(wall - (int)wall) * 2.0f + mid.y - 150
-			- (mouse.y - (int)mid.y) / 200.0f
-			- (self->title_ref->image.size.y / 2),
-		0.0f);
-	self->credits_ref->super.transform.position = ft_vec3f(5,
-		self->window_size.y - self->credits_ref->image.size.y - 5, 0);
+			- (mouse.y - (int)mid.y) / 200.0f);
 }
 
 void		menu_scene_update(t_menu_scene *const self)

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:19:02 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/07 18:34:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/18 18:53:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 void	menu_scene_render(t_menu_scene *const self, t_frame *const fb)
 {
-	frame_fill(fb, ft_rgba(33, 55, 71, 255));
-	image_entity_render(self->vignette_ref, fb);
+	image_entity_render(self->background_ref, fb);
 	button_entity_render(self->close_game_ref, fb);
+	button_entity_render(self->start_game_ref, fb);
 	image_entity_render(self->title_ref, fb);
 	image_entity_render(self->credits_ref, fb);
-	button_entity_render(self->start_game_ref, fb);
+	image_entity_render(self->vignette_ref, fb);
 }

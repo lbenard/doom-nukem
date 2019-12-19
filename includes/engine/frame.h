@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:02:59 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/28 17:46:25 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/03 09:58:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,15 @@ void				frame_update(t_frame *const self);
 void				frame_clear(t_frame *const self);
 void				frame_fill(t_frame *const self,
 						const t_rgba fill_color);
+void				frame_fill_blend(t_frame *const self,
+						const t_rgba fill_color,
+						t_rgba (*const blend)(const t_rgba back,
+							const t_rgba front));
 void				frame_layer(t_frame *const self,
 						const t_frame *const layer,
 						const t_isize pos,
-						t_u32 (*const blend)(const t_rgba *const back,
-							const t_rgba *const front));
+						t_rgba (*const blend)(const t_rgba back,
+							const t_rgba front));
 void				frame_layer_opaque(t_frame *const self,
 						const t_frame *const layer,
 						const t_isize pos);
@@ -92,8 +96,8 @@ t_frame_transform	ft_frame_transform(const t_vec2f anchor,
 void				frame_layer_transform(t_frame *const self,
 						const t_frame *const layer,
 						const t_frame_transform transform,
-						t_u32 (*const blend)(const t_rgba *const back,
-							const t_rgba *const front));
+						t_rgba (*const blend)(const t_rgba back,
+							const t_rgba front));
 
 void				destroy_frame(t_frame *const self);
 

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 00:31:57 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/04 12:04:04 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/03 09:58:25 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /*
 ** Blend modes used with frames
 */
-t_u32	blend_add(const t_rgba *const back, const t_rgba *const front);
+t_rgba	blend_add(const t_rgba back, const t_rgba front);
+t_rgba	blend_colorize(const t_rgba back, const t_rgba front);
 
 #endif

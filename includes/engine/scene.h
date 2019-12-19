@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 21:05:56 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/27 00:53:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/07 16:56:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "containers/list.h"
 # include "engine/event_handler.h"
-# include "engine/string.h"
+# include "containers/string.h"
 # include "engine/entity_list.h"
 # include "engine/entity_node.h"
 

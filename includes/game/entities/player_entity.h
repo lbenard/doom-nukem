@@ -6,14 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 16:18:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/13 17:28:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PLAYER_ENTITY_H
 # define PLAYER_ENTITY_H
 
-# include "engine/classic_entity.h"
+# include "engine/entity.h"
 # include "engine/entity_node.h"
 # include "engine/scene.h"
 # include "engine/map.h"
@@ -39,15 +39,15 @@ t_corners		ft_corners(t_bool ne, t_bool se, t_bool so, t_bool no);
 */
 typedef struct	s_player_entity
 {
-	t_classic_entity	super;
-	t_event_handler		event_handler;
-	const t_map			*map_ref;
-	float				speed;
-	t_input_id			forward;
-	t_input_id			backward;
-	t_input_id			left;
-	t_input_id			right;
-	t_input_id			sprint;
+	t_entity		super;
+	t_event_handler	event_handler;
+	const t_map		*map_ref;
+	float			speed;
+	t_input_id		forward;
+	t_input_id		backward;
+	t_input_id		left;
+	t_input_id		right;
+	t_input_id		sprint;
 }				t_player_entity;
 
 typedef struct	s_player_entity_args

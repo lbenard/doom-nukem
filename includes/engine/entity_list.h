@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 20:14:15 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 04:41:28 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/13 17:24:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define ENTITY_LIST_H
 
 # include "containers/module.h"
-# include "engine/classic_entity.h"
+# include "engine/entity.h"
 # include "containers/list.h"
 # include "containers/vector.h"
 
@@ -32,7 +32,7 @@ t_constructor		entity_list(void);
 
 t_result			init_entity_list(t_entity_list *const self);
 
-t_classic_entity	*entity_list_add_entity(t_entity_list *const self,
+t_entity	*entity_list_add_entity(t_entity_list *const self,
 						const t_constructor constructor);
 void				entity_list_update(t_entity_list *const self);
 

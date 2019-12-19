@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/31 18:44:44 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 19:21:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/19 21:17:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ void	entity_list_update(t_entity_list *const self)
 	while ((pos = pos->next) != &self->list)
 	{
 		node = (t_entity_node*)pos;
-		node->entity->update_fn(node->entity);
+		node->entity->vtable.update(node->entity);
 	}
 }

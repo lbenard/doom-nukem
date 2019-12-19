@@ -6,14 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:22:43 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 16:16:21 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/07 16:56:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "engine/scene.h"
 #include "engine/error.h"
-#include "engine/string.h"
 #include "ft/str.h"
 
 t_result	init_scene(t_scene *const self,
