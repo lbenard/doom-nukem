@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:57:03 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 18:15:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/20 01:47:56 by ppetitea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/editor_grid_component_entity.h"
 #include "engine/render_utils.h"
-
 #include <stdio.h>
 
 static void	render_columns(t_editor_grid_component_entity *const self,
@@ -54,9 +53,9 @@ static void	render_rows(t_editor_grid_component_entity *const self,
 	float	y;
 	int		sign;
 
-	camera_start = -camera->super.transform.position.y * self->unit_size
+	camera_start = camera->super.transform.position.y * self->unit_size
 		* camera->super.transform.scale.x - frame->size.y / 2.0f;
-	camera_end = -camera->super.transform.position.y * self->unit_size
+	camera_end = camera->super.transform.position.y * self->unit_size
 		* camera->super.transform.scale.x + frame->size.y / 2.0f;
 	sign = (camera_start >= 0) * 2 - 1;
 	y = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_camera_zoom_event.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 18:25:46 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 20:09:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/20 03:40:44 by ppetitea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,51 +17,71 @@
 
 #include <stdio.h>
 
-static void		camera_zoom_event(t_editor_camera_entity *const self,
+
+static t_vec2f		get_scroll_relative_to_camera(sfEvent *event)
+{
+	t_vec2f	mid;
+	t_usize	window;
+	t_vec2f	ret;
+	
+	window = game_singleton()->window.size;
+	mid = ft_vec2f((float)window.x / 2.0f, (float)window.y / 2.0f);
+	ret.x = ((float)event->mouseWheelScroll.x - mid.x);
+	ret.y = ((float)event->mouseWheelScroll.y - mid.y);
+	return (ret);
+}
+
+static t_vec2f		get_previous_position(t_vec2f scroll_relative,
+						t_transform camera, float unit)
+{
+	t_vec2f	ret;
+	float	zoom;
+	
+	zoom = camera.scale.x;
+	ret.x = (camera.position.x * unit * zoom + scroll_relative.x) / zoom;
+	ret.y = (camera.position.y * unit * zoom + scroll_relative.y) / zoom;
+	return (ret);
+}
+
+static void		update_camera_scale(t_editor_camera_entity *const self,
 					sfEvent *event)
 {
 	float	delta;
-	// t_usize	mid;
-	// t_vec2f	previous_pos;
-	// float	previous_scale;
-	// t_vec2f	new_offset;
+
+	delta = (event->mouseWheelScroll.delta > 0.0f) ? 1.1f : 1.0f / 1.1f;
+	self->super.transform.scale.x *= delta;
+	self->super.transform.scale.y *= delta;
+	self->super.transform.scale.z *= delta;
+}
+
+static void		update_camera_position(t_editor_camera_entity *const self,
+					t_vec2f pos, t_vec2f offset)
+{
+	float	zoom;
+	float	unit;
 	
+	unit = self->grid_unit;
+	zoom = self->super.transform.scale.x;
+	self->super.transform.position.x = (pos.x - offset.x) / (zoom * unit);
+	self->super.transform.position.y = (pos.y - offset.y) / (zoom * unit);
+}
+
+static void		camera_zoom_event(t_editor_camera_entity *const self,
+					sfEvent *event)
+{
+	t_vec2f	scroll_relative;
+	t_vec2f	scroll_previous;
+	t_vec2f	scroll_next;
+		
 	if (event->type == sfEvtMouseWheelScrolled)
 	{
-		// mid = ft_usize(game_singleton()->window.size.x / 2,
-		// 	game_singleton()->window.size.y / 2);
-
-		// previous_pos.x = self->super.transform.position.x;
-		// previous_pos.y = self->super.transform.position.y;
-		// previous_scale = self->super.transform.scale.x;
-		
-		delta = (event->mouseWheelScroll.delta > 0.0f) ? 1.1f : 0.9;
-		self->super.transform.scale.x *= delta;
-		self->super.transform.scale.y *= delta;
-		self->super.transform.scale.z *= delta;
-
-		// new_offset.x = self->super.transform.position.x
-		// 	+ (1.0f - (self->super.transform.scale.x / previous_scale))
-		// 	* (event->mouseWheelScroll.x - previous_pos.x) / self->grid_unit;
-		// new_offset.y = self->super.transform.position.y
-		// 	+ (1.0f - (self->super.transform.scale.y / previous_scale))
-		// 	* (event->mouseWheelScroll.y - previous_pos.y) / self->grid_unit;
-		// self->super.transform.position.x += (float)((float)event->mouseWheelScroll.x - mid.x)
-		// 	* self->super.transform.scale.x / self->grid_unit;
-		//+= (offset.x
-		//	* self->super.transform.scale.x - offset.x) / self->grid_unit;
-		// self->super.transform.position.y += (offset.y
-		// 	* self->super.transform.scale.y - offset.y) / self->grid_unit;
-		// printf("pos x: %f\n", self->super.transform.position.x);
-		// printf("pos y: %f\n", self->super.transform.position.y);
-		// self->super.transform.position.x = new_offset.x;
-		// self->super.transform.position.y = new_offset.y;
-		// printf("pos x: %f\n", self->super.transform.position.x);
-		// printf("pos y: %f\n", self->super.transform.position.y);
-		// self->super.transform.position.y += (float)((float)event->mouseWheelScroll.y - mid.y)
-		// 	* self->super.transform.scale.y / self->grid_unit;
-		// printf("%f\n", self->super.transform.scale.x);
-		// mid.x - event->mouseWheel.x;
+		scroll_relative = get_scroll_relative_to_camera(event);
+		scroll_previous = get_previous_position(scroll_relative,
+			self->super.transform, self->grid_unit);
+		update_camera_scale(self, event);
+		scroll_next.x = scroll_previous.x * self->super.transform.scale.x;
+		scroll_next.y = scroll_previous.y * self->super.transform.scale.x;
+		update_camera_position(self, scroll_next, scroll_relative);
 	}
 }
 
