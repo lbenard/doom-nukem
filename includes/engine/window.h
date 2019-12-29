@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 23:40:12 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/07 16:55:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/21 03:58:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_bool			window_is_running(const t_window *const self);
 t_bool			window_is_focused(const t_window *const self);
 t_result		window_set_name(t_window *const self,
 					const char *const name);
+t_isize			window_get_mouse_pos(const t_window *const self);
 void			window_close(t_window *const self);
 
 void			destroy_window(t_window *const self);

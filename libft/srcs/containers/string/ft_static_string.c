@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_new_component_uid.c                            :+:      :+:    :+:   */
+/*   ft_static_string.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 22:12:55 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/10 22:13:30 by lbenard          ###   ########.fr       */
+/*   Created: 2019/12/20 20:03:49 by lbenard           #+#    #+#             */
+/*   Updated: 2019/12/20 20:04:51 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine/component.h"
+#include "containers/string.h"
+#include "ft/str.h"
 
-t_component_uid	get_new_component_uid(void)
+t_static_string	ft_static_string(const char *const str)
 {
-	static t_component_uid	uid_count = 0;
+	t_static_string	ret;
 
-	return (uid_count++);
+	ret.str = str;
+	ret.len = ft_strlen(str);
+	return (ret);
 }

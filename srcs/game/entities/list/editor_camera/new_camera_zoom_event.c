@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_camera_zoom_event.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 18:25:46 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/20 03:40:44 by ppetitea         ###   ########.fr       */
+/*   Updated: 2019/12/21 01:42:57 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "engine/error.h"
 #include "engine/input.h"
 #include "engine/game.h"
-
-#include <stdio.h>
 
 
 static t_vec2f		get_scroll_relative_to_camera(sfEvent *event)

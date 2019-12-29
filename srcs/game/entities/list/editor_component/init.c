@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:52:24 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 21:57:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/25 20:44:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@ t_result	init_editor_component_entity(t_editor_component_entity *const self,
 			"failed to init entity"));
 	}
 	self->type = type;
-	self->vtable = vtable;
-	self->is_movable = FALSE;
+	self->selectable = FALSE;
+	self->is_selected = FALSE;
+	self->movable = FALSE;
+	self->is_moved = FALSE;
 	self->color = ft_rgb(127, 127, 127);
-	self->color = ft_rgb(200, 200, 200);
-	self->color = ft_rgb(255, 84, 84);
+	self->selected_color = ft_rgb(127, 127, 127);
+	self->dragged_color = ft_rgb(200, 200, 200);
+	self->error_color = ft_rgb(255, 84, 84);
+	self->vtable = vtable;
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:51:03 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 22:26:38 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/21 03:52:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ t_result	init_editor_grid_component_entity(
 {
 	if (init_editor_component_entity(&self->super, GRID,
 		(struct s_editor_component_entity_vtable){
-			editor_grid_component_entity_render,
-			NULL}) == ERROR)
+			editor_grid_component_entity_render, NULL}) == ERROR)
 	{
 		return (throw_result_str("init_editor_grid_component_entity()",
 			"failed to init editor component entity"));

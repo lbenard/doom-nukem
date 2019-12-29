@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2019/12/19 23:34:00 by lbenard          ###   ########.fr        #
+#    Updated: 2019/12/24 00:32:22 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS_LIST		=	main.c																		\
 					engine/entities/entity_list/entity_list.c									\
 					engine/entities/entity_list/init.c											\
 					engine/entities/entity_list/add_entity.c									\
+					engine/entities/entity_list/add_entity_ref.c								\
 					engine/entities/entity_list/update.c										\
 					engine/entities/entity_list/destroy.c										\
 																								\
@@ -185,6 +186,7 @@ SRCS_LIST		=	main.c																		\
 					engine/window/is_running.c													\
 					engine/window/is_focused.c													\
 					engine/window/set_name.c													\
+					engine/window/get_mouse_pos.c												\
 					engine/window/close.c														\
 					engine/window/destroy.c														\
 																								\
@@ -219,12 +221,14 @@ SRCS_LIST		=	main.c																		\
 					game/entities/list/editor_camera/editor_camera_entity.c						\
 					game/entities/list/editor_camera/init.c										\
 					game/entities/list/editor_camera/update.c									\
+					game/entities/list/editor_camera/screen_to_camera_pos.c						\
 					game/entities/list/editor_camera/destroy.c									\
 					game/entities/list/editor_camera/new_camera_zoom_event.c					\
 																								\
 					game/entities/list/editor_component/init.c									\
 					game/entities/list/editor_component/update.c								\
 					game/entities/list/editor_component/camera_pos.c							\
+					game/entities/list/editor_component/screen_pos.c							\
 					game/entities/list/editor_component/destroy.c								\
 																								\
 					game/entities/list/editor_grid_component/editor_grid_component_entity.c		\
@@ -265,6 +269,7 @@ SRCS_LIST		=	main.c																		\
 					game/scenes/list/editor/update.c											\
 					game/scenes/list/editor/render.c											\
 					game/scenes/list/editor/destroy.c											\
+					game/scenes/list/editor/new_component_movement_event.c						\
 																								\
 					game/scenes/list/menu/menu_scene.c											\
 					game/scenes/list/menu/init.c												\

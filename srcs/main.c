@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 18:36:43 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/29 21:34:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	main(void)
 		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
 	// game_set_scene(menu_scene(&game->window));
-	game_set_scene(editor_scene(game->window.size));
+	game_set_scene(editor_scene(&game->window));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event()))
 	{
@@ -146,19 +146,19 @@ int	main(void)
 // 	game = game_singleton();
 // 	register_inputs(game);
 // 	init_module(&module);
-// 	module_add(&module, &m_text, text("scream_when_youre_ready_to_die.png", ft_usize(1280, 720)));
-// 	// module_add(&module, &m_string, string("these are the signs of warning\n"
-// 	// 	"symbols of danger\n"
-// 	// 	"some are all too familiar\n"
-// 	// 	"this one, signals the most ominous threat	 of all\n"
-// 	// 	"by the time you see it, it may already be too late\n"));
-// 	module_add(&module, &m_string, string("Doom Nukem"));
+// 	module_add(&module, &m_text, text("haxorville.png", ft_usize(1280, 720)));
+// 	module_add(&module, &m_string, string("these are the signs of warning\n"
+// 		"symbols of danger\n"
+// 		"some are all too familiar\n"
+// 		"this one, signals the most ominous threat of all\n"
+// 		"by the time you see it, it may already be too late\n"));
+// 	// module_add(&module, &m_string, string("Doom Nukem"));
 // 	event_handler_add_callback(&game->event_handler, new_close_game_event());
 // 	if (module.has_error)
 // 		return (0);
 // 	text_set_ref(&m_text, string_as_ref(&m_string));
 // 	frame_fill_blend(&m_text.font.raster, ft_rgba(0, 0, 0, 255), blend_colorize);
-// 	text_render(&m_text, ft_text_settings(ft_isize(0, 0), 100, ft_usize(0, 0)));
+// 	text_render(&m_text, ft_text_settings(ft_isize(0, 0), 42));
 // 	// wall = get_wall_time();
 // 	while (window_is_running(&game->window))
 // 	{

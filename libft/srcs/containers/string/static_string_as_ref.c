@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get.c                                              :+:      :+:    :+:   */
+/*   static_string_as_ref.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 22:18:20 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/10 22:19:00 by lbenard          ###   ########.fr       */
+/*   Created: 2019/12/20 20:11:19 by lbenard           #+#    #+#             */
+/*   Updated: 2019/12/20 20:11:51 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine/component.h"
+#include "containers/string.h"
 
-void	*component_manager_get(t_component_manager *const self,
-			const t_entity_uid entity_id)
+t_string_ref	static_string_as_ref(t_static_string self)
 {
-	return (self->list.data + (self->component_size) * entity_id);
+	t_string_ref	ret;
+
+	ret.str = self.str;
+	ret.len = self.len;
+	return (ret);
 }

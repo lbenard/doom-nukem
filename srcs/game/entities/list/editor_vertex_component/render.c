@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 22:50:36 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 23:37:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/24 00:42:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,24 @@ void	editor_vertex_component_entity_render(
 			t_frame *const frame)
 {
 	t_editor_vertex_component_entity	*cast;
-	t_vec2f								pos;
 
-	pos = editor_component_entity_camera_pos(self, camera);
-	pos.x += frame->size.x / 2;
-	pos.y += frame->size.y / 2;
 	cast = (t_editor_vertex_component_entity*)self;
-	frame_layer_transform(frame, cast->vertex_ref,
-		ft_frame_transform_position(ft_isize(pos.x, pos.y)),
-		blend_add);
+	if (self->is_selected)
+		frame_layer_transform(
+			frame,
+			cast->vertex_selected_ref,
+			ft_frame_transform_position(editor_component_entity_screen_pos(
+				self,
+				camera,
+				frame)),
+			blend_add);
+	else
+		frame_layer_transform(
+			frame,
+			cast->vertex_ref,
+			ft_frame_transform_position(editor_component_entity_screen_pos(
+				self,
+				camera,
+				frame)),
+			blend_add);
 }

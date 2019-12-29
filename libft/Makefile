@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 18:02:14 by lbenard           #+#    #+#              #
-#    Updated: 2019/12/07 17:43:00 by lbenard          ###   ########.fr        #
+#    Updated: 2019/12/20 20:12:04 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,9 +54,8 @@ SRCS_LIST		=	containers/list/init_list_head.c		\
 					containers/string/dup.c					\
 					containers/string/as_ref.c				\
 					containers/string/destroy.c				\
-					containers/string/static_string.c		\
-					containers/string/init_static.c			\
-					containers/string/destroy_static.c		\
+					containers/string/ft_static_string.c	\
+					containers/string/static_string_as_ref.c\
 					containers/vector/vector.c				\
 					containers/vector/vector_data.c			\
 					containers/vector/init_vector.c			\
