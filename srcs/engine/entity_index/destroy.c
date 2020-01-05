@@ -1,0 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   destroy.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/04 18:52:17 by lbenard           #+#    #+#             */
+/*   Updated: 2020/01/04 19:48:02 by lbenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include "engine/entity_index.h"
+
+static void	destroy_descriptors(t_list_head *const descriptors)
+{
+	t_list_head					*pos;
+	t_entity_descriptor_node	*node;
+
+	pos = descriptors;
+	while ((pos = pos->next) != descriptors)
+	{
+		node = (t_entity_descriptor_node*)pos;
+		free(node);
+	}
+}
+
+void		destroy_entity_index(t_entity_index *const self)
+{
+	destroy_descriptors(&self->descriptors);
+	destroy_module(&self->module);
+}

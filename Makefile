@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2019/12/24 00:32:22 by lbenard          ###   ########.fr        #
+#    Updated: 2020/01/04 19:45:57 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,12 @@ SRCS_LIST		=	main.c																		\
 					engine/delta/get_last_delta.c												\
 					engine/delta/get_wall_time.c												\
 					engine/delta/set_last_delta.c												\
+																								\
+					engine/entity_index/new_entity_descriptor_node.c							\
+					engine/entity_index/entity_index.c											\
+					engine/entity_index/register.c												\
+					engine/entity_index/get.c													\
+					engine/entity_index/destroy.c												\
 																								\
 					engine/entities/entity_list/entity_list.c									\
 					engine/entities/entity_list/init.c											\

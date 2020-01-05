@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 04:41:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/01/05 22:15:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "engine/window.h"
 # include "engine/input.h"
 # include "engine/scene.h"
+# include "engine/entity_index.h"
 # include "types.h"
 # include "engine/event_handler.h"
 
@@ -29,6 +30,7 @@ typedef struct	s_game
 	t_window		window;
 	t_scene			*scene;
 	t_input			input;
+	t_entity_index	entity_index;
 	t_event_handler	event_handler;
 }				t_game;
 
