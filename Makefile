@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2019/12/19 23:34:00 by lbenard          ###   ########.fr        #
+#    Updated: 2020/01/05 12:47:07 by ppetitea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -276,7 +276,30 @@ SRCS_LIST		=	main.c																		\
 					game/scenes/list/raycasting/init.c											\
 					game/scenes/list/raycasting/update.c										\
 					game/scenes/list/raycasting/render.c										\
-					game/scenes/list/raycasting/destroy.c
+					game/scenes/list/raycasting/destroy.c										\
+																								\
+					game/map_parser/check/close_curly_braces.c									\
+					game/map_parser/check/curly_braces.c										\
+					game/map_parser/check/open_curly_braces.c									\
+					game/map_parser/check/utility.c												\
+					game/map_parser/debug/debug.c												\
+					game/map_parser/get_data_in_string/get_index.c								\
+					game/map_parser/get_data_in_string/get_key.c								\
+					game/map_parser/get_data_in_string/get_value_type.c							\
+					game/map_parser/get_data_in_string/get_value.c								\
+					game/map_parser/object/getter/get_child_object.c							\
+					game/map_parser/object/getter/get_float_value.c								\
+					game/map_parser/object/getter/get_int_value.c								\
+					game/map_parser/object/getter/get_string_value.c							\
+					game/map_parser/object/create.c												\
+					game/map_parser/object/free.c												\
+					game/map_parser/read_file/get_file_datas.c									\
+					game/map_parser/split_data/free_string_array.c								\
+					game/map_parser/split_data/new_string_array.c								\
+					game/map_parser/split_data/split_data.c										\
+					game/map_parser/parser.c													\
+					game/map_parser/to_object.c													\
+
 
 UNAME			=	$(shell uname)
 
