@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 14:17:44 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/07 18:08:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/20 20:11:05 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ typedef struct	s_static_string_args
 	const char *str;
 }				t_static_string_args;
 
-t_constructor	static_string(const char *const str);
-
-t_result		init_static_string(t_static_string *const self,
-					const t_static_string_args *const args);
-void			destroy_static_string(t_static_string *const self);
+t_static_string	ft_static_string(const char *const str);
+t_string_ref	static_string_as_ref(t_static_string self);
 
 #endif

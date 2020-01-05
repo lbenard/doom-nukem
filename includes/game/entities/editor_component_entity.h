@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:28:06 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 23:36:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/24 00:41:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ typedef struct	s_editor_component_entity
 {
 	t_entity				super;
 	t_editor_component_type	type;
-	t_bool					is_movable;
+	t_bool					selectable;
+	t_bool					is_selected;
+	t_bool					movable;
+	t_bool					is_moved;
 	t_rgb					color;
 	t_rgb					selected_color;
 	t_rgb					dragged_color;
@@ -44,8 +47,10 @@ typedef struct	s_editor_component_entity
 		void	(*render)(struct s_editor_component_entity *const self,
 					t_editor_camera_entity *const camera,
 					t_frame *const frame);
-		t_bool	(*is_selected)(struct s_editor_component_entity *const,
-					const t_isize cursor_pos);
+		t_bool	(*is_selected)(struct s_editor_component_entity *const self,
+					t_editor_camera_entity *const camera,
+					const t_frame *const frame,
+					const t_isize mouse_pos);
 	}						vtable;
 }				t_editor_component_entity;
 
@@ -63,8 +68,12 @@ t_result		init_editor_component_entity(
 void			editor_component_entity_update(
 					t_editor_component_entity *const self);
 t_vec2f			editor_component_entity_camera_pos(
-					t_editor_component_entity *const self,
-					t_editor_camera_entity *const camera);
+					const t_editor_component_entity *const self,
+					const t_editor_camera_entity *const camera);
+t_isize			editor_component_entity_screen_pos(
+					const t_editor_component_entity *const self,
+					const t_editor_camera_entity *const camera,
+					const t_frame *const screen);
 
 void			destroy_editor_component_entity(
 					t_editor_component_entity *const self);

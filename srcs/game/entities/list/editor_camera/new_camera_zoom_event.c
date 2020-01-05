@@ -6,7 +6,7 @@
 /*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 18:25:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/05 13:06:56 by ppetitea         ###   ########.fr       */
+/*   Updated: 2020/01/05 13:12:18 by ppetitea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "engine/error.h"
 #include "engine/input.h"
 #include "engine/game.h"
-
-#include <stdio.h>
 
 
 static t_vec2f		get_scroll_relative_to_camera(sfEvent *event)

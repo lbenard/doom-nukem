@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 20:27:11 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 23:11:41 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/21 03:52:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ typedef struct	s_editor_vertex_component_entity
 	const t_frame				*vertex_ref;
 	const t_frame				*vertex_selected_ref;
 }				t_editor_vertex_component_entity;
-
 
 typedef struct	s_editor_vertex_component_entity_args
 {
@@ -47,7 +46,9 @@ void			editor_vertex_component_entity_render(
 
 t_bool			editor_vertex_component_entity_is_selected(
 					t_editor_component_entity *const self,
-					const t_isize cursor_pos);
+					t_editor_camera_entity *const camera,
+					const t_frame *const frame,
+					const t_isize mouse_pos);
 
 void			destroy_editor_vertex_component_entity(
 					t_editor_vertex_component_entity *const self);

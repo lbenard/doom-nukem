@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 20:53:41 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/03 16:51:18 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/21 03:10:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	destroy_entity_list(t_entity_list *const self)
 	{
 		next = next->next;
 		entity = (t_entity_node*)pos;
-		entity->free_fn(entity->entity);
+		if (entity->free_fn)
+			entity->free_fn(entity->entity);
 		free(entity);
 	}
 }

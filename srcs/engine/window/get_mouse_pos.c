@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   get_mouse_pos.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 22:07:26 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/10 22:08:27 by lbenard          ###   ########.fr       */
+/*   Created: 2019/12/21 03:58:31 by lbenard           #+#    #+#             */
+/*   Updated: 2019/12/21 03:59:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine/component.h"
+#include "engine/window.h"
 
-void	destroy_component_manager(t_component_manager *const self)
+t_isize	window_get_mouse_pos(const t_window *const self)
 {
-	destroy_module(&self->module);
-	destroy_vector(&self->list);
-	free(self->name);
+	sfVector2i	pos;
+
+	pos = sfMouse_getPositionRenderWindow(self->window);
+	return (ft_isize(pos.x, pos.y));
 }

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 20:14:15 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/13 17:24:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2019/12/21 03:14:14 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 typedef struct		s_entity_list
 {
 	t_module	module;
-	t_vector	batch;
 	t_list_head	list;
 }					t_entity_list;
 
@@ -32,8 +31,10 @@ t_constructor		entity_list(void);
 
 t_result			init_entity_list(t_entity_list *const self);
 
-t_entity	*entity_list_add_entity(t_entity_list *const self,
+t_entity			*entity_list_add_entity(t_entity_list *const self,
 						const t_constructor constructor);
+t_entity			*entity_list_add_entity_ref(t_entity_list *const self,
+						t_entity *const entity_ref);
 void				entity_list_update(t_entity_list *const self);
 
 void				destroy_entity_list(t_entity_list *const self);
