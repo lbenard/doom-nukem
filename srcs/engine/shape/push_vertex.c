@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   push_vertex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/28 15:33:22 by ppetitea          #+#    #+#             */
-/*   Updated: 2020/01/05 22:25:45 by lbenard          ###   ########.fr       */
+/*   Created: 2020/01/05 23:18:12 by lbenard           #+#    #+#             */
+/*   Updated: 2020/01/05 23:19:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/map_parser/parser.h"
-#include <stdlib.h>
+#include "engine/shape.h"
+#include "engine/error.h"
 
-static void		free_object_recursively(t_dnon_object *obj)
+t_result	shape_push_vertex(t_shape *const self, t_vertex_node *const node)
 {
-	if (obj->key != NULL)
-		free(obj->key);
-	if (obj->type != LIST && obj->value != NULL)
-		free(obj->value);
-	else
+	if (!node)
 	{
-		list_foreach((t_list_head*)obj->value, 0, free_object);
-		free(obj->value);
+		self->module.has_error = TRUE;
+		return (throw_result_str("shape_push_vertex()",
+			"node is not valid"));
 	}
-}
-
-void		free_object(t_dnon_object *obj)
-{
-	free_object_recursively(obj);
-	free(obj);
+	list_add_entry(&node->node, &self->vertices);
+	return (OK);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 14:20:50 by ppetitea          #+#    #+#             */
-/*   Updated: 2020/01/02 22:17:16 by ppetitea         ###   ########.fr       */
+/*   Updated: 2020/01/05 22:25:30 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	debug_split(char **datas)
 	}
 }
 
-void		debug_object(t_json_object *obj)
+void		debug_object(t_dnon_object *obj)
 {
 	static int	deep = 0;
 

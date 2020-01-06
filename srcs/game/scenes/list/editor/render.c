@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:32:07 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/24 17:00:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/01/06 00:22:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	editor_scene_render(t_editor_scene *const self, t_frame *const fb)
 		component = (t_editor_component_entity*)node->entity;
 		component->vtable.render(component, self->camera_ref, fb);
 	}
+	shape_render(&self->shape,
+		ft_isize(fb->size.x / 2, fb->size.y / 2),
+		fb,
+		ft_rgba(0, 0, 255, 255));
 	// editor_grid_component_entity_render(
 	// 	(t_editor_component_entity*)self->grid_ref,
 	// 	self->camera_ref,

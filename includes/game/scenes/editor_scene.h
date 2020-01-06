@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/25 22:29:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/01/06 00:15:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "engine/window.h"
 # include "engine/frame.h"
 # include "engine/text.h"
+# include "engine/shape.h"
 # include "game/entities/editor_camera_entity.h"
 # include "game/entities/editor_grid_component_entity.h"
 # include "game/entities/editor_vertex_component_entity.h"
@@ -28,6 +29,7 @@ typedef struct	s_editor_scene
 	t_frame								vertex_texture;
 	t_frame								vertex_selected_texture;
 	t_text								title;
+	t_shape								shape;
 	t_editor_grid_component_entity		*grid_ref;
 	t_editor_vertex_component_entity	*vertex_ref;
 	t_editor_camera_entity				*camera_ref;

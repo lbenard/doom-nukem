@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2020/01/04 19:45:57 by lbenard          ###   ########.fr        #
-=======
-#    Updated: 2020/01/05 13:30:23 by ppetitea         ###   ########.fr        #
->>>>>>> 5a5df8ddecb178b7f8859a0bb489f5d595ca19e7
+#    Updated: 2020/01/06 00:25:51 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +40,7 @@ SRCS_LIST		=	main.c																		\
 																								\
 					engine/entity_index/new_entity_descriptor_node.c							\
 					engine/entity_index/entity_index.c											\
+					engine/entity_index/init.c													\
 					engine/entity_index/register.c												\
 					engine/entity_index/get.c													\
 					engine/entity_index/destroy.c												\
@@ -174,6 +171,17 @@ SRCS_LIST		=	main.c																		\
 					engine/sfml/sprite/sprite.c													\
 					engine/sfml/sprite/init.c													\
 					engine/sfml/sprite/destroy.c												\
+																								\
+					engine/shape/new_vertex_node.c												\
+					engine/shape/vertices_side.c												\
+					engine/shape/shape.c														\
+					engine/shape/init.c															\
+					engine/shape/push_vertex.c													\
+					engine/shape/update_box.c													\
+					engine/shape/get_center.c													\
+					engine/shape/is_point_in_shape.c											\
+					engine/shape/render.c														\
+					engine/shape/destroy.c														\
 																								\
 					engine/render_utils/row.c													\
 					engine/render_utils/column.c												\
@@ -313,7 +321,7 @@ SRCS_LIST		=	main.c																		\
 					game/map_parser/split_data/new_string_array.c								\
 					game/map_parser/split_data/split_data.c										\
 					game/map_parser/parser.c													\
-					game/map_parser/to_object.c													\
+					game/map_parser/to_object.c
 
 
 UNAME			=	$(shell uname)
@@ -354,7 +362,7 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -Wno-deprecated
+CFLAGS			=	#-Wall -Wextra -Werror -O3 -Ofast -flto -Wno-deprecated
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)

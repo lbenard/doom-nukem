@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_value.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/30 00:36:12 by ppetitea          #+#    #+#             */
-/*   Updated: 2020/01/02 22:33:08 by ppetitea         ###   ########.fr       */
+/*   Updated: 2020/01/05 22:25:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static float		*data_to_float_value(char *data)
 	return (ret);
 }
 
-void		*get_object_value(char *data, t_json_value_type type)
+void		*get_object_value(char *data, t_dnon_value_type type)
 {
 	size_t	i;
 

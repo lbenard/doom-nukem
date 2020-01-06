@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/28 15:33:22 by ppetitea          #+#    #+#             */
-/*   Updated: 2020/01/05 22:25:45 by lbenard          ###   ########.fr       */
+/*   Created: 2020/01/06 00:16:45 by lbenard           #+#    #+#             */
+/*   Updated: 2020/01/06 00:19:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/map_parser/parser.h"
 #include <stdlib.h>
+#include "engine/shape.h"
 
-static void		free_object_recursively(t_dnon_object *obj)
+static void	destroy_vertices(t_list_head *const vertices)
 {
-	if (obj->key != NULL)
-		free(obj->key);
-	if (obj->type != LIST && obj->value != NULL)
-		free(obj->value);
-	else
+	t_list_head		*pos;
+	t_list_head		*next;
+	t_vertex_node	*node;
+
+	pos = vertices;
+	next = pos->next;
+	while ((pos = next) != vertices)
 	{
-		list_foreach((t_list_head*)obj->value, 0, free_object);
-		free(obj->value);
+		next = pos->next;
+		node = (t_vertex_node*)pos;
+		free(node);
 	}
 }
 
-void		free_object(t_dnon_object *obj)
+void	destroy_shape(t_shape *const self)
 {
-	free_object_recursively(obj);
-	free(obj);
+	destroy_vertices(&self->vertices);
+	destroy_module(&self->module);
 }

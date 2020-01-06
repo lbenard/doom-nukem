@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 11:57:01 by ppetitea          #+#    #+#             */
-/*   Updated: 2020/01/05 13:00:31 by ppetitea         ###   ########.fr       */
+/*   Updated: 2020/01/05 22:25:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 t_result	parse_map_file(char *path)
 {
 	char			*data;
-	t_json_object	*obj;
+	t_dnon_object	*obj;
 
 	if (!(data = get_file_datas(path)))
 		return (throw_result_str("parse_map_file", "failed to get datas"));
 	if (!check_curly_braces(data))
 		return (throw_result_str("parse_map_file", "error around curly braces"));
-	obj = create_json_object(ft_strdup("root"), LIST);
+	obj = create_dnon_object(ft_strdup("root"), LIST);
 	to_object(data, obj);
 	// obj = get_child_object_by_key(obj, "player");
 	// if (obj)

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/29 21:26:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/01/06 00:32:14 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	add_modules(t_editor_scene *const self,
 			blend_colorize);
 		text_render(&self->title, ft_text_settings(ft_isize(0, 0), 42));
 	}
+	module_add(&self->super.module, &self->shape, shape());
 }
 
 static void	add_entities(t_editor_scene *const self,
@@ -67,6 +68,8 @@ static void	add_entities(t_editor_scene *const self,
 			editor_camera_entity(self->grid_ref->unit_size));
 }
 
+#include <stdio.h>
+
 t_result	init_editor_scene(t_editor_scene *const self,
 				const t_editor_scene_args *const args)
 {
@@ -80,6 +83,15 @@ t_result	init_editor_scene(t_editor_scene *const self,
 	add_entities(self, args);
 	event_handler_add_callback(&self->super.input_manager,
 		new_component_movement_event());
+	shape_push_vertex(&self->shape, new_vertex_node(ft_isize(0, 0)));
+	shape_push_vertex(&self->shape, new_vertex_node(ft_isize(100, 0)));
+	shape_push_vertex(&self->shape, new_vertex_node(ft_isize(0, 100)));
+	shape_update_box(&self->shape);
+	printf("start: %lu %lu size: %lu %lu\n",
+		self->shape.box.pos.x,
+		self->shape.box.pos.y,
+		self->shape.box.size.x,
+		self->shape.box.size.y);
 	self->screen_ref = args->screen;
 	self->selected_component = NULL;
 	if (self->super.module.has_error)
