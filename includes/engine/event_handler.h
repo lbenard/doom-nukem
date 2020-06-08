@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 15:53:03 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 04:39:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/04 22:55:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void			free_callback_node(t_callback_node *self);
 */
 typedef struct	s_event_handler
 {
-	t_list_head	node;
 	t_module	module;
+	t_list_head	node;
 	t_list_head	childs;
 	void*const	object;
 	t_list_head	callbacks;

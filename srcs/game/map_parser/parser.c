@@ -6,15 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 11:57:01 by ppetitea          #+#    #+#             */
-/*   Updated: 2020/01/05 22:25:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/08 20:26:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "engine/error.h"
 #include "game/map_parser/parser.h"
-
-#include <stdio.h>
 
 t_result	parse_map_file(char *path)
 {
@@ -39,8 +37,3 @@ t_result	parse_map_file(char *path)
 	free_object(obj);
 	return (OK);
 }
-
-/*
-**	unit test
-**	nothing
-*/

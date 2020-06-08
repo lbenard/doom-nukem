@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:30:43 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 20:29:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/04 22:25:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@
 */
 typedef struct	s_vector
 {
-	size_t	capacity;
-	size_t	size;
-	void	*data;
+	t_module	module;
+	size_t		capacity;
+	size_t		size;
+	void		*data;
 }				t_vector;
 
 typedef struct	s_vector_args

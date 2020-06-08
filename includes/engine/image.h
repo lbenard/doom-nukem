@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 07:17:53 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 16:29:40 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/08 20:06:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 typedef struct	s_image
 {
-	sfImage	*image;
-	t_usize	size;
+	t_module	module;
+	sfImage		*image;
+	t_usize		size;
 }				t_image;
 
 typedef struct	s_image_args

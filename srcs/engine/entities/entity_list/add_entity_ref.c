@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/21 02:38:16 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/21 03:19:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:51:09 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_entity	*entity_list_add_entity_ref(t_entity_list *const self,
 
 	if (self->module.has_error == TRUE || !entity)
 		return (NULL);
-	if (!(node = new_entity_node(entity, NULL)))
+	if (!(node = new_entity_node_ref(entity)))
 	{
 		self->module.has_error = TRUE;
 		return (NULL);

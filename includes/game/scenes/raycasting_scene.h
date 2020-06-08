@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:44:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/05 12:57:32 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "game/entities/player_entity.h"
 # include "game/entities/image_entity.h"
 # include "game/entities/minimap_entity.h"
+# include "game/entities/camera_entity.h"
 
 /*
 ** Raycasting level scene
@@ -35,6 +36,8 @@ typedef struct	s_raycasting_scene
 	t_image			texture;
 	t_image_entity	*vignette_ref;
 	t_player_entity	*player_ref;
+	t_camera_entity	*camera_ref;
+	float			fov;
 }				t_raycasting_scene;
 
 typedef struct	s_raycasting_scene_args
@@ -52,5 +55,10 @@ void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
 
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
+
+/*
+** Utils
+*/
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 21:57:52 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 04:37:55 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/04 22:22:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 typedef struct	s_array
 {
+	t_module	module;
 	void		*array;
 	size_t		size;
 }				t_array;

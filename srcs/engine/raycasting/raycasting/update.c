@@ -6,22 +6,18 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 17:51:27 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/04 03:48:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/02 19:33:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "engine/raycasting.h"
 #include "maths/vec2i.h"
-
-static float	float_abs(float x)
-{
-	return ((x < 0.0f) ? -x : x);
-}
+#include "maths/maths.h"
 
 #include <stdio.h>
 
-void	raycasting_update(t_raycasting *const self)
+void		raycasting_update(t_raycasting *const self)
 {
 	size_t	i;
 	t_ray	*ray;
@@ -41,8 +37,8 @@ void	raycasting_update(t_raycasting *const self)
 		camera_x = 2.0f * i / (float)self->columns_number - 1;
 		ray_dir = ft_vec2f(self->dir.x + self->plane.x * camera_x,
 			self->dir.y + self->plane.y * camera_x);
-		delta_dist = ft_vec2f(float_abs(1.0f / ray_dir.x),
-			float_abs(1.0f / ray_dir.y));
+		delta_dist = ft_vec2f(fabs(1.0f / ray_dir.x),
+			fabs(1.0f / ray_dir.y));
 		map = ft_vec2i((int)self->pos.x, (int)self->pos.y);
 		if (ray_dir.x < 0.0f)
 		{

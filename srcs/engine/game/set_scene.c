@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:06:58 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/07 18:35:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/08 20:23:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_result	game_set_scene(t_constructor constructor)
 	{
 		event_handler_remove_sub_handler(&game->event_handler,
 			&game->scene->input_manager);
+		destroy_module(&game->scene->module);
 	}
 	game->scene = static_module_allocate(constructor);
 	if (!game->scene)

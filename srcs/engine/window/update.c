@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 00:13:32 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/07 15:10:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/05/31 00:22:40 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	window_update(t_window *const self)
 	frame_update(&self->frame);
 	sfRenderWindow_drawSprite(self->window, self->frame.sprite.sprite, NULL);
 	sfRenderWindow_display(self->window);
-	frame_clear(&self->frame);
+	if (self->is_cleared)
+		frame_clear(&self->frame);
 }

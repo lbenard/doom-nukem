@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 14:17:44 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/20 20:11:05 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/04 22:19:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 
 typedef struct	s_string
 {
-	char	*str;
-	size_t	len;
+	t_module	module;
+	char		*str;
+	size_t		len;
 }				t_string;
 
 typedef struct	s_string_ref

@@ -6,13 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 23:28:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/05 23:30:15 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/01/06 13:45:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/shape.h"
 
-t_bool	vertices_side(t_isize p, t_isize a, t_isize b)
+t_bool	vertices_side(t_vec2f p, t_vec2f a, t_vec2f b)
 {
 	return (0 < (b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x));
 }

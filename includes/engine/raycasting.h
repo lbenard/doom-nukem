@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 16:50:53 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 04:44:29 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/01 19:49:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct	s_ray
 	t_wall			*wall;
 	float			perpendicular_distance;
 	float			texture_ratio;
-	// const t_image	*texture;
 }				t_ray;
 
 t_ray			ft_ray(const t_vec2f player_position,
@@ -76,9 +75,13 @@ typedef struct	s_raycasting
 	t_map		*map;
 	t_array		columns;
 	size_t		columns_number;
+	float		fov;
 	t_vec2f		pos;
 	t_vec2f		dir;
 	t_vec2f		plane;
+	size_t		rows_number;
+	t_vec2f		floor_step;
+	t_vec2f		floor_pos;
 }				t_raycasting;
 
 typedef struct	s_raycasting_args

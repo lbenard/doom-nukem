@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:14:43 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/13 17:26:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:45:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,9 @@ t_entity_node	*new_entity_node(t_entity *const entity,
 		return (NULL);
 	if (!(ret = (t_entity_node*)malloc(sizeof(t_entity_node))))
 		return (NULL);
-	*(t_entity**)&ret->entity = entity;
 	init_list_head(&ret->node);
+	ret->entity = entity;
+	ret->is_ref = FALSE;
 	ret->free_fn = free_fn;
 	return (ret);
 }

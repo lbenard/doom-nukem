@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 22:43:53 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/05 23:34:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/01/06 13:45:18 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct	s_vertex_node
 }				t_vertex_node;
 
 t_vertex_node	*new_vertex_node(const t_isize pos);
-t_bool			vertices_side(t_isize p, t_isize a, t_isize b);
+t_bool			vertices_side(t_vec2f p, t_vec2f a, t_vec2f b);
 
 typedef struct	s_shape_box
 {

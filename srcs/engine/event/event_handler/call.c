@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 19:19:26 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/04 13:03:44 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/08 19:40:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void		event_handler_call(t_event_handler *const self,
 	pos = self->childs.next;
 	while (pos != &self->childs)
 	{
-		sub_handler = (t_event_handler*)pos;
+		sub_handler = (t_event_handler*)((t_u8*)pos
+			- __builtin_offsetof(t_event_handler, node));
 		event_handler_call(sub_handler, event);
 		pos = pos->next;
 	}

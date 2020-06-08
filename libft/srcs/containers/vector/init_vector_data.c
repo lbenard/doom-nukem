@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/17 20:05:00 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 20:35:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/05 02:00:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 t_result	init_vector_data(t_vector *const vector,
 				const t_vector_args *const args)
 {
+	init_module(&vector->module);
 	if (!args->data)
 		return (ERROR);
 	if (!(vector->data = malloc(args->size)))

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 19:58:55 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 05:12:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/04 22:23:14 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 typedef struct	s_sprite
 {
+	t_module	module;
 	sfSprite	*sprite;
 }				t_sprite;
 

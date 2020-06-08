@@ -6,11 +6,12 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/29 18:48:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/08 20:02:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <math.h>
 #include "game/scenes/raycasting_scene.h"
 #include "engine/error.h"
 #include "engine/image.h"
@@ -25,12 +26,12 @@ static void	background_frame(t_frame *const frame,
 	i = ft_usize(0, 0);
 	while (i.y < frame->size.y)
 	{
+		darkness = (((double)frame->size.y / 2.0f) - (double)i.y);
+		darkness /= (((double)frame->size.y / 2.0f)
+			- ((i.y < frame->size.y / 2) ? 0 : ((double)frame->size.y)));
 		i.x = 0;
 		while (i.x < frame->size.x)
 		{
-			darkness = (((double)frame->size.y / 2.0f) - (double)i.y);
-			darkness /= (((double)frame->size.y / 2.0f)
-				- ((i.y < frame->size.y / 2) ? 0 : ((double)frame->size.y)));
 			if (i.y < frame->size.y / 2)
 				((t_u32*)frame->frame.array)[i.y * frame->size.x + i.x] =
 					ft_rgba(sky_color.r, sky_color.g, sky_color.b,
@@ -49,7 +50,7 @@ static void	add_modules(t_raycasting_scene *const self,
 				const t_raycasting_scene_args *const args)
 {
 	module_add(&self->super.module, &self->texture,
-		image("resources/textures/plaster.jpg"));
+		image("resources/textures/wall.png"));
 	module_add(&self->super.module, &self->map, map("maps/test_map.dn"));
 	module_add(&self->super.module, &self->background,
 		frame(args->window->size, ft_rgba(255, 255, 255, 255)));
@@ -70,6 +71,10 @@ static void	add_entities(t_raycasting_scene *const self,
 		image_entity_from_file("resources/textures/vignette-50.png",
 			ft_frame_transform_position(ft_isize(window_size.x / 2,
 				window_size.y / 2))));
+	// self->camera_ref = (t_camera_entity*)entity_list_add_entity(
+	// 	&self->super.entities,
+	// 	camera_entity()
+	// )
 }
 
 static void	init_vars(t_raycasting_scene *const self)
@@ -79,6 +84,7 @@ static void	init_vars(t_raycasting_scene *const self)
 	background_frame(&self->background, self->ground_color, self->sky_color);
 	event_handler_add_sub_handler(&self->super.input_manager,
 		&self->player_ref->event_handler);
+	self->fov = 66.0f * M_PI / 180.0f;
 	// self->renderer.direction = self->player_ref->super.transform.rotation.y;
 	// self->renderer.position =
 		// vec3f_to_vec2f(self->player_ref->super.transform.position);

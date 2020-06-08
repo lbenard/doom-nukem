@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 19:56:45 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 05:11:03 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/05 01:59:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 t_result	init_render_texture(t_render_texture *const self,
 				const t_render_texture_args *const args)
 {
+	init_module(&self->module);
 	if (!(self->texture =
 		sfRenderTexture_create(args->size.x, args->size.y, 0)))
 	{

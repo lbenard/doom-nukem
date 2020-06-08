@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 02:19:38 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 05:26:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/05 01:52:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,13 @@ void			destroy_module_node(t_module_node *const self);
 */
 typedef struct	s_module
 {
-	t_list_head	modules;
+	t_list_head	node;
 	t_bool		has_error;
+	t_list_head	modules;
+	void		(*destructor_fn)();
 }				t_module;
 
-t_result		init_module(t_module *self);
+t_result		init_module(t_module *const self);
 
 void			module_add(t_module *const self,
 					void *const module,

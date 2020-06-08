@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 16:59:25 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 21:32:51 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/05 02:02:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,7 @@ static void	add_modules(t_checkbox_entity *const self,
 t_result	init_checkbox_entity(t_checkbox_entity *const self,
 				const t_checkbox_entity_args *const args)
 {
-	if (init_entity_default(&self->super, entity_vtable(checkbox_entity_update))
-		== ERROR)
-	{
-		return (throw_result_str("init_checkbox_entity()",
-			"failed to create checkbox entity"));
-	}
+	init_entity_default(&self->super, entity_vtable(checkbox_entity_update));
 	add_modules(self, args);
 	self->current_texture = &self->normal_texture;
 	self->is_checked = FALSE;

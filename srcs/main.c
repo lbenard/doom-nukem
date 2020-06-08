@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/05 23:51:35 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/08 20:08:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include "engine/text.h"
 #include "game/scenes/menu_scene.h"
 #include "game/scenes/editor_scene.h"
+#include "game/scenes/noise_test_scene.h"
+// #include "game/scenes/sector_scene.h"
+#include "game/scenes/raycasting_scene.h"
 #include "game/events/events.h"
 
 void	register_inputs(t_game *const game)
@@ -56,26 +59,30 @@ void	register_inputs(t_game *const game)
 	input_register(&game->input, "CameraUp");
 	int camera_up = input_get_id(&game->input, "CameraUp");
 	input_attach(&game->input, camera_up, ft_key_event(sfKeyUp, KEY_HOLD));
+	input_attach(&game->input, camera_up, ft_key_event(sfKeyW, KEY_HOLD));
 	input_attach(&game->input, camera_up,
-		ft_stick_event(0, XBOX_LSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
+		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 
 	input_register(&game->input, "CameraRight");
 	int camera_right = input_get_id(&game->input, "CameraRight");
 	input_attach(&game->input, camera_right, ft_key_event(sfKeyRight, KEY_HOLD));
+	// input_attach(&game->input, camera_right, ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&game->input, camera_right,
-		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
+		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_POSITIVE));
 
 	input_register(&game->input, "CameraDown");
 	int camera_down = input_get_id(&game->input, "CameraDown");
 	input_attach(&game->input, camera_down, ft_key_event(sfKeyDown, KEY_HOLD));
+	input_attach(&game->input, camera_down, ft_key_event(sfKeyS, KEY_HOLD));
 	input_attach(&game->input, camera_down,
-		ft_stick_event(0, XBOX_LSTICK_Y, 20.0f, STICK_POSITIVE));
+		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_POSITIVE));
 
 	input_register(&game->input, "CameraLeft");
 	int camera_left = input_get_id(&game->input, "CameraLeft");
 	input_attach(&game->input, camera_left, ft_key_event(sfKeyLeft, KEY_HOLD));
+	// input_attach(&game->input, camera_left, ft_key_event(sfKeyA, KEY_HOLD));
 	input_attach(&game->input, camera_left,
-		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
+		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 	
 	input_register(&game->input, "Sprint");
 	int	sprint = input_get_id(&game->input, "Sprint");
@@ -98,8 +105,12 @@ void	register_inputs(t_game *const game)
 	// input_register(&game->input, "Backward");
 	// input_register(&game->input, "Left");
 	// input_register(&game->input, "Right");
-	// input_register(&game->input, "TurnLeft");
-	// input_register(&game->input, "TurnRight");
+	input_register(&game->input, "TurnLeft");
+	int	turn_left = input_get_id(&game->input, "TurnLeft");
+	input_attach(&game->input, turn_left, ft_key_event(sfKeyLeft, KEY_HOLD));
+	input_register(&game->input, "TurnRight");
+	int	turn_right = input_get_id(&game->input, "TurnRight");
+	input_attach(&game->input, turn_right, ft_key_event(sfKeyRight, KEY_HOLD));
 
 	// input_get(&game->input, forward);
 }
@@ -109,12 +120,15 @@ int	main(void)
 	t_game	*game;
 	
 	game = game_singleton();
-	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
 	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
+	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
 		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
-	// game_set_scene(menu_scene(&game->window));
-	game_set_scene(editor_scene(&game->window));
+	// game_set_scene(sector_scene());
+	game_set_scene(menu_scene(&game->window));
+	// game_set_scene(noise_test_scene());
+	// game_set_scene(editor_scene(&game->window));
+	// game_set_scene(raycasting_scene(&game->window));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event()))
 	{

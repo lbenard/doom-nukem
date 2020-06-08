@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/06 00:15:29 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/05/23 20:02:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,36 @@
 # include "engine/frame.h"
 # include "engine/text.h"
 # include "engine/shape.h"
-# include "game/entities/editor_camera_entity.h"
-# include "game/entities/editor_grid_component_entity.h"
-# include "game/entities/editor_vertex_component_entity.h"
+# include "game/entities/editor/editor_camera_entity.h"
+# include "game/entities/editor/grid_component_entity.h"
+# include "game/entities/editor/vertex_component_entity.h"
+# include "game/entities/checkbox_entity.h"
+
+typedef enum	s_editor_mode
+{
+	CURSOR,
+	CREATE,
+	SPLIT,
+	SECTORIZE
+}				t_editor_mode;
 
 typedef struct	s_editor_scene
 {
-	t_scene								super;
-	t_entity_list						components;
-	t_frame								vertex_texture;
-	t_frame								vertex_selected_texture;
-	t_text								title;
-	t_shape								shape;
-	t_editor_grid_component_entity		*grid_ref;
-	t_editor_vertex_component_entity	*vertex_ref;
-	t_editor_camera_entity				*camera_ref;
-	const t_window						*screen_ref;
-	t_editor_component_entity			*selected_component;
+	t_scene						super;
+	t_editor_mode				mode;
+	t_entity_list				components;
+	t_frame						vertex_texture;
+	t_frame						vertex_selected_texture;
+	struct s_hud
+	{
+		t_checkbox_entity	*cursor_ref;
+		t_checkbox_entity	*create_ref;
+		t_checkbox_entity	*split_ref;
+		t_checkbox_entity	*sectorize_ref;
+	}							hud;
+	t_editor_camera_entity		*camera_ref;
+	t_list_head					selected_components;
+	const t_window				*screen_ref;
 }				t_editor_scene;
 
 typedef struct	s_editor_scene_args
@@ -58,6 +71,7 @@ void			editor_scene_render(t_editor_scene *const self,
 
 void			destroy_editor_scene(t_editor_scene *const self);
 
-t_callback_node	*new_component_movement_event(void);
+t_callback_node	*new_component_cursor_event(void);
+t_callback_node	*new_component_create_event(void);
 
 #endif

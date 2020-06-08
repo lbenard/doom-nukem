@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 15:10:05 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/07 16:59:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/05 01:58:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_result	init_string(t_string *const self, const t_string_args *const args)
 {
 	size_t	len;
 
+	init_module(&self->module);
 	len = ft_strlen(args->str);
 	if (!(self->str = (char*)malloc(len + 1)))
 		return (ERROR);

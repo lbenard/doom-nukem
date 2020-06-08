@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 07:17:53 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 05:11:22 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/04 22:21:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct	s_render_texture
 {
+	t_module		module;
 	sfRenderTexture	*texture;
 	t_usize			size;
 }				t_render_texture;

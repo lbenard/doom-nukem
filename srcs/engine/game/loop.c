@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:07:46 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/19 23:41:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/08 20:08:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,18 @@ void	game_loop(void)
 	sfEvent	event;
 	double	spf;
 
+	//printf("loop\n");
 	game = game_singleton();
 	last_time = get_wall_time();
+	//printf("poll events\n");
 	while (sfRenderWindow_pollEvent(game->window.window, &event))
 		event_handler_call(&game->event_handler, &event);
+	//printf("input update\n");
 	input_update(&game->input);
+	//printf("scene update\n");
 	if (game->scene)
 		game->scene->update_fn(game->scene);
+	//printf("errors\n");
 	if (game->module.has_error)
 	{
 		game_close();
@@ -36,12 +41,13 @@ void	game_loop(void)
 	}
 	if (window_is_focused(&game->window))
 	{
+		//printf("render\n");
 		if (game->scene)
 			game->scene->render_fn(game->scene, &game->window.frame);
 		window_update(&game->window);
 	}
 	spf = get_wall_time() - last_time;
-	printf("fps: %f\n", 1.0f / spf);
+	// printf("fps: %f\n", 1.0f / spf);
 	set_last_delta(spf);
 	last_time = get_wall_time();
 }

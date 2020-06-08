@@ -6,14 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/05 23:34:03 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/06 01:56:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/01/06 12:48:55 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/shape.h"
 
-t_bool	shape_is_point_in_shape(const t_shape *const self,
-			const t_isize pos)
+t_bool	shape_is_point_in_shape(const t_shape *const self, const t_isize pos)
 {
 	t_bool				odd_node;
 	const t_list_head	*a;

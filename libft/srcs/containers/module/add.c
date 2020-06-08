@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 03:03:51 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 04:03:08 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/05 01:51:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,16 @@ void			module_add(t_module *const self,
 					void *const module,
 					const t_constructor constructor)
 {
-	t_module_node	*node;
+	t_module	*module_ptr;
 
 	if (self->has_error)
 		return ;
-	if (!(node = (t_module_node*)malloc(sizeof(t_module_node))))
-	{
-		self->has_error = TRUE;
-		return ;
-	}
 	if (construct_module(module, constructor) == ERROR)
 	{
-		free(node);
 		self->has_error = TRUE;
 		return ;
 	}
-	init_module_node(node, module, constructor.destructor_fn);
-	list_add_entry(&node->node, &self->modules);
+	module_ptr = (t_module*)module;
+	module_ptr->destructor_fn = constructor.destructor_fn;
+	list_add_entry(&module_ptr->node, &self->modules);
 }
