@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/06/01 14:55:18 by lbenard          ###   ########.fr        #
+#    Updated: 2020/06/22 02:29:18 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -295,6 +295,16 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/minimap/render.c												\
 					game/entities/list/minimap/destroy.c											\
 																									\
+					game/entities/list/monster/monster_entity.c										\
+					game/entities/list/monster/init.c												\
+					game/entities/list/monster/update.c												\
+					game/entities/list/monster/destroy.c											\
+																									\
+					game/entities/list/sprite/init.c												\
+					game/entities/list/sprite/destroy.c												\
+					game/entities/list/sprite/update.c												\
+					game/entities/list/sprite/vtable.c												\
+																									\
 					game/events/close_game_event.c													\
 																									\
 					game/scenes/list/benchmark/benchmark_scene.c									\
@@ -310,6 +320,12 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/editor/destroy.c												\
 					game/scenes/list/editor/new_component_cursor_event.c							\
 					game/scenes/list/editor/new_component_create_event.c							\
+																									\
+					game/scenes/list/new_editor/new_editor_scene.c									\
+					game/scenes/list/new_editor/init.c												\
+					game/scenes/list/new_editor/update.c											\
+					game/scenes/list/new_editor/render.c											\
+					game/scenes/list/new_editor/destroy.c											\
 																									\
 					game/scenes/list/menu/menu_scene.c												\
 					game/scenes/list/menu/init.c													\
@@ -328,6 +344,7 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/update.c											\
 					game/scenes/list/raycasting/render.c											\
 					game/scenes/list/raycasting/destroy.c											\
+					game/scenes/list/raycasting/cast.c												\
 																									\
 					game/scenes/list/sector/sector_scene.c											\
 					game/scenes/list/sector/init.c													\
