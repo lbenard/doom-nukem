@@ -49,16 +49,25 @@ static t_result	bmp_fill(int fd, t_frame *bmp, t_u16 bpp)
 	return (OK);
 }
 
+#include <stdio.h>
+
 static t_result	bmp_parse(int fd, t_frame *self)
 {
 	t_u32	offset;
 	t_u16	bits_per_pixel;
+	int		width;
+	int		height;
 
-	lseek(fd, sizeof(t_u16) * 8, SEEK_CUR);
-	if (read(fd, &self->size.x, sizeof(t_i32)) < 0)
+	lseek(fd, sizeof(t_u16) * 4, SEEK_CUR);
+	if (read(fd, &offset, sizeof(t_u32)) < 0)
 		return (throw_result_str(__func__, "read fail"));
-	if (read(fd, &self->size.y, sizeof(t_i32)) < 0)
+	lseek(fd, sizeof(t_u32), SEEK_CUR);
+	if (read(fd, &width, sizeof(t_i32)) < 0)
 		return (throw_result_str(__func__, "read fail"));
+	if (read(fd, &height, sizeof(t_i32)) < 0)
+		return (throw_result_str(__func__, "read fail"));
+	self->size = ft_usize((size_t)width, (size_t)height);
+	printf("size: %lu %lu\n", self->size.x, self->size.y);
 	module_add(&self->module, &self->frame,
 		array(sizeof(t_u32) * self->size.x * self->size.y));
 	if (self->module.has_error)
@@ -72,7 +81,7 @@ static t_result	bmp_parse(int fd, t_frame *self)
 	return (OK);
 }
 
-static t_result	bmp_open(char *path, t_frame *bmp, int *fd)
+static t_result	bmp_open(const char *const path, int *const fd)
 {
 	t_u16	magic;
 
@@ -98,7 +107,7 @@ t_result		init_frame_from_bmp(t_frame *const self,
 	int		fd;
 	
 	init_module(&self->module);
-	if (!bmp_open(args->path, self, &fd) || !bmp_parse(fd, self))
+	if (!bmp_open(args->path, &fd) || !bmp_parse(fd, self))
 	{
 		destroy_frame(self);
 		return (throw_result_str(__func__, "bmp_parse fail"));
