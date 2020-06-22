@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/05/23 20:07:07 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/17 23:16:05 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,8 @@ static void	add_entities(t_editor_scene *const self,
 		&self->components,
 		entity_list_add_entity(
 			&self->super.entities,
-			grid_component_entity(args->screen->size)));
-
-	size_t	i = 0;
-	while (i < 10)
-	{
-		size_t	y = 0;
-		while (y < 100)
-		{
-			t_vertex_component_entity *vertex =
-				(t_vertex_component_entity*)entity_list_add_entity_ref(
-					&self->components,
-					entity_list_add_entity(
-						&self->super.entities,
-						vertex_component_entity(
-							ft_vec2f(.1f * i, .1f * y),
-							&self->vertex_texture,
-							&self->vertex_selected_texture)));
-			list_add_entry(&vertex->super.selection_node, &self->selected_components);
-			y++;
-		}
-		i++;
-	}
+			grid_component_entity(ft_usize(args->screen->size.x * 0.8f,
+				args->screen->size.y * 0.8f))));
 	if (!self->super.module.has_error)
 		self->camera_ref = (t_editor_camera_entity*)entity_list_add_entity(
 			&self->super.entities,

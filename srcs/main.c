@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/08 20:08:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/22 17:17:22 by ppetitea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,34 +117,53 @@ void	register_inputs(t_game *const game)
 
 int	main(void)
 {
-	t_game	*game;
-	
-	game = game_singleton();
-	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
-	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
-		return (!throw_error_str("main()", "failed to start game"));
-	register_inputs(game);
-	// game_set_scene(sector_scene());
-	game_set_scene(menu_scene(&game->window));
-	// game_set_scene(noise_test_scene());
-	// game_set_scene(editor_scene(&game->window));
-	// game_set_scene(raycasting_scene(&game->window));
-	if (!event_handler_add_callback(&game->event_handler,
-		new_close_game_event()))
+	t_module	main_module;
+	t_window	main_window;
+	t_frame		main_bmp;
+
+	init_module(&main_module);
+	module_add(&main_module, &main_window, window("Test BMP", ft_usize(1280, 720)));
+	module_add(&main_module, &main_bmp, frame_from_bmp("test.bmp"));
+
+	while (window_is_running(&main_window))
 	{
-		stop_game();
-		return (!throw_error_str("main()", "failed to add exit callback"));
+		frame_layer(&main_window.frame, &main_bmp, ft_isize(0, 0), blend_add);
+		window_update(&main_window);
 	}
-	if (game->module.has_error)
-	{
-		stop_game();
-		return (!throw_error_str("main()", "failed to init game"));
-	}
-	while (window_is_running(&game->window))
-		game_loop();
-	stop_game();
+	destroy_module(&main_module);
 	return (0);
 }
+
+// int	main(void)
+// {
+// 	t_game	*game;
+	
+// 	game = game_singleton();
+// 	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
+// 	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
+// 		return (!throw_error_str("main()", "failed to start game"));
+// 	register_inputs(game);
+// 	// game_set_scene(sector_scene());
+// 	game_set_scene(menu_scene(&game->window));
+// 	// game_set_scene(noise_test_scene());
+// 	// game_set_scene(editor_scene(&game->window));
+// 	// game_set_scene(raycasting_scene(&game->window));
+// 	if (!event_handler_add_callback(&game->event_handler,
+// 		new_close_game_event()))
+// 	{
+// 		stop_game();
+// 		return (!throw_error_str("main()", "failed to add exit callback"));
+// 	}
+// 	if (game->module.has_error)
+// 	{
+// 		stop_game();
+// 		return (!throw_error_str("main()", "failed to init game"));
+// 	}
+// 	while (window_is_running(&game->window))
+// 		game_loop();
+// 	stop_game();
+// 	return (0);
+// }
 
 // #include <stdio.h>
 

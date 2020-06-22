@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:57:03 by lbenard           #+#    #+#             */
-/*   Updated: 2020/05/23 20:06:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/17 23:18:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void		render_columns(t_grid_component_entity *const self,
 	int		sign;
 
 	camera_start = camera->super.transform.position.x * self->unit_size
-		* camera->super.transform.scale.x - frame->size.x / 2.0f;
+		* camera->super.transform.scale.x - self->super.super.transform.scale.x / 2.0f;
 	camera_end = camera->super.transform.position.x * self->unit_size
-		* camera->super.transform.scale.x + frame->size.x / 2.0f;
+		* camera->super.transform.scale.x + self->super.super.transform.scale.x / 2.0f;
 	sign = (camera_start >= 0) * 2 - 1;
 	x = 0;
 	if (sign == 1)
@@ -47,9 +47,10 @@ static void		render_columns(t_grid_component_entity *const self,
 			x -= self->unit_size * camera->super.transform.scale.x;
 	while (x < camera_end)
 	{
-		render_column(frame, ft_usize((size_t)(x - camera_start), 0),
-			frame->size.y, color_from_zoom(camera->super.transform.scale,
-				(x >= -0.0001f && x <= 0.0001f)));
+		render_column(frame, ft_usize((size_t)(x - camera_start),
+			self->super.super.transform.position.y),
+			self->super.super.transform.scale.y, color_from_zoom(
+				camera->super.transform.scale, (x > -0.0001f && x < 0.0001f)));
 		x += self->unit_size * camera->super.transform.scale.x;
 	}
 }
@@ -64,9 +65,9 @@ static void		render_rows(t_grid_component_entity *const self,
 	int		sign;
 
 	camera_start = camera->super.transform.position.y * self->unit_size
-		* camera->super.transform.scale.x - frame->size.y / 2.0f;
+		* camera->super.transform.scale.x - self->super.super.transform.scale.y / 2.0f;
 	camera_end = camera->super.transform.position.y * self->unit_size
-		* camera->super.transform.scale.x + frame->size.y / 2.0f;
+		* camera->super.transform.scale.x + self->super.super.transform.scale.y / 2.0f;
 	sign = (camera_start >= 0) * 2 - 1;
 	y = 0;
 	if (sign == 1)
@@ -77,9 +78,10 @@ static void		render_rows(t_grid_component_entity *const self,
 			y -= self->unit_size * camera->super.transform.scale.x;
 	while (y < camera_end)
 	{
-		render_row(frame, ft_usize(0, (size_t)(y - camera_start)),
-			frame->size.x, color_from_zoom(camera->super.transform.scale,
-				(y >= -0.0001f && y <= 0.0001f)));
+		render_row(frame, ft_usize(self->super.super.transform.position.x,
+			(size_t)(y - camera_start)), self->super.super.transform.scale.x,
+			color_from_zoom(camera->super.transform.scale,
+				(y > -0.0001f && y < 0.0001f)));
 		y += self->unit_size * camera->super.transform.scale.x;
 	}
 }

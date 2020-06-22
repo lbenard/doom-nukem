@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/06/22 02:29:18 by lbenard          ###   ########.fr        #
+#    Updated: 2020/06/22 19:16:22 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,8 +81,10 @@ SRCS_LIST		=	main.c																			\
 																									\
 					engine/frame/frame.c															\
 					engine/frame/frame_from_file.c													\
+					engine/frame/frame_from_bmp.c													\
 					engine/frame/init.c																\
 					engine/frame/init_from_file.c													\
+					engine/frame/init_from_bmp.c													\
 					engine/frame/update.c															\
 					engine/frame/clear.c															\
 					engine/frame/fill.c																\

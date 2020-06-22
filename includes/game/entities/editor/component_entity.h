@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:28:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/05/23 20:14:55 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/19 21:11:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,6 @@ typedef struct	s_component_entity
 					const t_isize mouse_pos);
 	}					vtable;
 }				t_component_entity;
-
-typedef struct	s_component_entity_args
-{
-	t_component_type					type;
-	struct s_component_entity_vtable	vtable;
-}				t_component_entity_args;
 
 t_result		init_component_entity(t_component_entity *const self,
 					const t_component_type type,
