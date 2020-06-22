@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:02:59 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/03 09:58:21 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/22 17:16:04 by ppetitea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,13 @@ typedef struct		s_frame_args
 
 t_constructor		frame(const t_usize size, const t_rgba fill_color);
 t_constructor		frame_from_file(const char *const path);
+t_constructor		frame_from_bmp(const char *const path);
 
 t_result			init_frame(t_frame *const self,
 						const t_frame_args *const args);
 t_result			init_frame_from_file(t_frame *const self,
+						const t_frame_args *const args);
+t_result			init_frame_from_bmp(t_frame *const self,
 						const t_frame_args *const args);
 
 void				frame_update(t_frame *const self);
