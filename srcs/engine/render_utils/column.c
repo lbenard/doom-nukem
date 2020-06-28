@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 21:12:28 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/21 10:06:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/26 20:26:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ void	render_column(t_frame *const frame,
 	t_rgba	*ptr;
 
 	i = 0;
-	if (start.x < frame->size.x
-		&& start.y < frame->size.y)
-	while (i < length && start.y + i < frame->size.y)
+	if (start.x < frame->size.x && start.y < frame->size.y)
 	{
-		ptr = ((t_rgba*)frame->frame.array) + frame->size.x * (start.y + i)
-			+ start.x;
-		*ptr = blend_add(*ptr, color);
-		i++;
+		while (i < length && start.y + i < frame->size.y)
+		{
+			ptr = ((t_rgba*)frame->frame.array) + frame->size.x * (start.y + i)
+				+ start.x;
+			*ptr = blend_add(*ptr, color);
+			i++;
+		}
 	}
 }

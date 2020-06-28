@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 17:53:27 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/20 20:15:04 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/27 02:09:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct	s_text
 {
 	t_module		module;
 	t_frame			target;
+	t_rgba			*pixels;
 	t_ascii_font	font;
 	t_string		text;
 }				t_text;

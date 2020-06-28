@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_ray_in_map.c                                    :+:      :+:    :+:   */
+/*   ft_checkbox_position.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/02 07:06:41 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/03 22:27:46 by lbenard          ###   ########.fr       */
+/*   Created: 2020/06/28 18:23:10 by lbenard           #+#    #+#             */
+/*   Updated: 2020/06/28 18:23:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine/raycasting.h"
+#include "game/entities/checkbox_entity.h"
 
-t_bool	is_ray_in_map(const t_map *const map, const t_vec2f pos)
+t_checkbox_position	ft_checkbox_position(
+						const t_checkbox_entity *const relative,
+						const t_checkbox_side side,
+						const float gap)
 {
-	if (pos.x <= 0 || pos.y <= 0)
-		return (FALSE);
-	else if (pos.x >= map->size.x || pos.y >= map->size.y)
-		return (FALSE);
-	return (TRUE);
+	t_checkbox_position	ret;
+
+	ret.relative = relative;
+	ret.side = side;
+	ret.gap = gap;
+	return (ret);
 }

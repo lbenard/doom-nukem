@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/08 20:27:54 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/25 01:07:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,20 @@ static t_vec3f	move(const t_map *const map, t_vec3f pos, t_vec3f vel)
 
 static void		orientation(t_player_entity *const self, t_vec3f *rotation)
 {
+	float x_axis;
+
+	x_axis = input_get(&game_singleton()->input, self->camera_down)
+		+ input_get(&game_singleton()->input, self->camera_up);
+	if (x_axis == 0.0f)
+		self->super.transform.rotation.x = 0.0f;
+	else
+	{
+		self->super.transform.rotation.x += x_axis * get_last_delta() * 200.0f;
+		if (self->super.transform.rotation.x > 200.0f)
+			self->super.transform.rotation.x = 200.0f;
+		if (self->super.transform.rotation.x < -200.0f)
+			self->super.transform.rotation.x = -200.0f;
+	}
 	rotation->y -= input_get(&game_singleton()->input, self->turn_left)
 		* 2.0f * get_last_delta();
 	rotation->y += input_get(&game_singleton()->input, self->turn_right)

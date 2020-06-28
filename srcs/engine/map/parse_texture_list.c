@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 17:54:09 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 16:10:18 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/27 01:40:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_result	map_parse_texture_list(t_map *const self, char *textures_flag_str)
 	p = ft_skipchr(textures_flag_str, '\n');
 	while (*p)
 	{
-		if (!(new_node = static_module_allocate(texture_node(dn_get_key(p), dn_get_value(p)))))
+		if (!(new_node = static_module_allocate(texture_node(dn_get_key(p),
+			dn_get_value(p)))))
 		{
 			free(textures_flag_str);
 			free_texture_list(&self->textures);

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:33:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/05 02:03:12 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/25 00:50:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,19 @@ t_result	init_editor_camera_entity(t_editor_camera_entity *const self,
 	event_handler_add_sub_handler(&game_singleton()->event_handler,
 		&self->event_handler);
 	event_handler_add_callback(&self->event_handler,
-		new_editor_camera_zoom_event());
+		new_editor_camera_zoom_event(args->fb));
 	if (self->super.module.has_error || self->event_handler.module.has_error)
 	{
 		destroy_editor_camera_entity(self);
 		return (throw_result_str("init_editor_camera_entity()",
 			"failed to init entity module"));
 	}
-	self->up = input_get_id(&game_singleton()->input, "CameraUp");
-	self->right = input_get_id(&game_singleton()->input, "CameraRight");
-	self->down = input_get_id(&game_singleton()->input, "CameraDown");
-	self->left = input_get_id(&game_singleton()->input, "CameraLeft");
+	self->up = input_get_id(&game_singleton()->input, "EditorCameraUp");
+	self->right = input_get_id(&game_singleton()->input, "EditorCameraRight");
+	self->down = input_get_id(&game_singleton()->input, "EditorCameraDown");
+	self->left = input_get_id(&game_singleton()->input, "EditorCameraLeft");
+	self->dezoom = input_get_id(&game_singleton()->input, "EditorCameraDezoom");
+	self->zoom = input_get_id(&game_singleton()->input, "EditorCameraZoom");
 	self->grid_unit = args->grid_unit;
 	return (OK);
 }

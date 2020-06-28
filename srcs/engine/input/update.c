@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 22:12:46 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/01 22:57:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/26 20:25:09 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static float	stick_input(const t_input_event *const event)
 	value = sfJoystick_getAxisPosition(event->stick.joystick, event->code);
 	perpendicular = sfJoystick_getAxisPosition(event->stick.joystick,
 		xbox_perpendicular_axis(event->code));
-	(void)perpendicular;
 	if (ft_fabs(value) <= ft_fabs(event->stick.dead_zone) &&
 		ft_fabs(perpendicular) <= ft_fabs(event->stick.dead_zone))
 		return (0.0f);
@@ -83,7 +82,7 @@ static void		update_set(t_input_set *const set, t_vector *const events)
 	set->value = ft_fmin(ft_fmax(result, -1.0f), 1.0f);
 }
 
-void	input_update(t_input *const self)
+void			input_update(t_input *const self)
 {
 	size_t		i;
 	size_t		table_size;

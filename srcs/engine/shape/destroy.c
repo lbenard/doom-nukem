@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 00:16:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/06 00:19:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/27 01:40:01 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	destroy_vertices(t_list_head *const vertices)
 	}
 }
 
-void	destroy_shape(t_shape *const self)
+void		destroy_shape(t_shape *const self)
 {
 	destroy_vertices(&self->vertices);
 	destroy_module(&self->module);

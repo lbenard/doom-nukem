@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 18:13:26 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/05 01:59:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/27 02:10:37 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ t_result		init_frame_from_file(t_frame *const self,
 	}
 	copy_texture(self, &file);
 	destroy_image(&file);
+	self->pixels = (t_rgba*)self->frame.array;
 	return (OK);
 }

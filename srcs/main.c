@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/22 17:17:22 by ppetitea         ###   ########.fr       */
+/*   Updated: 2020/06/28 21:02:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "engine/ascii_font.h"
 #include "engine/text.h"
 #include "game/scenes/menu_scene.h"
-#include "game/scenes/editor_scene.h"
+#include "game/scenes/new_editor_scene.h"
 #include "game/scenes/noise_test_scene.h"
 // #include "game/scenes/sector_scene.h"
 #include "game/scenes/raycasting_scene.h"
@@ -56,33 +56,69 @@ void	register_inputs(t_game *const game)
 	input_attach(&game->input, right,
 		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
 
-	input_register(&game->input, "CameraUp");
-	int camera_up = input_get_id(&game->input, "CameraUp");
-	input_attach(&game->input, camera_up, ft_key_event(sfKeyUp, KEY_HOLD));
-	input_attach(&game->input, camera_up, ft_key_event(sfKeyW, KEY_HOLD));
-	input_attach(&game->input, camera_up,
-		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
-
 	input_register(&game->input, "CameraRight");
 	int camera_right = input_get_id(&game->input, "CameraRight");
 	input_attach(&game->input, camera_right, ft_key_event(sfKeyRight, KEY_HOLD));
-	// input_attach(&game->input, camera_right, ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&game->input, camera_right,
 		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_POSITIVE));
-
-	input_register(&game->input, "CameraDown");
-	int camera_down = input_get_id(&game->input, "CameraDown");
-	input_attach(&game->input, camera_down, ft_key_event(sfKeyDown, KEY_HOLD));
-	input_attach(&game->input, camera_down, ft_key_event(sfKeyS, KEY_HOLD));
-	input_attach(&game->input, camera_down,
-		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_POSITIVE));
 
 	input_register(&game->input, "CameraLeft");
 	int camera_left = input_get_id(&game->input, "CameraLeft");
 	input_attach(&game->input, camera_left, ft_key_event(sfKeyLeft, KEY_HOLD));
-	// input_attach(&game->input, camera_left, ft_key_event(sfKeyA, KEY_HOLD));
 	input_attach(&game->input, camera_left,
 		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
+
+	input_register(&game->input, "CameraUp");
+	int camera_up = input_get_id(&game->input, "CameraUp");
+	input_attach(&game->input, camera_up, ft_key_event(sfKeyPageUp, KEY_HOLD));
+	input_attach(&game->input, camera_up,
+		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
+	
+	input_register(&game->input, "CameraDown");
+	int camera_down = input_get_id(&game->input, "CameraDown");
+	input_attach(&game->input, camera_down, ft_key_event(sfKeyPageDown, KEY_HOLD | INVERT_INPUT));
+	input_attach(&game->input, camera_down,
+		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_POSITIVE | INVERT_INPUT));
+	
+	input_register(&game->input, "EditorCameraUp");
+	int editor_camera_up = input_get_id(&game->input, "EditorCameraUp");
+	input_attach(&game->input, editor_camera_up, ft_key_event(sfKeyUp, KEY_HOLD));
+	input_attach(&game->input, editor_camera_up, ft_key_event(sfKeyW, KEY_HOLD));
+	input_attach(&game->input, editor_camera_up,
+		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
+
+	input_register(&game->input, "EditorCameraRight");
+	int editor_camera_right = input_get_id(&game->input, "EditorCameraRight");
+	input_attach(&game->input, editor_camera_right, ft_key_event(sfKeyRight, KEY_HOLD));
+	input_attach(&game->input, editor_camera_right, ft_key_event(sfKeyD, KEY_HOLD));
+	input_attach(&game->input, editor_camera_right,
+		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_POSITIVE));
+
+	input_register(&game->input, "EditorCameraDown");
+	int editor_camera_down = input_get_id(&game->input, "EditorCameraDown");
+	input_attach(&game->input, editor_camera_down, ft_key_event(sfKeyDown, KEY_HOLD));
+	input_attach(&game->input, editor_camera_down, ft_key_event(sfKeyS, KEY_HOLD));
+	input_attach(&game->input, editor_camera_down,
+		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_POSITIVE));
+
+	input_register(&game->input, "EditorCameraLeft");
+	int editor_camera_left = input_get_id(&game->input, "EditorCameraLeft");
+	input_attach(&game->input, editor_camera_left, ft_key_event(sfKeyLeft, KEY_HOLD));
+	input_attach(&game->input, editor_camera_left, ft_key_event(sfKeyA, KEY_HOLD));
+	input_attach(&game->input, editor_camera_left,
+		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
+
+	input_register(&game->input, "EditorCameraDezoom");
+	int editor_camera_dezoom = input_get_id(&game->input, "EditorCameraDezoom");
+	input_attach(&game->input, editor_camera_dezoom,
+		ft_key_event(sfKeySubtract, KEY_HOLD | INVERT_INPUT));
+	input_attach(&game->input, editor_camera_dezoom,
+		ft_key_event(sfKeyPageDown, KEY_HOLD | INVERT_INPUT));
+	
+	input_register(&game->input, "EditorCameraZoom");
+	int editor_camera_zoom = input_get_id(&game->input, "EditorCameraZoom");
+	input_attach(&game->input, editor_camera_zoom, ft_key_event(sfKeyAdd, KEY_HOLD));
+	input_attach(&game->input, editor_camera_zoom, ft_key_event(sfKeyPageUp, KEY_HOLD));
 	
 	input_register(&game->input, "Sprint");
 	int	sprint = input_get_id(&game->input, "Sprint");
@@ -117,53 +153,35 @@ void	register_inputs(t_game *const game)
 
 int	main(void)
 {
-	t_module	main_module;
-	t_window	main_window;
-	t_frame		main_bmp;
-
-	init_module(&main_module);
-	module_add(&main_module, &main_window, window("Test BMP", ft_usize(1280, 720)));
-	module_add(&main_module, &main_bmp, frame_from_bmp("test.bmp"));
-
-	while (window_is_running(&main_window))
+	t_game	*game;
+	
+	game = game_singleton();
+	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1280, 720)}) == ERROR)
+	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
+	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
+		return (!throw_error_str("main()", "failed to start game"));
+	register_inputs(game);
+	// game_set_scene(sector_scene());
+	// game_set_scene(menu_scene(&game->window));
+	// game_set_scene(noise_test_scene());
+	game_set_scene(new_editor_scene(&game->window));
+	// game_set_scene(raycasting_scene(&game->window));
+	if (!event_handler_add_callback(&game->event_handler,
+		new_close_game_event()))
 	{
-		frame_layer(&main_window.frame, &main_bmp, ft_isize(0, 0), blend_add);
-		window_update(&main_window);
+		stop_game();
+		return (!throw_error_str("main()", "failed to add exit callback"));
 	}
-	destroy_module(&main_module);
+	if (game->module.has_error)
+	{
+		stop_game();
+		return (!throw_error_str("main()", "failed to init game"));
+	}
+	while (window_is_running(&game->window))
+		game_loop();
+	stop_game();
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	t_game	*game;
-	
-// 	game = game_singleton();
-// 	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
-// 	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
-// 		return (!throw_error_str("main()", "failed to start game"));
-// 	register_inputs(game);
-// 	// game_set_scene(sector_scene());
-// 	game_set_scene(menu_scene(&game->window));
-// 	// game_set_scene(noise_test_scene());
-// 	// game_set_scene(editor_scene(&game->window));
-// 	// game_set_scene(raycasting_scene(&game->window));
-// 	if (!event_handler_add_callback(&game->event_handler,
-// 		new_close_game_event()))
-// 	{
-// 		stop_game();
-// 		return (!throw_error_str("main()", "failed to add exit callback"));
-// 	}
-// 	if (game->module.has_error)
-// 	{
-// 		stop_game();
-// 		return (!throw_error_str("main()", "failed to init game"));
-// 	}
-// 	while (window_is_running(&game->window))
-// 		game_loop();
-// 	stop_game();
-// 	return (0);
-// }
 
 // #include <stdio.h>
 

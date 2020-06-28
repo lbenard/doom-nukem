@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:05:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/07 18:12:27 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/26 20:03:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 void	checkbox_entity_update(t_checkbox_entity *const self)
 {
-	static t_bool		was_mouse_pressed = FALSE;
 	t_bool				is_mouse_pressed;
 	sfVector2i			pos;
 	t_frame_coordinates	frame_coordinates;
 
+	if (!self->is_active)
+		return ;
 	pos = sfMouse_getPositionRenderWindow(self->window->window);
 	is_mouse_pressed = sfMouse_isButtonPressed(sfMouseLeft);
 	frame_coordinates = coordinates(
@@ -41,13 +42,17 @@ void	checkbox_entity_update(t_checkbox_entity *const self)
 		&& (ssize_t)pos.y >= frame_coordinates.start.y
 		&& (ssize_t)pos.y < frame_coordinates.end.y)
 	{
+		self->is_hovered = TRUE;
 		self->current_texture = &self->hover_texture;
-		if (is_mouse_pressed && was_mouse_pressed == FALSE)
+		if (is_mouse_pressed && self->was_mouse_pressed == FALSE)
 			self->is_checked = !self->is_checked;
 	}
 	else
+	{
+		self->is_hovered = FALSE;
 		self->current_texture = &self->normal_texture;
+	}
 	if (self->is_checked)
 		self->current_texture = &self->checked_texture;
-	was_mouse_pressed = is_mouse_pressed;
+	self->was_mouse_pressed = is_mouse_pressed;
 }

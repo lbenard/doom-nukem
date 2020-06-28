@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 19:31:47 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/05 01:59:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/27 02:10:22 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_result	init_frame(t_frame *const self, const t_frame_args *const args)
 		frame_fill(self, args->fill_color);
 		sfSprite_setTexture(self->sprite.sprite,
 			sfRenderTexture_getTexture(self->render_texture.texture), 0);
+		self->pixels = (t_rgba*)self->frame.array;
 	}
 	else
 	{

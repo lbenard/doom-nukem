@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:08:31 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 16:10:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/28 20:21:03 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@
 #include "ft/str.h"
 #include "ft/mem.h"
 
+#include <stdio.h>
+
 static t_result	wall_from_block(t_list_head *const textures,
 					t_wall *const wall,
 					t_block_node *const block)
 {
 	t_texture_node	*texture;
 
+	printf("north name: %s\n", block->north_texture_name);
+	printf("east name: %s\n", block->east_texture_name);
+	printf("south name: %s\n", block->south_texture_name);
+	printf("west name: %s\n", block->west_texture_name);
 	if (!(texture = texture_from_key(textures, block->north_texture_name)))
 		return (throw_result_str("wall_from_block()", "bad north texture"));
 	wall->north_texture_ref = &texture->image;

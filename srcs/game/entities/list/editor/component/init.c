@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:52:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/05 02:03:25 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/22 19:19:04 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ t_result	init_component_entity(t_component_entity *const self,
 	self->dragged_color = ft_rgb(200, 200, 200);
 	self->error_color = ft_rgb(255, 84, 84);
 	self->vtable = vtable;
-	return (TRUE);
+	return (OK);
 }

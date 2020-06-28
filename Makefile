@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/06/22 19:16:22 by lbenard          ###   ########.fr        #
+#    Updated: 2020/06/28 18:22:46 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -156,16 +156,6 @@ SRCS_LIST		=	main.c																			\
 					engine/parsing/dn_free_values.c													\
 					engine/parsing/dn_strsplit_length.c												\
 																									\
-					engine/raycasting/angle/ft.c													\
-					engine/raycasting/ray/ft.c														\
-					engine/raycasting/ray/is_ray_in_map.c											\
-					engine/raycasting/ray/ray_hitting_texture.c										\
-					engine/raycasting/raycasting/raycasting.c										\
-					engine/raycasting/raycasting/init.c												\
-					engine/raycasting/raycasting/update.c											\
-					engine/raycasting/raycasting/find_obstacle.c									\
-					engine/raycasting/raycasting/destroy.c											\
-																									\
 					engine/sfml/image/image.c														\
 					engine/sfml/image/init.c														\
 					engine/sfml/image/destroy.c														\
@@ -242,10 +232,19 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/button/destroy.c												\
 																									\
 					game/entities/list/checkbox/checkbox_entity.c									\
+					game/entities/list/checkbox/checkbox_entity_base.c								\
 					game/entities/list/checkbox/init.c												\
+					game/entities/list/checkbox/init_base.c											\
 					game/entities/list/checkbox/update.c											\
 					game/entities/list/checkbox/render.c											\
 					game/entities/list/checkbox/destroy.c											\
+					game/entities/list/checkbox/ft_checkbox_position.c								\
+					game/entities/list/checkbox/ft_checkbox_position_pos.c							\
+					game/entities/list/checkbox/create.c											\
+					game/entities/list/checkbox/create_relative.c									\
+					game/entities/list/checkbox/create_relative_pos.c								\
+					game/entities/list/checkbox/init_radio_group.c									\
+					game/entities/list/checkbox/update_radio_group.c								\
 																									\
 					game/entities/list/editor/camera/editor_camera_entity.c							\
 					game/entities/list/editor/camera/init.c											\
@@ -253,6 +252,8 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/camera/screen_to_editor_camera_pos.c					\
 					game/entities/list/editor/camera/editor_camera_pos.c							\
 					game/entities/list/editor/camera/editor_camera_pos_to_screen.c					\
+					game/entities/list/editor/camera/transform_camera_pos.c							\
+					game/entities/list/editor/camera/transform_screen_pos.c							\
 					game/entities/list/editor/camera/destroy.c										\
 					game/entities/list/editor/camera/new_editor_camera_zoom_event.c					\
 																									\
@@ -277,6 +278,12 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/grid_component/render.c								\
 					game/entities/list/editor/grid_component/is_hovered.c							\
 					game/entities/list/editor/grid_component/destroy.c								\
+																									\
+					game/entities/list/editor/preview_checkbox/preview_checkbox_entity.c			\
+					game/entities/list/editor/preview_checkbox/init.c								\
+					game/entities/list/editor/preview_checkbox/update.c								\
+					game/entities/list/editor/preview_checkbox/render.c								\
+					game/entities/list/editor/preview_checkbox/destroy.c							\
 																									\
 					game/entities/list/editor/vertex_component/vertex_component_entity.c			\
 					game/entities/list/editor/vertex_component/init.c								\
@@ -314,14 +321,6 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/benchmark/update.c												\
 					game/scenes/list/benchmark/render.c												\
 					game/scenes/list/benchmark/destroy.c											\
-																									\
-					game/scenes/list/editor/editor_scene.c											\
-					game/scenes/list/editor/init.c													\
-					game/scenes/list/editor/update.c												\
-					game/scenes/list/editor/render.c												\
-					game/scenes/list/editor/destroy.c												\
-					game/scenes/list/editor/new_component_cursor_event.c							\
-					game/scenes/list/editor/new_component_create_event.c							\
 																									\
 					game/scenes/list/new_editor/new_editor_scene.c									\
 					game/scenes/list/new_editor/init.c												\
@@ -415,7 +414,7 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto# -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto # -Wno-deprecated
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)

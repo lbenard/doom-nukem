@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ppetitea <ppetitea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:02:59 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/22 17:16:04 by ppetitea         ###   ########.fr       */
+/*   Updated: 2020/06/27 02:09:42 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_frame
 	t_module			module;
 	t_usize				size;
 	t_array				frame;
+	t_rgba				*pixels;
 	t_render_texture	render_texture;
 	t_sprite			sprite;
 }					t_frame;

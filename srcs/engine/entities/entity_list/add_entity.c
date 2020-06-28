@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/17 20:46:39 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/19 19:51:44 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/23 20:08:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_entity	*entity_list_add_entity(t_entity_list *const self,
 		self->module.has_error = TRUE;
 		return (NULL);
 	}
+	node->is_ref = FALSE;
 	list_add_entry(&node->node, &self->list);
 	return (new_entity);
 }

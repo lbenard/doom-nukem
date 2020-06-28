@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/02 20:23:28 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/25 00:54:57 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct	s_player_entity
 	t_input_id		right;
 	t_input_id		turn_left;
 	t_input_id		turn_right;
+	t_input_id		camera_up;
+	t_input_id		camera_down;
 	t_input_id		sprint;
 }				t_player_entity;
 

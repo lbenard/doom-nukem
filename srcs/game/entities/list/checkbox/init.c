@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 16:59:25 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/05 02:02:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/24 22:50:38 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ t_result	init_checkbox_entity(t_checkbox_entity *const self,
 	self->current_texture = &self->normal_texture;
 	self->is_checked = FALSE;
 	self->window = args->window;
+	self->was_mouse_pressed = FALSE;
+	self->is_active = TRUE;
 	if (self->super.module.has_error)
 	{
 		destroy_checkbox_entity(self);

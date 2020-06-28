@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 12:57:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/05 02:01:30 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/25 00:55:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_result	init_player_entity(t_player_entity *const self,
 	self->right = input_get_id(&game_singleton()->input, "Right");
 	self->turn_left = input_get_id(&game_singleton()->input, "CameraLeft");
 	self->turn_right = input_get_id(&game_singleton()->input, "CameraRight");
+	self->camera_up = input_get_id(&game_singleton()->input, "CameraUp");
+	self->camera_down = input_get_id(&game_singleton()->input, "CameraDown");
 	self->sprint = input_get_id(&game_singleton()->input, "Sprint");
 	if (self->super.module.has_error)
 	{

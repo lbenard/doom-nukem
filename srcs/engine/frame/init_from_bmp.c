@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_from_bmp.c                                   :+:      :+:    :+:   */
+/*   init_from_bmp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 18:13:26 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/05 01:59:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/27 02:10:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include "engine/render_texture.h"
 #include "engine/sprite.h"
 #include "ft/mem.h"
-
 
 static t_result	bmp_fill(int fd, t_frame *bmp, t_u16 bpp)
 {
@@ -39,8 +38,8 @@ static t_result	bmp_fill(int fd, t_frame *bmp, t_u16 bpp)
 			if (read(fd, &color, bpp) < 0)
 				return (throw_result_str(__func__, "read fail"));
 			color.c.a = (bpp == 3) ? 255 : color.c.a;
-			pixels[x + (bmp->size.y - y - 1) * bmp->size.x].integer
-				= color.integer;
+			pixels[x + (bmp->size.y - y - 1) * bmp->size.x].integer =
+				color.integer;
 			x++;
 		}
 		lseek(fd, (x * bpp) % 4, SEEK_CUR);
@@ -48,8 +47,6 @@ static t_result	bmp_fill(int fd, t_frame *bmp, t_u16 bpp)
 	}
 	return (OK);
 }
-
-#include <stdio.h>
 
 static t_result	bmp_parse(int fd, t_frame *self)
 {
@@ -67,7 +64,6 @@ static t_result	bmp_parse(int fd, t_frame *self)
 	if (read(fd, &height, sizeof(t_i32)) < 0)
 		return (throw_result_str(__func__, "read fail"));
 	self->size = ft_usize((size_t)width, (size_t)height);
-	printf("size: %lu %lu\n", self->size.x, self->size.y);
 	module_add(&self->module, &self->frame,
 		array(sizeof(t_u32) * self->size.x * self->size.y));
 	if (self->module.has_error)
@@ -104,8 +100,8 @@ static void		add_modules(t_frame *const self)
 t_result		init_frame_from_bmp(t_frame *const self,
 					const t_frame_args *const args)
 {
-	int		fd;
-	
+	int	fd;
+
 	init_module(&self->module);
 	if (!bmp_open(args->path, &fd) || !bmp_parse(fd, self))
 	{
@@ -121,5 +117,6 @@ t_result		init_frame_from_bmp(t_frame *const self,
 		return (throw_result_str("init_frame_from_bmp()",
 			"failed to init frame module"));
 	}
+	self->pixels = (t_rgba*)self->frame.array;
 	return (OK);
 }

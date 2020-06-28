@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 13:18:59 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/06 13:55:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/27 01:40:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ static t_bool	is_polygon_side(t_shape *const self,
 			&& side != vertices_side(ft_vec2f(node->pos.x, node->pos.y),
 				ft_vec2f(a->pos.x, a->pos.y),
 				ft_vec2f(b->pos.x, b->pos.y)))
- 			return (FALSE);
+		{
+			return (FALSE);
+		}
 	}
 	return (TRUE);
 }

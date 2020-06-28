@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:49:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/05 02:00:04 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/27 02:11:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ t_result	init_text(t_text *const self, const t_text_args *const args)
 	module_add(&self->module, &self->text, string(""));
 	if (self->module.has_error)
 		return (throw_result_str("init_text", "failed to init new text"));
+	else
+		self->pixels = (t_rgba*)self->target.frame.array;
 	return (OK);
 }

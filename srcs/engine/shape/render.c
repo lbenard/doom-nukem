@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 00:01:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/21 09:47:51 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/27 01:39:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	shape_render(const t_shape *const self,
 		&& i.y + pos.y < (ssize_t)framebuffer->size.y)
 	{
 		i.x = ft_ssmax(self->box.pos.x, 0);
-		while (i.x < (ssize_t)self->box.size.x  + self->box.pos.x
+		while (i.x < (ssize_t)self->box.size.x + self->box.pos.x
 			&& i.x + pos.x < (ssize_t)framebuffer->size.x)
 		{
 			if (shape_is_point_in_shape(self, ft_isize(i.x, i.y)))
