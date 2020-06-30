@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ssmin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 21:22:03 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/18 21:24:38 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/30 16:53:09 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,3 @@ ssize_t	ft_ssmin(ssize_t a, ssize_t b)
 {
 	return ((a < b) ? a : b);
 }
-
-
-
-
-
