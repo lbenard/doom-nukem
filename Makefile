@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/06/29 20:56:35 by lbenard          ###   ########.fr        #
+#    Updated: 2020/06/30 17:13:57 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -431,9 +431,12 @@ CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto # -Wno-deprecated
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)
-	LDFLAGS			:=	$(LDFLAGS) \
-						-Wl,-rpath,$(SFML_FOLDER)/extlibs/libs-osx/Frameworks
+	LDFLAGS         :=  $(LDFLAGS) \
+                        -Wl,-rpath,$(SFML_FOLDER)/extlibs/libs-osx/Frameworks \
+                        -Wl,-rpath,$(SFML_FOLDER)/lib \
+                        -Wl,-rpath,$(CSFML_FOLDER)/lib
 	RUN_PREFIX		:=	LD_LIBRARY_PATH=CSFML/lib:SFML/lib
+	CFLAGS := $(CFLAGS) -Wno-deprecated-declarations
 endif
 
 # Colors
