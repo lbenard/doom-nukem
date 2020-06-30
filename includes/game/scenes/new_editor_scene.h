@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/28 22:44:35 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/29 00:38:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "game/entities/editor/vertex_component_entity.h"
 # include "game/entities/checkbox_entity.h"
 # include "game/entities/editor/preview_checkbox_entity.h"
+# include "game/entities/editor/block_checkbox_entity.h"
 
 # define BUTTONS "resources/buttons/"
 
@@ -72,8 +73,9 @@ typedef struct	s_new_editor_scene
 		t_radio_group	blocks;
 		struct s_blocks_group
 		{
-			t_checkbox_entity	*concrete_ref;
-			t_checkbox_entity	*brick_ref;
+			t_block_checkbox_entity	*blue_ice;
+			t_block_checkbox_entity	*white_wool;
+			t_block_checkbox_entity	*acacia_log;
 		}						blocks_group;
 		t_radio_group	entities;
 		struct s_entities_group

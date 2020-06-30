@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/28 18:45:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/29 04:07:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,23 @@ static void	add_entities(t_new_editor_scene *const self,
 		ft_vec3f(self->editor_view.size.x + 30.0f, 30.0f, 0.0f)), args->screen);
 	self->hud.tools_group.create_ref = create_checkbox_relative(
 		&self->super.entities, "editor-create.png",
-		ft_checkbox_position(self->hud.tools_group.cursor_ref, RIGHT_TO, 45.0f),
+		ft_checkbox_position(self->hud.tools_group.cursor_ref, RIGHT_TO, 50.0f),
 		args->screen);
 	self->hud.create_group.show_blocks_ref = create_checkbox_relative(
 		&self->super.entities, "editor-block.png", ft_checkbox_position(
 		self->hud.tools_group.create_ref, BELOW, 50.0f), args->screen);
 	self->hud.create_group.show_entities_ref = create_checkbox_relative(
 		&self->super.entities, "editor-entity.png", ft_checkbox_position(
-		self->hud.create_group.show_blocks_ref, RIGHT_TO, 45.0f), args->screen);
+		self->hud.create_group.show_blocks_ref, RIGHT_TO, 50.0f), args->screen);
+	self->hud.blocks_group.blue_ice = create_block_checkbox(
+		&self->super.entities, "editor-button.png",
+		"resources/textures/blue_ice.png", args->screen);
+	self->hud.blocks_group.white_wool = create_block_checkbox(
+		&self->super.entities, "editor-button.png",
+		"resources/textures/white_wool.png", args->screen);
+	self->hud.blocks_group.acacia_log = create_block_checkbox(
+		&self->super.entities, "editor-button.png",
+		"resources/textures/acacia_log.png", args->screen);
 }
 
 t_result	init_new_editor_scene(t_new_editor_scene *const self,
@@ -80,6 +89,18 @@ t_result	init_new_editor_scene(t_new_editor_scene *const self,
 		init_radio_group(&self->hud.create,
 			(t_checkbox_entity**const)&self->hud.create_group,
 			sizeof(self->hud.create_group) / sizeof(t_checkbox_entity*), 0);
+		init_radio_group(&self->hud.blocks,
+			(t_checkbox_entity**const)&self->hud.blocks_group,
+			sizeof(self->hud.blocks_group) / sizeof(t_checkbox_entity*), 0);
+		block_checkbox_set_relative(self->hud.blocks_group.blue_ice,
+			ft_checkbox_position(self->hud.create_group.show_blocks_ref, BELOW,
+			50.0f));
+		block_checkbox_set_relative(self->hud.blocks_group.white_wool,
+			ft_checkbox_position(&self->hud.blocks_group.blue_ice->super.super,
+			RIGHT_TO, 50.0f));
+		block_checkbox_set_relative(self->hud.blocks_group.acacia_log,
+			ft_checkbox_position(&self->hud.blocks_group.white_wool->super.super,
+			RIGHT_TO, 50.0f));
 	}
 	else
 	{

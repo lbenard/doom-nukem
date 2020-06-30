@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:15:43 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/28 18:21:43 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/29 02:28:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,11 @@ t_checkbox_entity	*create_checkbox_relative_pos(t_entity_list *const list,
 						const t_checkbox_position position,
 						const t_window *const window);
 
+void				checkbox_set_relative(t_checkbox_entity *const self,
+						const t_checkbox_position position);
+void				checkbox_set_pos(t_checkbox_entity *const self, 
+						const t_vec3f pos);
+
 /*
 ** Utils
 */
@@ -128,5 +133,7 @@ t_result			init_radio_group(t_radio_group *const self,
 						const size_t default_checkbox);
 
 void				update_radio_group(t_radio_group *const self);
+void				radio_group_set_active(t_radio_group *const self,
+						const t_bool state);
 
 #endif

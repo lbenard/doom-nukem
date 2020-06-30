@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 18:13:26 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/27 02:10:44 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/29 19:18:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,15 @@ static t_result	bmp_open(const char *const path, int *const fd)
 	if ((*fd = open(path, O_RDONLY, 0)) < 0)
 		return (throw_result_str(__func__, "open fail"));
 	if (read(*fd, &magic, sizeof(t_u16)) < 0)
+	{
+		close(*fd);
 		return (throw_result_str(__func__, "read fail"));
+	}
 	if (magic != 0x4d42)
+	{
+		close(*fd);
 		return (throw_result_str(__func__, "unknow file format"));
+	}
 	return (OK);
 }
 
@@ -103,10 +109,15 @@ t_result		init_frame_from_bmp(t_frame *const self,
 	int	fd;
 
 	init_module(&self->module);
-	if (!bmp_open(args->path, &fd) || !bmp_parse(fd, self))
+	if (!bmp_open(args->path, &fd))
 	{
 		destroy_frame(self);
-		return (throw_result_str(__func__, "bmp_parse fail"));
+		return (throw_result_str(__func__, "failed to load file"));
+	}
+	if (!bmp_parse(fd, self))
+	{
+		close(fd);
+		
 	}
 	add_modules(self);
 	sfSprite_setTexture(self->sprite.sprite,

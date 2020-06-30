@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/20 19:51:35 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/29 23:57:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,13 @@
 t_result	init_monster_entity(t_monster_entity *const self,
 				const t_monster_entity_args *const args)
 {
-	if (init_sprite_entity(&self->super,
-		ft_vec3f(args->pos.x, args->pos.y, 0.0f),
-		args->path,
-		sprite_entity_vtable(monster_entity_update)) == ERROR)
+	if (static_module_create(self, sprite_entity(
+		ft_vec3f(args->pos.x, args->pos.y, 0.0f), args->path)) == ERROR)
 	{
-		destroy_monster_entity(self);
 		return (throw_result_str("init_monster_entity()",
-			"failed to init sprite parent"));
+			"failed to create parent class"));
 	}
+	self->super.super.vtable.update = monster_entity_update;
 	// module_add(&self->super.module, &self->texture,
 	// 	frame_from_file(args->path));
 	self->health = args->health;

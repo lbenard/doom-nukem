@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 16:59:25 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/24 22:50:38 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/29 04:03:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ t_result	init_checkbox_entity(t_checkbox_entity *const self,
 	self->is_checked = FALSE;
 	self->window = args->window;
 	self->was_mouse_pressed = FALSE;
-	self->is_active = TRUE;
+	self->is_active = FALSE;
+	self->is_hovered = FALSE;
 	if (self->super.module.has_error)
 	{
 		destroy_checkbox_entity(self);

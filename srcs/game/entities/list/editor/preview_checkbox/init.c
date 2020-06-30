@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:53:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/26 20:07:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/29 00:25:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 t_result	init_preview_checkbox_entity(t_preview_checkbox_entity *const self,
 				const t_preview_checkbox_entity_args *const args)
 {
-	if (static_module_create(&self->super, checkbox_entity(
-		args->normal_texture_path,
-		args->hover_texture_path,
-		args->checked_texture_path,
-		args->window)) == ERROR)
+	if (static_module_create(&self->super, checkbox_entity_base(
+		args->base_name, args->window)) == ERROR)
 	{
 		return (throw_result_str("init_preview_checkbox_entity()",
 			"failed to init parent class"));

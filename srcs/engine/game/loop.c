@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:07:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/27 01:41:25 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/30 14:23:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	game_loop(void)
 		window_update(&game->window);
 	}
 	spf = get_wall_time() - last_time;
-	// printf("fps: %f\n", 1.0f / spf);
+	printf("fps: %f\n", 1.0f / spf);
 	set_last_delta(spf);
 	last_time = get_wall_time();
 }
