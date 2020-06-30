@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/28 20:44:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/30 05:18:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	add_modules(t_raycasting_scene *const self,
 				const t_raycasting_scene_args *const args)
 {
 	module_add(&self->super.module, &self->texture,
-		image("resources/textures/wall.png"));
+		frame_from_file("resources/textures/wall.png"));
 	module_add(&self->super.module, &self->dinosaur,
 		frame_from_file("resources/textures/chrome-dinosaur.png"));
 	module_add(&self->super.module, &self->map, map("maps/test_map.dn"));
@@ -72,13 +72,13 @@ static void	add_entities(t_raycasting_scene *const self,
 {
 	self->player_ref = (t_player_entity*)entity_list_add_entity(
 		&self->super.entities, player_entity(&self->map));
-	// entity_list_add_entity_ref(
-	// 	&self->sprite_entities,
-	// 	entity_list_add_entity(
-	// 		&self->super.entities,
-	// 		sprite_entity(
-	// 			ft_vec3f(4.0f, 3.0f, 0.0f),
-	// 		"resources/textures/chrome-dinosaur.png")));
+	entity_list_add_entity_ref(
+		&self->sprite_entities,
+		entity_list_add_entity(
+			&self->super.entities,
+			sprite_entity(
+				ft_vec3f(4.0f, 3.0f, 0.0f),
+			"resources/textures/acacia_log_upscale.png")));
 	// entity_list_add_entity_ref(&self->sprite_entities,
 	// 	entity_list_add_entity(&self->super.entities,
 	// 		monster_entity(100, 15, ft_vec2f(4.0f, 3.0f),

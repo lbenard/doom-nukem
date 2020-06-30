@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 23:33:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/19 21:36:02 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/29 20:59:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,21 @@ typedef struct			s_sprite_entity
 {
 	t_entity				super;
 	t_frame					texture;
-	t_sprite_entity_vtable	vtable;
 }						t_sprite_entity;
 
-t_result				init_sprite_entity(t_sprite_entity *const self,
-							t_vec3f pos,
-							const char *texture_path,
-							t_sprite_entity_vtable vtable);
+typedef struct			s_sprite_entity_args
+{
+	t_vec3f					pos;
+	const char				*texture_path;
+}						t_sprite_entity_args;
 
-// void					sprite_entity_update(t_sprite_entity *const self);
+t_constructor			sprite_entity(const t_vec3f pos,
+							const char *texture_path);
+
+t_result				init_sprite_entity(t_sprite_entity *const self,
+							t_sprite_entity_args *const args);
+
+void					sprite_entity_update(t_sprite_entity *const self);
 
 void					destroy_sprite_entity(t_sprite_entity *const self);
 

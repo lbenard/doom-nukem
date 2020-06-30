@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/06/28 18:22:46 by lbenard          ###   ########.fr        #
+#    Updated: 2020/06/29 20:56:35 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -243,8 +243,11 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/checkbox/create.c											\
 					game/entities/list/checkbox/create_relative.c									\
 					game/entities/list/checkbox/create_relative_pos.c								\
+					game/entities/list/checkbox/set_relative.c										\
+					game/entities/list/checkbox/set_pos.c											\
 					game/entities/list/checkbox/init_radio_group.c									\
 					game/entities/list/checkbox/update_radio_group.c								\
+					game/entities/list/checkbox/radio_group_set_active.c							\
 																									\
 					game/entities/list/editor/camera/editor_camera_entity.c							\
 					game/entities/list/editor/camera/init.c											\
@@ -285,6 +288,15 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/preview_checkbox/render.c								\
 					game/entities/list/editor/preview_checkbox/destroy.c							\
 																									\
+					game/entities/list/editor/block_checkbox/block_checkbox_entity.c				\
+					game/entities/list/editor/block_checkbox/init.c									\
+					game/entities/list/editor/block_checkbox/update.c								\
+					game/entities/list/editor/block_checkbox/render.c								\
+					game/entities/list/editor/block_checkbox/destroy.c								\
+					game/entities/list/editor/block_checkbox/create.c								\
+					game/entities/list/editor/block_checkbox/set_relative.c							\
+					game/entities/list/editor/block_checkbox/set_pos.c								\
+																									\
 					game/entities/list/editor/vertex_component/vertex_component_entity.c			\
 					game/entities/list/editor/vertex_component/init.c								\
 					game/entities/list/editor/vertex_component/update.c								\
@@ -309,6 +321,7 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/monster/update.c												\
 					game/entities/list/monster/destroy.c											\
 																									\
+					game/entities/list/sprite/sprite_entity.c										\
 					game/entities/list/sprite/init.c												\
 					game/entities/list/sprite/destroy.c												\
 					game/entities/list/sprite/update.c												\

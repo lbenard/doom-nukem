@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/20 19:39:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/30 05:18:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct	s_raycasting_scene
 	t_rgb				ground_color;
 	t_rgb				sky_color;
 	t_frame				background;
-	t_image				texture;
+	t_frame				texture;
 	t_frame				dinosaur;
 	t_array				zbuffer;
 	t_frame				last_frame;
