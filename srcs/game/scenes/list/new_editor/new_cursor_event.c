@@ -6,12 +6,23 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 20:25:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 03:46:55 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 15:58:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/new_editor_scene.h"
 #include "engine/error.h"
+
+static void		remove_component(t_new_editor_scene *const self)
+{
+	entity_list_remove(&self->components,
+		(t_entity*)self->selected_component_ref);
+	entity_list_remove(&self->blocks,
+		(t_entity*)self->selected_component_ref);
+	entity_list_remove(&self->super.entities,
+		(t_entity*)self->selected_component_ref);
+	self->selected_component_ref = NULL;
+}
 
 static void		unselect_component(t_new_editor_scene *const self)
 {
@@ -46,11 +57,6 @@ static void		select_component(t_new_editor_scene *const self,
 				unselect_component(self);
 				self->selected_component_ref = component;
 				component->is_selected = TRUE;
-				// if (self->selected_component_ref
-				// 	&& !component->is_selected)
-				// 	unselect_component(self);
-				// if (!component->is_selected)
-				// 	self->selected_component_ref = component;
 				component->is_moved = TRUE;
 				list_move_tail(pos, &self->components.list);
 				break ;
@@ -72,6 +78,8 @@ static void		component_cursor(t_new_editor_scene *const self, sfEvent *event)
 			unselect_component(self);
 		if (event->type == sfEvtKeyPressed && event->key.code == sfKeySpace)
 			unselect_component(self);
+		if (event->type == sfEvtKeyPressed && event->key.code == sfKeyDelete)
+			remove_component(self);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:51:03 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 23:33:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 20:51:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_result	init_grid_component_entity(t_grid_component_entity *const self,
 	}
 	self->super.super.transform.scale.x = args->frame_size.x;
 	self->super.super.transform.scale.y = args->frame_size.y;
-	self->unit_size = args->frame_size.y * 0.2f;
+	self->unit_size = args->unit_size;
 	if (self->super.super.module.has_error)
 	{
 		destroy_grid_component_entity(self);

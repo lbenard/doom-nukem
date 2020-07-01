@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 01:13:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 20:21:51 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ typedef struct	s_new_editor_scene
 {
 	t_scene						super;
 	t_usize						map_size;
-	t_list_head					blocks;
-	t_list_head					entities;
 	t_entity_list				components;
+	t_entity_list				blocks;
+	t_entity_list				entities;
 	t_component_entity			*selected_component_ref;
 	t_frame						editor_view;
 	t_frame						editor_background;

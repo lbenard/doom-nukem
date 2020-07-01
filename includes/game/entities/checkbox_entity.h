@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 17:15:43 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/29 02:28:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 20:20:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,10 @@ t_constructor		checkbox_entity(const char *const normal_path,
 						const t_window *const window);
 t_constructor		checkbox_entity_base(const char *const base_name,
 						const t_window *const window);
-t_constructor		checkbox_entity_base_icon(const char *const base_name,
-						const char *const icon_name,
-						const t_window *const window);
 
 t_result			init_checkbox_entity(t_checkbox_entity *const self,
 						const t_checkbox_entity_args *const args);
 t_result			init_checkbox_entity_base(t_checkbox_entity *const self,
-						const t_checkbox_entity_args *const args);
-t_result			init_checkbox_entity_base_icon(t_checkbox_entity *const self,
 						const t_checkbox_entity_args *const args);
 
 void				checkbox_entity_update(t_checkbox_entity *const self);

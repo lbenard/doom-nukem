@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:45:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 23:33:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 20:51:04 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ typedef struct	s_grid_component_entity
 typedef struct	s_grid_component_entity_args
 {
 	t_usize	frame_size;
+	float	unit_size;
 }				t_grid_component_entity_args;
 
-t_constructor	grid_component_entity(const t_usize frame_size);
+t_constructor	grid_component_entity(const t_usize frame_size,
+					const float grid_unit);
 
 t_result		init_grid_component_entity(t_grid_component_entity *const self,
 					const t_grid_component_entity_args *const args);

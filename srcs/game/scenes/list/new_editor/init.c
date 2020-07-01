@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 01:13:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 20:52:17 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	add_modules(t_new_editor_scene *const self,
 		&self->editor_background,
 		frame_from_file("resources/textures/bob.jpg"));
 	module_add(&self->super.module, &self->components, entity_list());
+	module_add(&self->super.module, &self->blocks, entity_list());
+	module_add(&self->super.module, &self->entities, entity_list());
 
 	module_add(&self->super.module, &self->blocks_list.blue_ice,
 		editor_block_descriptor(0, "Blue ice",
@@ -47,11 +49,12 @@ static void	add_entities(t_new_editor_scene *const self,
 {
 	self->camera_ref = (t_editor_camera_entity*)entity_list_add_entity(
 		&self->super.entities,
-		editor_camera_entity(self->editor_view.size.y * 0.2f,
+		editor_camera_entity(self->editor_view.size.y * 0.1f,
 			&self->editor_view));
 	self->grid_ref = (t_grid_component_entity*)entity_list_add_entity_ref(
 		&self->components, entity_list_add_entity(&self->super.entities,
-			grid_component_entity(self->editor_view.size)));
+			grid_component_entity(self->editor_view.size,
+				self->camera_ref->grid_unit)));
 	self->hud.tools_group.cursor_ref = create_checkbox_relative_pos(
 		&self->super.entities, "editor-cursor.png", ft_checkbox_position_pos(
 		ft_vec3f(self->editor_view.size.x + 30.0f, 30.0f, 0.0f)), args->screen);
@@ -74,9 +77,6 @@ static void	add_entities(t_new_editor_scene *const self,
 	self->hud.blocks_group.acacia_log = create_block_checkbox(
 		&self->super.entities, "editor-button.png",
 		&self->blocks_list.acacia_log, args->screen);
-	entity_list_add_entity_ref(&self->components, entity_list_add_entity(
-		&self->super.entities,
-		block_component_entity(&self->blocks_list.acacia_log)));
 }
 
 t_result	init_new_editor_scene(t_new_editor_scene *const self,
@@ -88,8 +88,6 @@ t_result	init_new_editor_scene(t_new_editor_scene *const self,
 		return (throw_result_str("init_new_editor_scene()",
 			"failed to init scene"));
 	}
-	init_list_head(&self->entities);
-	init_list_head(&self->blocks);
 	self->selected_component_ref = NULL;
 	add_modules(self, args);
 	if (!self->super.module.has_error)
