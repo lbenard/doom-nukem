@@ -6,22 +6,22 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/29 04:07:29 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 01:13:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/new_editor_scene.h"
 #include "game/entities/editor/component_entity.h"
 #include "game/entities/editor/editor_camera_entity.h"
-#include "game/entities/editor/ghost_segment_component_entity.h"
+#include "game/entities/editor/block_component_entity.h"
 #include "engine/error.h"
 #include "engine/game.h"
+
+#include <stdio.h>
 
 static void	add_modules(t_new_editor_scene *const self,
 				const t_new_editor_scene_args *const args)
 {
-	module_add(&self->super.module, &self->dinosaur,
-		frame_from_bmp("dinosaur.bmp"));
 	module_add(&self->super.module,
 		&self->editor_view,
 		frame(ft_usize(args->screen->size.x - 400, args->screen->size.y),
@@ -29,6 +29,17 @@ static void	add_modules(t_new_editor_scene *const self,
 	module_add(&self->super.module,
 		&self->editor_background,
 		frame_from_file("resources/textures/bob.jpg"));
+	module_add(&self->super.module, &self->components, entity_list());
+
+	module_add(&self->super.module, &self->blocks_list.blue_ice,
+		editor_block_descriptor(0, "Blue ice",
+			"resources/textures/blue_ice.png"));
+	module_add(&self->super.module, &self->blocks_list.white_wool,
+		editor_block_descriptor(1, "While wool",
+			"resources/textures/white_wool.png"));
+	module_add(&self->super.module, &self->blocks_list.acacia_log,
+		editor_block_descriptor(2, "Acacia log",
+			"resources/textures/acacia_log.png"));
 }
 
 static void	add_entities(t_new_editor_scene *const self,
@@ -38,9 +49,9 @@ static void	add_entities(t_new_editor_scene *const self,
 		&self->super.entities,
 		editor_camera_entity(self->editor_view.size.y * 0.2f,
 			&self->editor_view));
-	self->grid_ref = (t_grid_component_entity*)entity_list_add_entity(
-		&self->super.entities,
-		grid_component_entity(self->editor_view.size));
+	self->grid_ref = (t_grid_component_entity*)entity_list_add_entity_ref(
+		&self->components, entity_list_add_entity(&self->super.entities,
+			grid_component_entity(self->editor_view.size)));
 	self->hud.tools_group.cursor_ref = create_checkbox_relative_pos(
 		&self->super.entities, "editor-cursor.png", ft_checkbox_position_pos(
 		ft_vec3f(self->editor_view.size.x + 30.0f, 30.0f, 0.0f)), args->screen);
@@ -56,13 +67,16 @@ static void	add_entities(t_new_editor_scene *const self,
 		self->hud.create_group.show_blocks_ref, RIGHT_TO, 50.0f), args->screen);
 	self->hud.blocks_group.blue_ice = create_block_checkbox(
 		&self->super.entities, "editor-button.png",
-		"resources/textures/blue_ice.png", args->screen);
+		&self->blocks_list.blue_ice, args->screen);
 	self->hud.blocks_group.white_wool = create_block_checkbox(
 		&self->super.entities, "editor-button.png",
-		"resources/textures/white_wool.png", args->screen);
+		&self->blocks_list.white_wool, args->screen);
 	self->hud.blocks_group.acacia_log = create_block_checkbox(
 		&self->super.entities, "editor-button.png",
-		"resources/textures/acacia_log.png", args->screen);
+		&self->blocks_list.acacia_log, args->screen);
+	entity_list_add_entity_ref(&self->components, entity_list_add_entity(
+		&self->super.entities,
+		block_component_entity(&self->blocks_list.acacia_log)));
 }
 
 t_result	init_new_editor_scene(t_new_editor_scene *const self,
@@ -76,9 +90,13 @@ t_result	init_new_editor_scene(t_new_editor_scene *const self,
 	}
 	init_list_head(&self->entities);
 	init_list_head(&self->blocks);
+	self->selected_component_ref = NULL;
 	add_modules(self, args);
 	if (!self->super.module.has_error)
 		add_entities(self, args);
+	event_handler_add_callback(&self->super.input_manager, new_cursor_event());
+	event_handler_add_callback(&self->super.input_manager,
+		new_block_create_event());
 	self->screen_ref = args->screen;
 	if (self->super.module.has_error == FALSE
 		&& self->super.entities.module.has_error == FALSE)

@@ -5,27 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/18 19:52:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 21:59:01 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/01 00:05:18 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/01 00:30:02 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/editor/component_entity.h"
+#include "game/scenes/editor_block_descriptor.h"
 #include "engine/error.h"
 
-t_result	init_component_entity(t_component_entity *const self,
-				t_component_entity_args *const args)
+t_result	init_editor_block_descriptor(t_editor_block_descriptor *const self,
+				t_editor_block_descriptor_args *const args)
 {
-	init_entity_default(&self->super, entity_vtable(component_entity_update));
-	self->type = args->type;
-	self->selectable = FALSE;
-	self->is_selected = FALSE;
-	self->movable = FALSE;
-	self->is_moved = FALSE;
-	self->color = ft_rgb(127, 127, 127);
-	self->selected_color = ft_rgb(127, 127, 127);
-	self->dragged_color = ft_rgb(200, 200, 200);
-	self->error_color = ft_rgb(255, 84, 84);
-	self->vtable = args->vtable;
+	init_module(&self->module);
+	module_add(&self->module, &self->texture,
+		frame_from_file(args->texture_path));
+	self->id = args->id;
+	self->name = args->name;
+	if (self->module.has_error)
+	{
+		destroy_editor_block_descriptor(self);
+		return (throw_result_str("init_editor_block_descriptor()",
+			"failed to init editor block"));
+	}
 	return (OK);
 }

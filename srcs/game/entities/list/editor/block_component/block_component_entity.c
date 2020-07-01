@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   block_component_entity.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/14 05:17:54 by lbenard           #+#    #+#             */
-/*   Updated: 2020/05/23 20:05:57 by lbenard          ###   ########.fr       */
+/*   Created: 2020/06/30 22:29:14 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/01 00:20:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/editor/ghost_segment_component_entity.h"
+#include "game/entities/editor/block_component_entity.h"
 
-void	ghost_segment_component_entity_render(t_component_entity *const self,
-			t_editor_camera_entity *const camera,
-			t_frame *const frame)
+t_constructor	block_component_entity(const t_editor_block_descriptor *block)
 {
-	t_ghost_segment_component_entity	*entity;
+	static t_block_component_entity_args	args;
 
-	entity = (t_ghost_segment_component_entity*)self;
-	(void)camera;
-	shape_render(
-		&entity->shape,
-		ft_isize(0, 0),
-		frame,
-		ft_rgba(255, 0, 0, 42)
-	);
+	args.block = block;
+	return (ft_constructor(init_block_component_entity,
+		destroy_block_component_entity,
+		sizeof(t_block_component_entity),
+		&args));
 }

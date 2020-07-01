@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/06/30 17:13:57 by mribouch         ###   ########.fr        #
+#    Updated: 2020/07/01 01:06:44 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -260,20 +260,12 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/camera/destroy.c										\
 					game/entities/list/editor/camera/new_editor_camera_zoom_event.c					\
 																									\
+					game/entities/list/editor/component/component_entity.c							\
 					game/entities/list/editor/component/init.c										\
 					game/entities/list/editor/component/update.c									\
 					game/entities/list/editor/component/camera_pos.c								\
 					game/entities/list/editor/component/screen_pos.c								\
 					game/entities/list/editor/component/destroy.c									\
-																									\
-					game/entities/list/editor/ghost_segment/ghost_segment_component_entity.c		\
-					game/entities/list/editor/ghost_segment/ghost_segment_component_entity_vertex.c	\
-					game/entities/list/editor/ghost_segment/init.c									\
-					game/entities/list/editor/ghost_segment/init_vertex.c									\
-					game/entities/list/editor/ghost_segment/update.c								\
-					game/entities/list/editor/ghost_segment/render.c								\
-					game/entities/list/editor/ghost_segment/is_hovered.c							\
-					game/entities/list/editor/ghost_segment/destroy.c								\
 																									\
 					game/entities/list/editor/grid_component/grid_component_entity.c				\
 					game/entities/list/editor/grid_component/init.c									\
@@ -297,12 +289,12 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/block_checkbox/set_relative.c							\
 					game/entities/list/editor/block_checkbox/set_pos.c								\
 																									\
-					game/entities/list/editor/vertex_component/vertex_component_entity.c			\
-					game/entities/list/editor/vertex_component/init.c								\
-					game/entities/list/editor/vertex_component/update.c								\
-					game/entities/list/editor/vertex_component/render.c								\
-					game/entities/list/editor/vertex_component/is_hovered.c							\
-					game/entities/list/editor/vertex_component/destroy.c							\
+					game/entities/list/editor/block_component/block_component_entity.c				\
+					game/entities/list/editor/block_component/init.c								\
+					game/entities/list/editor/block_component/update.c								\
+					game/entities/list/editor/block_component/render.c								\
+					game/entities/list/editor/block_component/is_hovered.c							\
+					game/entities/list/editor/block_component/destroy.c								\
 																									\
 					game/entities/list/image/image_entity_from_file.c								\
 					game/entities/list/image/init_from_file.c										\
@@ -335,11 +327,16 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/benchmark/render.c												\
 					game/scenes/list/benchmark/destroy.c											\
 																									\
+					game/scenes/list/new_editor/block_descriptor/editor_block_descriptor.c			\
+					game/scenes/list/new_editor/block_descriptor/init.c								\
+					game/scenes/list/new_editor/block_descriptor/destroy.c							\
 					game/scenes/list/new_editor/new_editor_scene.c									\
 					game/scenes/list/new_editor/init.c												\
 					game/scenes/list/new_editor/update.c											\
 					game/scenes/list/new_editor/render.c											\
 					game/scenes/list/new_editor/destroy.c											\
+					game/scenes/list/new_editor/new_cursor_event.c									\
+					game/scenes/list/new_editor/new_block_create_event.c							\
 																									\
 					game/scenes/list/menu/menu_scene.c												\
 					game/scenes/list/menu/init.c													\

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/29 00:38:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 01:13:47 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,19 @@
 # include "engine/frame.h"
 # include "engine/text.h"
 # include "engine/shape.h"
+# include "game/entities/editor/component_entity.h"
 # include "game/entities/editor/editor_camera_entity.h"
 # include "game/entities/editor/grid_component_entity.h"
-# include "game/entities/editor/vertex_component_entity.h"
-# include "game/entities/checkbox_entity.h"
 # include "game/entities/editor/preview_checkbox_entity.h"
 # include "game/entities/editor/block_checkbox_entity.h"
+# include "game/entities/checkbox_entity.h"
+# include "game/scenes/editor_block_descriptor.h"
 
 # define BUTTONS "resources/buttons/"
 
 /*
 ** Block and entity lists
 */
-
-typedef struct	s_editor_block_node
-{
-	t_list_head	node;
-	char		*name;
-	t_frame		texture;
-}				t_editor_block_node;
 
 typedef struct	s_editor_entity_node
 {
@@ -52,9 +46,10 @@ typedef struct	s_new_editor_scene
 	t_usize						map_size;
 	t_list_head					blocks;
 	t_list_head					entities;
+	t_entity_list				components;
+	t_component_entity			*selected_component_ref;
 	t_frame						editor_view;
 	t_frame						editor_background;
-	t_frame						dinosaur;
 	t_grid_component_entity		*grid_ref;
 	struct s_hud
 	{
@@ -88,9 +83,9 @@ typedef struct	s_new_editor_scene
 	}							hud;
 	struct s_blocks
 	{
-		t_editor_block_node	blue_ice;
-		t_editor_block_node	white_wool;
-		t_editor_block_node	acacia_log;
+		t_editor_block_descriptor	blue_ice;
+		t_editor_block_descriptor	white_wool;
+		t_editor_block_descriptor	acacia_log;
 	}							blocks_list;
 	t_editor_camera_entity		*camera_ref;
 	const t_window				*screen_ref;
@@ -116,5 +111,8 @@ void			new_editor_scene_render(t_new_editor_scene *const self,
 					t_frame *const fb);
 
 void			destroy_new_editor_scene(t_new_editor_scene *const self);
+
+t_callback_node	*new_cursor_event(void);
+t_callback_node	*new_block_create_event(void);
 
 #endif

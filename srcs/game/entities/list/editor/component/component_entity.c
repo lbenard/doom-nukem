@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   component_entity.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/14 05:33:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/14 06:31:22 by lbenard          ###   ########.fr       */
+/*   Created: 2020/06/30 21:56:24 by lbenard           #+#    #+#             */
+/*   Updated: 2020/06/30 21:57:57 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/editor/ghost_segment_component_entity.h"
+#include "game/entities/editor/component_entity.h"
 
-void	destroy_ghost_segment_component_entity(
-			t_ghost_segment_component_entity *const self)
+t_constructor	component_entity(const t_component_type type,
+					const struct s_component_entity_vtable vtable)
 {
-	destroy_module(&self->super.super.module);
+	static t_component_entity_args	args;
+
+	args.type = type;
+	args.vtable = vtable;
+	return (ft_constructor(init_component_entity,
+		destroy_component_entity,
+		sizeof(t_component_entity),
+		&args));
 }

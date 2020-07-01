@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:28:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/22 20:01:40 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/30 21:57:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct	s_component_entity
 	t_entity			super;
 	t_component_type	type;
 	t_bool				selectable;
-	t_list_head			selection_node;
+	t_bool				is_selected;
 	t_bool				movable;
 	t_bool				is_moved;
 	t_rgb				color;
@@ -54,9 +54,17 @@ typedef struct	s_component_entity
 	}					vtable;
 }				t_component_entity;
 
-t_result		init_component_entity(t_component_entity *const self,
-					const t_component_type type,
+typedef struct	s_component_entity_args
+{
+	t_component_type					type;
+	struct s_component_entity_vtable	vtable;
+}				t_component_entity_args;
+
+t_constructor	component_entity(const t_component_type type,
 					const struct s_component_entity_vtable vtable);
+
+t_result		init_component_entity(t_component_entity *const self,
+					t_component_entity_args *const args);
 
 void			component_entity_update(t_component_entity *const self);
 t_vec2f			component_entity_editor_camera_pos(

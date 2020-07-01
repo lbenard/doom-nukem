@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 19:28:54 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/29 00:27:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 00:24:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 typedef struct	s_preview_checkbox_entity
 {
 	t_checkbox_entity	super;
-	t_frame				preview;
+	const t_frame		*preview;
 }				t_preview_checkbox_entity;
 
 typedef struct	s_preview_checkbox_entity_args
 {
 	const char		*base_name;
-	const char		*preview_path;
+	const t_frame	*preview;
 	const t_window	*window;
 }				t_preview_checkbox_entity_args;
 
 t_constructor	preview_checkbox_entity(const char *const base_name,
-					const char *const preview_path,
+					const t_frame *const preview,
 					const t_window *const window);
 
 t_result		init_preview_checkbox_entity(

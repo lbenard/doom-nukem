@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 00:33:43 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/30 21:07:57 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,8 +164,8 @@ int	main(void)
 	// game_set_scene(sector_scene());
 	// game_set_scene(menu_scene(&game->window));
 	// game_set_scene(noise_test_scene());
-	// game_set_scene(new_editor_scene(&game->window));
-	game_set_scene(raycasting_scene(&game->window));
+	game_set_scene(new_editor_scene(&game->window));
+	// game_set_scene(raycasting_scene(&game->window));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event()))
 	{

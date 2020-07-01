@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 20:04:54 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/26 20:23:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/01 00:24:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	preview_checkbox_entity_render(t_preview_checkbox_entity *const self,
 	if (self->super.is_hovered)
 	{
 		frame_layer_transform(frame,
-			&self->preview,
+			self->preview,
 			ft_frame_transform(ft_vec2f(0.0f, 0.0f),
 				ft_isize(mouse.x + cursor_size.x, mouse.y + cursor_size.y),
 				ft_vec2f(3.0f, 3.0f),

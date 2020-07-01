@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/19 23:07:41 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/08 15:29:02 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/01 00:12:30 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/01 00:29:47 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/editor/vertex_component_entity.h"
+#include "game/scenes/editor_block_descriptor.h"
 
-void	destroy_vertex_component_entity(t_vertex_component_entity *const self)
+void	destroy_editor_block_descriptor(t_editor_block_descriptor *const self)
 {
-	destroy_module(&self->super.super.module);
+	destroy_module(&self->module);
 }
