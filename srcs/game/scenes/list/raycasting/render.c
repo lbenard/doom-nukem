@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 15:42:03 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/04 22:55:02 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,8 +251,5 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	floor_raycasting(self, fb, dir, plane);
 	ceiling_raycasting(self, fb, dir, plane);
 	walls_raycasting(self, fb);
-	frame_layer_opaque(&self->last_frame, fb, ft_isize(0, 0));
-	// frame_layer(fb, &((t_sprite_entity*)self->sprite_entities.list.next)->texture, ft_isize(0, 0), blend_add);
 	sprites(self, fb, dir, plane);
-	// frame_layer(fb, &((t_sprite_entity*)((t_entity_node*)self->sprite_entities.list.next)->entity)->texture, ft_isize(0, 0), blend_add);
 }
