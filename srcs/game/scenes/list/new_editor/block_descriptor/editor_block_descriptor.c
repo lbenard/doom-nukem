@@ -6,13 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:13:16 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 00:29:56 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/03 18:55:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/editor_block_descriptor.h"
 
-t_constructor	editor_block_descriptor(const size_t id,
+t_constructor	editor_block_descriptor(const char id,
 					const char *name,
 					const char *texture_path)
 {

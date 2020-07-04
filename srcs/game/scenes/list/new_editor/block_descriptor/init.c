@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:05:18 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 00:30:02 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/03 16:24:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_result	init_editor_block_descriptor(t_editor_block_descriptor *const self,
 		frame_from_file(args->texture_path));
 	self->id = args->id;
 	self->name = args->name;
+	self->path = args->texture_path;
 	if (self->module.has_error)
 	{
 		destroy_editor_block_descriptor(self);
