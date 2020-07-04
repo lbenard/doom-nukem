@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:21:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/24 22:41:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/03 18:01:55 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ typedef struct	s_editor_camera_entity_args
 {
 	float			grid_unit;
 	const t_frame	*fb;
+	t_event_handler	*parent;
 }				t_editor_camera_entity_args;
 
 t_constructor	editor_camera_entity(const float grid_unit,
-					const t_frame *const fb);
+					const t_frame *const fb,
+					t_event_handler *const parent_handler);
 
 t_result		init_editor_camera_entity(t_editor_camera_entity *const self,
 					const t_editor_camera_entity_args *const args);
