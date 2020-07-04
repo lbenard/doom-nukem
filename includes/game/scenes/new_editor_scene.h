@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 20:21:51 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/03 16:31:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct	s_editor_entity_node
 typedef struct	s_new_editor_scene
 {
 	t_scene						super;
+	const char					*path;
 	t_usize						map_size;
 	t_entity_list				components;
 	t_entity_list				blocks;
@@ -58,6 +59,7 @@ typedef struct	s_new_editor_scene
 		{
 			t_checkbox_entity	*cursor_ref;
 			t_checkbox_entity	*create_ref;
+			t_checkbox_entity	*save_ref;
 		}						tools_group;
 		t_radio_group	create;
 		struct s_create_group
@@ -97,7 +99,8 @@ typedef struct	s_new_editor_scene_args
 	const t_window	*screen;
 }				t_new_editor_scene_args;
 
-t_constructor	new_editor_scene(const t_window *const screen);
+t_constructor	new_editor_scene(const t_window *const screen,
+					const char *const path);
 // t_constructor	new_editor_scene_from_file(const t_usize window_size,
 // 					const char *const path);
 
@@ -110,7 +113,10 @@ void			new_editor_scene_update(t_new_editor_scene *const self);
 void			new_editor_scene_render(t_new_editor_scene *const self,
 					t_frame *const fb);
 
+t_result		new_editor_export_map(t_new_editor_scene *const self);
+
 void			destroy_new_editor_scene(t_new_editor_scene *const self);
+
 
 t_callback_node	*new_cursor_event(void);
 t_callback_node	*new_block_create_event(void);

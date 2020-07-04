@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 21:07:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/04 21:56:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,21 +151,23 @@ void	register_inputs(t_game *const game)
 	// input_get(&game->input, forward);
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
 	t_game	*game;
-	
+
+	if (ac != 2)
+		return (!throw_error_str("main()", "a map path must be given"));
 	game = game_singleton();
-	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1280, 720)}) == ERROR)
-	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
 	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
+	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
 		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
+	(void)av;
 	// game_set_scene(sector_scene());
-	// game_set_scene(menu_scene(&game->window));
+	game_set_scene(menu_scene(&game->window, av[1]));
 	// game_set_scene(noise_test_scene());
-	game_set_scene(new_editor_scene(&game->window));
-	// game_set_scene(raycasting_scene(&game->window));
+	// game_set_scene(new_editor_scene(&game->window, av[1]));
+	// game_set_scene(raycasting_scene(&game->window, av[1]));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event()))
 	{
@@ -182,6 +184,35 @@ int	main(void)
 	stop_game();
 	return (0);
 }
+
+// leak avec un sprite (56 bytes)
+
+// int	main(void)
+// {
+// 	t_module		main_module;
+// 	t_frame			screen;
+// 	sfRenderWindow	*window;
+// 	sfVideoMode		mode;
+
+// 	init_module(&main_module);
+// 	module_add(&main_module, &screen, frame(ft_usize(1280, 720), ft_rgba(0, 0, 0, 255)));
+// 	if (main_module.has_error)
+// 		return (-1);
+// 	mode.width = 1280;
+// 	mode.height = 720;
+// 	mode.bitsPerPixel = 24;
+// 	if (!(window = sfRenderWindow_create(mode, "test", sfClose, NULL)))
+// 	{
+// 		destroy_module(&main_module);
+// 		return (-1);
+// 	}
+// 	sfRenderWindow_drawSprite(window, screen.sprite.sprite, NULL);
+// 	// sfRenderWindow_clear(window, sfRed);
+// 	// sfRenderWindow_display(window);
+// 	sfRenderWindow_destroy(window);
+// 	destroy_module(&main_module);
+// 	return (0);
+// }
 
 // #include <stdio.h>
 

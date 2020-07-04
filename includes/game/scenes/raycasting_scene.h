@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 05:18:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/03 20:04:40 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ typedef struct	s_raycasting_scene
 	t_map				map;
 	t_rgb				ground_color;
 	t_rgb				sky_color;
-	t_frame				background;
+	// t_frame				background;
 	t_frame				texture;
-	t_frame				dinosaur;
+	// t_frame				dinosaur;
 	t_array				zbuffer;
-	t_frame				last_frame;
-	t_image_entity		*vignette_ref;
+	// t_frame				last_frame;
+	// t_image_entity		*vignette_ref;
 	t_player_entity		*player_ref;
 	t_camera_entity		*camera_ref;
 	t_monster_entity	*monster_ref;
@@ -50,9 +50,11 @@ typedef struct	s_raycasting_scene
 typedef struct	s_raycasting_scene_args
 {
 	const t_window	*window;
+	const char		*path;
 }				t_raycasting_scene_args;
 
-t_constructor	raycasting_scene(const t_window *const window);
+t_constructor	raycasting_scene(const t_window *const window,
+					const char *path);
 
 t_result		init_raycasting_scene(t_raycasting_scene *const self,
 					const t_raycasting_scene_args *const args);

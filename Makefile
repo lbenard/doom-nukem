@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/01 01:06:44 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/04 17:40:24 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -334,6 +334,7 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/new_editor/init.c												\
 					game/scenes/list/new_editor/update.c											\
 					game/scenes/list/new_editor/render.c											\
+					game/scenes/list/new_editor/export_map.c										\
 					game/scenes/list/new_editor/destroy.c											\
 					game/scenes/list/new_editor/new_cursor_event.c									\
 					game/scenes/list/new_editor/new_block_create_event.c							\
@@ -424,7 +425,7 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto # -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast# -flto# -g3 -fsanitize=address # -Wno-deprecated
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)
