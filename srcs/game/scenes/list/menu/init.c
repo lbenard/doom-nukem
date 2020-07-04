@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:18 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/18 17:20:07 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/03 19:23:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_result	init_menu_scene(t_menu_scene *const self,
 			"failed to init menu scene"));
 	}
 	self->window_size = args->window->size;
+	self->path = args->path;
 	add_buttons(self, args);
 	add_images(self, args->window->size);
 	if (self->super.module.has_error || self->super.entities.module.has_error)

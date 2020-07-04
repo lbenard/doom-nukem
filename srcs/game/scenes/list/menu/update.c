@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:58 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/29 20:03:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/04 22:11:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		menu_scene_update(t_menu_scene *const self)
 	entity_list_update(&self->super.entities);
 	if (self->start_game_ref->is_clicked)
 	{
-		game_set_scene(raycasting_scene(&game_singleton()->window));
+		game_set_scene(raycasting_scene(&game_singleton()->window, self->path));
 		return ;
 	}
 	if (self->close_game_ref->is_clicked)

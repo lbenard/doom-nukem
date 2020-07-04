@@ -6,12 +6,15 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:25:39 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 03:49:22 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/03 19:26:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/new_editor_scene.h"
 #include "engine/delta.h"
+#include "engine/error.h"
+#include "engine/game.h"
+#include "game/scenes/menu_scene.h"
 
 void	new_editor_scene_update(t_new_editor_scene *const self)
 {
@@ -40,4 +43,15 @@ void	new_editor_scene_update(t_new_editor_scene *const self)
 	radio_group_set_active(&self->hud.blocks,
 		self->hud.create_group.show_blocks_ref->is_checked
 		&& self->hud.create_group.show_blocks_ref->is_active);
+	if (self->hud.tools_group.save_ref->is_checked)
+	{
+		if (new_editor_export_map(self) == ERROR)
+		{
+			throw_result_str("new_editor_scene_update()",
+				"failed to export map");
+			window_close(&game_singleton()->window);
+		}
+		else
+			game_set_scene(menu_scene(self->screen_ref, self->path));
+	}
 }
