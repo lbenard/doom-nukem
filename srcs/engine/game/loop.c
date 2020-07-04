@@ -6,12 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:07:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 14:23:54 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/04 23:19:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/game.h"
 #include "engine/delta.h"
+#include "ft/io.h"
 
 #include <stdio.h>
 
@@ -41,7 +42,15 @@ void	game_loop(void)
 		window_update(&game->window);
 	}
 	spf = get_wall_time() - last_time;
-	printf("fps: %f\n", 1.0f / spf);
+	// printf("fps: %f\n", 1.0f / spf);
+	if (spf > MAX_DELTA)
+	{
+		ft_putstr("cpu just had a stroke (got ");
+		ft_putnbr(1.0f / spf);
+		ft_putstr("fps, expected at least ");
+		ft_putnbr(1.0f / MAX_DELTA);
+		ft_putstr("fps)\n");
+	}
 	set_last_delta(spf);
 	last_time = get_wall_time();
 }
