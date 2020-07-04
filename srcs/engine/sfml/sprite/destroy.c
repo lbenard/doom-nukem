@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 05:14:20 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/26 20:24:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/04 17:09:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	destroy_sprite(t_sprite *const self)
 {
+	destroy_module(&self->module);
 	sfSprite_destroy(self->sprite);
 }
