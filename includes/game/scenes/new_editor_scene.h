@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/03 16:31:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/05 00:56:30 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "game/entities/editor/grid_component_entity.h"
 # include "game/entities/editor/preview_checkbox_entity.h"
 # include "game/entities/editor/block_checkbox_entity.h"
+# include "game/entities/editor/player_component_entity.h"
 # include "game/entities/checkbox_entity.h"
 # include "game/scenes/editor_block_descriptor.h"
 
@@ -49,6 +50,7 @@ typedef struct	s_new_editor_scene
 	t_entity_list				blocks;
 	t_entity_list				entities;
 	t_component_entity			*selected_component_ref;
+	t_player_component_entity	*player_spawn_ref;
 	t_frame						editor_view;
 	t_frame						editor_background;
 	t_grid_component_entity		*grid_ref;

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:17:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/04 17:40:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/07 00:17:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ static t_result	write_blocks(t_new_editor_scene *const self, const int fd)
 		ft_putchar_fd(list[i].id, fd);
 		ft_putstr_fd(": ", fd);
 		ft_putchar_fd(list[i].id, fd);
-		ft_putchar_fd(' ', fd);
-		ft_putchar_fd(list[i].id, fd);
-		ft_putchar_fd(' ', fd);
-		ft_putchar_fd(list[i].id, fd);
-		ft_putchar_fd(' ', fd);
-		ft_putchar_fd(list[i].id, fd);
-		ft_putchar_fd(' ', fd);
 		ft_putchar_fd('\n', fd);
 		i++;
 	}
@@ -90,7 +83,22 @@ static t_result	write_map_size(const int fd, const t_usize size)
 	return (OK);
 }
 
-#include <stdio.h>
+static t_result	write_player_spawn(const int fd,
+					const t_player_component_entity *const player,
+					const t_isize origin)
+{
+	errno = 0;
+	ft_putstr_fd("-player\n", fd);
+	ft_putstr_fd("spawn: ", fd);
+	ft_putnbr_fd((int)player->super.super.transform.position.x - origin.x, fd);
+	ft_putchar_fd(' ', fd);
+	ft_putnbr_fd((int)player->super.super.transform.position.y - origin.y, fd);
+	ft_putchar_fd('\n', fd);
+	ft_putchar_fd('\n', fd);
+	if (errno)
+		return (throw_result("write_size()"));
+	return (OK);
+}
 
 static t_result	write_map(t_new_editor_scene *const self,
 					const int fd,
@@ -217,8 +225,14 @@ t_result		new_editor_export_map(t_new_editor_scene *const self)
 		return (throw_result("new_editor_export_map()"));
 	origin = blocks_origin(self);
 	size = get_map_size(self, origin);
-	printf("size: %lu %lu\n", size.x, size.y);
+	if (size.x < 3 || size.y < 3)
+	{
+		return (throw_result_str("new_editor_export_map()",
+			"map is too small"));
+	}
 	if (!write_map_size(fd, size))
+		return (throw_result("new_editor_export_map()"));
+	if (!write_player_spawn(fd, self->player_spawn_ref, origin))
 		return (throw_result("new_editor_export_map()"));
 	if (!write_map(self, fd, origin, size))
 		return (throw_result("new_editor_export_map()"));

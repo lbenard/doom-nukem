@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:38:15 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:58:14 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/06 23:41:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,14 @@
 # include "sizes/usize.h"
 # include "maths/vec2f.h"
 # include "maths/vec2d.h"
-# include "engine/image.h"
+# include "engine/frame.h"
 
 /*
 ** Map element. Contains wall texture for each orientation
 */
 typedef struct	s_wall
 {
-	const t_image	*north_texture_ref;
-	const t_image	*east_texture_ref;
-	const t_image	*south_texture_ref;
-	const t_image	*west_texture_ref;
+	const t_frame	*texture_ref;
 }				t_wall;
 
 /*
@@ -36,9 +33,10 @@ typedef struct	s_wall
 */
 typedef struct	s_texture_node
 {
+	t_module	module;
 	t_list_head	node;
 	const char	*key;
-	t_image		image;
+	t_frame		texture;
 }				t_texture_node;
 
 typedef struct	s_texture_node_args
@@ -64,21 +62,19 @@ void			free_texture_list(t_list_head *const self);
 */
 typedef struct	s_block_node
 {
+	t_module	module;
 	t_list_head	node;
 	char		key;
-	const char	*north_texture_name;
-	const char	*east_texture_name;
-	const char	*south_texture_name;
-	const char	*west_texture_name;
+	const char	*texture_path;
 }				t_block_node;
 
 typedef struct	s_block_node_args
 {
 	const char	*key;
-	char		**values;
+	const char	*texture_path;
 }				t_block_node_args;
 
-t_constructor	block_node(const char *key, char **values);
+t_constructor	block_node(const char *key, const char *texture_path);
 
 t_result		init_block_node(t_block_node *const self,
 					const t_block_node_args *const args);

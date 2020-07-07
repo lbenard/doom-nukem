@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/04 17:40:24 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/07 00:09:03 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -274,6 +274,13 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/grid_component/is_hovered.c							\
 					game/entities/list/editor/grid_component/destroy.c								\
 																									\
+					game/entities/list/editor/player_component/player_component_entity.c			\
+					game/entities/list/editor/player_component/init.c								\
+					game/entities/list/editor/player_component/update.c								\
+					game/entities/list/editor/player_component/render.c								\
+					game/entities/list/editor/player_component/is_hovered.c							\
+					game/entities/list/editor/player_component/destroy.c							\
+																									\
 					game/entities/list/editor/preview_checkbox/preview_checkbox_entity.c			\
 					game/entities/list/editor/preview_checkbox/init.c								\
 					game/entities/list/editor/preview_checkbox/update.c								\
@@ -301,12 +308,6 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/image/update.c												\
 					game/entities/list/image/render.c												\
 					game/entities/list/image/destroy.c												\
-																									\
-					game/entities/list/minimap/minimap_entity.c										\
-					game/entities/list/minimap/init.c												\
-					game/entities/list/minimap/update.c												\
-					game/entities/list/minimap/render.c												\
-					game/entities/list/minimap/destroy.c											\
 																									\
 					game/entities/list/monster/monster_entity.c										\
 					game/entities/list/monster/init.c												\

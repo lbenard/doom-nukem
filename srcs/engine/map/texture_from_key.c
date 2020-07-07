@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 17:06:43 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/03 18:13:43 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/06 23:53:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 t_texture_node	*texture_from_key(t_list_head *const self,
 					const char *const key)
 {
-	t_list_head	*pos;
-	t_list_head	*next;
+	t_list_head		*pos;
+	t_texture_node	*texture;
 
 	pos = self;
-	next = pos->next;
-	while ((pos = next) != self)
+	while ((pos = pos->next) != self)
 	{
-		next = next->next;
-		if (!ft_strcmp((((t_texture_node*)pos)->key), key))
-			return ((t_texture_node*)pos);
+		texture = (t_texture_node*)((t_u8*)pos
+			- __builtin_offsetof(t_texture_node, node));
+		if (!ft_strcmp(texture->key, key))
+			return (texture);
 	}
 	return (NULL);
 }

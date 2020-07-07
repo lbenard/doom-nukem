@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/28 16:13:36 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:33:36 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/05 00:47:08 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/05 00:47:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/minimap_entity.h"
+#include "game/entities/editor/player_component_entity.h"
 
-void	destroy_minimap_entity(t_minimap_entity *const self)
+void	destroy_player_component_entity(t_player_component_entity *const self)
 {
-	destroy_module(&self->super.module);
+	destroy_module(&self->super.super.module);
 }

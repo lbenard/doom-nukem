@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_entity.c                                   :+:      :+:    :+:   */
+/*   player_component_entity.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/14 13:27:33 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:30:39 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/05 00:35:35 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/05 00:36:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/minimap_entity.h"
+#include "game/entities/editor/player_component_entity.h"
 
-t_constructor	minimap_entity(const t_raycasting *renderer,
-					const t_usize max_size)
+t_constructor	player_component_entity(const char *const icon_path)
 {
-	static t_minimap_entity_args	args;
+	static t_player_component_entity_args	args;
 
-	args.renderer = renderer;
-	args.max_size = max_size;
-	return (ft_constructor(init_minimap_entity,
-		destroy_minimap_entity,
-		sizeof(t_minimap_entity), &args));
+	args.icon_path = icon_path;
+	return (ft_constructor(init_player_component_entity,
+		destroy_player_component_entity,
+		sizeof(t_player_component_entity),
+		&args));
 }

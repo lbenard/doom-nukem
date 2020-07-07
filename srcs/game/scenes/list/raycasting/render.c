@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/04 22:55:02 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/07 00:19:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,30 @@
 #include "ft/mem.h"
 #include "maths/maths.h"
 
-static t_rgba	color(const t_wall *const wall,
-					float distance,
-					float horizontal,
-					float vertical)
+static t_rgba	color(const t_raycasting_scene *const self,
+					const t_ray *const ray,
+					const float vertical)
 {
-	t_rgba			*texture;
+	const t_frame	*texture;
 	t_rgba			ret;
 
-	texture = (t_rgba*)sfImage_getPixelsPtr(wall->north_texture_ref->image);
-	ret.integer = texture[(int)(horizontal * wall->north_texture_ref->size.x)
-		+ (int)(vertical * wall->north_texture_ref->size.y) * wall->north_texture_ref->size.x].integer;
-	ret.c.r /= (distance / 3.0f) + 1;
-	ret.c.g /= (distance / 3.0f) + 1;
-	ret.c.b /= (distance / 3.0f) + 1;
+	// if (ray->hit.x >= self->map.size.x || ray->hit.y >= self->map.size.y
+	// 	|| ray->hit.x < 0 || ray->hit.y < 0)
+		texture = &self->texture;
+	// else
+	// 	texture = self->map.map[(int)ray->hit.y * self->map.size.x
+	// 		+ (int)ray->hit.x].texture_ref;
+	ret = texture->pixels[(int)(ray->horizontal_ratio * texture->size.x)
+		+ (int)(vertical * texture->size.y) * texture->size.x];
+	ret.c.r /= (ray->perpendicular_distance / 3.0f) + 1;
+	ret.c.g /= (ray->perpendicular_distance / 3.0f) + 1;
+	ret.c.b /= (ray->perpendicular_distance / 3.0f) + 1;
 	return (ret);
 }
 
 #include <stdio.h>
 
-static void	ceiling_raycasting(t_raycasting_scene *const self,
+static void	ceiling_raycasting(const t_raycasting_scene *const self,
 				t_frame *const target,
 				const t_vec2f dir,
 				const t_vec2f plane)
@@ -130,13 +134,12 @@ static void	walls_raycasting(t_raycasting_scene *const self,
 		start_y = (ssize_t)(target->size.y - size) / 2
 			+ self->player_ref->super.transform.rotation.x;
 		end_y = start_y + size;
+		printf("%f %f, size: %lu\n", ray->hit.x, ray->hit.y, size);
 		i.y = (size_t)ft_ssmax(start_y, 0);
 		while ((ssize_t)i.y < end_y && i.y < target->size.y)
 		{
-			target->pixels[target->size.x * i.y + i.x] = color(
-				&self->map.map[(int)(ray->hit.y * self->map.size.x + ray->hit.x)],
-					ray->perpendicular_distance, ray->horizontal_ratio,
-					inverse_lerp(start_y, end_y, i.y));
+			target->pixels[target->size.x * i.y + i.x] = color(self, ray,
+				inverse_lerp(start_y, end_y, i.y));
 			i.y++;
 		}
 		i.x++;
@@ -158,6 +161,7 @@ static void	zbuffer(t_raycasting_scene *const self,
 	while (i < length)
 	{
 		camera_x = 2.0f * i / (float)length - 1;
+		// printf("i: %lu\n", i);
 		buffer[i] = cast(&self->map,
 			ft_vec2f(self->player_ref->super.transform.position.x,
 				self->player_ref->super.transform.position.y),
@@ -236,6 +240,12 @@ void		sprites(t_raycasting_scene *const self,
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
+	(void)self;
+	(void)fb;
+	(void)zbuffer;
+	(void)walls_raycasting;
+	(void)floor_raycasting;
+	(void)ceiling_raycasting;
 	t_vec2f	dir;
 	t_vec2f	plane;
 	float	fov;
@@ -247,9 +257,14 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	rot_cos = cos(self->player_ref->super.transform.rotation.y);
 	dir = ft_vec2f(rot_cos, rot_sin);
 	plane = vec2f_scalar(ft_vec2f(-rot_sin, rot_cos), fov);
+	printf("zbuffer\n");
 	zbuffer(self, dir, plane);
+	printf("floor\n");
 	floor_raycasting(self, fb, dir, plane);
+	printf("ceiling\n");
 	ceiling_raycasting(self, fb, dir, plane);
+	printf("walls\n");
 	walls_raycasting(self, fb);
+	printf("sprites\n");
 	sprites(self, fb, dir, plane);
 }

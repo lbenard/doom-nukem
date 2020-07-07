@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/03 18:55:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/05 01:04:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ static void	add_entities(t_new_editor_scene *const self,
 		&self->components, entity_list_add_entity(&self->super.entities,
 			grid_component_entity(self->editor_view.size,
 				self->camera_ref->grid_unit)));
+	self->player_spawn_ref = (t_player_component_entity*)
+		entity_list_add_entity_ref(&self->components,
+			entity_list_add_entity(&self->super.entities,
+			player_component_entity(
+				"resources/textures/editor-player-spawn.png")));
 	self->hud.tools_group.cursor_ref = create_checkbox_relative_pos(
 		&self->super.entities, "editor-cursor.png", ft_checkbox_position_pos(
 		ft_vec3f(self->editor_view.size.x + 30.0f, 30.0f, 0.0f)), args->screen);
