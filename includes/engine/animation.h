@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 19:55:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/02 19:32:20 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/07 21:02:34 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,22 @@ typedef struct	s_animation
 	int			iter;
 }				t_animation;
 
-typedef struct	s_animation_entity_args
+typedef struct	s_animation_args
 {
 	int			anim;
 	int			nb_sprite;
 	float		speed;
 	int			iter;
-}				t_animation_entity_args;
+}				t_animation_args;
 
 
-t_result		init_animation(t_animation *const self, int anim, int nb_sprite, float speed);
+t_result		init_animation(t_animation *const self,
+					t_animation_args *const args);
 void			destroy_animation(t_animation *const self);
-t_constructor	animation(void);
+t_constructor	animation(int anim, int nb_sprite, float speed, int iter);
+
+// t_animation	anim;
+
+// module_add(&self->module, &self->anim, animation(0, 42, 1337));
 
 #endif
