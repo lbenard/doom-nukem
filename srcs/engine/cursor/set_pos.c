@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update.c                                           :+:      :+:    :+:   */
+/*   set_pos.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 20:15:10 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/07 20:04:14 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/07 20:10:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-#include "game/scenes/raycasting_scene.h"
-#include "engine/delta.h"
+#include "engine/cursor.h"
 
-void	raycasting_scene_update(t_raycasting_scene *const self)
+void	cursor_set_pos(t_cursor *const self,
+			const sfRenderWindow *const window,
+			const t_isize pos)
 {
-	entity_list_update(&self->super.entities);
-	cursor_set_pos(&self->window_ref->cursor, self->window_ref->window,
-		ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2));
+	sfVector2i	pos_cursor;
+
+	(void)self;
+	pos_cursor.x = pos.x;
+	pos_cursor.y = pos.y;
+	sfMouse_setPositionRenderWindow(pos_cursor, window);
 }

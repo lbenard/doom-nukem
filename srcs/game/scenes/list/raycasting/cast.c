@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 22:06:52 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 00:48:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/07 19:42:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_ray	cast(const t_map *const map,
 			const t_vec2f pos,
 			const t_vec2f dir)
 {
-	printf("cast\n");
+	// printf("cast\n");
 	t_vec2i	ray_pos;
 	t_vec2f	origin_dist;
 	t_vec2f	delta_dist;

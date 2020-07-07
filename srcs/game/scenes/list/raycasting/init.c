@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/04 22:52:02 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/07 20:54:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	add_modules(t_raycasting_scene *const self,
 	module_add(&self->super.module, &self->zbuffer,
 		array(sizeof(t_ray) * args->window->size.x));
 	module_add(&self->super.module, &self->sprite_entities, entity_list());
+	module_add(&self->super.module, &self->crosshair,
+		frame_from_file("resources/textures/crosshair-downscale.png"));
 }
 
 static void	add_entities(t_raycasting_scene *const self)
@@ -33,15 +35,17 @@ static void	add_entities(t_raycasting_scene *const self)
 		&self->super.entities, player_entity(&self->map));
 }
 
-static void	init_vars(t_raycasting_scene *const self)
+static void	init_vars(t_raycasting_scene *const self,
+				t_raycasting_scene_args *const args)
 {
 	self->ground_color = ft_rgb(105, 105, 105);
 	self->sky_color = ft_rgb(135, 206, 235);
 	self->fov = 90.0f * M_PI / 180.0f;
+	self->window_ref = args->window;
 }
 
 t_result	init_raycasting_scene(t_raycasting_scene *const self,
-				const t_raycasting_scene_args *const args)
+				t_raycasting_scene_args *const args)
 {
 	if (!init_scene(&self->super, "Raycasting sandbox",
 		(void(*)())raycasting_scene_update, (void(*)())raycasting_scene_render))
@@ -54,7 +58,7 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 		add_entities(self);
 	if (!self->super.module.has_error
 		&& !self->super.entities.module.has_error)
-		init_vars(self);
+		init_vars(self, args);
 	else
 	{
 		destroy_raycasting_scene(self);

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 00:19:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/07 20:52:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ static void	walls_raycasting(t_raycasting_scene *const self,
 		start_y = (ssize_t)(target->size.y - size) / 2
 			+ self->player_ref->super.transform.rotation.x;
 		end_y = start_y + size;
-		printf("%f %f, size: %lu\n", ray->hit.x, ray->hit.y, size);
+		// printf("%f %f, size: %lu\n", ray->hit.x, ray->hit.y, size);
 		i.y = (size_t)ft_ssmax(start_y, 0);
 		while ((ssize_t)i.y < end_y && i.y < target->size.y)
 		{
@@ -267,4 +267,10 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	walls_raycasting(self, fb);
 	printf("sprites\n");
 	sprites(self, fb, dir, plane);
+	frame_layer_transform(fb, &self->crosshair,
+		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
+			ft_isize(fb->size.x / 2, fb->size.y / 2),
+			ft_vec2f(1.0f, 1.0f),
+			255),
+		blend_add);
 }

@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/07 00:09:03 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/07 20:09:13 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS_LIST		=	main.c																			\
 					engine/cursor/init.c															\
 					engine/cursor/init_from_file.c													\
 					engine/cursor/set_visibility.c													\
+					engine/cursor/set_pos.c															\
 					engine/cursor/destroy.c															\
 																									\
 					engine/delta/get_delta_ptr.c													\

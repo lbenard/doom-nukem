@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/03 20:04:40 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/07 20:51:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@
 # include "maths/vec2i.h"
 # include "maths/vec2f.h"
 
+typedef struct	s_weapon
+{
+	char	*name;
+	size_t	ammo;
+	size_t	clip;
+	size_t	clip_size;
+	float	damage;
+}				t_weapon;
+
 /*
 ** Raycasting level scene
 */
@@ -36,32 +45,38 @@ typedef struct	s_raycasting_scene
 	t_rgb				sky_color;
 	// t_frame				background;
 	t_frame				texture;
+	t_frame				crosshair;
 	// t_frame				dinosaur;
 	t_array				zbuffer;
 	// t_frame				last_frame;
 	// t_image_entity		*vignette_ref;
 	t_player_entity		*player_ref;
+	t_weapon			weapon;
 	t_camera_entity		*camera_ref;
 	t_monster_entity	*monster_ref;
 	t_entity_list		sprite_entities;
+	t_window			*window_ref;
 	float				fov;
 }				t_raycasting_scene;
 
 typedef struct	s_raycasting_scene_args
 {
-	const t_window	*window;
-	const char		*path;
+	t_window	*window;
+	const char	*path;
 }				t_raycasting_scene_args;
 
-t_constructor	raycasting_scene(const t_window *const window,
+t_constructor	raycasting_scene(t_window *const window,
 					const char *path);
 
 t_result		init_raycasting_scene(t_raycasting_scene *const self,
-					const t_raycasting_scene_args *const args);
+					t_raycasting_scene_args *const args);
 
 void			raycasting_scene_update(t_raycasting_scene *const self);
 void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
+
+void			raycasting_scene_set_weapon_pistol(
+					t_raycasting_scene *const self);
 
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
 
