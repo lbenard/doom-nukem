@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 20:52:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/08 20:52:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static t_rgba	color(const t_raycasting_scene *const self,
 	const t_frame	*texture;
 	t_rgba			ret;
 
-	// if (ray->hit.x >= self->map.size.x || ray->hit.y >= self->map.size.y
-	// 	|| ray->hit.x < 0 || ray->hit.y < 0)
+	if (ray->hit.x >= self->map.size.x || ray->hit.y >= self->map.size.y
+		|| ray->hit.x < 0 || ray->hit.y < 0)
 		texture = &self->texture;
-	// else
-	// 	texture = self->map.map[(int)ray->hit.y * self->map.size.x
-	// 		+ (int)ray->hit.x].texture_ref;
+	else
+		texture = self->map.map[(int)ray->hit.y * self->map.size.x
+			+ (int)ray->hit.x].texture_ref;
 	ret = texture->pixels[(int)(ray->horizontal_ratio * texture->size.x)
 		+ (int)(vertical * texture->size.y) * texture->size.x];
 	ret.c.r /= (ray->perpendicular_distance / 3.0f) + 1;
@@ -257,15 +257,15 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	rot_cos = cos(self->player_ref->super.transform.rotation.y);
 	dir = ft_vec2f(rot_cos, rot_sin);
 	plane = vec2f_scalar(ft_vec2f(-rot_sin, rot_cos), fov);
-	printf("zbuffer\n");
+	//printf("zbuffer\n");
 	zbuffer(self, dir, plane);
-	printf("floor\n");
+	//printf("floor\n");
 	floor_raycasting(self, fb, dir, plane);
-	printf("ceiling\n");
+	//printf("ceiling\n");
 	ceiling_raycasting(self, fb, dir, plane);
-	printf("walls\n");
+	//printf("walls\n");
 	walls_raycasting(self, fb);
-	printf("sprites\n");
+	//printf("sprites\n");
 	sprites(self, fb, dir, plane);
 	frame_layer_transform(fb, &self->crosshair,
 		ft_frame_transform(ft_vec2f(0.5f, 0.5f),

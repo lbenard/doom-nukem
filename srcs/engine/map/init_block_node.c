@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/21 14:43:55 by ppetitea          #+#    #+#             */
-/*   Updated: 2020/07/06 23:58:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/08 20:51:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_result		init_block_node(t_block_node *const self,
 	init_list_head(&self->node);
 	self->key = args->key[0];
 	self->texture_path = args->texture_path;
-	free((char*)args->texture_path);
 	free((char*)args->key);
 	return (OK);
 }

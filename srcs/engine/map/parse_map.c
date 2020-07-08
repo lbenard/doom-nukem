@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:08:31 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 00:07:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/08 20:54:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ static t_result	parse(t_map *const self, char *map_flag_str, char *p)
 	columns_amount = 0;
 	while (*p)
 	{
-		if (columns_amount >= self->size.y ||
-			!fill_map_row(self, dn_get_value(p), columns_amount++))
+		if (columns_amount >= self->size.y
+			|| !fill_map_row(self, dn_get_value(p), columns_amount++))
 		{
 			free(map_flag_str);
 			free(self->map);
