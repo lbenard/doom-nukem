@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:17:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 00:17:54 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/09 02:49:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 #include <unistd.h>
 #include <errno.h>
 #include <stdlib.h>
-#include "game/scenes/new_editor_scene.h"
+#include "game/scenes/editor_scene.h"
 #include "game/entities/editor/block_component_entity.h"
 #include "engine/error.h"
 #include "ft/str.h"
 #include "ft/io.h"
 #include "ft/mem.h"
 
-static t_result	write_textures(t_new_editor_scene *const self, const int fd)
+static t_result	write_textures(t_editor_scene *const self, const int fd)
 {
 	t_editor_block_descriptor	*list;
 	size_t						i;
@@ -44,7 +44,7 @@ static t_result	write_textures(t_new_editor_scene *const self, const int fd)
 	return (OK);
 }
 
-static t_result	write_blocks(t_new_editor_scene *const self, const int fd)
+static t_result	write_blocks(t_editor_scene *const self, const int fd)
 {
 	t_editor_block_descriptor	*list;
 	size_t						i;
@@ -100,7 +100,7 @@ static t_result	write_player_spawn(const int fd,
 	return (OK);
 }
 
-static t_result	write_map(t_new_editor_scene *const self,
+static t_result	write_map(t_editor_scene *const self,
 					const int fd,
 					const t_isize origin,
 					const t_usize size)
@@ -149,7 +149,7 @@ static t_result	write_map(t_new_editor_scene *const self,
 	return (OK);
 }
 
-static t_isize	blocks_origin(t_new_editor_scene *const self)
+static t_isize	blocks_origin(t_editor_scene *const self)
 {
 	t_list_head					*pos;
 	t_block_component_entity	*block;
@@ -176,7 +176,7 @@ static t_isize	blocks_origin(t_new_editor_scene *const self)
 	return (block_pos);
 }
 
-static t_usize	get_map_size(t_new_editor_scene *const self,
+static t_usize	get_map_size(t_editor_scene *const self,
 					const t_isize origin)
 {
 	t_list_head					*pos;
@@ -206,7 +206,7 @@ static t_usize	get_map_size(t_new_editor_scene *const self,
 		(size_t)block_pos.y - origin.y + 1));
 }
 
-t_result		new_editor_export_map(t_new_editor_scene *const self)
+t_result		editor_scene_export_map(t_editor_scene *const self)
 {
 	int		fd;
 	t_isize	origin;
@@ -214,27 +214,27 @@ t_result		new_editor_export_map(t_new_editor_scene *const self)
 
 	if (list_size(&self->blocks.list) == 0)
 	{
-		return (throw_result_str("new_editor_export_map()",
+		return (throw_result_str("editor_export_map()",
 			"map has no blocks"));
 	}
 	if ((fd = open(self->path, O_WRONLY | O_CREAT | O_TRUNC, 0600)) == -1)
-		return (throw_result("new_editor_export_map()"));
+		return (throw_result("editor_export_map()"));
 	if (!write_textures(self, fd))
-		return (throw_result("new_editor_export_map()"));
+		return (throw_result("editor_export_map()"));
 	if (!write_blocks(self, fd))
-		return (throw_result("new_editor_export_map()"));
+		return (throw_result("editor_export_map()"));
 	origin = blocks_origin(self);
 	size = get_map_size(self, origin);
 	if (size.x < 3 || size.y < 3)
 	{
-		return (throw_result_str("new_editor_export_map()",
+		return (throw_result_str("editor_export_map()",
 			"map is too small"));
 	}
 	if (!write_map_size(fd, size))
-		return (throw_result("new_editor_export_map()"));
+		return (throw_result("editor_export_map()"));
 	if (!write_player_spawn(fd, self->player_spawn_ref, origin))
-		return (throw_result("new_editor_export_map()"));
+		return (throw_result("editor_export_map()"));
 	if (!write_map(self, fd, origin, size))
-		return (throw_result("new_editor_export_map()"));
+		return (throw_result("editor_export_map()"));
 	return (OK);
 }

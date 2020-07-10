@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 20:52:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/10 21:58:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "engine/ascii_font.h"
 #include "engine/text.h"
 #include "game/scenes/menu_scene.h"
-#include "game/scenes/new_editor_scene.h"
+#include "game/scenes/editor_scene.h"
 #include "game/scenes/noise_test_scene.h"
 // #include "game/scenes/sector_scene.h"
 #include "game/scenes/raycasting_scene.h"
@@ -55,6 +55,11 @@ void	register_inputs(t_game *const game)
 	input_attach(&game->input, right, ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&game->input, right,
 		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
+
+	input_register(&game->input, "Shoot");
+	int shoot = input_get_id(&game->input, "Shoot");
+	input_attach(&game->input, shoot, ft_mouse_event(sfMouseLeft, 0));
+	input_attach(&game->input, shoot, ft_key_event(sfKeySpace, 0));
 
 	input_register(&game->input, "CameraRight");
 	int camera_right = input_get_id(&game->input, "CameraRight");
@@ -158,16 +163,10 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (!throw_error_str("main()", "a map path must be given"));
 	game = game_singleton();
-	// if (start_game(&(t_game_args){"Doom Nukem", ft_usize(640, 480)}) == ERROR)
 	if (start_game(&(t_game_args){"Doom Nukem", ft_usize(1200, 600)}) == ERROR)
 		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
-	(void)av;
-	// game_set_scene(sector_scene());
-	// game_set_scene(menu_scene(&game->window, av[1]));
-	// game_set_scene(noise_test_scene());
-	game_set_scene(new_editor_scene(&game->window, av[1]));
-	// game_set_scene(raycasting_scene(&game->window, av[1]));
+	game_set_scene(menu_scene(&game->window, av[1]));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event()))
 	{

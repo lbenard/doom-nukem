@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blend.h                                            :+:      :+:    :+:   */
+/*   set_weapon_minigun.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 00:31:57 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/10 18:30:03 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/10 22:15:40 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/10 22:19:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BLEND_H
-# define BLEND_H
+#include "game/scenes/raycasting_scene.h"
+#include "engine/delta.h"
 
-# include "colors/rgba.h"
-
-/*
-** Blend modes used with frames
-*/
-t_rgba	blend_add(const t_rgba back, const t_rgba front);
-t_rgba	blend_colorize(const t_rgba back, const t_rgba front);
-t_rgba	blend_invert(const t_rgba back, const t_rgba front);
-
-#endif
+void	raycasting_scene_set_weapon_minigun(t_raycasting_scene *const self)
+{
+	self->weapon.name = "Minigun";
+	self->weapon.ammo = 100;
+	self->weapon.clip = 12;
+	self->weapon.clip_size = 12;
+	self->weapon.damage = 5.0f;
+	self->weapon.shoot_time = 1.0f / 20.0f;
+	self->weapon.last_shot = get_wall_time();
+}

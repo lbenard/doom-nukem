@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_scene.h                                     :+:      :+:    :+:   */
+/*   editor_scene.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/05/23 20:02:35 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/05 00:56:30 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,80 @@
 # include "engine/frame.h"
 # include "engine/text.h"
 # include "engine/shape.h"
+# include "game/entities/editor/component_entity.h"
 # include "game/entities/editor/editor_camera_entity.h"
 # include "game/entities/editor/grid_component_entity.h"
-# include "game/entities/editor/vertex_component_entity.h"
+# include "game/entities/editor/preview_checkbox_entity.h"
+# include "game/entities/editor/block_checkbox_entity.h"
+# include "game/entities/editor/player_component_entity.h"
 # include "game/entities/checkbox_entity.h"
+# include "game/scenes/editor_block_descriptor.h"
 
-typedef enum	s_editor_mode
+# define BUTTONS "resources/buttons/"
+
+/*
+** Block and entity lists
+*/
+
+typedef struct	s_editor_entity_node
 {
-	CURSOR,
-	CREATE,
-	SPLIT,
-	SECTORIZE
-}				t_editor_mode;
+	t_list_head		node;
+	char			*name;
+	t_constructor	constructor;
+	t_frame			icon;
+}				t_editor_entity_node;
 
 typedef struct	s_editor_scene
 {
 	t_scene						super;
-	t_editor_mode				mode;
+	const char					*path;
+	t_usize						map_size;
 	t_entity_list				components;
-	t_frame						vertex_texture;
-	t_frame						vertex_selected_texture;
+	t_entity_list				blocks;
+	t_entity_list				entities;
+	t_component_entity			*selected_component_ref;
+	t_player_component_entity	*player_spawn_ref;
+	t_frame						editor_view;
+	t_frame						editor_background;
+	t_grid_component_entity		*grid_ref;
 	struct s_hud
 	{
-		t_checkbox_entity	*cursor_ref;
-		t_checkbox_entity	*create_ref;
-		t_checkbox_entity	*split_ref;
-		t_checkbox_entity	*sectorize_ref;
+		t_radio_group	tools;
+		struct s_tools_group
+		{
+			t_checkbox_entity	*cursor_ref;
+			t_checkbox_entity	*create_ref;
+			t_checkbox_entity	*save_ref;
+		}						tools_group;
+		t_radio_group	create;
+		struct s_create_group
+		{
+			t_checkbox_entity	*show_blocks_ref;
+			t_checkbox_entity	*show_entities_ref;
+		}						create_group;
+		t_radio_group	blocks;
+		struct s_blocks_group
+		{
+			t_block_checkbox_entity	*blue_ice;
+			t_block_checkbox_entity	*white_wool;
+			t_block_checkbox_entity	*acacia_log;
+		}						blocks_group;
+		t_radio_group	entities;
+		struct s_entities_group
+		{
+			t_checkbox_entity	*player_ref;
+			t_checkbox_entity	*enemy_ref;
+			t_checkbox_entity	*gun_ref;
+			t_checkbox_entity	*ammo_ref;
+		}						entities_group;
 	}							hud;
+	struct s_blocks
+	{
+		t_editor_block_descriptor	blue_ice;
+		t_editor_block_descriptor	white_wool;
+		t_editor_block_descriptor	acacia_log;
+	}							blocks_list;
 	t_editor_camera_entity		*camera_ref;
-	t_list_head					selected_components;
 	const t_window				*screen_ref;
 }				t_editor_scene;
 
@@ -56,7 +101,8 @@ typedef struct	s_editor_scene_args
 	const t_window	*screen;
 }				t_editor_scene_args;
 
-t_constructor	editor_scene(const t_window *const screen);
+t_constructor	editor_scene(const t_window *const screen,
+					const char *const path);
 // t_constructor	editor_scene_from_file(const t_usize window_size,
 // 					const char *const path);
 
@@ -69,9 +115,15 @@ void			editor_scene_update(t_editor_scene *const self);
 void			editor_scene_render(t_editor_scene *const self,
 					t_frame *const fb);
 
+t_result		editor_scene_export_map(t_editor_scene *const self);
+t_result		editor_scene_add_block(t_editor_scene *const self,
+					const t_editor_block_descriptor *const block,
+					const t_vec2f pos);
+
 void			destroy_editor_scene(t_editor_scene *const self);
 
-t_callback_node	*new_component_cursor_event(void);
-t_callback_node	*new_component_create_event(void);
+
+t_callback_node	*new_cursor_event(void);
+t_callback_node	*new_block_create_event(void);
 
 #endif

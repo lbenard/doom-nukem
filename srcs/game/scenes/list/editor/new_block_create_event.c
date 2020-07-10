@@ -6,18 +6,18 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:38:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 20:03:44 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/09 02:50:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/scenes/new_editor_scene.h"
+#include "game/scenes/editor_scene.h"
 #include "game/entities/editor/block_component_entity.h"
 #include "engine/error.h"
 #include "maths/maths.h"
 
 #include <stdio.h>
 
-static t_vec3f	grid_pos(t_new_editor_scene *const self,
+static t_vec3f	grid_pos(t_editor_scene *const self,
 					const t_isize mouse_pos)
 {
 	t_vec2f	pos;
@@ -35,7 +35,7 @@ static t_vec3f	grid_pos(t_new_editor_scene *const self,
 	return (ft_vec3f(pos.x, pos.y, 0.0f));
 }
 
-static t_bool	is_free(t_new_editor_scene *const self, const t_vec3f pos)
+static t_bool	is_free(t_editor_scene *const self, const t_vec3f pos)
 {
 	t_list_head			*list_pos;
 	t_component_entity	*block;
@@ -53,11 +53,10 @@ static t_bool	is_free(t_new_editor_scene *const self, const t_vec3f pos)
 	return (TRUE);
 }
 
-static void		block_create(t_new_editor_scene *const self, sfEvent *event)
+static void		block_create(t_editor_scene *const self, sfEvent *event)
 {
 	t_isize					mouse_pos;
 	t_block_checkbox_entity	*checkbox;
-	t_component_entity		*block;
 	t_vec3f					pos;
 
 	if (event->type == sfEvtMouseButtonPressed)
@@ -75,13 +74,8 @@ static void		block_create(t_new_editor_scene *const self, sfEvent *event)
 				&& self->hud.create_group.show_blocks_ref->is_checked)
 			{
 				checkbox = (t_block_checkbox_entity*)self->hud.blocks.list[self->hud.blocks.last];
-				block = (t_component_entity*)entity_list_add_entity(
-					&self->super.entities,
-					block_component_entity(checkbox->block, &self->blocks));
-				entity_list_add_entity_ref(&self->components, (t_entity*)block);
-				entity_list_add_entity_ref(&self->blocks, (t_entity*)block);
-				if (block)
-					block->super.transform.position = pos;
+				editor_scene_add_block(self, checkbox->block,
+					ft_vec2f(pos.x, pos.y));
 			}
 		}
 	}

@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blend.h                                            :+:      :+:    :+:   */
+/*   sound.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 00:31:57 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/10 18:30:03 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/10 21:24:57 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/10 21:25:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BLEND_H
-# define BLEND_H
+#include "engine/sound.h"
 
-# include "colors/rgba.h"
+t_constructor	sound(const char *const path)
+{
+	static t_sound_args	args;
 
-/*
-** Blend modes used with frames
-*/
-t_rgba	blend_add(const t_rgba back, const t_rgba front);
-t_rgba	blend_colorize(const t_rgba back, const t_rgba front);
-t_rgba	blend_invert(const t_rgba back, const t_rgba front);
-
-#endif
+	args.path = path;
+	return (ft_constructor(init_sound, destroy_sound, sizeof(t_sound), &args));
+}

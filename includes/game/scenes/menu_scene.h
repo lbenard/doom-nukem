@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:24:16 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/03 19:23:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/09 00:25:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_menu_scene
 	t_image_entity	*title_ref;
 	t_image_entity	*credits_ref;
 	t_button_entity	*start_game_ref;
+	t_button_entity	*editor_ref;
 	t_button_entity	*close_game_ref;
 	const char		*path;
 }				t_menu_scene;

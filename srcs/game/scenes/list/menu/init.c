@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:18 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/03 19:23:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/09 00:28:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ static void	add_buttons(t_menu_scene *const scene,
 		dynamic_button_entity("resources/buttons/start-game-upscale.png",
 			"resources/buttons/start-game-hover-upscale.png",
 			"resources/buttons/start-game-click-upscale.png",
+			args->window));
+	scene->editor_ref = (t_button_entity*)entity_list_add_entity(
+		&scene->super.entities,
+		dynamic_button_entity("resources/buttons/editor-upscale.png",
+			"resources/buttons/editor-hover-upscale.png",
+			"resources/buttons/editor-click-upscale.png",
 			args->window));
 	scene->close_game_ref = (t_button_entity*)entity_list_add_entity(
 		&scene->super.entities,

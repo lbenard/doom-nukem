@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_editor_scene.c                                 :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/13 15:31:18 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/03 16:32:24 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/10 21:33:32 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/10 21:34:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/scenes/new_editor_scene.h"
+#include "engine/sound.h"
 
-t_constructor	new_editor_scene(const t_window *const screen,
-					const char *const path)
+void	destroy_sound(t_sound *const self)
 {
-	static t_new_editor_scene_args	args;
-
-	args.screen = screen;
-	args.path = path;
-	return (ft_constructor(init_new_editor_scene,
-		destroy_new_editor_scene,
-		sizeof(t_new_editor_scene),
-		&args));
+	destroy_module(&self->module);
+	if (self->sound)
+		sfSound_destroy(self->sound);
+	if (self->sound_buffer)
+		sfSoundBuffer_destroy(self->sound_buffer);
 }

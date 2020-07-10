@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_editor_scene_from_file.c                       :+:      :+:    :+:   */
+/*   block_from_texture_path.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/13 15:53:36 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/22 02:10:14 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/08 22:54:47 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/08 22:59:10 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/scenes/new_editor_scene.h"
+#include "engine/map.h"
 
-t_constructor	new_editor_scene_from_file(const t_usize window_size,
+t_block_node	*block_from_texture_path(t_list_head *const self,
 					const char *const path)
 {
-	static	t_new_editor_scene_args	args;
+	t_list_head		*pos;
+	t_block_node	*block;
 
-	args.window_size = window_size;
-	args.path = path;
-	return (ft_constructor(
-		init_new_editor_scene_from_file,
-		destroy_new_editor_scene,
-		sizeof(t_new_editor_scene),
-		&args
-	));
+	pos = self;
+	while ((pos = pos->next) != self)
+	{
+		block = (t_block_node*)((t_u8*)pos
+			- __builtin_offsetof(t_block_node, node));
+		if (block->texture_path == path)
+			return (block);
+	}
+	return (NULL);
+
 }

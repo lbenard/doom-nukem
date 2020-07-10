@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:38:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 20:49:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/08 23:00:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 typedef struct	s_wall
 {
 	const t_frame	*texture_ref;
+	char			id;
 }				t_wall;
 
 /*
@@ -81,6 +82,8 @@ t_result		init_block_node(t_block_node *const self,
 
 t_block_node	*block_from_key(t_list_head *const self,
 					const char key);
+t_block_node	*block_from_texture_path(t_list_head *const self,
+					const char *const path);
 
 void			destroy_block_node(t_block_node *const self);
 

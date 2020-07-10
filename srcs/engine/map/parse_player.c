@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 17:37:11 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 00:06:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/09 01:14:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_result		map_parse_player(t_map *const self, char *player_flag_str)
 {
 	char	**spawn_str;
 
+	if (!player_flag_str)
+		return (throw_result_str("parse_player()", "flag is incorrect"));
 	spawn_str = dn_get_values(ft_strstr(player_flag_str, "spawn: "), ' ');
 	free(player_flag_str);
 	if (!spawn_str || dn_strsplit_length(spawn_str) != 2)

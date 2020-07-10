@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/07 20:09:13 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/10 22:16:45 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS_LIST		=	main.c																			\
 																									\
 					engine/blend/add.c																\
 					engine/blend/colorize.c															\
+					engine/blend/invert.c															\
 																									\
 					engine/controller/xbox/perpendicular_axis.c										\
 																									\
@@ -179,6 +180,11 @@ SRCS_LIST		=	main.c																			\
 					engine/shape/render.c															\
 					engine/shape/destroy.c															\
 																									\
+					engine/sound/sound.c															\
+					engine/sound/init.c																\
+					engine/sound/play.c																\
+					engine/sound/destroy.c															\
+																									\
 					engine/render_utils/row.c														\
 					engine/render_utils/column.c													\
 					engine/render_utils/line.c														\
@@ -329,17 +335,18 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/benchmark/render.c												\
 					game/scenes/list/benchmark/destroy.c											\
 																									\
-					game/scenes/list/new_editor/block_descriptor/editor_block_descriptor.c			\
-					game/scenes/list/new_editor/block_descriptor/init.c								\
-					game/scenes/list/new_editor/block_descriptor/destroy.c							\
-					game/scenes/list/new_editor/new_editor_scene.c									\
-					game/scenes/list/new_editor/init.c												\
-					game/scenes/list/new_editor/update.c											\
-					game/scenes/list/new_editor/render.c											\
-					game/scenes/list/new_editor/export_map.c										\
-					game/scenes/list/new_editor/destroy.c											\
-					game/scenes/list/new_editor/new_cursor_event.c									\
-					game/scenes/list/new_editor/new_block_create_event.c							\
+					game/scenes/list/editor/block_descriptor/editor_block_descriptor.c				\
+					game/scenes/list/editor/block_descriptor/init.c									\
+					game/scenes/list/editor/block_descriptor/destroy.c								\
+					game/scenes/list/editor/editor_scene.c											\
+					game/scenes/list/editor/init.c													\
+					game/scenes/list/editor/update.c												\
+					game/scenes/list/editor/render.c												\
+					game/scenes/list/editor/export_map.c											\
+					game/scenes/list/editor/add_block.c												\
+					game/scenes/list/editor/destroy.c												\
+					game/scenes/list/editor/new_cursor_event.c										\
+					game/scenes/list/editor/new_block_create_event.c								\
 																									\
 					game/scenes/list/menu/menu_scene.c												\
 					game/scenes/list/menu/init.c													\
@@ -357,6 +364,10 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/init.c												\
 					game/scenes/list/raycasting/update.c											\
 					game/scenes/list/raycasting/render.c											\
+					game/scenes/list/raycasting/add_monster.c										\
+					game/scenes/list/raycasting/set_weapon_pistol.c									\
+					game/scenes/list/raycasting/set_weapon_minigun.c								\
+					game/scenes/list/raycasting/shoot.c												\
 					game/scenes/list/raycasting/destroy.c											\
 					game/scenes/list/raycasting/cast.c												\
 																									\

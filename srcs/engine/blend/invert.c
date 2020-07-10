@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   blend.h                                            :+:      :+:    :+:   */
+/*   invert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/10 00:31:57 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/10 18:30:03 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/10 18:30:11 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/10 18:34:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BLEND_H
-# define BLEND_H
+#include "engine/blend.h"
 
-# include "colors/rgba.h"
+t_rgba	blend_invert(const t_rgba back, const t_rgba front)
+{
+	t_rgba	invert;
 
-/*
-** Blend modes used with frames
-*/
-t_rgba	blend_add(const t_rgba back, const t_rgba front);
-t_rgba	blend_colorize(const t_rgba back, const t_rgba front);
-t_rgba	blend_invert(const t_rgba back, const t_rgba front);
-
-#endif
+	invert.c.r = 255 - back.c.r;
+	invert.c.g = 255 - back.c.g;
+	invert.c.b = 255 - back.c.b;
+	invert.c.a = front.c.a;
+	return (blend_add(back, invert));
+}

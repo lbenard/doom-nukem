@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:08:31 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 20:54:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/09 01:24:47 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "ft/str.h"
 #include "ft/mem.h"
 
+#include <stdio.h>
+
 static t_result	wall_from_block(t_list_head *const textures,
 					t_wall *const wall,
 					t_block_node *const block)
@@ -26,6 +28,7 @@ static t_result	wall_from_block(t_list_head *const textures,
 	if (!(texture = texture_from_key(textures, block->texture_path)))
 		return (throw_result_str("wall_from_block()", "bad texture value"));
 	wall->texture_ref = &texture->texture;
+	wall->id = block->key;
 	return (OK);
 }
 
@@ -35,10 +38,11 @@ static t_result	fill_wall_from_char(t_map *const self,
 {
 	t_block_node	*block;
 
+	wall->id = c;
 	if (c == ' ')
 		wall->texture_ref = NULL;
 	else if ((block = block_from_key(&self->blocks, c)))
-		wall_from_block(&self->textures, wall, block);
+		return (wall_from_block(&self->textures, wall, block));
 	else
 	{
 		return (throw_result_str("fill_wall_from_char()",

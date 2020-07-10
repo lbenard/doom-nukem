@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:26:29 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 12:02:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/09 01:01:55 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ static char	*join_next_line(char *text, char *next_line)
 		return (text);
 	}
 	else
+	{
+		free(text);
+		free(next_line);
 		return (NULL);
+	}
 }
 
 char		*dn_read_file(const char *path)
@@ -64,10 +68,15 @@ char		*dn_read_file(const char *path)
 	}
 	while (ft_get_next_line(file_descriptor, &line))
 	{
-		if (!line || !dn_is_line_correct(line) ||
-			!(map_str = join_next_line(map_str, add_newline(line))))
+		if (!line || !dn_is_line_correct(line))
 		{
 			free(map_str);
+			free(line);
+			close(file_descriptor);
+			return (throw_error_str("dn_read_file()", "failed to read line"));
+		}
+		if (!(map_str = join_next_line(map_str, add_newline(line))))
+		{
 			close(file_descriptor);
 			return (throw_error_str("dn_read_file()", "map syntax error"));
 		}

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 20:52:31 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/10 20:32:38 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,10 +208,14 @@ void		sprites(t_raycasting_scene *const self,
 			+ (int)self->player_ref->super.transform.rotation.x;
 		int draw_end_y = fb->size.y / 2 + sprite_height / 2
 			+ (int)self->player_ref->super.transform.rotation.x;
+		sprite->last_start_y = draw_start_y;
+		sprite->last_end_y = draw_end_y;
 
 		int	sprite_width = ft_abs((int)(fb->size.y / transform.y));
 		int	draw_start_x = sprite_screen_x - sprite_width / 2;
 		int	draw_end_x = sprite_screen_x + sprite_width / 2;
+		sprite->last_start_x = draw_start_x;
+		sprite->last_end_x = draw_end_x;
 		i.x = (size_t)ft_ssmax(draw_start_x, 0);
 		while ((ssize_t)i.x < draw_end_x && i.x < fb->size.x)
 		{
@@ -240,12 +244,6 @@ void		sprites(t_raycasting_scene *const self,
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
-	(void)self;
-	(void)fb;
-	(void)zbuffer;
-	(void)walls_raycasting;
-	(void)floor_raycasting;
-	(void)ceiling_raycasting;
 	t_vec2f	dir;
 	t_vec2f	plane;
 	float	fov;
@@ -257,20 +255,15 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	rot_cos = cos(self->player_ref->super.transform.rotation.y);
 	dir = ft_vec2f(rot_cos, rot_sin);
 	plane = vec2f_scalar(ft_vec2f(-rot_sin, rot_cos), fov);
-	//printf("zbuffer\n");
 	zbuffer(self, dir, plane);
-	//printf("floor\n");
 	floor_raycasting(self, fb, dir, plane);
-	//printf("ceiling\n");
 	ceiling_raycasting(self, fb, dir, plane);
-	//printf("walls\n");
 	walls_raycasting(self, fb);
-	//printf("sprites\n");
 	sprites(self, fb, dir, plane);
 	frame_layer_transform(fb, &self->crosshair,
 		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
 			ft_isize(fb->size.x / 2, fb->size.y / 2),
 			ft_vec2f(1.0f, 1.0f),
 			255),
-		blend_add);
+		blend_invert);
 }

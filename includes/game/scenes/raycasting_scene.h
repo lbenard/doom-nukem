@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 20:51:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/10 22:16:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "engine/window.h"
 # include "engine/frame.h"
 # include "engine/array.h"
+# include "engine/sound.h"
 # include "game/entities/player_entity.h"
 # include "game/entities/image_entity.h"
 # include "game/entities/camera_entity.h"
@@ -32,6 +33,8 @@ typedef struct	s_weapon
 	size_t	clip;
 	size_t	clip_size;
 	float	damage;
+	float	shoot_time;
+	double	last_shot;
 }				t_weapon;
 
 /*
@@ -43,19 +46,18 @@ typedef struct	s_raycasting_scene
 	t_map				map;
 	t_rgb				ground_color;
 	t_rgb				sky_color;
-	// t_frame				background;
 	t_frame				texture;
 	t_frame				crosshair;
-	// t_frame				dinosaur;
 	t_array				zbuffer;
-	// t_frame				last_frame;
-	// t_image_entity		*vignette_ref;
 	t_player_entity		*player_ref;
 	t_weapon			weapon;
+	t_input_id			shoot_input;
 	t_camera_entity		*camera_ref;
 	t_monster_entity	*monster_ref;
 	t_entity_list		sprite_entities;
+	t_entity_list		monster_entities;
 	t_window			*window_ref;
+	t_sound				pistol;
 	float				fov;
 }				t_raycasting_scene;
 
@@ -75,8 +77,14 @@ void			raycasting_scene_update(t_raycasting_scene *const self);
 void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
 
+t_result		raycasting_scene_add_monster(t_raycasting_scene *const self,
+					t_constructor constructor);
+
 void			raycasting_scene_set_weapon_pistol(
 					t_raycasting_scene *const self);
+void			raycasting_scene_set_weapon_minigun(
+					t_raycasting_scene *const self);
+void			raycasting_scene_shoot(t_raycasting_scene *const self);
 
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
 
