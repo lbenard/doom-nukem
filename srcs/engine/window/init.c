@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 04:36:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/27 01:38:03 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:25:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ static void	init_vars(t_window *const self, const t_window_args *const args)
 
 t_result	init_window(t_window *const self, const t_window_args *const args)
 {
-	sfVideoMode	mode;
+	sfVideoMode			mode;
 
 	init_module(&self->module);
 	mode = (sfVideoMode) {.width = args->size.x, .height = args->size.y,
 		.bitsPerPixel = 32};
-	if (!(self->window = sfRenderWindow_create(mode, args->name, sfClose,
-		NULL)))
+	if (!(self->window = sfRenderWindow_create(mode, args->name,
+		sfClose/* | sfFullscreen*/, NULL)))
 	{
 		return (throw_result_str("init_window()",
 			"error while create sfRenderWindow"));

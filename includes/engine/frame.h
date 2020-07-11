@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:02:59 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/27 02:09:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:07:37 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void				frame_layer(t_frame *const self,
 void				frame_layer_opaque(t_frame *const self,
 						const t_frame *const layer,
 						const t_isize pos);
+void				frame_layer_add(t_frame *const self,
+						const t_frame *const layer,
+						const t_isize pos);
 /*
 ** Transform-related layer functions
 */
@@ -102,6 +105,9 @@ void				frame_layer_transform(t_frame *const self,
 						const t_frame_transform transform,
 						t_rgba (*const blend)(const t_rgba back,
 							const t_rgba front));
+void				frame_layer_transform_add(t_frame *const self,
+						const t_frame *const layer,
+						const t_frame_transform transform);
 
 void				destroy_frame(t_frame *const self);
 

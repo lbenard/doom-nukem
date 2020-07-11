@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 00:13:32 by lbenard           #+#    #+#             */
-/*   Updated: 2020/05/31 00:22:40 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:03:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	window_update(t_window *const self)
 	{
 		mouse_pos.x = sfMouse_getPositionRenderWindow(self->window).x;
 		mouse_pos.y = sfMouse_getPositionRenderWindow(self->window).y;
-		frame_layer(&self->frame, &self->cursor.cursor, mouse_pos, blend_add);
+		frame_layer_add(&self->frame, &self->cursor.cursor, mouse_pos);
 	}
 	frame_update(&self->frame);
 	sfRenderWindow_drawSprite(self->window, self->frame.sprite.sprite, NULL);

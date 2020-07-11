@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:30:08 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/05 11:59:07 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 19:46:05 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "types.h"
 
-# define PROGRAM_NAME "Doom Nukem"
+# define PROGRAM_NAME "Doum Nukem"
 
 /*
 ** Error handling and stack trace

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:07:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/06 22:23:31 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:27:53 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,16 @@
 #include "ft/io.h"
 
 #include <stdio.h>
+
+static void	fps_average(double spf)
+{
+	static double	total_fps = 0;
+	static size_t	total_frames = 0.0f;
+
+	total_fps += 1.0f / spf;
+	total_frames++;
+	printf("average: %f\n", total_fps / total_frames);
+}
 
 void	game_loop(void)
 {
@@ -42,7 +52,7 @@ void	game_loop(void)
 		window_update(&game->window);
 	}
 	spf = get_wall_time() - last_time;
-	// printf("fps: %f\n", 1.0f / spf);
+	fps_average(spf);
 	if (spf > MAX_DELTA)
 	{
 		ft_putstr("cpu just had a stroke (got ");

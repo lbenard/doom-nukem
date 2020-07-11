@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/10 22:06:52 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 19:42:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 15:24:40 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@
 
 static t_bool	is_hitting(const t_map *const map, const t_vec2i ray)
 {
-	// if (ray.x < 0 || ray.y < 0)
-	// 	return (TRUE);
-	// if (ray.x >= (int)map->size.x || ray.y >= (int)map->size.y)
-	// 	return (TRUE);
+	if (ray.x < 0 || ray.y < 0)
+		return (TRUE);
+	if (ray.x >= (int)map->size.x || ray.y >= (int)map->size.y)
+		return (TRUE);
 	if (map->map[ray.y * map->size.x + ray.x].texture_ref)
 		return (TRUE);
 	return (FALSE);

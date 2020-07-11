@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/10 22:16:31 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 04:12:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ typedef struct	s_raycasting_scene
 	t_map				map;
 	t_rgb				ground_color;
 	t_rgb				sky_color;
-	t_frame				texture;
+	t_frame				floor;
+	t_frame				ceiling;
 	t_frame				crosshair;
 	t_array				zbuffer;
 	t_player_entity		*player_ref;

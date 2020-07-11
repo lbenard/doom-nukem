@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/09 02:49:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 04:02:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	add_modules(t_editor_scene *const self,
 	module_add(&self->super.module, &self->entities, entity_list());
 
 	module_add(&self->super.module, &self->blocks_list.blue_ice,
-		editor_block_descriptor('0', "Blue ice",
-			"resources/textures/blue_ice.png"));
+		editor_block_descriptor('0', "Sandstone",
+			"resources/textures/pack/block/sandstone.png"));
 	module_add(&self->super.module, &self->blocks_list.white_wool,
 		editor_block_descriptor('1', "While wool",
 			"resources/textures/white_wool.png"));

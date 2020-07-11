@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:18 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/09 00:28:28 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 19:52:38 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,38 @@ static void	add_buttons(t_menu_scene *const scene,
 			args->window));
 }
 
-static void	add_images(t_menu_scene *const scene, const t_usize window_size)
+static void	add_images(t_menu_scene *const self, const t_usize window_size)
 {
-	scene->vignette_ref = (t_image_entity*)entity_list_add_entity(
-		&scene->super.entities,
+	self->vignette_ref = (t_image_entity*)entity_list_add_entity(
+		&self->super.entities,
 		image_entity_from_file("resources/textures/vignette.png",
 			ft_frame_transform_position(ft_isize(window_size.x / 2,
 				window_size.y / 2))));
-	scene->background_ref = (t_image_entity*)entity_list_add_entity(
-		&scene->super.entities,
+	self->background_ref = (t_image_entity*)entity_list_add_entity(
+		&self->super.entities,
 		image_entity_from_file("resources/textures/blood-background.png",
 			ft_frame_transform_position(ft_isize(window_size.x / 2,
 				window_size.y / 2))));
-	scene->title_ref = (t_image_entity*)entity_list_add_entity(
-		&scene->super.entities,
-		image_entity_from_file("resources/texts/wolf3d-upscale.png",
+	self->title_ref = (t_image_entity*)entity_list_add_entity(
+		&self->super.entities,
+		image_entity_from_file("resources/texts/doum-upscale.png",
 			ft_frame_transform_default()));
-	scene->credits_ref = (t_image_entity*)entity_list_add_entity(
-		&scene->super.entities,
-		image_entity_from_file("resources/texts/credits-upscale.png",
-			ft_frame_transform(ft_vec2f(.0f, 1.0f),
-				ft_isize(5, window_size.y - 5),
-				ft_vec2f(1.0f, 1.0f),
-				COLOR_OPAQUE)));
+	module_add(&self->super.module, &self->credits,
+		text("haxorville.png", ft_usize(window_size.x, 9)));
+	if (!self->super.module.has_error)
+	{
+		text_set_ref(&self->credits,
+			static_string_as_ref(ft_static_string("Handcrafted by lbenard, "
+				"lugibone, mribouch & ppetitea")));
+		text_render(&self->credits, ft_text_settings(ft_isize(0, 0), 9));
+	}
+	// self->credits_ref = (t_image_entity*)entity_list_add_entity(
+	// 	&self->super.entities,
+	// 	image_entity_from_file("resources/texts/credits-upscale.png",
+	// 		ft_frame_transform(ft_vec2f(.0f, 1.0f),
+	// 			ft_isize(5, window_size.y - 5),
+	// 			ft_vec2f(1.0f, 1.0f),
+	// 			COLOR_OPAQUE)));
 }
 
 t_result	init_menu_scene(t_menu_scene *const self,

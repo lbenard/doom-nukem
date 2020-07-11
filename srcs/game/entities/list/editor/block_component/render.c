@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 22:35:59 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/05 00:42:16 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:10:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ void	block_component_entity_render(t_component_entity *const self,
 		* camera->super.transform.scale.x;
 	scale.y = camera->grid_unit / (float)cast->block->texture.size.y
 		* camera->super.transform.scale.y;
-	frame_layer_transform(fb,
+	frame_layer_transform_add(fb,
 		&cast->block->texture,
 		ft_frame_transform(ft_vec2f(0.0f, 0.0f),
 			component_entity_screen_pos(self, camera, fb),
 			scale,
-		(self->is_moved) ? 127 : 255),
-		blend_add);
+		(self->is_moved) ? 127 : 255));
 }

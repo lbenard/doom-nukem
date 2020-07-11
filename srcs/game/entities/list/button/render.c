@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 16:30:43 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/15 17:30:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:03:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	button_entity_render(t_button_entity *const self, t_frame *const frame)
 {
-	frame_layer(frame,
+	frame_layer_add(frame,
 		self->current_texture,
 		ft_isize(
 			self->super.transform.position.x,
-			self->super.transform.position.y),
-		blend_add);
+			self->super.transform.position.y));
 }

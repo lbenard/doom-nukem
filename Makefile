@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/10 22:16:45 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/11 21:19:53 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,11 +93,13 @@ SRCS_LIST		=	main.c																			\
 					engine/frame/fill_blend.c														\
 					engine/frame/layer.c															\
 					engine/frame/layer_opaque.c														\
+					engine/frame/layer_add.c														\
 					engine/frame/coordinates.c														\
 					engine/frame/ft_frame_transform_default.c										\
 					engine/frame/ft_frame_transform_position.c										\
 					engine/frame/ft_frame_transform.c												\
 					engine/frame/layer_transform.c													\
+					engine/frame/layer_transform_add.c												\
 					engine/frame/destroy.c															\
 																									\
 					engine/game/game.c																\
@@ -438,9 +440,9 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast# -flto# -g3 -fsanitize=address # -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto# -g3 -fsanitize=address # -Wno-deprecated
 
-LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
+LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS) -pg
 ifneq ($(UNAME), Linux)
 	LDFLAGS         :=  $(LDFLAGS) \
                         -Wl,-rpath,$(SFML_FOLDER)/extlibs/libs-osx/Frameworks \

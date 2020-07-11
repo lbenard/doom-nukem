@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 20:26:55 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/08 20:29:44 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:06:01 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,16 +103,15 @@ static void	render_column(t_frame *const fb, t_cast *const cast, t_usize i)
 				i.y));
 		wall_pixel = ((t_rgba*)cast->wall->texture_ref->frame.array)
 			[vertical * cast->wall->texture_ref->size.x + horizontal];
-		((t_rgba*)fb->frame.array)[fb->size.x * i.y + i.x] =
-			blend_add(
-				ft_rgba(wall_pixel.c.r * fog,
-					wall_pixel.c.g * fog,
-					wall_pixel.c.b * fog,
-					255),
-				ft_rgba(cast->wall->color.r * fog,
-					cast->wall->color.g * fog,
-					cast->wall->color.b * fog,
-					127));
+		fb->pixels[fb->size.x * i.y + i.x] = blend_add(
+			ft_rgba(wall_pixel.c.r * fog,
+				wall_pixel.c.g * fog,
+				wall_pixel.c.b * fog,
+				255),
+			ft_rgba(cast->wall->color.r * fog,
+				cast->wall->color.g * fog,
+				cast->wall->color.b * fog,
+				127));
 		i.y++;
 	}
 }

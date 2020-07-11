@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 17:37:11 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/09 01:14:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 19:39:09 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,6 @@
 #include "engine/error.h"
 #include "ft/str.h"
 #include "maths/maths.h"
-
-/*
-** Gloomy magic bit of code
-*/
-static t_bool	is_player_immured(const t_vec2d position, t_map *const map)
-{
-	return (map->map[(int)position.x
-		+ (int)position.y * map->size.x].texture_ref ||
-		map->map[(int)(position.x + 0.1)
-		+ (int)position.y * map->size.x].texture_ref ||
-		map->map[(int)(position.x + 0.1)
-		+ (int)(position.y + 0.1) * map->size.x].texture_ref ||
-		map->map[(int)position.x
-		+ (int)position.y * map->size.x].texture_ref ||
-		map->map[(int)position.x
-		+ (int)(position.y + 0.1) * map->size.x].texture_ref ||
-		map->map[(int)(position.x - 0.1)
-		+ (int)(position.y + 0.1) * map->size.x].texture_ref ||
-		map->map[(int)(position.x - 0.1)
-		+ (int)position.y * map->size.x].texture_ref ||
-		map->map[(int)(position.x - 0.1)
-		+ (int)(position.y - 0.1) * map->size.x].texture_ref ||
-		map->map[(int)position.x
-		+ (int)(position.y - 0.1) * map->size.x].texture_ref ||
-		map->map[(int)(position.x + 0.1)
-		+ (int)(position.y - 0.1) * map->size.x].texture_ref);
-}
 
 t_result		map_parse_player(t_map *const self, char *player_flag_str)
 {
@@ -64,12 +37,6 @@ t_result		map_parse_player(t_map *const self, char *player_flag_str)
 		dn_free_values(spawn_str);
 		return (throw_result_str("parse_player()",
 			"player is outside the map"));
-	}
-	if (is_player_immured(self->spawn, self))
-	{
-		dn_free_values(spawn_str);
-		return (throw_result_str("parse_player()",
-			"player is immured, poor player"));
 	}
 	dn_free_values(spawn_str);
 	return (OK);

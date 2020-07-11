@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/10 20:32:38 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:23:30 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_rgba	color(const t_raycasting_scene *const self,
 
 	if (ray->hit.x >= self->map.size.x || ray->hit.y >= self->map.size.y
 		|| ray->hit.x < 0 || ray->hit.y < 0)
-		texture = &self->texture;
+		texture = &self->floor;
 	else
 		texture = self->map.map[(int)ray->hit.y * self->map.size.x
 			+ (int)ray->hit.x].texture_ref;
@@ -47,11 +47,15 @@ static void	ceiling_raycasting(const t_raycasting_scene *const self,
 	t_vec2f	floor;
 	t_vec2i	t;
 	float	distance;
+	float	darkness_step;
+	float	darkness_value;
 
 	i.y = target->size.y / 2 - self->player_ref->super.transform.rotation.x;
+	darkness_step = 1.0f / target->size.y / 2 * 5.0f;
+	darkness_value = 0.0f;
 	while (i.y < target->size.y)
 	{
-		distance = (target->size.y / 2.0f)
+		distance = (target->size.y / 1.0f)
 			/ (i.y + self->player_ref->super.transform.rotation.x
 			- target->size.y / 2.0f);
 		floor.x = self->player_ref->super.transform.position.x + distance
@@ -61,18 +65,23 @@ static void	ceiling_raycasting(const t_raycasting_scene *const self,
 		i.x = 0;
 		while (i.x < target->size.x)
 		{
-			t.x = (int)(self->texture.size.x * (floor.x - (int)(floor.x)))
-				& (self->texture.size.x - 1);
-			t.y = (int)(self->texture.size.y * (floor.y - (int)(floor.y)))
-				& (self->texture.size.y - 1);
+			t.x = (int)(self->ceiling.size.x * (floor.x - (int)(floor.x)))
+				& (self->ceiling.size.x - 1);
+			t.y = (int)(self->ceiling.size.y * (floor.y - (int)(floor.y)))
+				& (self->ceiling.size.y - 1);
 			floor.x += distance * (dir.x + plane.x - (dir.x - plane.x))
 				/ target->size.x;
 			floor.y += distance * (dir.y + plane.y - (dir.y - plane.y))
 				/ target->size.x;
+			t_rgba	floor_color = self->ceiling.pixels[self->ceiling.size.x * t.y + t.x];
+			floor_color.c.r *= ft_fmin(darkness_value, 1.0f);
+			floor_color.c.g *= ft_fmin(darkness_value, 1.0f);
+			floor_color.c.b *= ft_fmin(darkness_value, 1.0f);
 			target->pixels[(target->size.y - i.y - 1) * target->size.x + i.x] =
-				self->texture.pixels[self->texture.size.x * t.y + t.x];
+				floor_color;
 			i.x++;
 		}
+		darkness_value += darkness_step;
 		i.y++;
 	}
 }
@@ -86,8 +95,12 @@ static void	floor_raycasting(t_raycasting_scene *const self,
 	t_vec2f	floor;
 	t_vec2i	t;
 	float	distance;
+	float	darkness_step;
+	float	darkness_value;
 
 	i.y = target->size.y / 2 + self->player_ref->super.transform.rotation.x;
+	darkness_step = 1.0f / target->size.y / 2 * 5.0f;
+	darkness_value = 0.0f;
 	while (i.y < target->size.y)
 	{
 		distance = (target->size.y / 2.0f)
@@ -100,18 +113,22 @@ static void	floor_raycasting(t_raycasting_scene *const self,
 		i.x = 0;
 		while (i.x < target->size.x)
 		{
-			t.x = (int)(self->texture.size.x * (floor.x - (int)(floor.x)))
-				& (self->texture.size.x - 1);
-			t.y = (int)(self->texture.size.y * (floor.y - (int)(floor.y)))
-				& (self->texture.size.y - 1);
+			t.x = (int)(self->floor.size.x * (floor.x - (int)(floor.x)))
+				& (self->floor.size.x - 1);
+			t.y = (int)(self->floor.size.y * (floor.y - (int)(floor.y)))
+				& (self->floor.size.y - 1);
 			floor.x += distance * (dir.x + plane.x - (dir.x - plane.x))
 				/ target->size.x;
 			floor.y += distance * (dir.y + plane.y - (dir.y - plane.y))
 				/ target->size.x;
-			target->pixels[i.y * target->size.x + i.x] =
-				self->texture.pixels[self->texture.size.x * t.y + t.x];
+			t_rgba	floor_color = self->floor.pixels[self->floor.size.x * t.y + t.x];
+			floor_color.c.r *= ft_fmin(darkness_value, 1.0f);
+			floor_color.c.g *= ft_fmin(darkness_value, 1.0f);
+			floor_color.c.b *= ft_fmin(darkness_value, 1.0f);
+			target->pixels[i.y * target->size.x + i.x] = floor_color;
 			i.x++;
 		}
+		darkness_value += darkness_step;
 		i.y++;
 	}
 }
@@ -231,15 +248,26 @@ void		sprites(t_raycasting_scene *const self,
 			{
 				sprite_px.y = inverse_lerp(draw_start_y, draw_end_y, i.y)
 					* sprite->texture.size.y;
+				t_rgba	sprite_color = sprite->texture.pixels[sprite_px.y
+					* sprite->texture.size.x + sprite_px.x];
+				float	sprite_distance = sqrt(sprite_pos.x * sprite_pos.x + sprite_pos.y * sprite_pos.y);
+				sprite_color.c.r /= (sprite_distance / 3.0f) + 1;
+				sprite_color.c.g /= (sprite_distance / 3.0f) + 1;
+				sprite_color.c.b /= (sprite_distance / 3.0f) + 1;
+				if (sprite_color.c.a == 255)
+					fb->pixels[i.y * fb->size.x + i.x] = sprite_color;
+				else
 				fb->pixels[i.y * fb->size.x + i.x] =
 					blend_add(fb->pixels[i.y * fb->size.x + i.x],
-					sprite->texture.pixels[sprite_px.y * sprite->texture.size.x + sprite_px.x]);
+					sprite_color);
 				i.y++;
 			}
 			i.x++;
 		}
 	}
 }
+
+#include <stdio.h>
 
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
@@ -250,14 +278,18 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	float	rot_sin;
 	float	rot_cos;
 
+	printf("render\n");
 	fov = tan(self->fov / 2.0f);
 	rot_sin = sin(self->player_ref->super.transform.rotation.y);
 	rot_cos = cos(self->player_ref->super.transform.rotation.y);
 	dir = ft_vec2f(rot_cos, rot_sin);
 	plane = vec2f_scalar(ft_vec2f(-rot_sin, rot_cos), fov);
 	zbuffer(self, dir, plane);
+	//frame_fill_blend(fb, ft_rgba(0, 0, 0, 10), blend_add);
+	frame_fill(fb, ft_rgba(0, 0, 0, 255));
 	floor_raycasting(self, fb, dir, plane);
-	ceiling_raycasting(self, fb, dir, plane);
+	(void)ceiling_raycasting;
+	// ceiling_raycasting(self, fb, dir, plane);
 	walls_raycasting(self, fb);
 	sprites(self, fb, dir, plane);
 	frame_layer_transform(fb, &self->crosshair,
