@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 12:57:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 19:39:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:50:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ t_result		init_player_entity(t_player_entity *const self,
 					const t_player_entity_args *const args)
 {
 	init_entity_default(&self->super, entity_vtable(player_entity_update));
-	module_add(&self->super.module, &self->event_handler, event_handler(self));
+	self->velocity = ft_vec3f(0.0f, 0.0f, 0.0f);
+	self->is_moving = FALSE;
 	self->map_ref = args->map;
 	self->speed = 2.0f;
 	self->super.transform.position.x = args->map->spawn.x;

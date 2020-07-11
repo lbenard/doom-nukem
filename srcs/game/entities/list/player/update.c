@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/25 01:07:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 22:04:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "game/entities/player_entity.h"
 #include "engine/game.h"
 #include "engine/delta.h"
+#include "maths/maths.h"
 
 static t_vec3f	move(const t_map *const map, t_vec3f pos, t_vec3f vel)
 {
@@ -61,9 +62,7 @@ static void		orientation(t_player_entity *const self, t_vec3f *rotation)
 		* 2.0f * get_last_delta();
 }
 
-static void		wasd(t_player_entity *const self,
-					t_vec3f *transform,
-					t_vec3f rotation)
+static void		wasd(t_player_entity *const self, t_vec3f rotation)
 {
 	t_vec2f	rotation_trigonometry;
 	float	w;
@@ -75,30 +74,40 @@ static void		wasd(t_player_entity *const self,
 	a = input_get(&game_singleton()->input, self->left);
 	s = input_get(&game_singleton()->input, self->backward);
 	d = input_get(&game_singleton()->input, self->right);
-	rotation_trigonometry = ft_vec2f(cos(rotation.y), sin(rotation.y));
-	transform->x += rotation_trigonometry.x * w;
-	transform->y += rotation_trigonometry.y * w;
-	transform->x += rotation_trigonometry.y * a;
-	transform->y -= rotation_trigonometry.x * a;
-	transform->x -= rotation_trigonometry.x * s;
-	transform->y -= rotation_trigonometry.y * s;
-	transform->x -= rotation_trigonometry.y * d;
-	transform->y += rotation_trigonometry.x * d;
+	self->is_moving = ft_fabs(w + s) > 0.01f || ft_fabs(a + d) > 0.01f;
+	if (self->is_moving)
+	{
+		rotation_trigonometry = ft_vec2f(cos(rotation.y), sin(rotation.y));
+		self->velocity.x += rotation_trigonometry.x * w;
+		self->velocity.y += rotation_trigonometry.y * w;
+		self->velocity.x += rotation_trigonometry.y * a;
+		self->velocity.y -= rotation_trigonometry.x * a;
+		self->velocity.x -= rotation_trigonometry.x * s;
+		self->velocity.y -= rotation_trigonometry.y * s;
+		self->velocity.x -= rotation_trigonometry.y * d;
+		self->velocity.y += rotation_trigonometry.x * d;
+	}
+
 }
+
+#include <stdio.h>
 
 void			player_entity_update(t_player_entity *const self)
 {
-	t_vec3f	velocity;
-
-	velocity = ft_vec3f(0.0f, 0.0f, 0.0f);
 	orientation(self, &self->super.transform.rotation);
-	wasd(self, &velocity, self->super.transform.rotation);
-	velocity = vec3f_scalar(velocity, get_last_delta());
-	velocity = vec3f_scalar(velocity, self->speed);
-	if (input_get(&game_singleton()->input, self->sprint))
-		velocity = vec3f_scalar(velocity, 2.0f);
-	velocity = move(self->map_ref, self->super.transform.position, velocity);
-	self->super.transform.position.x += velocity.x;
-	self->super.transform.position.y += velocity.y;
-	self->super.transform.position.z += velocity.z;
+	wasd(self, self->super.transform.rotation);
+	printf("velocity %f %f %f\n", self->velocity.x, self->velocity.y, self->velocity.z);
+	if (self->is_moving)
+	{
+		self->velocity = vec3f_scalar(self->velocity, get_last_delta());
+		self->velocity = vec3f_scalar(self->velocity, self->speed);
+		if (input_get(&game_singleton()->input, self->sprint))
+			self->velocity = vec3f_scalar(self->velocity, 2.0f);
+	}
+	else
+		self->velocity = vec3f_scalar(self->velocity, 0.8f);
+	self->velocity = move(self->map_ref, self->super.transform.position, self->velocity);
+	self->super.transform.position.x += self->velocity.x;
+	self->super.transform.position.y += self->velocity.y;
+	self->super.transform.position.z += self->velocity.z;
 }
