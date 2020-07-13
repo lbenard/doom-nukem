@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 21:05:56 by lbenard           #+#    #+#             */
-/*   Updated: 2019/12/07 16:56:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 00:56:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 # define SCENE_H
 
 # include "containers/list.h"
-# include "engine/event_handler.h"
 # include "containers/string.h"
 # include "engine/entity_list.h"
 # include "engine/entity_node.h"
+# include "engine/event_handler.h"
+# include "engine/input.h"
 
 /*
 ** Super-class for any scene object. Stores generic scene informations such as
@@ -30,6 +31,7 @@ typedef struct	s_scene
 	t_string			name;
 	t_entity_list		entities;
 	t_event_handler		input_manager;
+	t_input				input;
 	void				(*update_fn)();
 	void				(*render_fn)();
 }				t_scene;
