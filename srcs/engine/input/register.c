@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 19:58:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/26 20:25:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 01:02:42 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ static t_bool	is_key_in_table(t_vector *const table, const char *const key)
 	return (FALSE);
 }
 
-void			input_register(t_input *const self, const char *const key)
+t_input_id		input_register(t_input *const self, const char *const key)
 {
 	t_input_set	set;
 
 	if (is_key_in_table(&self->table, key))
-		return ;
+		return (input_get_id(self, key));
 	set = ft_input_set(key, input_set_get_uid());
 	if (vector_push_back(&self->table, &set, sizeof(t_input_set)) == ERROR)
 	{
 		throw_error_str("input_register()", "failed to add set in input table");
 		self->module.has_error = TRUE;
-		return ;
+		return (INPUT_NULL_ID);
 	}
+	return (set.id);
 }

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 10:39:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 19:02:35 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 00:43:22 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_constructor		input(void);
 
 t_result			init_input(t_input *const self);
 
-void				input_register(t_input *const self, const char *const key);
+t_input_id			input_register(t_input *const self, const char *const key);
 t_input_id			input_get_id(t_input *const self, const char *const key);
 void				input_attach(t_input *const self,
 						const t_input_id id,
