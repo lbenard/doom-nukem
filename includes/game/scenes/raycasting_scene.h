@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 04:12:27 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/13 22:34:57 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "engine/frame.h"
 # include "engine/array.h"
 # include "engine/sound.h"
+# include "engine/text.h"
 # include "game/entities/player_entity.h"
 # include "game/entities/image_entity.h"
 # include "game/entities/camera_entity.h"
@@ -51,8 +52,17 @@ typedef struct	s_raycasting_scene
 	t_frame				crosshair;
 	t_array				zbuffer;
 	t_player_entity		*player_ref;
-	t_weapon			weapon;
-	t_input_id			shoot_input;
+	struct s_weapon_infos
+	{
+		t_weapon			weapon;
+		t_bool				just_shooted;
+		t_bool				just_reloaded;
+		t_bool				first_render;
+		t_input_id			shoot_input;
+		t_input_id			reload_input;
+		char				display[10];
+		t_text				display_text;
+	}					weapon;
 	t_camera_entity		*camera_ref;
 	t_monster_entity	*monster_ref;
 	t_entity_list		sprite_entities;
@@ -77,15 +87,24 @@ t_result		init_raycasting_scene(t_raycasting_scene *const self,
 void			raycasting_scene_update(t_raycasting_scene *const self);
 void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
+void			raycasting_scene_render_weapon_display(
+					t_raycasting_scene *const self,
+					t_frame *const fb);
 
 t_result		raycasting_scene_add_monster(t_raycasting_scene *const self,
 					t_constructor constructor);
+void			raycasting_scene_kill_monster(t_raycasting_scene *const self,
+					const t_entity *const monster);
 
-void			raycasting_scene_set_weapon_pistol(
+void			raycasting_scene_weapon_set_pistol(
 					t_raycasting_scene *const self);
-void			raycasting_scene_set_weapon_minigun(
+void			raycasting_scene_weapon_set_minigun(
 					t_raycasting_scene *const self);
-void			raycasting_scene_shoot(t_raycasting_scene *const self);
+
+void			raycasting_scene_weapon_use(t_raycasting_scene *const self);
+t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
+					const size_t ammo_amount);
+void			raycasting_scene_weapon_reload(t_raycasting_scene *const self);
 
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
 

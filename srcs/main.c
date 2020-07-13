@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/12 03:59:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/13 20:50:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,114 +27,98 @@
 
 void	register_inputs(t_game *const game)
 {
-	input_register(&game->input, "Forward");
-	int forward = input_get_id(&game->input, "Forward");
+	int forward = input_register(&game->input, "Forward");
 	input_attach(&game->input, forward, ft_key_event(sfKeyW, KEY_HOLD));
 	input_attach(&game->input, forward, ft_key_event(sfKeyUp, KEY_HOLD));
 	input_attach(&game->input, forward,
 		ft_stick_event(0, XBOX_LSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 
-
-	input_register(&game->input, "Backward");
-	int backward = input_get_id(&game->input, "Backward");
+	int backward = input_register(&game->input, "Backward");
 	input_attach(&game->input, backward, ft_key_event(sfKeyS, KEY_HOLD));
 	input_attach(&game->input, backward, ft_key_event(sfKeyDown, KEY_HOLD));
 	input_attach(&game->input, backward,
 		ft_stick_event(0, XBOX_LSTICK_Y, 20.0f, STICK_POSITIVE));
 
-
-	input_register(&game->input, "Left");
-	int left = input_get_id(&game->input, "Left");
+	int left = input_register(&game->input, "Left");
 	input_attach(&game->input, left, ft_key_event(sfKeyA, KEY_HOLD));
 	input_attach(&game->input, left,
 		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 
-
-	input_register(&game->input, "Right");
-	int right = input_get_id(&game->input, "Right");
+	int right = input_register(&game->input, "Right");
 	input_attach(&game->input, right, ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&game->input, right,
 		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
 
-	input_register(&game->input, "Shoot");
-	int shoot = input_get_id(&game->input, "Shoot");
+	int shoot = input_register(&game->input, "Shoot");
 	input_attach(&game->input, shoot, ft_mouse_event(sfMouseLeft, 0));
 	input_attach(&game->input, shoot, ft_key_event(sfKeySpace, 0));
 	input_attach(&game->input, shoot,
 		ft_stick_event(0, XBOX_RTRIGGER, 20.0f, 0));
 
-	input_register(&game->input, "CameraRight");
-	int camera_right = input_get_id(&game->input, "CameraRight");
+	int reload = input_register(&game->input, "Reload");
+	input_attach(&game->input, reload, ft_key_event(sfKeyR, 0));
+	input_attach(&game->input, reload, ft_button_event(0, XBOX_A, 0));
+
+	int camera_right = input_register(&game->input, "CameraRight");
 	input_attach(&game->input, camera_right, ft_key_event(sfKeyRight, KEY_HOLD));
 	input_attach(&game->input, camera_right,
 		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_POSITIVE));
 
-	input_register(&game->input, "CameraLeft");
-	int camera_left = input_get_id(&game->input, "CameraLeft");
+	int camera_left = input_register(&game->input, "CameraLeft");
 	input_attach(&game->input, camera_left, ft_key_event(sfKeyLeft, KEY_HOLD));
 	input_attach(&game->input, camera_left,
 		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 
-	input_register(&game->input, "CameraUp");
-	int camera_up = input_get_id(&game->input, "CameraUp");
+	int camera_up = input_register(&game->input, "CameraUp");
 	input_attach(&game->input, camera_up, ft_key_event(sfKeyPageUp, KEY_HOLD));
 	input_attach(&game->input, camera_up,
 		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 	
-	input_register(&game->input, "CameraDown");
-	int camera_down = input_get_id(&game->input, "CameraDown");
+	int camera_down = input_register(&game->input, "CameraDown");
 	input_attach(&game->input, camera_down, ft_key_event(sfKeyPageDown, KEY_HOLD | INVERT_INPUT));
 	input_attach(&game->input, camera_down,
 		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_POSITIVE | INVERT_INPUT));
 	
-	input_register(&game->input, "EditorCameraUp");
-	int editor_camera_up = input_get_id(&game->input, "EditorCameraUp");
+	int editor_camera_up = input_register(&game->input, "EditorCameraUp");
 	input_attach(&game->input, editor_camera_up, ft_key_event(sfKeyUp, KEY_HOLD));
 	input_attach(&game->input, editor_camera_up, ft_key_event(sfKeyW, KEY_HOLD));
 	input_attach(&game->input, editor_camera_up,
 		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 
-	input_register(&game->input, "EditorCameraRight");
-	int editor_camera_right = input_get_id(&game->input, "EditorCameraRight");
+	int editor_camera_right = input_register(&game->input, "EditorCameraRight");
 	input_attach(&game->input, editor_camera_right, ft_key_event(sfKeyRight, KEY_HOLD));
 	input_attach(&game->input, editor_camera_right, ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&game->input, editor_camera_right,
 		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_POSITIVE));
 
-	input_register(&game->input, "EditorCameraDown");
-	int editor_camera_down = input_get_id(&game->input, "EditorCameraDown");
+	int editor_camera_down = input_register(&game->input, "EditorCameraDown");
 	input_attach(&game->input, editor_camera_down, ft_key_event(sfKeyDown, KEY_HOLD));
 	input_attach(&game->input, editor_camera_down, ft_key_event(sfKeyS, KEY_HOLD));
 	input_attach(&game->input, editor_camera_down,
 		ft_stick_event(0, XBOX_RSTICK_Y, 20.0f, STICK_POSITIVE));
 
-	input_register(&game->input, "EditorCameraLeft");
-	int editor_camera_left = input_get_id(&game->input, "EditorCameraLeft");
+	int editor_camera_left = input_register(&game->input, "EditorCameraLeft");
 	input_attach(&game->input, editor_camera_left, ft_key_event(sfKeyLeft, KEY_HOLD));
 	input_attach(&game->input, editor_camera_left, ft_key_event(sfKeyA, KEY_HOLD));
 	input_attach(&game->input, editor_camera_left,
 		ft_stick_event(0, XBOX_RSTICK_X, 20.0f, STICK_NEGATIVE | INVERT_INPUT));
 
-	input_register(&game->input, "EditorCameraDezoom");
-	int editor_camera_dezoom = input_get_id(&game->input, "EditorCameraDezoom");
+	int editor_camera_dezoom = input_register(&game->input, "EditorCameraDezoom");
 	input_attach(&game->input, editor_camera_dezoom,
 		ft_key_event(sfKeySubtract, KEY_HOLD | INVERT_INPUT));
 	input_attach(&game->input, editor_camera_dezoom,
 		ft_key_event(sfKeyPageDown, KEY_HOLD | INVERT_INPUT));
 	
-	input_register(&game->input, "EditorCameraZoom");
-	int editor_camera_zoom = input_get_id(&game->input, "EditorCameraZoom");
+	int editor_camera_zoom = input_register(&game->input, "EditorCameraZoom");
 	input_attach(&game->input, editor_camera_zoom, ft_key_event(sfKeyAdd, KEY_HOLD));
 	input_attach(&game->input, editor_camera_zoom, ft_key_event(sfKeyPageUp, KEY_HOLD));
 	
-	input_register(&game->input, "Sprint");
-	int	sprint = input_get_id(&game->input, "Sprint");
+	int	sprint = input_register(&game->input, "Sprint");
 	input_attach(&game->input, sprint, ft_key_event(sfKeyLShift, KEY_HOLD));
 	input_attach(&game->input, sprint,
 		ft_button_event(0, XBOX_A, INPUT_NO_FLAG));
 
-	input_register(&game->input, "Quit");
-	int	quit = input_get_id(&game->input, "Quit");
+	int	quit = input_register(&game->input, "Quit");
 	input_attach(&game->input, quit, ft_key_event(sfKeyEscape, 0));
 	input_attach(&game->input, quit, ft_button_event(0, XBOX_START, 0));
 

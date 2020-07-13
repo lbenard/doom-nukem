@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:07:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:27:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/13 20:38:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	fps_average(double spf)
 
 	total_fps += 1.0f / spf;
 	total_frames++;
-	printf("average: %f\n", total_fps / total_frames);
+	// printf("average: %f\n", total_fps / total_frames);
 }
 
 void	game_loop(void)

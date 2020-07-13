@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/12 03:01:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/13 21:25:18 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,6 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	float	rot_sin;
 	float	rot_cos;
 
-	printf("render\n");
 	fov = tan(self->fov / 2.0f);
 	rot_sin = sin(self->player_ref->super.transform.rotation.y);
 	rot_cos = cos(self->player_ref->super.transform.rotation.y);
@@ -301,6 +300,7 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 		blend_invert);
 	frame_fill_blend(fb,
 		ft_rgba(255, 255, 255,
-			63 - ft_fmin((get_wall_time() - self->weapon.last_shot) * 10.0f, 1.0f) * 63),
+			63 - ft_fmin((get_wall_time() - self->weapon.weapon.last_shot) * 10.0f, 1.0f) * 63),
 		blend_add);
+	raycasting_scene_render_weapon_display(self, fb);
 }

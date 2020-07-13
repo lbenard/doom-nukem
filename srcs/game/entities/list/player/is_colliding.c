@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 16:02:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 00:06:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/13 19:09:02 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ static t_bool	is_block_empty(const t_map *const map, t_vec2i pos)
 {
 	if (!does_position_belong_to_size(pos, map->size))
 		return (FALSE);
-	else if (map->map[pos.x + pos.y * map->size.x].texture_ref)
+	if (map->map[pos.x + pos.y * map->size.x].texture_ref)
 		return (FALSE);
-	else
-		return (TRUE);
+	if (pos.x <= 0 || pos.x >= (int)map->size.x - 1
+		|| pos.y <= 0 || pos.y >= (int)map->size.y - 1)
+		return (FALSE);
+	return (TRUE);
 }
 
 t_bool			is_colliding(const t_map *const map,

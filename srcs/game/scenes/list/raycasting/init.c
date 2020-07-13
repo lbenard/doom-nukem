@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 04:15:40 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/13 22:35:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "engine/error.h"
 #include "engine/image.h"
 #include "engine/game.h"
+#include "ft/str.h"
 
 static void	add_modules(t_raycasting_scene *const self,
 				const t_raycasting_scene_args *const args)
@@ -32,7 +33,9 @@ static void	add_modules(t_raycasting_scene *const self,
 	module_add(&self->super.module, &self->crosshair,
 		frame_from_file("resources/textures/crosshair-downscale.png"));
 	module_add(&self->super.module, &self->pistol,
-		sound("resources/sound/minigun.wav"));
+		sound("resources/sound/ar15-pistol-shot.wav"));
+	module_add(&self->super.module, &self->weapon.display_text,
+		text("haxorville.png", ft_usize(args->window->size.x, 9)));
 }
 
 static void	add_entities(t_raycasting_scene *const self)
@@ -53,9 +56,14 @@ static void	init_vars(t_raycasting_scene *const self,
 	self->sky_color = ft_rgb(135, 206, 235);
 	self->fov = 90.0f * M_PI / 180.0f;
 	self->window_ref = args->window;
-	// raycasting_scene_set_weapon_pistol(self);
-	raycasting_scene_set_weapon_minigun(self);
-	self->shoot_input = input_get_id(&game_singleton()->input, "Shoot");
+	// raycasting_scene_weapon_set_pistol(self);
+	raycasting_scene_weapon_set_minigun(self);
+	self->weapon.just_shooted = FALSE;
+	self->weapon.just_reloaded = FALSE;
+	self->weapon.first_render = TRUE;
+	self->weapon.shoot_input = input_get_id(&game_singleton()->input, "Shoot");
+	self->weapon.reload_input = input_get_id(&game_singleton()->input, "Reload");
+	ft_strcpy(self->weapon.display, "42/42");
 }
 
 t_result	init_raycasting_scene(t_raycasting_scene *const self,

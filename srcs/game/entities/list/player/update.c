@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 22:04:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/13 20:38:01 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,10 @@ static void		wasd(t_player_entity *const self, t_vec3f rotation)
 
 }
 
-#include <stdio.h>
-
 void			player_entity_update(t_player_entity *const self)
 {
 	orientation(self, &self->super.transform.rotation);
 	wasd(self, self->super.transform.rotation);
-	printf("velocity %f %f %f\n", self->velocity.x, self->velocity.y, self->velocity.z);
 	if (self->is_moving)
 	{
 		self->velocity = vec3f_scalar(self->velocity, get_last_delta());
