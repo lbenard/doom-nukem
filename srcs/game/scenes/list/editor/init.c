@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 04:02:44 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 01:03:58 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	add_entities(t_editor_scene *const self,
 	self->camera_ref = (t_editor_camera_entity*)entity_list_add_entity(
 		&self->super.entities,
 		editor_camera_entity(self->editor_view.size.y * 0.1f,
-			&self->editor_view, &self->super.input_manager));
+			&self->editor_view, &self->super));
 	self->grid_ref = (t_grid_component_entity*)entity_list_add_entity_ref(
 		&self->components, entity_list_add_entity(&self->super.entities,
 			grid_component_entity(self->editor_view.size,

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:33:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 22:32:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 01:02:17 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_result	init_editor_camera_entity(t_editor_camera_entity *const self,
 	init_entity_default(&self->super,
 		entity_vtable(editor_camera_entity_update));
 	module_add(&self->super.module, &self->event_handler, event_handler(self));
-	event_handler_add_sub_handler(args->parent,
+	event_handler_add_sub_handler(&args->editor->input_manager,
 		&self->event_handler);
 	event_handler_add_callback(&self->event_handler,
 		new_editor_camera_zoom_event(args->fb));
