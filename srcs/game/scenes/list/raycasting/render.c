@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:23:30 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 03:01:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "game/scenes/raycasting_scene.h"
 #include "ft/mem.h"
 #include "maths/maths.h"
+#include "engine/delta.h"
 
 static t_rgba	color(const t_raycasting_scene *const self,
 					const t_ray *const ray,
@@ -99,7 +100,7 @@ static void	floor_raycasting(t_raycasting_scene *const self,
 	float	darkness_value;
 
 	i.y = target->size.y / 2 + self->player_ref->super.transform.rotation.x;
-	darkness_step = 1.0f / target->size.y / 2 * 5.0f;
+	darkness_step = 1.0f / target->size.y / 2 * 10.0f;
 	darkness_value = 0.0f;
 	while (i.y < target->size.y)
 	{
@@ -215,8 +216,6 @@ void		sprites(t_raycasting_scene *const self,
 		t_vec2d	transform;
 		transform.x = inv_det * (dir.y * sprite_pos.x - dir.x * sprite_pos.y);
 		transform.y = inv_det * (-plane.y * sprite_pos.x + plane.x * sprite_pos.y);
-		if (transform.y <= 0)
-			continue ;
 
 		int	sprite_screen_x = (int)((fb->size.x / 2) * (1 + transform.x / transform.y));
 
@@ -233,6 +232,9 @@ void		sprites(t_raycasting_scene *const self,
 		int	draw_end_x = sprite_screen_x + sprite_width / 2;
 		sprite->last_start_x = draw_start_x;
 		sprite->last_end_x = draw_end_x;
+		sprite->last_perpendicular_distance = transform.y;
+		if (transform.y <= 0)
+			continue ;
 		i.x = (size_t)ft_ssmax(draw_start_x, 0);
 		while ((ssize_t)i.x < draw_end_x && i.x < fb->size.x)
 		{
@@ -250,10 +252,9 @@ void		sprites(t_raycasting_scene *const self,
 					* sprite->texture.size.y;
 				t_rgba	sprite_color = sprite->texture.pixels[sprite_px.y
 					* sprite->texture.size.x + sprite_px.x];
-				float	sprite_distance = sqrt(sprite_pos.x * sprite_pos.x + sprite_pos.y * sprite_pos.y);
-				sprite_color.c.r /= (sprite_distance / 3.0f) + 1;
-				sprite_color.c.g /= (sprite_distance / 3.0f) + 1;
-				sprite_color.c.b /= (sprite_distance / 3.0f) + 1;
+				sprite_color.c.r /= (transform.y / 3.0f) + 1;
+				sprite_color.c.g /= (transform.y / 3.0f) + 1;
+				sprite_color.c.b /= (transform.y / 3.0f) + 1;
 				if (sprite_color.c.a == 255)
 					fb->pixels[i.y * fb->size.x + i.x] = sprite_color;
 				else
@@ -298,4 +299,8 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 			ft_vec2f(1.0f, 1.0f),
 			255),
 		blend_invert);
+	frame_fill_blend(fb,
+		ft_rgba(255, 255, 255,
+			63 - ft_fmin((get_wall_time() - self->weapon.last_shot) * 10.0f, 1.0f) * 63),
+		blend_add);
 }
