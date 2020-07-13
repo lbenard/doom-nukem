@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:28:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 03:59:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	register_inputs(t_game *const game)
 	int shoot = input_get_id(&game->input, "Shoot");
 	input_attach(&game->input, shoot, ft_mouse_event(sfMouseLeft, 0));
 	input_attach(&game->input, shoot, ft_key_event(sfKeySpace, 0));
+	input_attach(&game->input, shoot,
+		ft_stick_event(0, XBOX_RTRIGGER, 20.0f, 0));
 
 	input_register(&game->input, "CameraRight");
 	int camera_right = input_get_id(&game->input, "CameraRight");
@@ -136,6 +138,11 @@ void	register_inputs(t_game *const game)
 	input_attach(&game->input, quit, ft_key_event(sfKeyEscape, 0));
 	input_attach(&game->input, quit, ft_button_event(0, XBOX_START, 0));
 
+	// input_register(&game->input, "Back");
+	// int	quit = input_get_id(&game->input, "Quit");
+	// input_attach(&game->input, quit, ft_key_event(sfKeyEscape, 0));
+	// input_attach(&game->input, quit, ft_button_event(0, XBOX_START, 0));
+
 	// input_register(&game->input, "Pause");
 	// input_attach(&game->input,
 	// 	input_get_id(&game->input, "Pause"),
@@ -163,11 +170,11 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (!throw_error_str("main()", "a map path must be given"));
 	game = game_singleton();
-	if (start_game(&(t_game_args){"Doum Nukem", ft_usize(1920, 1080)}) == ERROR)
+	if (start_game(&(t_game_args){PROGRAM_NAME, ft_usize(1280, 720), TRUENT}) == ERROR)
 		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
-	// game_set_scene(menu_scene(&game->window, av[1]));
-	game_set_scene(raycasting_scene(&game->window, av[1]));
+	game_set_scene(menu_scene(&game->window, av[1]));
+	// game_set_scene(raycasting_scene(&game->window, av[1]));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event()))
 	{
