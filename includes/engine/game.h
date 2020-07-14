@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/01/05 22:15:16 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 00:08:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,12 @@ typedef struct	s_game_args
 {
 	const char	*name;
 	t_usize		window_size;
+	t_bool		fullscreen;
 }				t_game_args;
 
-t_constructor	game(const char *const name, const t_usize window_size);
+t_constructor	game(const char *const name,
+					const t_usize window_size,
+					const t_bool fullscreen);
 
 t_game			*game_singleton(void);
 

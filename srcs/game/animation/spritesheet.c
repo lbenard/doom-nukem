@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spritesheet.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 18:54:37 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/08 19:50:33 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:34:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,8 @@ t_result		init_spritesheet(t_spritesheet *const self,
 					t_spritesheet_args *const args)
 {
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	init_module(&self->module);
 	ft_putendl("debut");
 	module_add(&self->module, &self->pixels, frame_from_bmp(args->path));

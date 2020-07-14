@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 18:13:26 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/29 19:18:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/06/30 18:41:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_result		init_frame_from_bmp(t_frame *const self,
 	if (!bmp_parse(fd, self))
 	{
 		close(fd);
-		
+		return (throw_result_str(__func__, "failed to parse bmp"));
 	}
 	add_modules(self);
 	sfSprite_setTexture(self->sprite.sprite,

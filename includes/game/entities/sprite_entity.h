@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 23:33:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/29 20:59:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 02:39:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ typedef struct			s_sprite_entity_vtable
 
 typedef struct			s_sprite_entity
 {
-	t_entity				super;
-	t_frame					texture;
+	t_entity	super;
+	t_frame		texture;
+	int			last_start_x;
+	int			last_end_x;
+	int			last_start_y;
+	int			last_end_y;
+	float		last_perpendicular_distance;
 }						t_sprite_entity;
 
 typedef struct			s_sprite_entity_args

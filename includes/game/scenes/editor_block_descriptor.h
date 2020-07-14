@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:27:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 00:28:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/03 18:55:14 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,20 @@
 typedef struct	s_editor_block_descriptor
 {
 	t_module	module;
-	size_t		id;
+	char		id;
 	const char	*name;
+	const char	*path;
 	t_frame		texture;
 }				t_editor_block_descriptor;
 
 typedef struct	s_editor_block_descriptor_args
 {
-	size_t		id;
+	char		id;
 	const char	*name;
 	const char	*texture_path;
 }				t_editor_block_descriptor_args;
 
-t_constructor	editor_block_descriptor(const size_t id,
+t_constructor	editor_block_descriptor(const char id,
 					const char *name,
 					const char *texture_path);
 

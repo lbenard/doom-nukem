@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:04:22 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/08 19:48:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/12 00:07:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_result	start_game(const t_game_args *const args)
 	game = game_singleton();
 	init_module(&game->module);
 	module_add(&game->module, &game->window,
-		window(args->name, args->window_size));
+		window(args->name, args->window_size, args->fullscreen));
 	module_add(&game->module, &game->event_handler, event_handler(game));
 	module_add(&game->module, &game->input, input());
 	game->scene = NULL;

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 00:32:47 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 20:34:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:10:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_result	init_block_checkbox_entity(t_block_checkbox_entity *const self,
 			"failed to create parent object"));
 	}
 	self->block = args->block;
-	frame_layer_transform(&self->super.super.normal_texture,
+	frame_layer_transform_add(&self->super.super.normal_texture,
 		&self->block->texture,
 		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
 			ft_isize(self->super.super.normal_texture.size.x / 2,
@@ -34,9 +34,8 @@ t_result	init_block_checkbox_entity(t_block_checkbox_entity *const self,
 				/ (float)self->block->texture.size.x * 0.7,
 				(float)self->super.super.normal_texture.size.y
 					/ (float)self->block->texture.size.y * 0.7),
-			255),
-		blend_add);
-	frame_layer_transform(&self->super.super.hover_texture,
+			255));
+	frame_layer_transform_add(&self->super.super.hover_texture,
 		&self->block->texture,
 		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
 			ft_isize(self->super.super.hover_texture.size.x / 2,
@@ -45,9 +44,8 @@ t_result	init_block_checkbox_entity(t_block_checkbox_entity *const self,
 				/ (float)self->block->texture.size.x * 0.7,
 				(float)self->super.super.hover_texture.size.y
 					/ (float)self->block->texture.size.y * 0.7),
-			255),
-		blend_add);
-	frame_layer_transform(&self->super.super.checked_texture,
+			255));
+	frame_layer_transform_add(&self->super.super.checked_texture,
 		&self->block->texture,
 		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
 			ft_isize(self->super.super.checked_texture.size.x / 2,
@@ -56,8 +54,7 @@ t_result	init_block_checkbox_entity(t_block_checkbox_entity *const self,
 				/ (float)self->block->texture.size.x * 0.7,
 				(float)self->super.super.checked_texture.size.y
 					/ (float)self->block->texture.size.y * 0.7),
-			255),
-		blend_add);
+			255));
 	if (self->super.super.super.module.has_error)
 	{
 		destroy_block_checkbox_entity(self);

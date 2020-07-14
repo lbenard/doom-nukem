@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:19:26 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/25 01:55:29 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:10:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	checkbox_entity_render(t_checkbox_entity *const self,
 {
 	if (self->is_active)
 	{
-		frame_layer_transform(
+		frame_layer_transform_add(
 			frame,
 			self->current_texture,
 			ft_frame_transform(
@@ -31,8 +31,7 @@ void	checkbox_entity_render(t_checkbox_entity *const self,
 					self->super.transform.scale.y
 				),
 				COLOR_OPAQUE
-			),
-			blend_add
+			)
 		);
 	}
 }

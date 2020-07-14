@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:41:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/19 21:28:28 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/10 19:29:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,5 @@
 
 void	monster_entity_update(t_sprite_entity *const self)
 {
-	t_monster_entity	*monster;
-
-	monster = (t_monster_entity*)self;
-	monster->health *= 0.99;
+	(void)self;
 }

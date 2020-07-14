@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 22:37:03 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 00:53:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/05 00:44:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_bool	block_component_entity_is_hovered(t_component_entity *const self,
 			const t_frame *const frame,
 			const t_isize mouse_pos)
 {
-	t_isize						entity_pos;
+	t_isize	entity_pos;
 
 	entity_pos = component_entity_screen_pos(self, camera, frame);
 	return (mouse_pos.x >= entity_pos.x

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 16:24:09 by ppetitea          #+#    #+#             */
-/*   Updated: 2019/11/06 15:33:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/06 23:43:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,18 @@ t_result	init_texture_node(t_texture_node *const self,
 	{
 		free((char*)args->key);
 		free((char*)args->path);
-		return (throw_result_str("new_texture_node()", "incorrect argument"));
+		return (throw_result_str("init_texture_node()", "incorrect argument"));
 	}
-	if (static_module_create(&self->image, image(args->path)) == ERROR)
-	{
-		free((char*)args->key);
-		free((char*)args->path);
-		return (throw_result_str("new_texture_node()",
-			"failed while creating image"));
-	}
+	init_module(&self->module);
+	module_add(&self->module, &self->texture, frame_from_file(args->path));
 	free((char*)args->path);
 	init_list_head(&self->node);
 	self->key = args->key;
+	if (self->module.has_error)
+	{
+		destroy_texture_node(self);
+		return (throw_result_str("init_texture_node()",
+			"failed to create new texture node"));
+	}
 	return (OK);
 }

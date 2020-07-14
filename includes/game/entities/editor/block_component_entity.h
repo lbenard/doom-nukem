@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 22:12:48 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 20:10:11 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/08 22:28:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define BLOCK_COMPONENT_ENTITY_H
 
 # include "game/entities/editor/component_entity.h"
-# include "game/scenes/new_editor_scene.h"
+# include "game/scenes/editor_scene.h"
 
 typedef struct	s_block_component_entity
 {

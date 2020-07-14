@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 19:55:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 20:46:37 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:31:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct	s_spritesheet
 	int			sprite_line;
 	int			sprite_height;
 }				t_spritesheet;
-
 typedef struct	s_animation
 {
 	int			anim;

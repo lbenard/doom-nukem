@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/01 01:06:44 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/14 19:34:20 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS_LIST		=	main.c																			\
 																									\
 					engine/blend/add.c																\
 					engine/blend/colorize.c															\
+					engine/blend/invert.c															\
 																									\
 					engine/controller/xbox/perpendicular_axis.c										\
 																									\
@@ -31,6 +32,7 @@ SRCS_LIST		=	main.c																			\
 					engine/cursor/init.c															\
 					engine/cursor/init_from_file.c													\
 					engine/cursor/set_visibility.c													\
+					engine/cursor/set_pos.c															\
 					engine/cursor/destroy.c															\
 																									\
 					engine/delta/get_delta_ptr.c													\
@@ -91,11 +93,13 @@ SRCS_LIST		=	main.c																			\
 					engine/frame/fill_blend.c														\
 					engine/frame/layer.c															\
 					engine/frame/layer_opaque.c														\
+					engine/frame/layer_add.c														\
 					engine/frame/coordinates.c														\
 					engine/frame/ft_frame_transform_default.c										\
 					engine/frame/ft_frame_transform_position.c										\
 					engine/frame/ft_frame_transform.c												\
 					engine/frame/layer_transform.c													\
+					engine/frame/layer_transform_add.c												\
 					engine/frame/destroy.c															\
 																									\
 					engine/game/game.c																\
@@ -178,6 +182,11 @@ SRCS_LIST		=	main.c																			\
 					engine/shape/render.c															\
 					engine/shape/destroy.c															\
 																									\
+					engine/sound/sound.c															\
+					engine/sound/init.c																\
+					engine/sound/play.c																\
+					engine/sound/destroy.c															\
+																									\
 					engine/render_utils/row.c														\
 					engine/render_utils/column.c													\
 					engine/render_utils/line.c														\
@@ -202,6 +211,9 @@ SRCS_LIST		=	main.c																			\
 					engine/window/get_mouse_pos.c													\
 					engine/window/close.c															\
 					engine/window/destroy.c															\
+																									\
+					game/animation/spritesheet.c													\
+					game/animation/animation.c														\
 																									\
 					game/entities/list/player/ft_corners.c											\
 					game/entities/list/player/player_entity.c										\
@@ -274,6 +286,13 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/grid_component/is_hovered.c							\
 					game/entities/list/editor/grid_component/destroy.c								\
 																									\
+					game/entities/list/editor/player_component/player_component_entity.c			\
+					game/entities/list/editor/player_component/init.c								\
+					game/entities/list/editor/player_component/update.c								\
+					game/entities/list/editor/player_component/render.c								\
+					game/entities/list/editor/player_component/is_hovered.c							\
+					game/entities/list/editor/player_component/destroy.c							\
+																									\
 					game/entities/list/editor/preview_checkbox/preview_checkbox_entity.c			\
 					game/entities/list/editor/preview_checkbox/init.c								\
 					game/entities/list/editor/preview_checkbox/update.c								\
@@ -302,12 +321,6 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/image/render.c												\
 					game/entities/list/image/destroy.c												\
 																									\
-					game/entities/list/minimap/minimap_entity.c										\
-					game/entities/list/minimap/init.c												\
-					game/entities/list/minimap/update.c												\
-					game/entities/list/minimap/render.c												\
-					game/entities/list/minimap/destroy.c											\
-																									\
 					game/entities/list/monster/monster_entity.c										\
 					game/entities/list/monster/init.c												\
 					game/entities/list/monster/update.c												\
@@ -327,16 +340,18 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/benchmark/render.c												\
 					game/scenes/list/benchmark/destroy.c											\
 																									\
-					game/scenes/list/new_editor/block_descriptor/editor_block_descriptor.c			\
-					game/scenes/list/new_editor/block_descriptor/init.c								\
-					game/scenes/list/new_editor/block_descriptor/destroy.c							\
-					game/scenes/list/new_editor/new_editor_scene.c									\
-					game/scenes/list/new_editor/init.c												\
-					game/scenes/list/new_editor/update.c											\
-					game/scenes/list/new_editor/render.c											\
-					game/scenes/list/new_editor/destroy.c											\
-					game/scenes/list/new_editor/new_cursor_event.c									\
-					game/scenes/list/new_editor/new_block_create_event.c							\
+					game/scenes/list/editor/block_descriptor/editor_block_descriptor.c				\
+					game/scenes/list/editor/block_descriptor/init.c									\
+					game/scenes/list/editor/block_descriptor/destroy.c								\
+					game/scenes/list/editor/editor_scene.c											\
+					game/scenes/list/editor/init.c													\
+					game/scenes/list/editor/update.c												\
+					game/scenes/list/editor/render.c												\
+					game/scenes/list/editor/export_map.c											\
+					game/scenes/list/editor/add_block.c												\
+					game/scenes/list/editor/destroy.c												\
+					game/scenes/list/editor/new_cursor_event.c										\
+					game/scenes/list/editor/new_block_create_event.c								\
 																									\
 					game/scenes/list/menu/menu_scene.c												\
 					game/scenes/list/menu/init.c													\
@@ -354,6 +369,14 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/init.c												\
 					game/scenes/list/raycasting/update.c											\
 					game/scenes/list/raycasting/render.c											\
+					game/scenes/list/raycasting/render_weapon_display.c								\
+					game/scenes/list/raycasting/add_monster.c										\
+					game/scenes/list/raycasting/kill_monster.c										\
+					game/scenes/list/raycasting/weapon_set_pistol.c									\
+					game/scenes/list/raycasting/weapon_set_minigun.c								\
+					game/scenes/list/raycasting/weapon_use.c										\
+					game/scenes/list/raycasting/weapon_shoot.c										\
+					game/scenes/list/raycasting/weapon_reload.c										\
 					game/scenes/list/raycasting/destroy.c											\
 					game/scenes/list/raycasting/cast.c												\
 																									\
@@ -424,9 +447,9 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto # -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto# -g3 -fsanitize=address # -Wno-deprecated
 
-LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
+LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS) -pg
 ifneq ($(UNAME), Linux)
 	LDFLAGS         :=  $(LDFLAGS) \
                         -Wl,-rpath,$(SFML_FOLDER)/extlibs/libs-osx/Frameworks \

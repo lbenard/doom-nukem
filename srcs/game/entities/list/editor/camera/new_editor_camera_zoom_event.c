@@ -5,6 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/08 22:32:24 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/08 22:32:24 by lbenard          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   editor_camera_zoom_event.c                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 18:25:46 by lbenard           #+#    #+#             */
 /*   Updated: 2020/06/24 22:41:38 by lbenard          ###   ########.fr       */
 /*                                                                            */
@@ -91,7 +103,7 @@ t_callback_node	*new_editor_camera_zoom_event(const t_frame *const fb)
 
 	if (!(node = new_callback_node(editor_camera_zoom_event, (void*)fb)))
 	{
-		return (throw_error_str("new_editor_camera_zoom_event()",
+		return (throw_error_str("editor_camera_zoom_event()",
 			"failed to create new editor camera zoom event"));
 	}
 	return (node);

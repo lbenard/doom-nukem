@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/25 00:54:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/11 21:50:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ t_corners		ft_corners(t_bool ne, t_bool se, t_bool so, t_bool no);
 typedef struct	s_player_entity
 {
 	t_entity		super;
-	t_event_handler	event_handler;
+	t_vec3f			velocity;
+	t_bool			is_moving;
 	const t_map		*map_ref;
 	float			speed;
 	t_input_id		forward;

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:08:31 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/28 20:21:03 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/09 01:24:47 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,10 @@ static t_result	wall_from_block(t_list_head *const textures,
 {
 	t_texture_node	*texture;
 
-	printf("north name: %s\n", block->north_texture_name);
-	printf("east name: %s\n", block->east_texture_name);
-	printf("south name: %s\n", block->south_texture_name);
-	printf("west name: %s\n", block->west_texture_name);
-	if (!(texture = texture_from_key(textures, block->north_texture_name)))
-		return (throw_result_str("wall_from_block()", "bad north texture"));
-	wall->north_texture_ref = &texture->image;
-	if (!(texture = texture_from_key(textures, block->east_texture_name)))
-		return (throw_result_str("wall_from_block()", "bad east texture"));
-	wall->east_texture_ref = &texture->image;
-	if (!(texture = texture_from_key(textures, block->south_texture_name)))
-		return (throw_result_str("wall_from_block()", "bad south texture"));
-	wall->south_texture_ref = &texture->image;
-	if (!(texture = texture_from_key(textures, block->west_texture_name)))
-		return (throw_result_str("wall_from_block()", "bad west texture"));
-	wall->west_texture_ref = &texture->image;
+	if (!(texture = texture_from_key(textures, block->texture_path)))
+		return (throw_result_str("wall_from_block()", "bad texture value"));
+	wall->texture_ref = &texture->texture;
+	wall->id = block->key;
 	return (OK);
 }
 
@@ -50,10 +38,11 @@ static t_result	fill_wall_from_char(t_map *const self,
 {
 	t_block_node	*block;
 
+	wall->id = c;
 	if (c == ' ')
-		ft_bzero(wall, sizeof(t_wall));
+		wall->texture_ref = NULL;
 	else if ((block = block_from_key(&self->blocks, c)))
-		wall_from_block(&self->textures, wall, block);
+		return (wall_from_block(&self->textures, wall, block));
 	else
 	{
 		return (throw_result_str("fill_wall_from_char()",
@@ -64,7 +53,7 @@ static t_result	fill_wall_from_char(t_map *const self,
 
 static t_result	fill_map_row(t_map *self, char *row, int y)
 {
-	size_t			x;
+	size_t	x;
 
 	if (!row)
 		return (throw_result_str("fill_map_row()", "invalid row string"));
@@ -97,8 +86,8 @@ static t_result	parse(t_map *const self, char *map_flag_str, char *p)
 	columns_amount = 0;
 	while (*p)
 	{
-		if (columns_amount >= self->size.y ||
-			!fill_map_row(self, dn_get_value(p), columns_amount++))
+		if (columns_amount >= self->size.y
+			|| !fill_map_row(self, dn_get_value(p), columns_amount++))
 		{
 			free(map_flag_str);
 			free(self->map);
