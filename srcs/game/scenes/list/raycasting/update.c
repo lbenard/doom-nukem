@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/13 21:20:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/14 19:50:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	raycasting_scene_update(t_raycasting_scene *const self)
 		raycasting_scene_weapon_reload(self);
 	if (input_get(&game_singleton()->input, self->weapon.shoot_input) > 0.0f)
 		raycasting_scene_weapon_use(self);
+	animation_update(&self->testanim, &self->ss);
 	// cursor_set_pos(&self->window_ref->cursor, self->window_ref->window,
 	// 	ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 18:54:30 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/08 20:46:54 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/14 19:49:51 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,17 @@ t_constructor	animation(int anim, int nb_sprite, float speed, int iter)
 		sizeof(t_animation), &args));
 }
 
-void			animate_sprite(t_animation *anim, t_spritesheet *ss,
-					t_frame *screen, int x, int y, float coef)
+void			animation_update(t_animation *const anim, const t_spritesheet *const ss)
 {
-	int	line;
-
-(void)coef;
-	line = ss->sprite_line * anim->anim;
-	frame_layer_transform(screen,
-		&ss->sprite[(int)(line + anim->iter * anim->speed)],
-		ft_frame_transform(ft_vec2f(0.0f, 0.0f),
-			ft_isize(x, y),
-			ft_vec2f(coef, coef),
-			255),
-		blend_add);
 	anim->iter++;
 	if (anim->iter * anim->speed >= ss->sprite_line)
 		anim->iter = 0;
-	// printf("iter = %d\n", anim->iter);
+}
+
+t_frame	*animation_current(t_animation *const self, t_spritesheet *const ss)
+{
+	int	line;
+
+	line = ss->sprite_line * self->anim;
+	return (&ss->sprite[(int)(line + self->iter * self->speed)]);
 }

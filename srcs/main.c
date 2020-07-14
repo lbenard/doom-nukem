@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/13 20:50:21 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/14 20:14:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,8 @@ int	main(int ac, char **av)
 	if (start_game(&(t_game_args){PROGRAM_NAME, ft_usize(1280, 720), TRUENT}) == ERROR)
 		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
-	game_set_scene(menu_scene(&game->window, av[1]));
-	// game_set_scene(raycasting_scene(&game->window, av[1]));
+	// game_set_scene(menu_scene(&game->window, av[1]));
+	game_set_scene(raycasting_scene(&game->window, av[1]));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event()))
 	{

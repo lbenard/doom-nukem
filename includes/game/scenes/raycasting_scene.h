@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/13 22:34:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/14 19:36:30 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "engine/array.h"
 # include "engine/sound.h"
 # include "engine/text.h"
+# include "engine/animation.h"
+# include "engine/spritesheet.h"
 # include "game/entities/player_entity.h"
 # include "game/entities/image_entity.h"
 # include "game/entities/camera_entity.h"
@@ -69,6 +71,8 @@ typedef struct	s_raycasting_scene
 	t_entity_list		monster_entities;
 	t_window			*window_ref;
 	t_sound				pistol;
+	t_spritesheet		ss;
+	t_animation			testanim;
 	float				fov;
 }				t_raycasting_scene;
 

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/13 22:35:28 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/14 19:38:25 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ static void	add_modules(t_raycasting_scene *const self,
 		sound("resources/sound/ar15-pistol-shot.wav"));
 	module_add(&self->super.module, &self->weapon.display_text,
 		text("haxorville.png", ft_usize(args->window->size.x, 9)));
+	module_add(&self->super.module, &self->ss,
+		spritesheet("resources/sprites/sprite-sheet-png-walking-2.bmp",
+			36, 9, 4));
+	module_add(&self->super.module, &self->testanim, animation(0, 36, 0.5f, 0));
 }
 
 static void	add_entities(t_raycasting_scene *const self)

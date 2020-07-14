@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/13 21:25:18 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/14 20:13:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,9 +198,11 @@ void		sprites(t_raycasting_scene *const self,
 	t_usize			i;
 	t_ray			*zbuffer;
 	t_usize			sprite_px;
+	t_frame			*sprite_texture;
 
 	zbuffer = (t_ray*)self->zbuffer.array;
 	pos = &self->sprite_entities.list;
+	sprite_texture = animation_current(&self->testanim, &self->ss);
 	while ((pos = pos->next) != &self->sprite_entities.list)
 	{
 		sprite = (t_sprite_entity*)((t_entity_node*)pos)->entity;
@@ -244,23 +246,28 @@ void		sprites(t_raycasting_scene *const self,
 				continue ;
 			}
 			sprite_px.x = inverse_lerp(draw_start_x, draw_end_x, i.x)
-				* sprite->texture.size.x;
+				* sprite_texture->size.x;
 			i.y = (size_t)ft_ssmax(draw_start_y, 0);
 			while ((ssize_t)i.y < draw_end_y && i.y < fb->size.y)
 			{
 				sprite_px.y = inverse_lerp(draw_start_y, draw_end_y, i.y)
-					* sprite->texture.size.y;
-				t_rgba	sprite_color = sprite->texture.pixels[sprite_px.y
-					* sprite->texture.size.x + sprite_px.x];
-				sprite_color.c.r /= (transform.y / 3.0f) + 1;
-				sprite_color.c.g /= (transform.y / 3.0f) + 1;
-				sprite_color.c.b /= (transform.y / 3.0f) + 1;
-				if (sprite_color.c.a == 255)
-					fb->pixels[i.y * fb->size.x + i.x] = sprite_color;
-				else
-				fb->pixels[i.y * fb->size.x + i.x] =
-					blend_add(fb->pixels[i.y * fb->size.x + i.x],
-					sprite_color);
+					* sprite_texture->size.y;
+				t_rgba	sprite_color = sprite_texture->pixels[sprite_px.y
+					* sprite_texture->size.x + sprite_px.x];
+				if (!(sprite_color.c.r == 255
+					&& sprite_color.c.g == 255
+					&& sprite_color.c.b == 255))
+				{
+					sprite_color.c.r /= (transform.y / 3.0f) + 1;
+					sprite_color.c.g /= (transform.y / 3.0f) + 1;
+					sprite_color.c.b /= (transform.y / 3.0f) + 1;
+					if (sprite_color.c.a == 255)
+						fb->pixels[i.y * fb->size.x + i.x] = sprite_color;
+					else
+						fb->pixels[i.y * fb->size.x + i.x] =
+							blend_add(fb->pixels[i.y * fb->size.x + i.x],
+							sprite_color);
+				}
 				i.y++;
 			}
 			i.x++;
@@ -292,6 +299,10 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	// ceiling_raycasting(self, fb, dir, plane);
 	walls_raycasting(self, fb);
 	sprites(self, fb, dir, plane);
+	self->testanim.speed = 1;
+	self->testanim.anim = 2;
+	frame_layer_add(fb, animation_current(&self->testanim, &self->ss), ft_isize(0, 0));
+	// animate_sprite(&self->testanim, &self->ss, fb, 0, 0, 1.0f);
 	frame_layer_transform(fb, &self->crosshair,
 		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
 			ft_isize(fb->size.x / 2, fb->size.y / 2),
