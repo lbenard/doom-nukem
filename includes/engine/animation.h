@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 19:55:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 21:02:34 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/08 20:46:37 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define ANIMATION_H
 
 # include "containers/module.h"
+# include "engine/spritesheet.h"
 
 
 /*
@@ -61,6 +62,8 @@ t_result		init_animation(t_animation *const self,
 					t_animation_args *const args);
 void			destroy_animation(t_animation *const self);
 t_constructor	animation(int anim, int nb_sprite, float speed, int iter);
+void		animate_sprite(t_animation *anim, t_spritesheet *ss, t_frame *screen, int x, int y, float coef);
+
 
 // t_animation	anim;
 
