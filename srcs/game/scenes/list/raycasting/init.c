@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/14 19:38:25 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/14 22:22:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void	init_vars(t_raycasting_scene *const self,
 	self->weapon.first_render = TRUE;
 	self->weapon.shoot_input = input_get_id(&game_singleton()->input, "Shoot");
 	self->weapon.reload_input = input_get_id(&game_singleton()->input, "Reload");
-	ft_strcpy(self->weapon.display, "42/42");
 }
 
 t_result	init_raycasting_scene(t_raycasting_scene *const self,

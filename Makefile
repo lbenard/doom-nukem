@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/14 19:34:20 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/14 23:57:34 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,13 @@ SRCS_LIST		=	main.c																			\
 					engine/array/array.c															\
 					engine/array/init.c																\
 					engine/array/destroy.c															\
+																									\
+					engine/a_star/init.c															\
+					engine/a_star/a_star.c															\
+					engine/a_star/analyse.c															\
+					engine/a_star/child.c															\
+					engine/a_star/list.c															\
+					engine/a_star/node.c															\
 																									\
 					engine/ascii_font/ascii_font.c													\
 					engine/ascii_font/init.c														\
