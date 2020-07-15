@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a_star.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:02:04 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/15 00:10:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/15 19:09:59 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ t_node	*ft_get_path(t_node cur_node, t_star *star)
 		return (NULL);
 	ret->pos.x = prev.pos.x;
 	ret->pos.y = prev.pos.y;
+	ft_delist(&star->closel);
+	ft_delist(&star->openl);
+	free(star);
 	return (ret);
 }
 

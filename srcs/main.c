@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/15 00:36:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/15 19:09:55 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void	register_inputs(t_game *const game)
 // 		return (!throw_error_str("main()", "failed to start game"));
 // 	register_inputs(game);
 // 	// game_set_scene(menu_scene(&game->window, av[1]));
-// 	game_set_scene(raycasting_scene(&game->window, av[1]));
+// 	game_set_scene(editor_scene(&game->window, av[1]));
 // 	if (!event_handler_add_callback(&game->event_handler,
 // 		new_close_game_event()))
 // 	{
@@ -194,10 +194,17 @@ int	main(int ac, char **av)
 	t_mob		enemy;
 	player.pos.x = 1;
 	player.pos.y = 7;
-	enemy.pos.x = 15;
+	enemy.pos.x = 12;
 	enemy.pos.y = 7;
-	path = init(&main_map, enemy, player);
-	printf("%d %d\n", path->pos.x, path->pos.y);
+	while ((enemy.pos.x != player.pos.x) || (enemy.pos.y != player.pos.y))
+	{
+		path = init(&main_map, enemy, player);
+		enemy.pos.x = path->pos.x;
+		enemy.pos.y = path->pos.y;
+		free(path);
+		printf("%d %d\n", enemy.pos.x, enemy.pos.y);
+	}
+	// path = init(&main_map, enemy, player);
 	destroy_module(&main_module);
 }
 
