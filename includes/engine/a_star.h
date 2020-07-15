@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 22:44:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/14 23:53:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/15 23:32:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include "libft.h"
 # include "engine/map.h"
+# include "types.h"
 # define INT_MAX 2147483647
 // # define HEIGHT 500
 // # define WIDTH 500
@@ -82,7 +83,7 @@ typedef struct			s_star
 	t_star_list			*closel;
 }						t_star;
 
-t_node					*ft_a_star(t_star *star);
+t_result				ft_a_star(t_node *const self, t_star *star);
 void					ft_print_map(t_map map);
 t_node					ft_closest_node(t_star_list **close, t_node end);
 void					ft_add_node(t_star_list **list, t_node node);
@@ -92,7 +93,7 @@ int						ft_find_node(t_star_list **list, int x, int y);
 int						ft_count_node(t_star_list **list);
 void					ft_print_list(t_star_list *list);
 t_node					*ft_get_node(t_star_list **list, int x, int y);
-t_node					*init(const t_map *const map, t_mob monstre, t_mob player);
+t_result				init(t_node *const self, const t_map *const map, t_mob monstre, t_mob player);
 void					ft_change_g(t_star_list **list, int g, t_father father,
 							t_node find);
 void					ft_diag(t_star *star, t_node c_node);
@@ -108,6 +109,6 @@ int						ft_analyse(int x, int y, t_star *star);
 void					ft_check_start_end(t_node start, t_node end, const t_map *const map);
 int						ft_validiag(int x, int y, t_star *star,
 							t_node cur_node);
-t_node					*ft_is_openl_empty(t_star *star);
+t_result				ft_is_openl_empty(t_node *const self, t_star *star);
 
 #endif

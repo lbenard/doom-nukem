@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a_star.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:02:04 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/15 19:09:59 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/15 23:35:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,37 +64,34 @@ t_node	ft_closest_node(t_star_list **close, t_node end)
 	return (node);
 }
 
-t_node	*ft_get_path(t_node cur_node, t_star *star)
+t_result	ft_get_path(t_node *const self, t_node cur_node, t_star *star)
 {
-	t_node	find;
-	t_node	prev;
+	t_node	*find;
+	t_node	*prev;
 	int		i;
-	t_node	*ret;
 
 	i = 0;
-	find = cur_node;
+	find = &cur_node;
 	prev = find;
-	while (find.pos.x != star->start.pos.x || find.pos.y != star->start.pos.y)
+	while (find->pos.x != star->start.pos.x || find->pos.y != star->start.pos.y)
 	{
-		find = *ft_get_node(&star->closel,
-			find.father.pos.x, find.father.pos.y);
-		if (find.pos.x != star->start.pos.x || find.pos.y != star->start.pos.y)
+		find = ft_get_node(&star->closel,
+			find->father.pos.x, find->father.pos.y);
+		if (find->pos.x != star->start.pos.x || find->pos.y != star->start.pos.y)
 			prev = find;
 		i++;
 	}
 	// star->map.map[prev.pos.y][prev.pos.x] = 8;
 	// ft_print_map(star->map);
-	if (!(ret = malloc(sizeof(t_node))))
-		return (NULL);
-	ret->pos.x = prev.pos.x;
-	ret->pos.y = prev.pos.y;
+	self->pos.x = prev->pos.x;
+	self->pos.y = prev->pos.y;
 	ft_delist(&star->closel);
 	ft_delist(&star->openl);
 	free(star);
-	return (ret);
+	return (OK);
 }
 
-t_node	*ft_a_star(t_star *star)
+t_result	ft_a_star(t_node *const self, t_star *star)
 {
 	t_node	c_node;
 	int		count;
@@ -111,9 +108,9 @@ t_node	*ft_a_star(t_star *star)
 		if ((count = ft_count_node(&star->openl)) >= 1)
 			ft_del_node(&star->openl, c_node.pos.x, c_node.pos.y);
 		if (count <= 0)
-			return (ft_is_openl_empty(star));
+			return (ft_is_openl_empty(self, star));
 		ft_add_node(&star->closel, c_node);
 		ft_check_child(star, c_node);
 	}
-	return (ft_get_path(c_node, star));
+	return (ft_get_path(self, c_node, star));
 }
