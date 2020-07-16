@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_size.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/15 23:39:22 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 02:23:09 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/16 02:21:51 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/16 02:23:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/sprite_entity.h"
 #include "engine/error.h"
 
-t_result	init_sprite_entity(t_sprite_entity *const self,
+t_result	init_sprite_entity_size(t_sprite_entity *const self,
 				t_sprite_entity_args *const args)
 {
 	init_entity(&self->super,
@@ -23,7 +23,7 @@ t_result	init_sprite_entity(t_sprite_entity *const self,
 			ft_vec3f(1.0f, 1.0f, 1.0f)),
 		entity_vtable(sprite_entity_update));
 	module_add(&self->super.module, &self->texture,
-		frame_from_file(args->texture_path));
+		frame(args->sprite_size, ft_rgba(0, 0, 0, 0)));
 	if (self->super.module.has_error)
 	{
 		destroy_sprite_entity(self);

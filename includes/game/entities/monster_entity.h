@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:07:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/19 21:39:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 03:45:09 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,44 @@
 
 # include "game/entities/sprite_entity.h"
 # include "engine/frame.h"
+# include "engine/animation.h"
+# include "engine/spritesheet.h"
+# include "engine/text.h"
+# include "game/entities/player_entity.h"
 
 typedef struct	s_monster_entity
 {
-	t_sprite_entity	super;
-	float			health;
-	int				damage;
+	t_sprite_entity			super;
+	t_animation				animation;
+	const t_spritesheet		*spritesheet_ref;
+	const t_player_entity	*player_ref;
+	float					health;
+	float					damage;
+	const char				*name;
+	t_text					name_text;
 }				t_monster_entity;
 
 typedef struct	s_monster_entity_args
 {
-	float	health;
-	int		damage;
-	t_vec2f	pos;
-	char	*path;
+	t_vec2f					pos;
+	const t_spritesheet		*spritesheet_ref;
+	const t_player_entity	*player_ref;
+	float					health;
+	int						damage;
+	const char				*name;
 }				t_monster_entity_args;
 
-t_constructor	monster_entity(const float health,
-					const int damage,
-					const t_vec2f pos,
-					char *const path);
+t_constructor	monster_entity(const t_vec2f pos,
+					const t_spritesheet *const spritesheet_ref,
+					const t_player_entity *const player_ref,
+					const float health,
+					const float damage,
+					const char *const name);
 
 t_result		init_monster_entity(t_monster_entity *const self,
 					const t_monster_entity_args *const args);
 
-void			monster_entity_update(t_sprite_entity *const self);
+void			monster_entity_update(t_monster_entity *const self);
 // void			monster_entity_render(t_monster_entity *const self,
 // 					t_frame *const fb);
 

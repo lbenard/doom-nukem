@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/14 22:22:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 15:46:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,29 @@ static void	add_modules(t_raycasting_scene *const self,
 	module_add(&self->super.module, &self->weapon.display_text,
 		text("haxorville.png", ft_usize(args->window->size.x, 9)));
 	module_add(&self->super.module, &self->ss,
-		spritesheet("resources/sprites/sprite-sheet-png-walking-2.bmp",
-			36, 9, 4));
-	module_add(&self->super.module, &self->testanim, animation(0, 36, 0.5f, 0));
+		spritesheet("resources/sprites/wow.bmp",
+			ft_usize(17, 8)));
 }
 
 static void	add_entities(t_raycasting_scene *const self)
 {
 	self->player_ref = (t_player_entity*)entity_list_add_entity(
 		&self->super.entities, player_entity(&self->map));
-	raycasting_scene_add_monster(self,
-		monster_entity(100.0f,
-			5,
-			ft_vec2f(3.0f, 3.0f),
-			"resources/textures/tom_nook.png"));
+	if (!self->super.module.has_error)
+	{
+		raycasting_scene_add_monster(self,
+			monster_entity(ft_vec2f(5.0f, 5.0f),
+				&self->ss,
+				self->player_ref,
+				100.0f,
+				10.0f,
+				"Test"));
+	}
+	// raycasting_scene_add_monster(self,
+	// 	monster_entity(100.0f,
+	// 		5,
+	// 		ft_vec2f(3.0f, 3.0f),
+	// 		"resources/textures/tom_nook.png"));
 }
 
 static void	init_vars(t_raycasting_scene *const self,
@@ -60,8 +69,8 @@ static void	init_vars(t_raycasting_scene *const self,
 	self->sky_color = ft_rgb(135, 206, 235);
 	self->fov = 90.0f * M_PI / 180.0f;
 	self->window_ref = args->window;
-	// raycasting_scene_weapon_set_pistol(self);
-	raycasting_scene_weapon_set_minigun(self);
+	raycasting_scene_weapon_set_pistol(self);
+	// raycasting_scene_weapon_set_minigun(self);
 	self->weapon.just_shooted = FALSE;
 	self->weapon.just_reloaded = FALSE;
 	self->weapon.first_render = TRUE;

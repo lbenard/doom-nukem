@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/14 23:57:34 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/16 16:00:06 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -334,7 +334,9 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/monster/destroy.c											\
 																									\
 					game/entities/list/sprite/sprite_entity.c										\
+					game/entities/list/sprite/sprite_entity_size.c									\
 					game/entities/list/sprite/init.c												\
+					game/entities/list/sprite/init_size.c											\
 					game/entities/list/sprite/destroy.c												\
 					game/entities/list/sprite/update.c												\
 					game/entities/list/sprite/vtable.c												\
@@ -456,7 +458,7 @@ LIBS			=	-lft				\
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
 CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto# -g3 -fsanitize=address # -Wno-deprecated
 
-LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS) -pg
+LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)
 	LDFLAGS         :=  $(LDFLAGS) \
                         -Wl,-rpath,$(SFML_FOLDER)/extlibs/libs-osx/Frameworks \

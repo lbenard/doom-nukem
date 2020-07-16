@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/14 20:13:56 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 15:55:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,10 +202,10 @@ void		sprites(t_raycasting_scene *const self,
 
 	zbuffer = (t_ray*)self->zbuffer.array;
 	pos = &self->sprite_entities.list;
-	sprite_texture = animation_current(&self->testanim, &self->ss);
 	while ((pos = pos->next) != &self->sprite_entities.list)
 	{
 		sprite = (t_sprite_entity*)((t_entity_node*)pos)->entity;
+		sprite_texture = &sprite->texture;
 		
 		t_vec2d	sprite_pos;
 		sprite_pos.x = sprite->super.transform.position.x
@@ -275,6 +275,26 @@ void		sprites(t_raycasting_scene *const self,
 	}
 }
 
+static void	monsters(t_raycasting_scene *const self,
+				t_frame *const fb)
+{
+	t_list_head			*pos;
+	t_monster_entity	*monster;
+
+	pos = &self->monster_entities.list;
+	while ((pos = pos->next) != &self->monster_entities.list)
+	{
+		monster = (t_monster_entity*)((t_entity_node*)pos)->entity;
+		frame_layer_transform(fb,
+			&monster->name_text.target,
+			ft_frame_transform(ft_vec2f(0.5f, 1.0f),
+				ft_isize((monster->super.last_start_x + monster->super.last_end_x) / 2,
+					monster->super.last_start_y),
+				ft_vec2f(2.0f, 2.0f), 255),
+			blend_invert);
+	}
+}
+
 #include <stdio.h>
 
 void		raycasting_scene_render(t_raycasting_scene *const self,
@@ -299,10 +319,7 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	// ceiling_raycasting(self, fb, dir, plane);
 	walls_raycasting(self, fb);
 	sprites(self, fb, dir, plane);
-	self->testanim.speed = 1;
-	self->testanim.anim = 2;
-	frame_layer_add(fb, animation_current(&self->testanim, &self->ss), ft_isize(0, 0));
-	// animate_sprite(&self->testanim, &self->ss, fb, 0, 0, 1.0f);
+	monsters(self, fb);
 	frame_layer_transform(fb, &self->crosshair,
 		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
 			ft_isize(fb->size.x / 2, fb->size.y / 2),

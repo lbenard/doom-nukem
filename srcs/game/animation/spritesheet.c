@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 18:54:37 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/14 19:34:41 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/15 02:59:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,36 +20,27 @@
 
 void		grab_sprite(t_spritesheet *ss, int num)
 {
-	int	i;
-	int	j;
-	int	x;
-	// int	y;
-	int	startx;
-	int	starty;
-	int	index;
+	size_t	i;
+	size_t	j;
+	size_t	x;
+	size_t	startx;
+	size_t	starty;
 
-	i = 0;
-	j = 0;
+	startx = num * ss->sprite_size.x;
+	startx %= ss->sheet_size.x;
+	starty = (num / ss->grid_size.x) * ss->sprite_size.y;
 	x = 0;
-	// y = 0;
-	startx = num * ss->sprite_w;
-	startx %= ss->sheet_w;
-	starty = (num / ss->sprite_line) * ss->sprite_h;
-	// if (startx >= ss->sheet_w)
-	// 	starty = startx/ss->sheet_w;
-	// printf("num = %d, spritew = %d, spriteh = %d, startx = %d, starty = %d, ssw = %d, ssh = %d\n", num, ss->sprite_w, ss->sprite_h, startx, starty,ss->sheet_w, ss->sheet_h);
-	// printf("index = %d, sprite_line = %d, sprite_height = %d\n", startx + j + (i + starty) * (ss->sheet_w), ss->sprite_line, ss->sprite_height);
-	while (i < ss->sprite_h)
+	i = 0;
+	while (i < ss->sprite_size.y)
 	{
-		while (j < ss->sprite_w)
+		j = 0;
+		while (j < ss->sprite_size.x)
 		{
-			index = startx + j + (i + starty) * (ss->sheet_w);
-			ss->sprite[num].pixels[x] = ss->pixels.pixels[index];
-			// ss->sprite[num][x] = ss->pixels.pixels[index];
+			ss->sprite[num].pixels[x] = ss->pixels.pixels[startx + j
+				+ (i + starty) * (ss->sheet_size.x)];
 			j++;
 			x++;
 		}
-		j = 0;
 		i++;
 	}
 }
@@ -57,9 +48,8 @@ void		grab_sprite(t_spritesheet *ss, int num)
 t_result		init_spritesheet(t_spritesheet *const self,
 					t_spritesheet_args *const args)
 {
-	int		i;
+	size_t	i;
 
-	i = 0;
 	init_module(&self->module);
 	ft_putendl("debut");
 	module_add(&self->module, &self->pixels, frame_from_bmp(args->path));
@@ -69,49 +59,51 @@ t_result		init_spritesheet(t_spritesheet *const self,
 		return (throw_result_str("init_spritesheet()",
 			"failed to init spritesheet"));
 	}
-	ft_putendl("mid");
-	self->sprite_line = args->line;
-	self->sprite_height = args->height;
-	self->nb_sprite = args->nb_sprite;
-	self->sheet_w = self->pixels.size.x;
-	self->sheet_h = self->pixels.size.y;
-	self->sprite_w = self->pixels.size.x / args->line;
-	self->sprite_h = self->pixels.size.y / args->height;
-	if (!(self->sprite = malloc(sizeof(t_frame) * (args->nb_sprite))))
-		return (throw_result_str("load_spritesheet", "failed to malloc sprite"));
-	ft_putendl("before while");
-	while (i < args->nb_sprite)
+	self->grid_size = args->grid_size;
+	self->nb_sprite = args->grid_size.x * args->grid_size.y;
+	self->sheet_size = self->pixels.size;
+	self->sprite_size = ft_usize(self->pixels.size.x / self->grid_size.x,
+		self->pixels.size.y / self->grid_size.y);
+	if (!(self->sprite = (t_frame*)malloc(sizeof(t_frame) * (self->nb_sprite))))
+	{
+		destroy_spritesheet(self);
+		return (throw_result_str("init_spritesheet()",
+			"failed to malloc sprite"));
+	}
+	i = 0;
+	while (i < self->nb_sprite)
 	{
 		module_add(&self->module, &self->sprite[i],
-			frame(ft_usize(self->pixels.size.x / args->line,
-				self->pixels.size.y / args->height), ft_rgba(0, 0, 0, 255)));
+			frame(self->sprite_size, ft_rgba(0, 0, 0, 255)));
 		i++;
 	}
-	ft_putendl("after while");
+	if (self->module.has_error)
+	{
+		destroy_spritesheet(self);
+		return (throw_result_str("init_spritesheet()",
+			"failed to create sprites"));
+	}
 	i = 0;
-	while (i < args->nb_sprite)
+	while (i < self->nb_sprite)
 	{
 		grab_sprite(self, i);
 		i++;
 	}
-	ft_putendl("after grab");
 	return (OK);
 }
 
 void	destroy_spritesheet(t_spritesheet *const self)
 {
 	destroy_module(&self->module);
+	free(self->sprite);
 }
 
-t_constructor	spritesheet(char *path, int nb_sprite, int line, int height)
+t_constructor	spritesheet(const char *const path, const t_usize grid_size)
 {
 	static t_spritesheet_args	args;
 
 	args.path = path;
-	args.nb_sprite = nb_sprite;
-	args.line = line;
-	args.height = height;
-
+	args.grid_size = grid_size;
 	return (ft_constructor(init_spritesheet, destroy_spritesheet,
 			sizeof(t_spritesheet), &args));
 }

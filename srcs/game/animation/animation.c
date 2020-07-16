@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 18:54:30 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/14 19:49:51 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 02:51:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@ void			destroy_animation(t_animation *const self)
 	destroy_module(&self->module);
 }
 
-t_constructor	animation(int anim, int nb_sprite, float speed, int iter)
+t_constructor	animation(int anim, int nb_sprite, float speed)
 {
 	static t_animation_args	args;
 
 	args.anim = anim;
 	args.nb_sprite = nb_sprite;
 	args.speed = speed;
-	args.iter = iter;
-
 	return (ft_constructor(init_animation, destroy_animation,
 		sizeof(t_animation), &args));
 }
@@ -45,14 +43,15 @@ t_constructor	animation(int anim, int nb_sprite, float speed, int iter)
 void			animation_update(t_animation *const anim, const t_spritesheet *const ss)
 {
 	anim->iter++;
-	if (anim->iter * anim->speed >= ss->sprite_line)
+	if (anim->iter * anim->speed >= ss->grid_size.x)
 		anim->iter = 0;
 }
 
-t_frame	*animation_current(t_animation *const self, t_spritesheet *const ss)
+t_frame	*animation_current(t_animation *const self,
+			const t_spritesheet *const ss)
 {
 	int	line;
 
-	line = ss->sprite_line * self->anim;
+	line = ss->grid_size.x * self->anim;
 	return (&ss->sprite[(int)(line + self->iter * self->speed)]);
 }

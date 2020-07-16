@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/14 19:36:30 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 03:41:12 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct	s_raycasting_scene
 	t_window			*window_ref;
 	t_sound				pistol;
 	t_spritesheet		ss;
-	t_animation			testanim;
 	float				fov;
 }				t_raycasting_scene;
 
