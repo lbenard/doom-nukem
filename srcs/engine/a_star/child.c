@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 22:48:36 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/14 22:48:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 18:20:42 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_node	ft_get_f(int x, int y, t_star *star, t_node cur_node)
 		ret.g = 14 + cur_node.g;
 	else
 		ret.g = 10 + cur_node.g;
-	ret.h = (abs(star->end.pos.x - x) + abs(star->end.pos.y - y)) * 10;
+	ret.h = (ft_ssabs(star->end.pos.x - x) + ft_ssabs(star->end.pos.y - y)) * 10;
 	ret.f = ret.g + ret.h;
 	ret.pos.x = x;
 	ret.pos.y = y;

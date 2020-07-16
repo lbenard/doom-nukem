@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   analyse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:54:13 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/15 23:35:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 18:09:27 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ft_check_start_end(t_node start, t_node end, const t_map *const map)
 	}
 }
 
-t_result	ft_is_openl_empty(t_node *const self, t_star *star)
+t_result	ft_is_openl_empty(t_star *star)
 {
 	t_star_list	*retop;
 	t_star_list	*retclo;
@@ -80,5 +80,5 @@ t_result	ft_is_openl_empty(t_node *const self, t_star *star)
 	star->openl = retop;
 	star->closel = retclo;
 	ft_add_node(&star->openl, star->start);
-	return (ft_a_star(self, star));
+	return (ft_a_star(star));
 }
