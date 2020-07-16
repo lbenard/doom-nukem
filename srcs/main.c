@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/15 19:09:55 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/16 16:04:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,8 +157,8 @@ void	register_inputs(t_game *const game)
 // 	if (start_game(&(t_game_args){PROGRAM_NAME, ft_usize(1280, 720), TRUENT}) == ERROR)
 // 		return (!throw_error_str("main()", "failed to start game"));
 // 	register_inputs(game);
-// 	// game_set_scene(menu_scene(&game->window, av[1]));
-// 	game_set_scene(editor_scene(&game->window, av[1]));
+// 	game_set_scene(menu_scene(&game->window, av[1]));
+// 	// game_set_scene(editor_scene(&game->window, av[1]));
 // 	if (!event_handler_add_callback(&game->event_handler,
 // 		new_close_game_event()))
 // 	{
@@ -182,7 +182,7 @@ int	main(int ac, char **av)
 {
 	t_module	main_module;
 	t_map		main_map;
-	t_node		*path;
+	t_node		path;
 
 	if (ac != 2)
 		return (!throw_error_str("main()", "a map path must be given"));
@@ -198,10 +198,10 @@ int	main(int ac, char **av)
 	enemy.pos.y = 7;
 	while ((enemy.pos.x != player.pos.x) || (enemy.pos.y != player.pos.y))
 	{
-		path = init(&main_map, enemy, player);
-		enemy.pos.x = path->pos.x;
-		enemy.pos.y = path->pos.y;
-		free(path);
+		init(&path, &main_map, enemy, player);
+		enemy.pos.x = path.pos.x;
+		enemy.pos.y = path.pos.y;
+		// free(path);
 		printf("%d %d\n", enemy.pos.x, enemy.pos.y);
 	}
 	// path = init(&main_map, enemy, player);
