@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 15:41:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 20:09:30 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_result	init_monster_entity(t_monster_entity *const self,
 	self->health = args->health;
 	self->damage = args->damage;
 	self->name = args->name;
+	self->is_star = FALSE;
 	module_add(&self->super.super.module, &self->animation,
 		animation(0, args->spritesheet_ref->nb_sprite, 1.0f));
 	module_add(&self->super.super.module, &self->name_text,
