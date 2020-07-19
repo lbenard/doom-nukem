@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 23:48:17 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/15 23:34:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 18:28:42 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,31 +23,29 @@ static t_father	ft_initfather(void)
 	return (ret);
 }
 
-t_result	init(t_node *const self,
+t_result	init_astar(t_star *a_star,
 				const t_map *const map,
-				t_mob monstre,
-				t_mob player)
+				t_entity monstre,
+				t_entity player)
 {
-	t_star			*star;
-
-	if (!(star = malloc(sizeof(t_star))))
+	// if (!(star = malloc(sizeof(t_star))))
+	// 	return (ERROR);
+	if (!(a_star->closel = malloc(sizeof(t_star_list))))
 		return (ERROR);
-	if (!(star->closel = malloc(sizeof(t_star_list))))
+	if (!(a_star->openl = malloc(sizeof(t_star_list))))
 		return (ERROR);
-	if (!(star->openl = malloc(sizeof(t_star_list))))
-		return (ERROR);
-	star->start.pos.x = (int)monstre.pos.x;
-	star->start.pos.y = (int)monstre.pos.y;
-	star->end.pos.x = (int)player.pos.x;
-	star->end.pos.y = (int)player.pos.y;
-	star->start.g = 0;
-	star->start.father = ft_initfather();
-	star->openl->next = NULL;
-	star->closel->next = NULL;
-	star->map = map;
-	star->wall = 1;
-	ft_add_node(&star->openl, star->start);
+	a_star->start.pos.x = (int)monstre.transform.position.x;
+	a_star->start.pos.y = (int)monstre.transform.position.y;
+	a_star->end.pos.x = (int)player.transform.position.x;
+	a_star->end.pos.y = (int)player.transform.position.y;
+	a_star->start.g = 0;
+	a_star->start.father = ft_initfather();
+	a_star->openl->next = NULL;
+	a_star->closel->next = NULL;
+	a_star->map = map;
+	a_star->wall = 1;
+	ft_add_node(&a_star->openl, a_star->start);
 	ft_putendl("------------------");
-	return (ft_a_star(self, star));
+	return (ft_a_star(a_star));
 	// ft_delist(&openl);
 }

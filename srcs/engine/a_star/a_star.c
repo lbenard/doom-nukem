@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a_star.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:02:04 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/15 23:35:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 18:11:38 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_node	ft_closest_node(t_star_list **close, t_node end)
 	return (node);
 }
 
-t_result	ft_get_path(t_node *const self, t_node cur_node, t_star *star)
+t_result	ft_get_path(t_node cur_node, t_star *star)
 {
 	t_node	*find;
 	t_node	*prev;
@@ -83,15 +83,15 @@ t_result	ft_get_path(t_node *const self, t_node cur_node, t_star *star)
 	}
 	// star->map.map[prev.pos.y][prev.pos.x] = 8;
 	// ft_print_map(star->map);
-	self->pos.x = prev->pos.x;
-	self->pos.y = prev->pos.y;
+	star->next_pos.pos.x = prev->pos.x;
+	star->next_pos.pos.y = prev->pos.y;
 	ft_delist(&star->closel);
 	ft_delist(&star->openl);
-	free(star);
+	// free(star);
 	return (OK);
 }
 
-t_result	ft_a_star(t_node *const self, t_star *star)
+t_result	ft_a_star(t_star *star)
 {
 	t_node	c_node;
 	int		count;
@@ -108,9 +108,9 @@ t_result	ft_a_star(t_node *const self, t_star *star)
 		if ((count = ft_count_node(&star->openl)) >= 1)
 			ft_del_node(&star->openl, c_node.pos.x, c_node.pos.y);
 		if (count <= 0)
-			return (ft_is_openl_empty(self, star));
+			return (ft_is_openl_empty(star));
 		ft_add_node(&star->closel, c_node);
 		ft_check_child(star, c_node);
 	}
-	return (ft_get_path(self, c_node, star));
+	return (ft_get_path(c_node, star));
 }

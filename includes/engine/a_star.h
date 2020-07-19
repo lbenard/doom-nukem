@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a_star.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 22:44:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/15 23:32:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 18:28:50 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,24 @@
 # include "libft.h"
 # include "engine/map.h"
 # include "types.h"
+# include "engine/entity.h"
+
+// # include "game/entities/monster_entity.h"
+// # include "game/entities/player_entity.h"
 # define INT_MAX 2147483647
 // # define HEIGHT 500
 // # define WIDTH 500
 
-typedef struct			s_point
-{
-	int					x;
-	int					y;
-	int					z;
-}						t_point;
-
 typedef struct			s_father
 {
-	t_point				pos;
+	t_isize				pos;
 	int					g;
 	int					f;
 }						t_father;
 
 typedef struct			s_node
 {
-	t_point				pos;
+	t_isize				pos;
 	int					g;
 	int					h;
 	int					f;
@@ -60,30 +57,18 @@ typedef struct			s_mainnode
 	t_node				end;
 }						t_mainnode;
 
-typedef struct			s_mob
-{
-	t_point				pos;
-	int					wall;
-}						t_mob;
-
-typedef struct	s_coord2d
-{
-	double		x;
-	double		y;
-	int			color;
-}				t_coord2d;
-
 typedef struct			s_star
 {
 	int					wall;
 	const t_map			*map;
 	t_node				start;
 	t_node				end;
+	t_node				next_pos;
 	t_star_list			*openl;
 	t_star_list			*closel;
 }						t_star;
 
-t_result				ft_a_star(t_node *const self, t_star *star);
+t_result				ft_a_star(t_star *star);
 void					ft_print_map(t_map map);
 t_node					ft_closest_node(t_star_list **close, t_node end);
 void					ft_add_node(t_star_list **list, t_node node);
@@ -93,7 +78,7 @@ int						ft_find_node(t_star_list **list, int x, int y);
 int						ft_count_node(t_star_list **list);
 void					ft_print_list(t_star_list *list);
 t_node					*ft_get_node(t_star_list **list, int x, int y);
-t_result				init(t_node *const self, const t_map *const map, t_mob monstre, t_mob player);
+t_result				init_astar(t_star *a_star, const t_map *const map, t_entity monstre, t_entity player);
 void					ft_change_g(t_star_list **list, int g, t_father father,
 							t_node find);
 void					ft_diag(t_star *star, t_node c_node);
@@ -109,6 +94,6 @@ int						ft_analyse(int x, int y, t_star *star);
 void					ft_check_start_end(t_node start, t_node end, const t_map *const map);
 int						ft_validiag(int x, int y, t_star *star,
 							t_node cur_node);
-t_result				ft_is_openl_empty(t_node *const self, t_star *star);
+t_result				ft_is_openl_empty(t_star *star);
 
 #endif

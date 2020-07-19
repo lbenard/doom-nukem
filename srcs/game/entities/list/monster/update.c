@@ -3,47 +3,123 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:41:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 03:29:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 21:34:14 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/monster_entity.h"
 #include "engine/delta.h"
+#include "engine/a_star.h"
 
 void	monster_entity_update(t_monster_entity *const self)
 {
 	t_vec3f	position;
-	t_vec3f	player_pos;
+	t_vec2f	next_pos;
 	t_vec3f	difference;
 	float	distance;
 	t_vec3f	direction;
+	t_vec3f	player_pos;
 
 	animation_update(&self->animation, self->spritesheet_ref);
 	frame_layer_opaque(&self->super.texture,
 		animation_current(&self->animation, self->spritesheet_ref),
 		ft_isize(0, 0));
-	position = self->super.super.transform.position;
 	player_pos = self->player_ref->super.transform.position;
+	position = self->super.super.transform.position;
 	difference = ft_vec3f(player_pos.x - position.x,
-		player_pos.y - position.y,
-		player_pos.z - position.z);
+    player_pos.y - position.y,
+    player_pos.z - position.z);
 	distance = difference.x * difference.x
 		+ difference.y * difference.y
 		+ difference.z * difference.z;
 	if (distance < 75)
 	{
-		self->animation.speed = 1.0f;
-		direction = difference;
-		direction = vec3f_normalize(direction);
-		direction = vec3f_scalar(direction, 2.0f);
-		direction = vec3f_scalar(direction, get_last_delta());
-		self->super.super.transform.position.x += direction.x;
-		self->super.super.transform.position.y += direction.y;
-		self->super.super.transform.position.z += direction.z;
+		if (self->is_star == FALSE)
+		{
+			ft_putendl("changmeet detatr");
+			init_astar(&self->a_star, self->player_ref->map_ref,
+				self->super.super, self->player_ref->super);
+			self->is_star = TRUE;
+		}
+		if (((ssize_t)self->super.super.transform.position.x != self->a_star.next_pos.pos.x) || 
+				((ssize_t)self->super.super.transform.position.y != self->a_star.next_pos.pos.y))
+		{
+			self->animation.speed = 1.0f;
+			ft_putendl("le zizi");
+			position = self->super.super.transform.position;
+			next_pos.x = self->a_star.next_pos.pos.x;
+			next_pos.y = self->a_star.next_pos.pos.y;
+			next_pos.x += 0.5f;
+			next_pos.y += 0.5f;
+			printf("monstrex = %f, monstrey = %f, nextposx = %f, nextposy = %f\n",
+			position.x, position.y, next_pos.x, next_pos.y);
+			// self->a_star.next_pos. = self->player_ref->super.transform.position;
+			difference = ft_vec3f((float)next_pos.x - position.x,
+			(float)next_pos.y - position.y,
+		 	0.0f);
+			direction = difference;
+			direction = vec3f_normalize(direction);
+			direction = vec3f_scalar(direction, 2.0f);
+			direction = vec3f_scalar(direction, get_last_delta());
+			self->super.super.transform.position.x += direction.x;
+			self->super.super.transform.position.y += direction.y;
+			self->super.super.transform.position.z += direction.z;
+			init_astar(&self->a_star, self->player_ref->map_ref, self->super.super, self->player_ref->super);
+		}
+		else
+		{
+			self->animation.speed = 0;
+			ft_putendl("couilles");
+			init_astar(&self->a_star, self->player_ref->map_ref, self->super.super, self->player_ref->super);
+		}
+		
+		
+		// self->animation.speed = 1.0f;
+		// direction = difference;
+		// direction = vec3f_normalize(direction);
+		// direction = vec3f_scalar(direction, 2.0f);
+		// direction = vec3f_scalar(direction, get_last_delta());
+		// self->super.super.transform.position.x += direction.x;
+		// self->super.super.transform.position.y += direction.y;
+		// self->super.super.transform.position.z += direction.z;
 	}
 	else
 		self->animation.speed = 0.0f;
 }
+// void	monster_entity_update(t_monster_entity *const self)
+// {
+// 	t_vec3f	position;
+// 	t_vec3f	player_pos;
+// 	t_vec3f	difference;
+// 	float	distance;
+// 	t_vec3f	direction;
+
+// 	animation_update(&self->animation, self->spritesheet_ref);
+// 	frame_layer_opaque(&self->super.texture,
+// 		animation_current(&self->animation, self->spritesheet_ref),
+// 		ft_isize(0, 0));
+// 	position = self->super.super.transform.position;
+// 	player_pos = self->player_ref->super.transform.position;
+// 	difference = ft_vec3f(player_pos.x - position.x,
+// 		player_pos.y - position.y,
+// 		player_pos.z - position.z);
+// 	distance = difference.x * difference.x
+// 		+ difference.y * difference.y
+// 		+ difference.z * difference.z;
+// 	if (distance < 75)
+// 	{
+// 		self->animation.speed = 1.0f;
+// 		direction = difference;
+// 		direction = vec3f_normalize(direction);
+// 		direction = vec3f_scalar(direction, 2.0f);
+// 		direction = vec3f_scalar(direction, get_last_delta());
+// 		self->super.super.transform.position.x += direction.x;
+// 		self->super.super.transform.position.y += direction.y;
+// 		self->super.super.transform.position.z += direction.z;
+// 	}
+// 	else
+// 		self->animation.speed = 0.0f;
+// }

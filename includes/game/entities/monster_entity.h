@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monster_entity.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:07:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 03:45:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 20:37:03 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "engine/spritesheet.h"
 # include "engine/text.h"
 # include "game/entities/player_entity.h"
+# include "engine/a_star.h"
 
 typedef struct	s_monster_entity
 {
@@ -29,6 +30,8 @@ typedef struct	s_monster_entity
 	float					health;
 	float					damage;
 	const char				*name;
+	t_star					a_star;
+	t_bool					is_star;
 	t_text					name_text;
 }				t_monster_entity;
 
