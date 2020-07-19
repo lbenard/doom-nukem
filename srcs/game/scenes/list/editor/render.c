@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:32:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:11:29 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 21:09:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void	editor_scene_render(t_editor_scene *const self,
 	checkbox_entity_render(self->hud.create_group.show_blocks_ref, fb);
 	checkbox_entity_render(self->hud.create_group.show_entities_ref, fb);
 	render_preview_buttons(self, fb);
+	entity_checkbox_entity_render(self->hud.entities_group.onepunchman, fb);
 }

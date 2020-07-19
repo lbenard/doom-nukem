@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 20:21:41 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/08 20:30:11 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "game/scenes/sector_scene.h"
 #include "engine/error.h"
-#include "engine/game.h"
+#include "game/game.h"
 
 t_result	init_sector_scene(t_sector_scene *const self)
 {

@@ -6,14 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 16:37:21 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "types.h"
 #include "engine/error.h"
 #include "engine/controller.h"
-#include "engine/game.h"
+#include "game/game.h"
 #include "engine/lookup_table.h"
 #include "engine/delta.h"
 #include "engine/ascii_font.h"

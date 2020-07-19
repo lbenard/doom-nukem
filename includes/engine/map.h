@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:38:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 23:00:41 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,110 +19,79 @@
 # include "maths/vec2f.h"
 # include "maths/vec2d.h"
 # include "engine/frame.h"
+# include "game/game.h"
 
 /*
 ** Map element. Contains wall texture for each orientation
 */
-typedef struct	s_wall
+typedef struct		s_wall
 {
 	const t_frame	*texture_ref;
 	char			id;
-}				t_wall;
+}					t_wall;
+
+t_block_descriptor	*block_from_key(const char key);
 
 /*
-** Texture node
+** Entity node
 */
-typedef struct	s_texture_node
+typedef struct		s_map_entity_node
 {
 	t_module	module;
 	t_list_head	node;
-	const char	*key;
-	t_frame		texture;
-}				t_texture_node;
+	const char	*name;
+	t_vec2f		pos;
+}					t_map_entity_node;
 
-typedef struct	s_texture_node_args
+typedef struct		s_map_entity_node_args
 {
-	const char	*key;
-	const char	*path;
-}				t_texture_node_args;
+	const char	*name;
+	t_vec2f		pos;
+}					t_map_entity_node_args;
 
-t_constructor	texture_node(const char *key, const char *path);
+t_constructor		map_entity_node(const char *name, const t_vec2f pos);
 
-t_result		init_texture_node(t_texture_node *const self,
-					const t_texture_node_args *const args);
+t_result			init_map_entity_node(t_map_entity_node *const self,
+						const t_map_entity_node_args *const args);
 
-t_texture_node	*texture_from_key(t_list_head *const self,
-					const char *const key);
+t_map_entity_node	*entity_from_name(t_list_head *const self,
+						const char *name);
 
-void			destroy_texture_node(t_texture_node *const self);
+void				destroy_map_entity_node(t_map_entity_node *const self);
 
-void			free_texture_list(t_list_head *const self);
-
-/*
-** Block node
-*/
-typedef struct	s_block_node
-{
-	t_module	module;
-	t_list_head	node;
-	char		key;
-	const char	*texture_path;
-}				t_block_node;
-
-typedef struct	s_block_node_args
-{
-	const char	*key;
-	const char	*texture_path;
-}				t_block_node_args;
-
-t_constructor	block_node(const char *key, const char *texture_path);
-
-t_result		init_block_node(t_block_node *const self,
-					const t_block_node_args *const args);
-
-t_block_node	*block_from_key(t_list_head *const self,
-					const char key);
-t_block_node	*block_from_texture_path(t_list_head *const self,
-					const char *const path);
-
-void			destroy_block_node(t_block_node *const self);
-
-void			free_block_list(t_list_head *const self);
+void				free_entity_list(t_list_head *const self);
 
 /*
 ** Map for .wolf level files. Stores textures, blocks (set of 4 textures),
 ** map size, spawn position and the map itself.
 */
-typedef struct	s_map
+typedef struct		s_map
 {
-	t_module	module;
-	t_list_head textures;
-	t_list_head blocks;
-	t_usize		size;
-	t_wall		*map;
-	t_vec2d		spawn;
-}				t_map;
+	t_module		module;
+	t_list_head 	entities;
+	t_usize			size;
+	t_wall			*map;
+	t_vec2d			spawn;
+}					t_map;
 
-typedef struct	s_map_args
+typedef struct		s_map_args
 {
 	const char	*path;
-}				t_map_args;
+}					t_map_args;
 
-t_constructor	map(const char *const path);
+t_constructor		map(const char *const path);
 
-t_result		init_map(t_map *self, const t_map_args *const args);
+t_result			init_map(t_map *self, const t_map_args *const args);
 
-t_result		map_parse_texture_list(t_map *const self,
-					char *textures_flag_str);
-t_result		map_parse_block_list(t_map *const self,
-					char *blocks_flag_str);
-t_result		map_parse_size(t_map *const self,
-					char *size_flag_str);
-t_result		map_parse_map(t_map *const self,
-					char *map_flag_str);
-t_result		map_parse_player(t_map *const self,
-					char *player_flag_str);
+t_result			map_parse_size(t_map *const self,
+						char *size_flag_str);
+t_result			map_parse_player(t_map *const self,
+						char *player_flag_str);
+t_result			map_parse_entities(t_map *const self,
+						char *player_flag_str);
+t_result			map_parse_map(t_map *const self,
+						char *map_flag_str);
 
-void			destroy_map(t_map *const self);
+void				destroy_map(t_map *const self);
 
 #endif

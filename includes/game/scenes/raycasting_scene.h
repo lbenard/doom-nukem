@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 03:41:12 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 20:14:17 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include "game/entities/camera_entity.h"
 # include "game/entities/sprite_entity.h"
 # include "game/entities/monster_entity.h"
+# include "game/entity_descriptor.h"
 # include "maths/vec2i.h"
 # include "maths/vec2f.h"
 
@@ -94,6 +95,9 @@ void			raycasting_scene_render_weapon_display(
 					t_raycasting_scene *const self,
 					t_frame *const fb);
 
+t_result		raycasting_scene_add_entity(t_raycasting_scene *const self,
+					const t_entity_descriptor *const entity_descriptor,
+					const t_vec2f pos);
 t_result		raycasting_scene_add_monster(t_raycasting_scene *const self,
 					t_constructor constructor);
 void			raycasting_scene_kill_monster(t_raycasting_scene *const self,

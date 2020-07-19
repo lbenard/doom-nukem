@@ -6,13 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 22:29:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 20:03:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 17:56:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/editor/block_component_entity.h"
 
-t_constructor	block_component_entity(const t_editor_block_descriptor *block,
+t_constructor	block_component_entity(const t_block_descriptor *block,
 					const t_entity_list *const block_list)
 {
 	static t_block_component_entity_args	args;

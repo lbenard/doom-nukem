@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 22:32:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 22:32:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #include "game/entities/editor/editor_camera_entity.h"
 #include "engine/error.h"
 #include "engine/input.h"
-#include "engine/game.h"
+#include "game/game.h"
 
 
 static t_vec2f		get_scroll_relative_to_camera(sfEvent *event,

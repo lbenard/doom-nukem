@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 18:08:31 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/09 01:24:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,27 @@
 #include "engine/map.h"
 #include "engine/error.h"
 #include "engine/parsing.h"
+#include "game/game.h"
 #include "ft/str.h"
 #include "ft/mem.h"
 
-#include <stdio.h>
-
-static t_result	wall_from_block(t_list_head *const textures,
-					t_wall *const wall,
-					t_block_node *const block)
+static t_result	wall_from_block(t_wall *const wall,
+					t_block_descriptor *const block)
 {
-	t_texture_node	*texture;
-
-	if (!(texture = texture_from_key(textures, block->texture_path)))
-		return (throw_result_str("wall_from_block()", "bad texture value"));
-	wall->texture_ref = &texture->texture;
-	wall->id = block->key;
+	wall->texture_ref = &block->texture;
+	wall->id = block->id;
 	return (OK);
 }
 
-static t_result	fill_wall_from_char(t_map *const self,
-					t_wall *const wall,
-					const char c)
+static t_result	fill_wall_from_char(t_wall *const wall, const char c)
 {
-	t_block_node	*block;
+	t_block_descriptor	*block;
 
 	wall->id = c;
 	if (c == ' ')
 		wall->texture_ref = NULL;
-	else if ((block = block_from_key(&self->blocks, c)))
-		return (wall_from_block(&self->textures, wall, block));
+	else if ((block = block_from_key(c)))
+		return (wall_from_block(wall, block));
 	else
 	{
 		return (throw_result_str("fill_wall_from_char()",
@@ -66,7 +58,7 @@ static t_result	fill_map_row(t_map *self, char *row, int y)
 	x = 0;
 	while (row[x])
 	{
-		if (fill_wall_from_char(self, &self->map[x + y * self->size.x], row[x])
+		if (fill_wall_from_char(&self->map[x + y * self->size.x], row[x])
 			== ERROR)
 		{
 			free(row);

@@ -6,14 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:25:39 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/09 02:50:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/editor_scene.h"
 #include "engine/delta.h"
 #include "engine/error.h"
-#include "engine/game.h"
+#include "game/game.h"
 #include "game/scenes/menu_scene.h"
 
 void	editor_scene_update(t_editor_scene *const self)
@@ -36,13 +36,16 @@ void	editor_scene_update(t_editor_scene *const self)
 	update_radio_group(&self->hud.tools);
 	update_radio_group(&self->hud.create);
 	update_radio_group(&self->hud.blocks);
-	// update_radio_group(&self->hud.entities);
+	update_radio_group(&self->hud.entities);
 	radio_group_set_active(&self->hud.tools, TRUE);
 	radio_group_set_active(&self->hud.create,
 		self->hud.tools_group.create_ref->is_checked);
 	radio_group_set_active(&self->hud.blocks,
 		self->hud.create_group.show_blocks_ref->is_checked
 		&& self->hud.create_group.show_blocks_ref->is_active);
+	radio_group_set_active(&self->hud.entities,
+		self->hud.create_group.show_entities_ref->is_checked
+		&& self->hud.create_group.show_entities_ref->is_active);
 	if (self->hud.tools_group.save_ref->is_checked)
 	{
 		if (editor_scene_export_map(self) == ERROR)

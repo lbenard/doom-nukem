@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/16 16:00:06 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/19 02:02:46 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,14 +109,6 @@ SRCS_LIST		=	main.c																			\
 					engine/frame/layer_transform_add.c												\
 					engine/frame/destroy.c															\
 																									\
-					engine/game/game.c																\
-					engine/game/singleton.c															\
-					engine/game/start.c																\
-					engine/game/set_scene.c															\
-					engine/game/loop.c																\
-					engine/game/close.c																\
-					engine/game/stop.c																\
-																									\
 					engine/input/ft_key_event.c														\
 					engine/input/ft_mouse_event.c													\
 					engine/input/ft_stick_event.c													\
@@ -136,23 +128,18 @@ SRCS_LIST		=	main.c																			\
 					engine/lookup_table/sine.c														\
 					engine/lookup_table/tangent.c													\
 																									\
-					engine/map/texture_node.c														\
-					engine/map/init_texture_node.c													\
-					engine/map/texture_from_key.c													\
-					engine/map/destroy_texture_node.c												\
-					engine/map/free_texture_list.c													\
-					engine/map/block_node.c															\
-					engine/map/init_block_node.c													\
 					engine/map/block_from_key.c														\
-					engine/map/destroy_block_node.c													\
-					engine/map/free_block_list.c													\
+					engine/map/map_entity_node.c													\
+					engine/map/init_map_entity_node.c												\
+					engine/map/entity_from_name.c													\
+					engine/map/destroy_map_entity_node.c											\
+					engine/map/free_entity_list.c													\
 					engine/map/map.c																\
 					engine/map/init.c																\
-					engine/map/parse_texture_list.c													\
-					engine/map/parse_block_list.c													\
 					engine/map/parse_size.c															\
 					engine/map/parse_map.c															\
 					engine/map/parse_player.c														\
+					engine/map/parse_entities.c														\
 					engine/map/destroy.c															\
 																									\
 					engine/parsing/dn_read_file.c													\
@@ -218,6 +205,25 @@ SRCS_LIST		=	main.c																			\
 					engine/window/get_mouse_pos.c													\
 					engine/window/close.c															\
 					engine/window/destroy.c															\
+																									\
+					game/game/game.c																\
+					game/game/singleton.c															\
+					game/game/start.c																\
+					game/game/init_block_descriptors.c												\
+					game/game/init_entity_descriptors.c												\
+					game/game/set_scene.c															\
+					game/game/loop.c																\
+					game/game/close.c																\
+					game/game/stop.c																\
+																									\
+					game/block_descriptor/block_descriptor.c										\
+					game/block_descriptor/init.c													\
+					game/block_descriptor/destroy.c													\
+																									\
+					game/entity_descriptor/entity_descriptor.c										\
+					game/entity_descriptor/init.c													\
+					game/entity_descriptor/descriptor_from_name.c									\
+					game/entity_descriptor/destroy.c												\
 																									\
 					game/animation/spritesheet.c													\
 					game/animation/animation.c														\
@@ -315,12 +321,28 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/block_checkbox/set_relative.c							\
 					game/entities/list/editor/block_checkbox/set_pos.c								\
 																									\
+					game/entities/list/editor/entity_checkbox/entity_checkbox_entity.c				\
+					game/entities/list/editor/entity_checkbox/init.c								\
+					game/entities/list/editor/entity_checkbox/update.c								\
+					game/entities/list/editor/entity_checkbox/render.c								\
+					game/entities/list/editor/entity_checkbox/destroy.c								\
+					game/entities/list/editor/entity_checkbox/create.c								\
+					game/entities/list/editor/entity_checkbox/set_relative.c						\
+					game/entities/list/editor/entity_checkbox/set_pos.c								\
+																									\
 					game/entities/list/editor/block_component/block_component_entity.c				\
 					game/entities/list/editor/block_component/init.c								\
 					game/entities/list/editor/block_component/update.c								\
 					game/entities/list/editor/block_component/render.c								\
 					game/entities/list/editor/block_component/is_hovered.c							\
 					game/entities/list/editor/block_component/destroy.c								\
+																									\
+					game/entities/list/editor/entity_component/entity_component_entity.c			\
+					game/entities/list/editor/entity_component/init.c								\
+					game/entities/list/editor/entity_component/update.c								\
+					game/entities/list/editor/entity_component/render.c								\
+					game/entities/list/editor/entity_component/is_hovered.c							\
+					game/entities/list/editor/entity_component/destroy.c							\
 																									\
 					game/entities/list/image/image_entity_from_file.c								\
 					game/entities/list/image/init_from_file.c										\
@@ -332,6 +354,11 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/monster/init.c												\
 					game/entities/list/monster/update.c												\
 					game/entities/list/monster/destroy.c											\
+																									\
+					game/entities/list/onepunchman/onepunchman_entity.c								\
+					game/entities/list/onepunchman/init.c											\
+					game/entities/list/onepunchman/update.c											\
+					game/entities/list/onepunchman/destroy.c										\
 																									\
 					game/entities/list/sprite/sprite_entity.c										\
 					game/entities/list/sprite/sprite_entity_size.c									\
@@ -349,18 +376,17 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/benchmark/render.c												\
 					game/scenes/list/benchmark/destroy.c											\
 																									\
-					game/scenes/list/editor/block_descriptor/editor_block_descriptor.c				\
-					game/scenes/list/editor/block_descriptor/init.c									\
-					game/scenes/list/editor/block_descriptor/destroy.c								\
 					game/scenes/list/editor/editor_scene.c											\
 					game/scenes/list/editor/init.c													\
 					game/scenes/list/editor/update.c												\
 					game/scenes/list/editor/render.c												\
 					game/scenes/list/editor/export_map.c											\
 					game/scenes/list/editor/add_block.c												\
+					game/scenes/list/editor/add_entity.c											\
 					game/scenes/list/editor/destroy.c												\
 					game/scenes/list/editor/new_cursor_event.c										\
 					game/scenes/list/editor/new_block_create_event.c								\
+					game/scenes/list/editor/new_entity_create_event.c								\
 																									\
 					game/scenes/list/menu/menu_scene.c												\
 					game/scenes/list/menu/init.c													\
@@ -379,6 +405,7 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/update.c											\
 					game/scenes/list/raycasting/render.c											\
 					game/scenes/list/raycasting/render_weapon_display.c								\
+					game/scenes/list/raycasting/add_entity.c										\
 					game/scenes/list/raycasting/add_monster.c										\
 					game/scenes/list/raycasting/kill_monster.c										\
 					game/scenes/list/raycasting/weapon_set_pistol.c									\

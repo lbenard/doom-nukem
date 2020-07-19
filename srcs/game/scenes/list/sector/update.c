@@ -6,14 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 20:26:26 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/08 20:28:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "game/scenes/sector_scene.h"
 #include "engine/delta.h"
-#include "engine/game.h"
+#include "game/game.h"
 
 void	sector_scene_update(t_sector_scene *const self)
 {

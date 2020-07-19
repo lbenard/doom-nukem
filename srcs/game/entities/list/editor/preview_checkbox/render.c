@@ -6,12 +6,12 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 20:04:54 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:11:14 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/editor/preview_checkbox_entity.h"
-#include "engine/game.h"
+#include "game/game.h"
 
 void	preview_checkbox_entity_render(t_preview_checkbox_entity *const self,
 			t_frame *const frame)

@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 18:02:14 by lbenard           #+#    #+#              #
-#    Updated: 2020/01/14 06:37:29 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/16 21:51:42 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -160,10 +160,12 @@ SRCS_LIST		=	containers/list/init_list_head.c		\
 					ft/io/ft_putstr.c						\
 					ft/io/ft_putendl.c						\
 					ft/io/ft_putnbr.c						\
+					ft/io/ft_putfloat.c						\
 					ft/io/ft_putchar_fd.c					\
 					ft/io/ft_putstr_fd.c					\
 					ft/io/ft_putendl_fd.c					\
 					ft/io/ft_putnbr_fd.c					\
+					ft/io/ft_putfloat_fd.c					\
 					ft/mem/ft_memset.c						\
 					ft/mem/ft_bzero.c						\
 					ft/mem/ft_memcpy.c						\

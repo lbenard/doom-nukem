@@ -6,14 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/13 20:38:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "game/scenes/raycasting_scene.h"
 #include "game/entities/player_entity.h"
-#include "engine/game.h"
+#include "game/game.h"
 #include "engine/delta.h"
 #include "maths/maths.h"
 

@@ -23,9 +23,10 @@
 # include "game/entities/editor/grid_component_entity.h"
 # include "game/entities/editor/preview_checkbox_entity.h"
 # include "game/entities/editor/block_checkbox_entity.h"
+# include "game/entities/editor/entity_checkbox_entity.h"
 # include "game/entities/editor/player_component_entity.h"
 # include "game/entities/checkbox_entity.h"
-# include "game/scenes/editor_block_descriptor.h"
+# include "game/block_descriptor.h"
 
 # define BUTTONS "resources/buttons/"
 
@@ -79,18 +80,9 @@ typedef struct	s_editor_scene
 		t_radio_group	entities;
 		struct s_entities_group
 		{
-			t_checkbox_entity	*player_ref;
-			t_checkbox_entity	*enemy_ref;
-			t_checkbox_entity	*gun_ref;
-			t_checkbox_entity	*ammo_ref;
+			t_entity_checkbox_entity	*onepunchman;
 		}						entities_group;
 	}							hud;
-	struct s_blocks
-	{
-		t_editor_block_descriptor	blue_ice;
-		t_editor_block_descriptor	white_wool;
-		t_editor_block_descriptor	acacia_log;
-	}							blocks_list;
 	t_editor_camera_entity		*camera_ref;
 	const t_window				*screen_ref;
 }				t_editor_scene;
@@ -117,7 +109,10 @@ void			editor_scene_render(t_editor_scene *const self,
 
 t_result		editor_scene_export_map(t_editor_scene *const self);
 t_result		editor_scene_add_block(t_editor_scene *const self,
-					const t_editor_block_descriptor *const block,
+					const t_block_descriptor *const block,
+					const t_vec2f pos);
+t_result		editor_scene_add_entity(t_editor_scene *const self,
+					const t_entity_descriptor *const entity,
 					const t_vec2f pos);
 
 void			destroy_editor_scene(t_editor_scene *const self);
@@ -125,5 +120,6 @@ void			destroy_editor_scene(t_editor_scene *const self);
 
 t_callback_node	*new_cursor_event(void);
 t_callback_node	*new_block_create_event(void);
+t_callback_node	*new_entity_create_event(void);
 
 #endif

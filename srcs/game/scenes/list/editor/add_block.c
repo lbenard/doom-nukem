@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 02:37:42 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/09 02:49:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 17:54:38 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "game/entities/editor/block_component_entity.h"
 
 t_result	editor_scene_add_block(t_editor_scene *const self,
-				const t_editor_block_descriptor *const block,
+				const t_block_descriptor *const block,
 				const t_vec2f pos)
 {
 	t_component_entity	*new_block;

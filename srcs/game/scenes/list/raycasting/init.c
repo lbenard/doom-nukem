@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 15:46:54 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "game/scenes/raycasting_scene.h"
 #include "engine/error.h"
 #include "engine/image.h"
-#include "engine/game.h"
+#include "game/game.h"
 #include "ft/str.h"
 
 static void	add_modules(t_raycasting_scene *const self,
@@ -43,23 +43,28 @@ static void	add_modules(t_raycasting_scene *const self,
 
 static void	add_entities(t_raycasting_scene *const self)
 {
+	t_list_head			*pos;
+	t_map_entity_node	*node;
+	t_entity_descriptor	*descriptor;
+
 	self->player_ref = (t_player_entity*)entity_list_add_entity(
 		&self->super.entities, player_entity(&self->map));
 	if (!self->super.module.has_error)
 	{
-		raycasting_scene_add_monster(self,
-			monster_entity(ft_vec2f(5.0f, 5.0f),
-				&self->ss,
-				self->player_ref,
-				100.0f,
-				10.0f,
-				"Test"));
+		pos = &self->map.entities;
+		while ((pos = pos->next) != &self->map.entities)
+		{
+			node = (t_map_entity_node*)((t_u8*)pos
+				- __builtin_offsetof(t_map_entity_node, node));
+			descriptor = descriptor_from_name(
+				(t_entity_descriptor*)&game_singleton()->entities_list,
+				sizeof(game_singleton()->entities_list)
+					/ sizeof(t_entity_descriptor),
+				node->name);
+			if (descriptor)
+				raycasting_scene_add_entity(self, descriptor, node->pos);
+		}
 	}
-	// raycasting_scene_add_monster(self,
-	// 	monster_entity(100.0f,
-	// 		5,
-	// 		ft_vec2f(3.0f, 3.0f),
-	// 		"resources/textures/tom_nook.png"));
 }
 
 static void	init_vars(t_raycasting_scene *const self,
@@ -69,8 +74,8 @@ static void	init_vars(t_raycasting_scene *const self,
 	self->sky_color = ft_rgb(135, 206, 235);
 	self->fov = 90.0f * M_PI / 180.0f;
 	self->window_ref = args->window;
-	raycasting_scene_weapon_set_pistol(self);
-	// raycasting_scene_weapon_set_minigun(self);
+	// raycasting_scene_weapon_set_pistol(self);
+	raycasting_scene_weapon_set_minigun(self);
 	self->weapon.just_shooted = FALSE;
 	self->weapon.just_reloaded = FALSE;
 	self->weapon.first_render = TRUE;

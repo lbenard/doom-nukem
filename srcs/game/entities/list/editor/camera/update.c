@@ -6,13 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:36:20 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 03:26:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/editor/editor_camera_entity.h"
 #include "engine/delta.h"
-#include "engine/game.h"
+#include "game/game.h"
 #include "maths/maths.h"
 
 static void	limit_scale(t_editor_camera_entity *const self)

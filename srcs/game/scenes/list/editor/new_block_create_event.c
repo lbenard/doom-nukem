@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:38:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/09 02:50:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 21:20:32 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 
-static t_vec3f	grid_pos(t_editor_scene *const self,
+static t_vec2f	grid_pos(t_editor_scene *const self,
 					const t_isize mouse_pos)
 {
 	t_vec2f	pos;
@@ -32,10 +32,10 @@ static t_vec3f	grid_pos(t_editor_scene *const self,
 		pos.y = (int)(pos.y - 1.0f);
 	else
 		pos.y = (int)pos.y;
-	return (ft_vec3f(pos.x, pos.y, 0.0f));
+	return (pos);
 }
 
-static t_bool	is_free(t_editor_scene *const self, const t_vec3f pos)
+static t_bool	is_free(t_editor_scene *const self, const t_vec2f pos)
 {
 	t_list_head			*list_pos;
 	t_component_entity	*block;
@@ -57,7 +57,7 @@ static void		block_create(t_editor_scene *const self, sfEvent *event)
 {
 	t_isize					mouse_pos;
 	t_block_checkbox_entity	*checkbox;
-	t_vec3f					pos;
+	t_vec2f					pos;
 
 	if (event->type == sfEvtMouseButtonPressed)
 	{
@@ -73,9 +73,9 @@ static void		block_create(t_editor_scene *const self, sfEvent *event)
 			if (self->hud.create_group.show_blocks_ref->is_active
 				&& self->hud.create_group.show_blocks_ref->is_checked)
 			{
-				checkbox = (t_block_checkbox_entity*)self->hud.blocks.list[self->hud.blocks.last];
-				editor_scene_add_block(self, checkbox->block,
-					ft_vec2f(pos.x, pos.y));
+				checkbox = (t_block_checkbox_entity*)
+					self->hud.blocks.list[self->hud.blocks.last];
+				editor_scene_add_block(self, checkbox->block, pos);
 			}
 		}
 	}

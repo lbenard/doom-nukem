@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:17:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/09 02:49:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@
 #include <stdlib.h>
 #include "game/scenes/editor_scene.h"
 #include "game/entities/editor/block_component_entity.h"
+#include "game/entities/editor/entity_component_entity.h"
 #include "engine/error.h"
+#include "game/game.h"
 #include "ft/str.h"
 #include "ft/io.h"
 #include "ft/mem.h"
 
-static t_result	write_textures(t_editor_scene *const self, const int fd)
+static t_result	write_textures(t_game *const game, const int fd)
 {
-	t_editor_block_descriptor	*list;
+	t_block_descriptor	*list;
 	size_t						i;
 
 	errno = 0;
 	ft_putstr_fd("-textures\n", fd);
-	list = (t_editor_block_descriptor*)&self->blocks_list;
+	list = (t_block_descriptor*)&game->blocks_list;
 	i = 0;
-	while (i < sizeof(self->blocks_list) / sizeof(t_editor_block_descriptor))
+	while (i < sizeof(game->blocks_list) / sizeof(t_block_descriptor))
 	{
 		ft_putchar_fd(list[i].id, fd);
 		ft_putstr_fd(": ", fd);
@@ -44,16 +46,16 @@ static t_result	write_textures(t_editor_scene *const self, const int fd)
 	return (OK);
 }
 
-static t_result	write_blocks(t_editor_scene *const self, const int fd)
+static t_result	write_blocks(t_game *const game, const int fd)
 {
-	t_editor_block_descriptor	*list;
+	t_block_descriptor	*list;
 	size_t						i;
 
 	errno = 0;
 	ft_putstr_fd("-blocks\n", fd);
-	list = (t_editor_block_descriptor*)&self->blocks_list;
+	list = (t_block_descriptor*)&game->blocks_list;
 	i = 0;
-	while (i < sizeof(self->blocks_list) / sizeof(t_editor_block_descriptor))
+	while (i < sizeof(game->blocks_list) / sizeof(t_block_descriptor))
 	{
 		ft_putchar_fd(list[i].id, fd);
 		ft_putstr_fd(": ", fd);
@@ -94,6 +96,34 @@ static t_result	write_player_spawn(const int fd,
 	ft_putchar_fd(' ', fd);
 	ft_putnbr_fd((int)player->super.super.transform.position.y - origin.y, fd);
 	ft_putchar_fd('\n', fd);
+	ft_putchar_fd('\n', fd);
+	if (errno)
+		return (throw_result("write_size()"));
+	return (OK);
+}
+
+static t_result	write_entities(t_editor_scene *const self,
+					const int fd,
+					const t_isize origin)
+{
+	t_list_head					*pos;
+	t_entity_component_entity	*entity;
+
+	errno = 0;
+	pos = &self->entities.list;
+	ft_putstr_fd("-entities\n", fd);
+	while ((pos = pos->next) != &self->entities.list)
+	{
+		entity = (t_entity_component_entity*)((t_entity_node*)pos)->entity;
+		ft_putstr_fd(entity->entity->name, fd);
+		ft_putstr_fd(": ", fd);
+		ft_putfloat_fd(entity->super.super.transform.position.x
+			- (float)origin.x, fd);
+		ft_putchar_fd(' ', fd);
+		ft_putfloat_fd(entity->super.super.transform.position.y
+			- (float)origin.y, fd);
+		ft_putchar_fd('\n', fd);
+	}
 	ft_putchar_fd('\n', fd);
 	if (errno)
 		return (throw_result("write_size()"));
@@ -219,9 +249,9 @@ t_result		editor_scene_export_map(t_editor_scene *const self)
 	}
 	if ((fd = open(self->path, O_WRONLY | O_CREAT | O_TRUNC, 0600)) == -1)
 		return (throw_result("editor_export_map()"));
-	if (!write_textures(self, fd))
+	if (!write_textures(game_singleton(), fd))
 		return (throw_result("editor_export_map()"));
-	if (!write_blocks(self, fd))
+	if (!write_blocks(game_singleton(), fd))
 		return (throw_result("editor_export_map()"));
 	origin = blocks_origin(self);
 	size = get_map_size(self, origin);
@@ -233,6 +263,8 @@ t_result		editor_scene_export_map(t_editor_scene *const self)
 	if (!write_map_size(fd, size))
 		return (throw_result("editor_export_map()"));
 	if (!write_player_spawn(fd, self->player_spawn_ref, origin))
+		return (throw_result("editor_export_map()"));
+	if (!write_entities(self, fd, origin))
 		return (throw_result("editor_export_map()"));
 	if (!write_map(self, fd, origin, size))
 		return (throw_result("editor_export_map()"));

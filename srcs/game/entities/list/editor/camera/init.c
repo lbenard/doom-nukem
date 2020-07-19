@@ -6,11 +6,11 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:33:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/12 01:02:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine/game.h"
+#include "game/game.h"
 #include "game/entities/editor/editor_camera_entity.h"
 #include "engine/error.h"
 

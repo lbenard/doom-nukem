@@ -6,14 +6,12 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 22:33:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/01 20:12:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 21:27:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/editor/block_component_entity.h"
 #include "maths/maths.h"
-
-#include <stdio.h>
 
 static t_bool	is_position_free(t_block_component_entity *const self)
 {

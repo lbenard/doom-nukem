@@ -6,24 +6,28 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 17:10:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 20:54:58 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/map.h"
+#include "game/game.h"
 
-t_block_node	*block_from_key(t_list_head *const self, const char key)
+t_block_descriptor	*block_from_key(const char key)
 {
-	t_list_head		*pos;
-	t_block_node	*block;
+	t_block_descriptor	*blocks;
+	size_t				block_amount;
+	size_t				i;
 
-	pos = self;
-	while ((pos = pos->next) != self)
+	blocks = (t_block_descriptor*)&game_singleton()->blocks_list;
+	block_amount = sizeof(game_singleton()->blocks_list)
+		/ sizeof(t_block_descriptor);
+	i = 0;
+	while (i < block_amount)
 	{
-		block = (t_block_node*)((t_u8*)pos
-			- __builtin_offsetof(t_block_node, node));
-		if (block->key == key)
-			return (block);
+		if (blocks[i].id == key)
+			return (&blocks[i]);
+		i++;
 	}
 	return (NULL);
 }

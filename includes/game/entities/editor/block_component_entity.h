@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 22:12:48 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 22:28:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/16 17:54:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
 
 typedef struct	s_block_component_entity
 {
-	t_component_entity				super;
-	t_vec3f							pos_before_move;
-	t_bool							was_not_moved;
-	const t_editor_block_descriptor	*block;
-	const t_entity_list				*block_list;
+	t_component_entity			super;
+	t_vec3f						pos_before_move;
+	t_bool						was_not_moved;
+	const t_block_descriptor	*block;
+	const t_entity_list			*block_list;
 }				t_block_component_entity;
 
 typedef struct	s_block_component_entity_args
 {
-	const t_editor_block_descriptor	*block;
-	const t_entity_list				*block_list;
+	const t_block_descriptor	*block;
+	const t_entity_list			*block_list;
 }				t_block_component_entity_args;
 
-t_constructor	block_component_entity(const t_editor_block_descriptor *block,
+t_constructor	block_component_entity(const t_block_descriptor *block,
 					const t_entity_list *const block_list);
 
 t_result		init_block_component_entity(

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/03 17:37:11 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 19:39:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 01:15:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "ft/str.h"
 #include "maths/maths.h"
 
-t_result		map_parse_player(t_map *const self, char *player_flag_str)
+t_result	map_parse_player(t_map *const self, char *player_flag_str)
 {
 	char	**spawn_str;
 
