@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:30:55 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
 		return (throw_result_str("init_onepunchman_entity()",
 			"failed to create monster entity"));
 	}
-	self->super.super.super.vtable.update = onepunchman_entity_update;
 	return (OK);
 }
