@@ -100,6 +100,8 @@ t_constructor	editor_scene(const t_window *const screen,
 
 t_result		init_editor_scene(t_editor_scene *const self,
 					const t_editor_scene_args *const args);
+t_result		fill_from_map(t_editor_scene *const self,
+					const char *const path);
 // t_result		init_editor_scene_from_file(t_editor_scene *const self,
 // 					const t_editor_scene_args *const args);
 

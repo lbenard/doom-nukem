@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 21:22:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	add_entities(t_raycasting_scene *const self)
 		{
 			node = (t_map_entity_node*)((t_u8*)pos
 				- __builtin_offsetof(t_map_entity_node, node));
-			descriptor = descriptor_from_name(
+			descriptor = entity_descriptor_from_name(
 				(t_entity_descriptor*)&game_singleton()->entities_list,
 				sizeof(game_singleton()->entities_list)
 					/ sizeof(t_entity_descriptor),

@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/19 02:02:46 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/19 21:49:20 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -218,11 +218,12 @@ SRCS_LIST		=	main.c																			\
 																									\
 					game/block_descriptor/block_descriptor.c										\
 					game/block_descriptor/init.c													\
+					game/block_descriptor/from_id.c													\
 					game/block_descriptor/destroy.c													\
 																									\
 					game/entity_descriptor/entity_descriptor.c										\
 					game/entity_descriptor/init.c													\
-					game/entity_descriptor/descriptor_from_name.c									\
+					game/entity_descriptor/from_name.c												\
 					game/entity_descriptor/destroy.c												\
 																									\
 					game/animation/spritesheet.c													\
@@ -378,6 +379,7 @@ SRCS_LIST		=	main.c																			\
 																									\
 					game/scenes/list/editor/editor_scene.c											\
 					game/scenes/list/editor/init.c													\
+					game/scenes/list/editor/fill_from_map.c											\
 					game/scenes/list/editor/update.c												\
 					game/scenes/list/editor/render.c												\
 					game/scenes/list/editor/export_map.c											\

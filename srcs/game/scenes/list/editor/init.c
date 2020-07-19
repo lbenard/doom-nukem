@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 21:52:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,49 +86,6 @@ static void	add_entities(t_editor_scene *const self,
 		&game->entities_list.onepunchman, args->screen);
 }
 
-static void	input_map(t_editor_scene *const self,
-				const char *const path,
-				t_game *const game)
-{
-	t_map				input_map;
-	t_usize				i;
-	size_t				j;
-	t_block_descriptor	*block_descriptors;
-	// t_list_head			*pos;
-	// t_entity_descriptor	*entity_descriptors;
-
-	if (static_module_create(&input_map, map(path)) == ERROR)
-		return ;
-	block_descriptors = (t_block_descriptor*)&game->blocks_list;
-	i.y = 0;
-	while (i.y < input_map.size.y)
-	{
-		i.x = 0;
-		while (i.x < input_map.size.x)
-		{
-			if (input_map.map[i.y * input_map.size.x + i.x].id != ' ')
-			{
-				j = 0;
-				while (j < sizeof(game->blocks_list)
-					/ sizeof(t_block_descriptor))
-				{
-					if (block_descriptors[j].id
-						== input_map.map[i.y * input_map.size.x + i.x].id)
-						editor_scene_add_block(self,
-							&block_descriptors[j],
-							ft_vec2f(i.x, i.y));
-					j++;
-				}
-			}
-			i.x++;
-		}
-		i.y++;
-	}
-	self->player_spawn_ref->super.super.transform.position = ft_vec3f(
-		input_map.spawn.x, input_map.spawn.y, 0.0f);
-	destroy_map(&input_map);
-}
-
 t_result	init_editor_scene(t_editor_scene *const self,
 				const t_editor_scene_args *const args)
 {
@@ -143,7 +100,7 @@ t_result	init_editor_scene(t_editor_scene *const self,
 	add_modules(self, args);
 	if (!self->super.module.has_error)
 		add_entities(self, args, game_singleton());
-	input_map(self, args->path, game_singleton());
+	fill_from_map(self, args->path);
 	event_handler_add_callback(&self->super.input_manager, new_cursor_event());
 	event_handler_add_callback(&self->super.input_manager,
 		new_block_create_event());

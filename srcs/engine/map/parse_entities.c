@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 00:19:55 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:04:05 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 21:22:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static t_map_entity_node	*create_node(const char *const key,
 {
 	t_map_entity_node	*new_node;
 
-	if (!descriptor_from_name(
+	if (!entity_descriptor_from_name(
 		(t_entity_descriptor*)&game_singleton()->entities_list,
 		sizeof(game_singleton()->entities_list),
 		key))

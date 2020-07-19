@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 16:34:36 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 01:42:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 21:21:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_constructor			entity_descriptor(const char *const name,
 t_result				init_entity_descriptor(t_entity_descriptor *const self,
 							t_entity_descriptor_args *const args);
 
-t_entity_descriptor		*descriptor_from_name(
+t_entity_descriptor		*entity_descriptor_from_name(
 							t_entity_descriptor *const descriptors,
 							const size_t amount,
 							const char *const name);
