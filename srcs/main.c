@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:08:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:23:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,67 +147,33 @@ void	register_inputs(t_game *const game)
 	// input_get(&game->input, forward);
 }
 
-// int	main(int ac, char **av)
-// {
-// 	t_game	*game;
-
-// 	if (ac != 2)
-// 		return (!throw_error_str("main()", "a map path must be given"));
-// 	game = game_singleton();
-// 	if (start_game(&(t_game_args){PROGRAM_NAME, ft_usize(1280, 720), TRUENT}) == ERROR)
-// 		return (!throw_error_str("main()", "failed to start game"));
-// 	register_inputs(game);
-// 	game_set_scene(menu_scene(&game->window, av[1]));
-// 	// game_set_scene(editor_scene(&game->window, av[1]));
-// 	if (!event_handler_add_callback(&game->event_handler,
-// 		new_close_game_event()))
-// 	{
-// 		stop_game();
-// 		return (!throw_error_str("main()", "failed to add exit callback"));
-// 	}
-// 	if (game->module.has_error)
-// 	{
-// 		stop_game();
-// 		return (!throw_error_str("main()", "failed to init game"));
-// 	}
-// 	while (window_is_running(&game->window))
-// 		game_loop();
-// 	stop_game();
-// 	return (0);
-// }
-
-#include "engine/a_star.h"
-
 int	main(int ac, char **av)
 {
-	t_module	main_module;
-	t_map		main_map;
-	t_monster_entity	monster1;
-	t_spritesheet		ss;
-	t_player_entity		player;
+	t_game	*game;
 
 	if (ac != 2)
 		return (!throw_error_str("main()", "a map path must be given"));
-	init_module(&main_module);
-	module_add(&main_module, &main_map, map(av[1]));
-	module_add(&main_module, &player, player_entity(&main_map));
-	module_add(&main_module, &ss, spritesheet("resources/sprites/wow.bmp", ft_usize(17, 8)));
-	module_add(&main_module, &monster1, monster_entity(ft_vec2f(12, 15), &ss, &player, 100.0f, 10.0f, "le sexe"));
-	if (main_module.has_error)
-		return (-1);
-	for (int i = 0; i < 15; i++)
+	game = game_singleton();
+	if (start_game(&(t_game_args){PROGRAM_NAME, ft_usize(1280, 720), TRUENT}) == ERROR)
+		return (!throw_error_str("main()", "failed to start game"));
+	register_inputs(game);
+	game_set_scene(menu_scene(&game->window, av[1]));
+	// game_set_scene(editor_scene(&game->window, av[1]));
+	if (!event_handler_add_callback(&game->event_handler,
+		new_close_game_event()))
 	{
-		// if ((((t_entity*)&monster1)->transform. != player.pos.x) || (enemy.pos.y != player.pos.y))
-		// {
-			init_astar(&(monster1.a_star), &main_map, monster1.super.super, player.super);
-			monster1.super.super.transform.position.x = monster1.a_star.next_pos.pos.x;
-			monster1.super.super.transform.position.y = monster1.a_star.next_pos.pos.y;
-			// free(path);
-			printf("%f %f\n", monster1.super.super.transform.position.x, monster1.super.super.transform.position.y);
-		// }
+		stop_game();
+		return (!throw_error_str("main()", "failed to add exit callback"));
 	}
-	// path = init(&main_map, enemy, player);
-	destroy_module(&main_module);
+	if (game->module.has_error)
+	{
+		stop_game();
+		return (!throw_error_str("main()", "failed to init game"));
+	}
+	while (window_is_running(&game->window))
+		game_loop();
+	stop_game();
+	return (0);
 }
 
 // leak avec un sprite (56 bytes)
