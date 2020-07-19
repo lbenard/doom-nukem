@@ -6,14 +6,12 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 00:32:47 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:10:43 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:24:17 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/editor/block_checkbox_entity.h"
 #include "engine/error.h"
-
-#include <stdio.h>
 
 t_result	init_block_checkbox_entity(t_block_checkbox_entity *const self,
 				const t_block_checkbox_entity_args *const args)

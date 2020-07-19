@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 18:54:37 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/15 02:59:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:24:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "engine/animation.h"
 #include "ft/io.h"
 #include <stdlib.h>
-#include <stdio.h>
-	// frame_layer(NULL, &self->pixels, ft_isize(0, 0), blend_add);
 
 void		grab_sprite(t_spritesheet *ss, int num)
 {
@@ -51,7 +49,6 @@ t_result		init_spritesheet(t_spritesheet *const self,
 	size_t	i;
 
 	init_module(&self->module);
-	ft_putendl("debut");
 	module_add(&self->module, &self->pixels, frame_from_bmp(args->path));
 	if (self->module.has_error)
 	{

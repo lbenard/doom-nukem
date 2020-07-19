@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:38:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 21:20:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:24:42 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "game/entities/editor/block_component_entity.h"
 #include "engine/error.h"
 #include "maths/maths.h"
-
-#include <stdio.h>
 
 static t_vec2f	grid_pos(t_editor_scene *const self,
 					const t_isize mouse_pos)

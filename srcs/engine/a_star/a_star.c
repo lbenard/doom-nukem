@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   a_star.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:02:04 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/16 18:11:38 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/19 02:24:04 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
-#include <stdio.h>
 #include "engine/a_star.h"
 
 t_node	ft_fill_node(int x, int y, int f)

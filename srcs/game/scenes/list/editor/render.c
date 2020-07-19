@@ -6,13 +6,11 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:32:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 21:09:21 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:24:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/editor_scene.h"
-
-#include <stdio.h>
 
 static void	render_preview_buttons(t_editor_scene *const self,
 			t_frame *const fb)

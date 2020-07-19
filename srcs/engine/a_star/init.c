@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 23:48:17 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 18:28:42 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/19 02:21:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ t_result	init_astar(t_star *a_star,
 				t_entity monstre,
 				t_entity player)
 {
-	// if (!(star = malloc(sizeof(t_star))))
-	// 	return (ERROR);
 	if (!(a_star->closel = malloc(sizeof(t_star_list))))
 		return (ERROR);
 	if (!(a_star->openl = malloc(sizeof(t_star_list))))
@@ -45,7 +43,5 @@ t_result	init_astar(t_star *a_star,
 	a_star->map = map;
 	a_star->wall = 1;
 	ft_add_node(&a_star->openl, a_star->start);
-	ft_putendl("------------------");
 	return (ft_a_star(a_star));
-	// ft_delist(&openl);
 }

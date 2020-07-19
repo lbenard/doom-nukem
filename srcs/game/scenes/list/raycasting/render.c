@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 15:55:41 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:25:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ static t_rgba	color(const t_raycasting_scene *const self,
 	ret.c.b /= (ray->perpendicular_distance / 3.0f) + 1;
 	return (ret);
 }
-
-#include <stdio.h>
 
 static void	ceiling_raycasting(const t_raycasting_scene *const self,
 				t_frame *const target,
@@ -152,7 +150,6 @@ static void	walls_raycasting(t_raycasting_scene *const self,
 		start_y = (ssize_t)(target->size.y - size) / 2
 			+ self->player_ref->super.transform.rotation.x;
 		end_y = start_y + size;
-		// printf("%f %f, size: %lu\n", ray->hit.x, ray->hit.y, size);
 		i.y = (size_t)ft_ssmax(start_y, 0);
 		while ((ssize_t)i.y < end_y && i.y < target->size.y)
 		{
@@ -179,7 +176,6 @@ static void	zbuffer(t_raycasting_scene *const self,
 	while (i < length)
 	{
 		camera_x = 2.0f * i / (float)length - 1;
-		// printf("i: %lu\n", i);
 		buffer[i] = cast(&self->map,
 			ft_vec2f(self->player_ref->super.transform.position.x,
 				self->player_ref->super.transform.position.y),
@@ -294,8 +290,6 @@ static void	monsters(t_raycasting_scene *const self,
 			blend_invert);
 	}
 }
-
-#include <stdio.h>
 
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)

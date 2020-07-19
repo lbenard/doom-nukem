@@ -6,15 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 21:04:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/13 21:27:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 02:22:55 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/raycasting_scene.h"
 #include "maths/maths.h"
 #include "ft/str.h"
-
-#include <stdio.h>
 
 static void	itoa_limit(char *const dest, size_t n, size_t limit)
 {
@@ -30,7 +28,6 @@ static void	itoa_limit(char *const dest, size_t n, size_t limit)
 			n *= 10;
 		n--;
 	}
-	// printf("itoa %lu nb_len %lu limit %lu ", n, nb_len, limit);
 	dest[nb_len] = 0;
 	while (42)
 	{
@@ -39,7 +36,6 @@ static void	itoa_limit(char *const dest, size_t n, size_t limit)
 		if (!n)
 			break ;
 	}
-	// printf("result %s\n", dest);
 	return ;
 }
 
@@ -57,7 +53,6 @@ static void	update_display(t_raycasting_scene *const self)
 	frame_fill_blend(&self->weapon.display_text.target,
 		ft_rgba(0, 0, 0, 255),
 		blend_colorize);
-	printf("%s\n", self->weapon.display);
 }
 
 void	raycasting_scene_render_weapon_display(t_raycasting_scene *const self,
