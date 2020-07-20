@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   benchmark_scene.c                                  :+:      :+:    :+:   */
+/*   ft_monster_stats.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/05 13:32:34 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/06 19:35:05 by lbenard          ###   ########.fr       */
+/*   Created: 2020/07/20 18:52:11 by lbenard           #+#    #+#             */
+/*   Updated: 2020/07/20 18:52:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/scenes/benchmark_scene.h"
+#include "game/entities/monster_entity.h"
 
-t_constructor	benchmark_scene(const size_t entities_number,
-					t_window *const window)
+t_monster_stats	ft_monster_stats(const t_vec2f pos,
+					const float health,
+					const float damage,
+					const char *name)
 {
-	static t_benchmark_scene_args	args;
+	t_monster_stats	ret;
 
-	args.entities_number = entities_number;
-	args.window = window;
-	return (ft_constructor(init_benchmark_scene,
-		destroy_benchmark_scene,
-		sizeof(t_benchmark_scene),
-		&args));
+	ret.pos = pos;
+	ret.health = health;
+	ret.damage = damage;
+	ret.name = name;
+	return (ret);
 }

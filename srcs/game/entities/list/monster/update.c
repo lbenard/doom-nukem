@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:41:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:20:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/20 19:30:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	monster_entity_update(t_monster_entity *const self)
 	t_vec3f	direction;
 	t_vec3f	player_pos;
 
+	sprite_entity_update(&self->super);
 	animation_update(&self->animation, self->spritesheet_ref);
 	frame_layer_opaque(&self->super.texture,
 		animation_current(&self->animation, self->spritesheet_ref),

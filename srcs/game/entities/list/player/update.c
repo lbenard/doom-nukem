@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 22:40:53 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,9 @@ static void		wasd(t_player_entity *const self, t_vec3f rotation)
 
 void			player_entity_update(t_player_entity *const self)
 {
+	float	rot_sin;
+	float	rot_cos;
+
 	orientation(self, &self->super.transform.rotation);
 	wasd(self, self->super.transform.rotation);
 	if (self->is_moving)
@@ -107,4 +110,8 @@ void			player_entity_update(t_player_entity *const self)
 	self->super.transform.position.x += self->velocity.x;
 	self->super.transform.position.y += self->velocity.y;
 	self->super.transform.position.z += self->velocity.z;
+	rot_sin = sin(self->super.transform.rotation.y);
+	rot_cos = cos(self->super.transform.rotation.y);
+	self->dir = ft_vec2f(rot_cos, rot_sin);
+	self->plane = vec2f_scalar(ft_vec2f(-rot_sin, rot_cos), self->fov);
 }

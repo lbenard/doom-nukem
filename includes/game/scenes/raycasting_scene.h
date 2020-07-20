@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 20:14:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/20 03:55:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include "game/entities/image_entity.h"
 # include "game/entities/camera_entity.h"
 # include "game/entities/sprite_entity.h"
-# include "game/entities/monster_entity.h"
 # include "game/entity_descriptor.h"
 # include "maths/vec2i.h"
 # include "maths/vec2f.h"
@@ -67,7 +66,6 @@ typedef struct	s_raycasting_scene
 		t_text				display_text;
 	}					weapon;
 	t_camera_entity		*camera_ref;
-	t_monster_entity	*monster_ref;
 	t_entity_list		sprite_entities;
 	t_entity_list		monster_entities;
 	t_window			*window_ref;
@@ -91,6 +89,8 @@ t_result		init_raycasting_scene(t_raycasting_scene *const self,
 void			raycasting_scene_update(t_raycasting_scene *const self);
 void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
+void			raycasting_scene_render_sprites(t_raycasting_scene *const self,
+					t_frame *const fb);
 void			raycasting_scene_render_weapon_display(
 					t_raycasting_scene *const self,
 					t_frame *const fb);
@@ -98,8 +98,6 @@ void			raycasting_scene_render_weapon_display(
 t_result		raycasting_scene_add_entity(t_raycasting_scene *const self,
 					const t_entity_descriptor *const entity_descriptor,
 					const t_vec2f pos);
-t_result		raycasting_scene_add_monster(t_raycasting_scene *const self,
-					t_constructor constructor);
 void			raycasting_scene_kill_monster(t_raycasting_scene *const self,
 					const t_entity *const monster);
 

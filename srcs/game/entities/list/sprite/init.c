@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 23:39:22 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 02:23:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/20 18:40:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_result	init_sprite_entity(t_sprite_entity *const self,
 		entity_vtable(sprite_entity_update));
 	module_add(&self->super.module, &self->texture,
 		frame_from_file(args->texture_path));
+	self->player_ref = args->player_ref;
+	self->frame_ref = args->frame_ref;
 	if (self->super.module.has_error)
 	{
 		destroy_sprite_entity(self);

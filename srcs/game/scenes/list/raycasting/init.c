@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 21:22:54 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 22:34:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	add_entities(t_raycasting_scene *const self)
 	t_entity_descriptor	*descriptor;
 
 	self->player_ref = (t_player_entity*)entity_list_add_entity(
-		&self->super.entities, player_entity(&self->map));
+		&self->super.entities, player_entity(&self->map, self->fov));
 	if (!self->super.module.has_error)
 	{
 		pos = &self->map.entities;
@@ -92,12 +92,10 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 		return (throw_result_str("init_raycasting_scene()",
 			"failed while initalizing scene"));
 	}
+	init_vars(self, args);
 	add_modules(self, args);
 	if (!self->super.module.has_error)
 		add_entities(self);
-	if (!self->super.module.has_error
-		&& !self->super.entities.module.has_error)
-		init_vars(self, args);
 	else
 	{
 		destroy_raycasting_scene(self);

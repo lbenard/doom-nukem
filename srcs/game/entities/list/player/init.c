@@ -6,11 +6,12 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 12:57:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 03:28:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/20 02:46:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <math.h>
 #include "engine/error.h"
 #include "game/entities/player_entity.h"
 #include "game/events/events.h"
@@ -46,11 +47,19 @@ static t_bool	is_player_immured(const t_vec2f position,
 t_result		init_player_entity(t_player_entity *const self,
 					const t_player_entity_args *const args)
 {
+	float	rot_sin;
+	float	rot_cos;
+
 	init_entity_default(&self->super, entity_vtable(player_entity_update));
 	self->velocity = ft_vec3f(0.0f, 0.0f, 0.0f);
 	self->is_moving = FALSE;
 	self->map_ref = args->map;
 	self->speed = 3.0f;
+	self->fov = args->fov;
+	rot_sin = sin(self->super.transform.rotation.y);
+	rot_cos = cos(self->super.transform.rotation.y);
+	self->dir = ft_vec2f(rot_cos, rot_sin);
+	self->plane = vec2f_scalar(ft_vec2f(-rot_sin, rot_cos), self->fov);
 	self->super.transform.position.x = args->map->spawn.x;
 	self->super.transform.position.y = args->map->spawn.y;
 	if (is_player_immured(vec3f_to_vec2f(self->super.transform.position),

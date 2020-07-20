@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 20:09:30 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/20 18:45:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ t_result	init_monster_entity(t_monster_entity *const self,
 {
 	if (static_module_create(self, sprite_entity_size(
 		ft_vec3f(args->pos.x, args->pos.y, 0.0f),
-		args->spritesheet_ref->sprite_size)) == ERROR)
+		args->spritesheet_ref->sprite_size, args->player_ref, args->frame_ref))
+		== ERROR)
 	{
 		return (throw_result_str("init_monster_entity()",
 			"failed to create parent class"));
@@ -34,8 +35,8 @@ t_result	init_monster_entity(t_monster_entity *const self,
 	module_add(&self->super.super.module, &self->animation,
 		animation(0, args->spritesheet_ref->nb_sprite, 1.0f));
 	module_add(&self->super.super.module, &self->name_text,
-		text("scream_when_youre_ready_to_die.png",
-			ft_usize(9 * ft_strlen(args->name), 12)));
+		text("haxorville.png",
+			ft_usize(5 * ft_strlen(args->name), 9)));
 	if (self->super.super.module.has_error == TRUE)
 	{
 		destroy_monster_entity(self);
@@ -44,7 +45,9 @@ t_result	init_monster_entity(t_monster_entity *const self,
 	}
 	text_set_ref(&self->name_text,
 		static_string_as_ref(ft_static_string(self->name)));
-	text_render(&self->name_text, ft_text_settings(ft_isize(0, 0), 12));
+	text_render(&self->name_text, ft_text_settings(ft_isize(0, 0), 9));
+	frame_fill_blend(&self->name_text.target, ft_rgba(255, 255, 255, 255),
+		blend_colorize);
 	return (OK);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:50:27 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/19 22:37:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ typedef struct	s_player_entity
 	t_bool			is_moving;
 	const t_map		*map_ref;
 	float			speed;
+	float			fov;
+	t_vec2f			dir;
+	t_vec2f			plane;
 	t_input_id		forward;
 	t_input_id		backward;
 	t_input_id		left;
@@ -58,9 +61,10 @@ typedef struct	s_player_entity
 typedef struct	s_player_entity_args
 {
 	const t_map		*map;
+	float			fov;
 }				t_player_entity_args;
 
-t_constructor	player_entity(const t_map *const map);
+t_constructor	player_entity(const t_map *const map, const float fov);
 
 t_result		init_player_entity(t_player_entity *const self,
 					const t_player_entity_args *const args);
