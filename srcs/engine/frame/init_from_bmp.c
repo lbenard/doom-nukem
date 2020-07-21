@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/03 18:13:26 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 18:41:16 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/22 01:44:09 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,27 +23,25 @@
 static t_result	bmp_fill(int fd, t_frame *bmp, t_u16 bpp)
 {
 	t_rgba	color;
-	size_t	x;
-	size_t	y;
-	t_rgba	*pixels;
+	t_rgba	fixed;
+	t_usize	i;
 
 	bpp /= 8;
-	y = 0;
-	pixels = (t_rgba*)bmp->frame.array;
-	while (y < bmp->size.y)
+	i.y = 0;
+	while (i.y < bmp->size.y)
 	{
-		x = 0;
-		while (x < bmp->size.x)
+		i.x = 0;
+		while (i.x < bmp->size.x)
 		{
 			if (read(fd, &color, bpp) < 0)
 				return (throw_result_str(__func__, "read fail"));
 			color.c.a = (bpp == 3) ? 255 : color.c.a;
-			pixels[x + (bmp->size.y - y - 1) * bmp->size.x].integer =
-				color.integer;
-			x++;
+			fixed = ft_rgba(color.c.b, color.c.g, color.c.r, color.c.a);
+			bmp->pixels[i.x + (bmp->size.y - i.y - 1) * bmp->size.x] = fixed;
+			i.x++;
 		}
-		lseek(fd, (x * bpp) % 4, SEEK_CUR);
-		y++;
+		lseek(fd, (i.x * bpp) % 4, SEEK_CUR);
+		i.y++;
 	}
 	return (OK);
 }
@@ -68,6 +66,7 @@ static t_result	bmp_parse(int fd, t_frame *self)
 		array(sizeof(t_u32) * self->size.x * self->size.y));
 	if (self->module.has_error)
 		return (throw_result_str(__func__, "array module fail"));
+	self->pixels = (t_rgba*)self->frame.array;
 	lseek(fd, sizeof(t_u16), SEEK_CUR);
 	if (read(fd, &bits_per_pixel, sizeof(t_u16)) < 0)
 		return (throw_result_str(__func__, "read fail"));
@@ -128,6 +127,5 @@ t_result		init_frame_from_bmp(t_frame *const self,
 		return (throw_result_str("init_frame_from_bmp()",
 			"failed to init frame module"));
 	}
-	self->pixels = (t_rgba*)self->frame.array;
 	return (OK);
 }
