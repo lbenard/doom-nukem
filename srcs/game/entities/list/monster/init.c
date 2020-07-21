@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/20 18:45:28 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/21 03:43:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_result	init_monster_entity(t_monster_entity *const self,
 	self->super.super.vtable.update = monster_entity_update;
 	self->spritesheet_ref = args->spritesheet_ref;
 	self->player_ref = args->player_ref;
+	self->full_health = args->health;
 	self->health = args->health;
 	self->damage = args->damage;
 	self->name = args->name;

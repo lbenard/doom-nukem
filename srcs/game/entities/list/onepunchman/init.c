@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/20 18:55:58 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/21 03:46:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
 			ft_monster_stats(args->pos,
 				100.0f,
 				10.0f,
-				"One Punch Man"),
+				"Weird Alien"),
 			&raycasting->ss,
 			raycasting->player_ref,
 			&raycasting->window_ref->frame)) == ERROR)

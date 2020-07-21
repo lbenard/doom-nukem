@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/20 22:50:27 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/21 04:21:10 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,40 @@ static void	render_sprites(t_raycasting_scene *const self,
 	}
 }
 
+static void	monsters_health(const t_monster_entity *const monster,
+				t_frame *const fb)
+{
+	float	health_percentage;
+	t_usize	health_bar_size;
+	t_usize	i;
+
+	health_percentage = monster->health / monster->full_health;
+	health_bar_size.x = monster->super.end_x - monster->super.start_x;
+	health_bar_size.y = health_bar_size.x / 20;
+	i.y = 0;
+	while (i.y < health_bar_size.y)
+	{
+		i.x = 0;
+		while (i.x < health_bar_size.x)
+		{
+			if (!(monster->super.start_y + (ssize_t)i.y < 0
+				|| monster->super.start_y + i.y >= fb->size.y
+				|| monster->super.start_x + (ssize_t)i.x < 0
+				|| monster->super.start_x + i.x >= fb->size.x))
+			{
+				if ((float)(i.x + i.y) / (float)health_bar_size.x > health_percentage)
+					fb->pixels[(monster->super.start_y + i.y) * fb->size.x
+						+ monster->super.start_x + i.x] = ft_rgba(0, 31, 0, 255);
+				else
+					fb->pixels[(monster->super.start_y + i.y) * fb->size.x
+						+ monster->super.start_x + i.x] = ft_rgba(0, 255, 0, 255);
+			}
+			i.x++;
+		}
+		i.y++;
+	}
+}
+
 static void	monsters(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
@@ -102,19 +136,21 @@ static void	monsters(t_raycasting_scene *const self,
 	while ((pos = pos->next) != &self->monster_entities.list)
 	{
 		monster = (t_monster_entity*)((t_entity_node*)pos)->entity;
-		if (monster->super.perpendicular_distance < 10.0f
-			&& monster->super.is_visible)
-		{
-			distance_opacity = inverse_lerp(10.0f,
-				0.0f,
-				monster->super.perpendicular_distance) * 255;
-			frame_layer_transform_add(fb,
-				&monster->name_text.target,
-				ft_frame_transform(ft_vec2f(0.5f, 1.0f),
-					ft_isize((monster->super.start_x + monster->super.end_x) / 2,
-						monster->super.start_y),
-					ft_vec2f(2.0f, 2.0f), distance_opacity));
-		}
+		if (monster->super.perpendicular_distance > 10.0f
+			|| !monster->super.is_visible)
+			continue ;
+		distance_opacity = inverse_lerp(10.0f, 0.0f,
+			monster->super.perpendicular_distance) * 255;
+		frame_layer_transform_add(fb,
+			&monster->name_text.target,
+			ft_frame_transform(ft_vec2f(0.5f, 1.0f),
+				ft_isize((monster->super.start_x + monster->super.end_x) / 2,
+					monster->super.start_y),
+				ft_vec2f(10.0f / monster->super.perpendicular_distance,
+					10.0f / monster->super.perpendicular_distance),
+				distance_opacity));
+		if (monster->health < monster->full_health)
+			monsters_health(monster, fb);
 	}
 }
 
