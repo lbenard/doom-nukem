@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/20 22:43:35 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/21 22:24:20 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,25 @@ static void	zbuffer(t_raycasting_scene *const self,
 	}
 }
 
+void	display_hud(t_raycasting_scene *self, t_frame *const fb)
+{
+	int		perc_sprite;
+	float	index_sprite;
+	static double i;
+
+	i += 0.03;
+	if (i >= PI)
+		i = -PI;
+	perc_sprite = 100 * self->player_ref->health / 150;
+	index_sprite = ((float)self->hud_ray.heart_ss.grid_size.x / 100.0f) * perc_sprite;
+	frame_layer_transform(fb, &self->hud_ray.heart_ss.sprite[8 - (int)index_sprite],
+		ft_frame_transform(ft_vec2f(0.5f, 1.0f), ft_isize(fb->size.x / 2 - self->hud_ray.heart_ss.grid_size.x / 2,
+			fb->size.y - 64), ft_vec2f(2 + cosf(i) / 3, 2 + cosf(i) / 3), 255), blend_add);
+	// printf("health = %d, perc = %d, index_sprite = %f\n", self->player_ref->health, perc_sprite, index_sprite);
+	printf("costime = %f\n", i);
+
+}
+
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
@@ -206,4 +225,5 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 			63 - ft_fmin((get_wall_time() - self->weapon.weapon.last_shot) * 10.0f, 1.0f) * 63),
 		blend_add);
 	raycasting_scene_render_weapon_display(self, fb);
+	display_hud(self, fb);
 }

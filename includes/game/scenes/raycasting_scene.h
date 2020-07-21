@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_scene.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/20 03:55:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/21 18:22:43 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include "game/entity_descriptor.h"
 # include "maths/vec2i.h"
 # include "maths/vec2f.h"
+# include "game/hud_game.h"
 
 typedef struct	s_weapon
 {
@@ -54,6 +55,7 @@ typedef struct	s_raycasting_scene
 	t_frame				crosshair;
 	t_array				zbuffer;
 	t_player_entity		*player_ref;
+	t_hud_game			hud_ray;
 	struct s_weapon_infos
 	{
 		t_weapon			weapon;

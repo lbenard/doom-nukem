@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 22:34:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/21 18:22:38 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static void	add_modules(t_raycasting_scene *const self,
 	module_add(&self->super.module, &self->ss,
 		spritesheet("resources/sprites/wow.bmp",
 			ft_usize(17, 8)));
+	module_add(&self->super.module, &self->hud_ray,
+		hud_game("resources/sprites/heart_disintegration.bmp",
+			"resources/sprites/sprite-sheet-png-walking-2.bmp"));
 }
 
 static void	add_entities(t_raycasting_scene *const self)

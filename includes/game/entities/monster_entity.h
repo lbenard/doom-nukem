@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:07:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 03:43:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/22 01:50:14 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct	s_monster_entity_args
 	int						damage;
 	const char				*name;
 	const t_spritesheet		*spritesheet_ref;
-	const t_player_entity	*player_ref;
+	t_player_entity			*player_ref;
 	const t_frame			*frame_ref;
 }				t_monster_entity_args;
 
@@ -62,7 +62,7 @@ t_monster_stats	ft_monster_stats(const t_vec2f pos,
 
 t_constructor	monster_entity(const t_monster_stats stats,
 					const t_spritesheet *const spritesheet_ref,
-					const t_player_entity *const player_ref,
+					t_player_entity *player_ref,
 					const t_frame *const frame_ref);
 
 t_result		init_monster_entity(t_monster_entity *const self,
