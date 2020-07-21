@@ -16,3 +16,4 @@ void	ft_putfloat(float n)
 {
 	ft_putfloat_fd(n, 1);
 }
+

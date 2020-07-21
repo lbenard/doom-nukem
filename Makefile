@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/20 18:53:22 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/21 18:38:27 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -439,7 +439,9 @@ SRCS_LIST		=	main.c																			\
 					game/map_parser/split_data/new_string_array.c									\
 					game/map_parser/split_data/split_data.c											\
 					game/map_parser/parser.c														\
-					game/map_parser/to_object.c
+					game/map_parser/to_object.c														\
+																									\
+					game/hud/hud_game.c
 
 
 UNAME			=	$(shell uname)

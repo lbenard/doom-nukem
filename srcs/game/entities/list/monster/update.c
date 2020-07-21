@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:41:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/20 19:30:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/21 18:54:39 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/monster_entity.h"
+#include "game/entities/player_entity.h"
 #include "engine/delta.h"
 #include "engine/a_star.h"
 
@@ -67,8 +68,14 @@ void	monster_entity_update(t_monster_entity *const self)
 		}
 		else
 		{
+			if (self->player_ref->is_taking_damage == FALSE)
+			{
+				ft_putendl("couilles");
+				take_damage(self->player_ref, 1);
+				self->player_ref->is_taking_damage = TRUE;
+			}
+			self->player_ref->is_taking_damage = FALSE;
 			self->animation.speed = 0;
-			ft_putendl("couilles");
 			init_astar(&self->a_star, self->player_ref->map_ref, self->super.super, self->player_ref->super);
 		}
 	}

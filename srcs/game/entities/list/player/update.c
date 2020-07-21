@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 22:40:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/21 18:44:56 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,14 @@ static void		wasd(t_player_entity *const self, t_vec3f rotation)
 		self->velocity.y += rotation_trigonometry.x * d;
 	}
 
+}
+
+void			take_damage(t_player_entity *self, int damage)
+{
+	if (self->health - damage < 0)
+		self->health = 0;
+	else
+		self->health -= damage;
 }
 
 void			player_entity_update(t_player_entity *const self)
