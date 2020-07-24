@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 20:25:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 22:28:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/22 01:56:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,9 @@ static void		component_cursor(t_editor_scene *const self, sfEvent *event)
 {
 	if (self->hud.tools_group.cursor_ref->is_checked)
 	{
-		if (event->type == sfEvtMouseButtonPressed)
+		if (event->type == sfEvtMouseButtonPressed
+			&& event->mouseButton.x < (ssize_t)self->editor_view.size.x
+			&& event->mouseButton.y < (ssize_t)self->editor_view.size.y)
 			select_component(self, event);
 		if (event->type == sfEvtMouseButtonReleased
 			&& self->selected_component_ref)
