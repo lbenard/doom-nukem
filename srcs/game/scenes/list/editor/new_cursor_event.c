@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 20:25:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/08 22:28:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/21 16:47:58 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 static void		remove_component(t_editor_scene *const self)
 {
+	entity_list_remove(&self->super.entities,
+		(t_entity*)self->selected_component_ref);
 	entity_list_remove(&self->components,
 		(t_entity*)self->selected_component_ref);
 	entity_list_remove(&self->blocks,
 		(t_entity*)self->selected_component_ref);
-	entity_list_remove(&self->super.entities,
+	entity_list_remove(&self->entities,
 		(t_entity*)self->selected_component_ref);
 	self->selected_component_ref = NULL;
 }

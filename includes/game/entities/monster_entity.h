@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:07:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/22 01:50:14 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/22 14:51:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_monster_entity
 	t_sprite_entity			super;
 	t_animation				animation;
 	const t_spritesheet		*spritesheet_ref;
-	const t_player_entity	*player_ref;
+	t_player_entity			*player_ref;
 	float					full_health;
 	float					health;
 	float					damage;
