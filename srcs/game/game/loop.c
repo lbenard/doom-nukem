@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:07:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 19:17:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	fps_average(double spf)
 
 	total_fps += 1.0f / spf;
 	total_frames++;
-	printf("average: %f\n", total_fps / total_frames);
+	// printf("average: %f\n", total_fps / total_frames);
 }
 
 void	game_loop(void)
@@ -47,7 +47,7 @@ void	game_loop(void)
 	}
 	if (window_is_focused(&game->window))
 	{
-		if (game->scene)
+		if (game->scene && !game->has_scene_changed)
 			game->scene->render_fn(game->scene, &game->window.frame);
 		window_update(&game->window);
 	}
@@ -55,12 +55,13 @@ void	game_loop(void)
 	fps_average(spf);
 	if (spf > MAX_DELTA)
 	{
-		ft_putstr("cpu just had a stroke (got ");
-		ft_putnbr(1.0f / spf);
-		ft_putstr("fps, expected at least ");
-		ft_putnbr(1.0f / MAX_DELTA);
-		ft_putstr("fps)\n");
+		// ft_putstr("cpu just had a stroke (got ");
+		// ft_putnbr(1.0f / spf);
+		// ft_putstr("fps, expected at least ");
+		// ft_putnbr(1.0f / MAX_DELTA);
+		// ft_putstr("fps)\n");
 	}
 	set_last_delta(spf);
 	last_time = get_wall_time();
+	game->has_scene_changed = FALSE;
 }

@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 20:28:22 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/26 20:52:17 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	add_modules(t_raycasting_scene *const self,
 		hud_game("resources/sprites/heart_disintegration.bmp",
 			"resources/sprites/sprite-sheet-png-walking-2.bmp"));
 }
+
+#include <stdio.h>
 
 static void	add_entities(t_raycasting_scene *const self)
 {
@@ -84,6 +86,7 @@ static void	init_vars(t_raycasting_scene *const self,
 	self->weapon.first_render = TRUE;
 	self->weapon.shoot_input = input_get_id(&game_singleton()->input, "Shoot");
 	self->weapon.reload_input = input_get_id(&game_singleton()->input, "Reload");
+	self->use_input = input_get_id(&game_singleton()->input, "Use");
 }
 
 t_result	init_raycasting_scene(t_raycasting_scene *const self,
@@ -99,7 +102,7 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 	add_modules(self, args);
 	if (!self->super.module.has_error)
 		add_entities(self);
-	else
+	if (self->super.module.has_error || self->super.entities.module.has_error)
 	{
 		destroy_raycasting_scene(self);
 		return (throw_result_str("init_raycasting_scene()",

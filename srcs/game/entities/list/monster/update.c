@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:41:50 by lbenard           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/07/26 19:10:29 by mribouch         ###   ########.fr       */
+=======
+/*   Updated: 2020/07/26 19:56:09 by lbenard          ###   ########.fr       */
+>>>>>>> b9b4f61cee1d9ca6d967a29bda4d6d77264ed363
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,15 +122,13 @@ void	monster_entity_update(t_monster_entity *const self)
 			self->super.super.transform.position.z += direction.z;
 			self->super.super.transform.direction = vec3f_normalize(direction);
 			self->animation.anim = get_orientate_sprite(self);
-			printf("dirx = %f, diry = %f\n", self->super.super.transform.direction.x, self->super.super.transform.direction.y);
 			// animation_update(&self->animation, self->spritesheet_ref);
 			init_astar(&self->a_star, self->player_ref->map_ref, self->super.super, self->player_ref->super);
 		}
 		else
 		{
-			if (self->player_ref->is_taking_damage == FALSE)
+			if (self->player_ref->is_taking_damage == FALSE && distance < 1.5f)
 			{
-				ft_putendl("couilles");
 				take_damage(self->player_ref, 1);
 				self->player_ref->is_taking_damage = TRUE;
 			}

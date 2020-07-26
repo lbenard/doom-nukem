@@ -73,9 +73,18 @@ typedef struct	s_editor_scene
 		t_radio_group	blocks;
 		struct s_blocks_group
 		{
-			t_block_checkbox_entity	*blue_ice;
-			t_block_checkbox_entity	*white_wool;
-			t_block_checkbox_entity	*acacia_log;
+			t_block_checkbox_entity	*sandstone;
+			t_block_checkbox_entity	*metallic_wall;
+			t_block_checkbox_entity	*metallic_crate;
+			t_block_checkbox_entity	*metallic_door;
+			t_block_checkbox_entity	*metallic_light_tile;
+			t_block_checkbox_entity	*metallic_dark_tile;
+			t_block_checkbox_entity	*metallic_red_button;
+			t_block_checkbox_entity	*metallic_green_button;
+			t_block_checkbox_entity	*metallic_blue_button;
+			t_block_checkbox_entity	*metallic_red_door;
+			t_block_checkbox_entity	*metallic_green_door;
+			t_block_checkbox_entity	*metallic_blue_door;
 		}						blocks_group;
 		t_radio_group	entities;
 		struct s_entities_group

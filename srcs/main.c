@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 20:28:17 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/26 20:52:45 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ void	register_inputs(t_game *const game)
 	input_attach(&game->input, right, ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&game->input, right,
 		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
+
+	int use = input_register(&game->input, "Use");
+	input_attach(&game->input, use, ft_key_event(sfKeyE, 0));
+	input_attach(&game->input, use, ft_button_event(0, XBOX_A, 0));
 
 	int shoot = input_register(&game->input, "Shoot");
 	input_attach(&game->input, shoot, ft_mouse_event(sfMouseLeft, 0));

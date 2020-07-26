@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_scene.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 18:22:43 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/26 19:31:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_raycasting_scene
 	t_frame				crosshair;
 	t_array				zbuffer;
 	t_player_entity		*player_ref;
+	t_input_id			use_input;
 	t_hud_game			hud_ray;
 	struct s_weapon_infos
 	{
@@ -121,10 +122,9 @@ void			destroy_raycasting_scene(t_raycasting_scene *const self);
 
 typedef struct	s_ray
 {
-	t_vec2f			hit;
-	t_wall			*wall;
-	float			perpendicular_distance;
-	float			horizontal_ratio;
+	t_vec2f	hit;
+	float	perpendicular_distance;
+	float	horizontal_ratio;
 }				t_ray;
 
 // typedef struct	s_casting

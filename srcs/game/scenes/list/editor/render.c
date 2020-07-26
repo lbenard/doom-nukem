@@ -6,30 +6,31 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:32:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:24:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 18:19:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/editor_scene.h"
 
 static void	render_preview_buttons(t_editor_scene *const self,
-			t_frame *const fb)
+				t_frame *const fb)
 {
+	t_block_checkbox_entity	**list;
+	size_t					size;
+	size_t					i;
 	t_block_checkbox_entity	*hovered;
 
 	hovered = NULL;
-	if (self->hud.blocks_group.blue_ice->super.super.is_hovered)
-		hovered = self->hud.blocks_group.blue_ice;
-	if (self->hud.blocks_group.white_wool->super.super.is_hovered)
-		hovered = self->hud.blocks_group.white_wool;
-	if (self->hud.blocks_group.acacia_log->super.super.is_hovered)
-		hovered = self->hud.blocks_group.acacia_log;
-	if (self->hud.blocks_group.blue_ice != hovered)
-		block_checkbox_entity_render(self->hud.blocks_group.blue_ice, fb);
-	if (self->hud.blocks_group.white_wool != hovered)
-		block_checkbox_entity_render(self->hud.blocks_group.white_wool, fb);
-	if (self->hud.blocks_group.acacia_log != hovered)
-		block_checkbox_entity_render(self->hud.blocks_group.acacia_log, fb);
+	list = (t_block_checkbox_entity**)&self->hud.blocks_group;
+	size = sizeof(self->hud.blocks_group) / sizeof(*list);
+	i = 0;
+	while (i < size)
+	{
+		if (!hovered && list[i]->super.super.is_hovered)
+			hovered = list[i];
+		block_checkbox_entity_render(list[i], fb);
+		i++;
+	}
 	if (hovered)
 		block_checkbox_entity_render(hovered, fb);
 }
