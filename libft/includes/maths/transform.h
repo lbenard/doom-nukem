@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 21:18:49 by lbenard           #+#    #+#             */
-/*   Updated: 2019/02/23 21:21:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 17:45:30 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_transform
 	t_vec3f	position;
 	t_vec3f	rotation;
 	t_vec3f	scale;
+	t_vec3f	direction;
 }				t_transform;
 
 /*
