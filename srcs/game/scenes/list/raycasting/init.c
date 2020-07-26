@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 20:52:17 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/26 21:19:39 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static void	add_modules(t_raycasting_scene *const self,
 				const t_raycasting_scene_args *const args)
 {
 	module_add(&self->super.module, &self->floor,
-		frame_from_file("resources/textures/pack/block/andesite.bmp"));
+		frame_from_file("resources/textures/andesite.bmp"));
 	module_add(&self->super.module, &self->ceiling,
-		frame_from_file("resources/textures/pack/block/coarse_dirt.bmp"));
+		frame_from_file("resources/textures/coarse_dirt.bmp"));
 	module_add(&self->super.module, &self->map, map(args->path));
 	module_add(&self->super.module, &self->zbuffer,
 		array(sizeof(t_ray) * args->window->size.x));

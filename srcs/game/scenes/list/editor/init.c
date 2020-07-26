@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 20:47:42 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/26 21:19:15 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	add_modules(t_editor_scene *const self,
 			ft_rgba(64, 0, 0, 255)));
 	module_add(&self->super.module,
 		&self->editor_background,
-		frame_from_file("resources/textures/bob.jpg"));
+		frame_from_file("resources/textures/bob.bmp"));
 	module_add(&self->super.module, &self->components, entity_list());
 	module_add(&self->super.module, &self->blocks, entity_list());
 	module_add(&self->super.module, &self->entities, entity_list());
@@ -52,7 +52,7 @@ static void	add_block_buttons(t_editor_scene *const self,
 	while (i < ft_smin(descriptors_size, buttons_size))
 	{
 		buttons[i] = create_block_checkbox(
-			&self->super.entities, "editor-button.png",
+			&self->super.entities, "editor-button.bmp",
 			&descriptors[i], args->screen);
 		if (buttons[i])
 		{
