@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 18:06:13 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/26 20:28:16 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_result	init_monster_entity(t_monster_entity *const self,
 	module_add(&self->super.super.module, &self->animation,
 		animation(0, args->spritesheet_ref->nb_sprite, 1.0f));
 	module_add(&self->super.super.module, &self->name_text,
-		text("haxorville.png",
+		text("haxorville.bmp",
 			ft_usize(5 * ft_strlen(args->name), 9)));
 	if (self->super.super.module.has_error == TRUE)
 	{

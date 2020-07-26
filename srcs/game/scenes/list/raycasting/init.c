@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 18:22:38 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/26 20:28:22 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ static void	add_modules(t_raycasting_scene *const self,
 				const t_raycasting_scene_args *const args)
 {
 	module_add(&self->super.module, &self->floor,
-		frame_from_file("resources/textures/pack/block/andesite.png"));
+		frame_from_file("resources/textures/pack/block/andesite.bmp"));
 	module_add(&self->super.module, &self->ceiling,
-		frame_from_file("resources/textures/pack/block/coarse_dirt.png"));
+		frame_from_file("resources/textures/pack/block/coarse_dirt.bmp"));
 	module_add(&self->super.module, &self->map, map(args->path));
 	module_add(&self->super.module, &self->zbuffer,
 		array(sizeof(t_ray) * args->window->size.x));
 	module_add(&self->super.module, &self->sprite_entities, entity_list());
 	module_add(&self->super.module, &self->monster_entities, entity_list());
 	module_add(&self->super.module, &self->crosshair,
-		frame_from_file("resources/textures/crosshair-downscale.png"));
+		frame_from_file("resources/textures/crosshair-downscale.bmp"));
 	module_add(&self->super.module, &self->pistol,
 		sound("resources/sound/ar15-pistol-shot.wav"));
 	module_add(&self->super.module, &self->weapon.display_text,
-		text("haxorville.png", ft_usize(args->window->size.x, 9)));
+		text("haxorville.bmp", ft_usize(args->window->size.x, 9)));
 	module_add(&self->super.module, &self->ss,
 		spritesheet("resources/sprites/wow.bmp",
 			ft_usize(17, 8)));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:23:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 20:28:17 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ int	main(int ac, char **av)
 // 	game = game_singleton();
 // 	register_inputs(game);
 // 	init_module(&module);
-// 	module_add(&module, &m_text, text("haxorville.png", ft_usize(1280, 720)));
+// 	module_add(&module, &m_text, text("haxorville.bmp", ft_usize(1280, 720)));
 // 	module_add(&module, &m_string, string("these are the signs of warning\n"
 // 		"symbols of danger\n"
 // 		"some are all too familiar\n"

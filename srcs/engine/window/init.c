@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 04:36:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/12 00:34:56 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 20:28:13 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	add_modules(t_window *const self, const t_window_args *const args)
 	module_add(&self->module, &self->frame,
 		frame(self->size, ft_rgba(0, 0, 0, 255)));
 	module_add(&self->module, &self->cursor,
-		cursor_from_file("resources/cursors/cursor-upscale.png"));
+		cursor_from_file("resources/cursors/cursor-upscale.bmp"));
 }
 
 static void	init_vars(t_window *const self, const t_window_args *const args)

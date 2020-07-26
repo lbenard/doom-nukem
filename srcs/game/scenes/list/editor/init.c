@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 21:52:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 20:28:25 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,40 +49,40 @@ static void	add_entities(t_editor_scene *const self,
 		entity_list_add_entity_ref(&self->components,
 			entity_list_add_entity(&self->super.entities,
 			player_component_entity(
-				"resources/textures/editor-player-spawn.png")));
+				"resources/textures/editor-player-spawn.bmp")));
 	// Tools
 	self->hud.tools_group.cursor_ref = create_checkbox_relative_pos(
-		&self->super.entities, "editor-cursor.png", ft_checkbox_position_pos(
+		&self->super.entities, "editor-cursor.bmp", ft_checkbox_position_pos(
 		ft_vec3f(self->editor_view.size.x + 30.0f, 30.0f, 0.0f)), args->screen);
 	self->hud.tools_group.create_ref = create_checkbox_relative(
-		&self->super.entities, "editor-create.png",
+		&self->super.entities, "editor-create.bmp",
 		ft_checkbox_position(self->hud.tools_group.cursor_ref, RIGHT_TO, 50.0f),
 		args->screen);
 	self->hud.tools_group.save_ref = create_checkbox_relative_pos(
-		&self->super.entities, "editor-save.png",
+		&self->super.entities, "editor-save.bmp",
 		ft_checkbox_position_pos(ft_vec3f(args->screen->size.x - 30,
 		args->screen->size.y - 30, 0.0f)), args->screen);
 
 	self->hud.create_group.show_blocks_ref = create_checkbox_relative(
-		&self->super.entities, "editor-block.png", ft_checkbox_position(
+		&self->super.entities, "editor-block.bmp", ft_checkbox_position(
 		self->hud.tools_group.create_ref, BELOW, 50.0f), args->screen);
 	self->hud.create_group.show_entities_ref = create_checkbox_relative(
-		&self->super.entities, "editor-entity.png", ft_checkbox_position(
+		&self->super.entities, "editor-entity.bmp", ft_checkbox_position(
 		self->hud.create_group.show_blocks_ref, RIGHT_TO, 50.0f), args->screen);
 
 	// Blocks
 	self->hud.blocks_group.blue_ice = create_block_checkbox(
-		&self->super.entities, "editor-button.png",
+		&self->super.entities, "editor-button.bmp",
 		&game->blocks_list.blue_ice, args->screen);
 	self->hud.blocks_group.white_wool = create_block_checkbox(
-		&self->super.entities, "editor-button.png",
+		&self->super.entities, "editor-button.bmp",
 		&game->blocks_list.white_wool, args->screen);
 	self->hud.blocks_group.acacia_log = create_block_checkbox(
-		&self->super.entities, "editor-button.png",
+		&self->super.entities, "editor-button.bmp",
 		&game->blocks_list.acacia_log, args->screen);
 
 	self->hud.entities_group.onepunchman = create_entity_checkbox(
-		&self->super.entities, "editor-button.png",
+		&self->super.entities, "editor-button.bmp",
 		&game->entities_list.onepunchman, args->screen);
 }
 

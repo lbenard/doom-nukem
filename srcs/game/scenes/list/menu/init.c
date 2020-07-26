@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:18 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 19:52:38 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 20:28:24 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ static void	add_buttons(t_menu_scene *const scene,
 {
 	scene->start_game_ref = (t_button_entity*)entity_list_add_entity(
 		&scene->super.entities,
-		dynamic_button_entity("resources/buttons/start-game-upscale.png",
-			"resources/buttons/start-game-hover-upscale.png",
-			"resources/buttons/start-game-click-upscale.png",
+		dynamic_button_entity("resources/buttons/start-game-upscale.bmp",
+			"resources/buttons/start-game-hover-upscale.bmp",
+			"resources/buttons/start-game-click-upscale.bmp",
 			args->window));
 	scene->editor_ref = (t_button_entity*)entity_list_add_entity(
 		&scene->super.entities,
-		dynamic_button_entity("resources/buttons/editor-upscale.png",
-			"resources/buttons/editor-hover-upscale.png",
-			"resources/buttons/editor-click-upscale.png",
+		dynamic_button_entity("resources/buttons/editor-upscale.bmp",
+			"resources/buttons/editor-hover-upscale.bmp",
+			"resources/buttons/editor-click-upscale.bmp",
 			args->window));
 	scene->close_game_ref = (t_button_entity*)entity_list_add_entity(
 		&scene->super.entities,
-		dynamic_button_entity("resources/buttons/close-game-upscale.png",
-			"resources/buttons/close-game-hover-upscale.png",
-			"resources/buttons/close-game-click-upscale.png",
+		dynamic_button_entity("resources/buttons/close-game-upscale.bmp",
+			"resources/buttons/close-game-hover-upscale.bmp",
+			"resources/buttons/close-game-click-upscale.bmp",
 			args->window));
 }
 
@@ -43,20 +43,20 @@ static void	add_images(t_menu_scene *const self, const t_usize window_size)
 {
 	self->vignette_ref = (t_image_entity*)entity_list_add_entity(
 		&self->super.entities,
-		image_entity_from_file("resources/textures/vignette.png",
+		image_entity_from_file("resources/textures/vignette.bmp",
 			ft_frame_transform_position(ft_isize(window_size.x / 2,
 				window_size.y / 2))));
 	self->background_ref = (t_image_entity*)entity_list_add_entity(
 		&self->super.entities,
-		image_entity_from_file("resources/textures/blood-background.png",
+		image_entity_from_file("resources/textures/blood-background.bmp",
 			ft_frame_transform_position(ft_isize(window_size.x / 2,
 				window_size.y / 2))));
 	self->title_ref = (t_image_entity*)entity_list_add_entity(
 		&self->super.entities,
-		image_entity_from_file("resources/texts/doum-upscale.png",
+		image_entity_from_file("resources/texts/doum-upscale.bmp",
 			ft_frame_transform_default()));
 	module_add(&self->super.module, &self->credits,
-		text("haxorville.png", ft_usize(window_size.x, 9)));
+		text("haxorville.bmp", ft_usize(window_size.x, 9)));
 	if (!self->super.module.has_error)
 	{
 		text_set_ref(&self->credits,
@@ -66,7 +66,7 @@ static void	add_images(t_menu_scene *const self, const t_usize window_size)
 	}
 	// self->credits_ref = (t_image_entity*)entity_list_add_entity(
 	// 	&self->super.entities,
-	// 	image_entity_from_file("resources/texts/credits-upscale.png",
+	// 	image_entity_from_file("resources/texts/credits-upscale.bmp",
 	// 		ft_frame_transform(ft_vec2f(.0f, 1.0f),
 	// 			ft_isize(5, window_size.y - 5),
 	// 			ft_vec2f(1.0f, 1.0f),
