@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 03:43:56 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 18:06:13 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_result	init_monster_entity(t_monster_entity *const self,
 	self->damage = args->damage;
 	self->name = args->name;
 	self->is_star = FALSE;
+	self->super.super.transform.direction = ft_vec3f(0, 1, 0);
 	module_add(&self->super.super.module, &self->animation,
 		animation(0, args->spritesheet_ref->nb_sprite, 1.0f));
 	module_add(&self->super.super.module, &self->name_text,
