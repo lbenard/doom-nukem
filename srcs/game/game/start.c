@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:04:22 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 19:16:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_result	start_game(const t_game_args *const args)
 	init_block_descriptors(game);
 	init_entity_descriptors(game);
 	game->scene = NULL;
+	game->has_scene_changed = FALSE;
 	if (game->module.has_error)
 	{
 		stop_game();

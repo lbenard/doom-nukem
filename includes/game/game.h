@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 19:03:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 19:16:47 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,24 @@ typedef struct	s_game
 	t_module				module;
 	t_window				window;
 	t_scene					*scene;
+	t_bool					has_scene_changed;
 	t_input					input;
 	t_entity_index			entity_index;
 	t_event_handler			event_handler;
 	struct s_blocks
 	{
-		t_block_descriptor	blue_ice;
-		t_block_descriptor	white_wool;
-		t_block_descriptor	acacia_log;
+		t_block_descriptor	sandstone;
+		t_block_descriptor	metallic_wall;
+		t_block_descriptor	metallic_crate;
+		t_block_descriptor	metallic_door;
+		t_block_descriptor	metallic_light_tile;
+		t_block_descriptor	metallic_dark_tile;
+		t_block_descriptor	metallic_red_button;
+		t_block_descriptor	metallic_green_button;
+		t_block_descriptor	metallic_blue_button;
+		t_block_descriptor	metallic_red_door;
+		t_block_descriptor	metallic_green_door;
+		t_block_descriptor	metallic_blue_door;
 	}						blocks_list;
 	struct s_entities
 	{

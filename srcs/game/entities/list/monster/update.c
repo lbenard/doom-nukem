@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:41:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 18:54:39 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/26 19:50:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	monster_entity_update(t_monster_entity *const self)
 	distance = difference.x * difference.x
 		+ difference.y * difference.y
 		+ difference.z * difference.z;
-	if (distance < 75)
+	if (distance < 75.0f)
 	{
 		if (self->is_star == FALSE)
 		{
@@ -68,9 +68,8 @@ void	monster_entity_update(t_monster_entity *const self)
 		}
 		else
 		{
-			if (self->player_ref->is_taking_damage == FALSE)
+			if (self->player_ref->is_taking_damage == FALSE && distance < 1.5f)
 			{
-				ft_putendl("couilles");
 				take_damage(self->player_ref, 1);
 				self->player_ref->is_taking_damage = TRUE;
 			}

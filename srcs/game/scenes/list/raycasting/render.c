@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/22 16:04:05 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/26 19:50:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,29 +162,6 @@ static void	walls_raycasting(t_raycasting_scene *const self,
 	}
 }
 
-static void	zbuffer(t_raycasting_scene *const self,
-				const t_vec2f dir,
-				const t_vec2f plane)
-{
-	size_t	i;
-	size_t	length;
-	float	camera_x;
-	t_ray	*buffer;
-
-	length = self->zbuffer.size / sizeof(t_ray);
-	buffer = (t_ray*)self->zbuffer.array;
-	i = 0;
-	while (i < length)
-	{
-		camera_x = 2.0f * i / (float)length - 1;
-		buffer[i] = cast(&self->map,
-			ft_vec2f(self->player_ref->super.transform.position.x,
-				self->player_ref->super.transform.position.y),
-			ft_vec2f(dir.x + plane.x * camera_x, dir.y + plane.y * camera_x));
-		i++;
-	}
-}
-
 void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 {
 	int		perc_sprite;
@@ -207,14 +184,11 @@ void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 				ft_isize(fb->size.x / 2 - 
 					self->hud_ray.heart_ss.grid_size.x / 2,
 					fb->size.y - 64),ft_vec2f(fx, fx), 255), blend_add);
-	// printf("health = %d, perc = %d, index_sprite = %f\n", self->player_ref->health, perc_sprite, index_sprite);
-	printf("amplitude = %f\n", amplitude);
 }
 
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
-	zbuffer(self, self->player_ref->dir, self->player_ref->plane);
 	frame_fill(fb, ft_rgba(0, 0, 0, 255));
 	floor_raycasting(self, fb, self->player_ref->dir, self->player_ref->plane);
 	(void)ceiling_raycasting;
