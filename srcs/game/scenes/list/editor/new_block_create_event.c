@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:38:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:24:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/22 01:56:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ static void		block_create(t_editor_scene *const self, sfEvent *event)
 	t_block_checkbox_entity	*checkbox;
 	t_vec2f					pos;
 
-	if (event->type == sfEvtMouseButtonPressed)
+	if (event->type == sfEvtMouseButtonPressed
+		&& event->mouseButton.x < (ssize_t)self->editor_view.size.x
+		&& event->mouseButton.y < (ssize_t)self->editor_view.size.y)
 	{
 		mouse_pos = ft_isize(event->mouseButton.x, event->mouseButton.y);
 		if (mouse_pos.x >= 0

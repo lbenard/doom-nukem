@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/22 03:37:00 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/22 16:04:05 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,20 +190,25 @@ void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 	int		perc_sprite;
 	float	index_sprite;
 	static double i;
+	float	amplitude;
+	float	fx;
 
 	perc_sprite = 100 * self->player_ref->health / 150;
-	index_sprite = ((float)self->hud_ray.heart_ss.grid_size.x / 100.0f) * perc_sprite;
-	i += 0.05 + (float)((8 - index_sprite) / 100);
-	if (i >= 6.283)
+	index_sprite = ((float)self->hud_ray.heart_ss.grid_size.x / 100.0f)
+		* perc_sprite;
+	amplitude = 4.0f - 0.3 * (8 - index_sprite);
+	i += 0.04 + (float)((8 - index_sprite) / 100);
+	if (i >= 3.160)
 		i = 0;
-	frame_layer_transform(fb, &self->hud_ray.heart_ss.sprite[8 - (int)index_sprite],
-		ft_frame_transform(ft_vec2f(0.5f, 1.0f), ft_isize(fb->size.x / 2 - self->hud_ray.heart_ss.grid_size.x / 2,
-			fb->size.y - 64), ft_vec2f(1 + cos(i - 1.571)*sin(i - 1.571)/(i - 1.571), 1 + cos(i - 1.571)*sin(i - 1.571)/(i - 1.571)), 255), blend_add);
+	fx = 2 + cos((i - 0.523) * 3)*sin((i - 0.523))/((i - 0.523) * amplitude);
+	frame_layer_transform(fb,
+		&self->hud_ray.heart_ss.sprite[8 - (int)index_sprite],
+			ft_frame_transform(ft_vec2f(0.5f, 1.0f),
+				ft_isize(fb->size.x / 2 - 
+					self->hud_ray.heart_ss.grid_size.x / 2,
+					fb->size.y - 64),ft_vec2f(fx, fx), 255), blend_add);
 	// printf("health = %d, perc = %d, index_sprite = %f\n", self->player_ref->health, perc_sprite, index_sprite);
-	printf("costime = %f\n", i);
-	// cos(x)+10*sin(2*x)/x
-	// 2 + cosf(i) / 3, 2 + cosf(i) / 3
-
+	printf("amplitude = %f\n", amplitude);
 }
 
 void		raycasting_scene_render(t_raycasting_scene *const self,
