@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 21:19:39 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/27 17:56:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ static void	add_modules(t_raycasting_scene *const self,
 		hud_game("resources/sprites/heart_disintegration.bmp",
 			"resources/sprites/sprite-sheet-png-walking-2.bmp"));
 }
-
-#include <stdio.h>
 
 static void	add_entities(t_raycasting_scene *const self)
 {
@@ -93,7 +91,7 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 				t_raycasting_scene_args *const args)
 {
 	if (!init_scene(&self->super, "Raycasting sandbox",
-		(void(*)())raycasting_scene_update, (void(*)())raycasting_scene_render))
+		raycasting_scene_update, raycasting_scene_render))
 	{
 		return (throw_result_str("init_raycasting_scene()",
 			"failed while initalizing scene"));

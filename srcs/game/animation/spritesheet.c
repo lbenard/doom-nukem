@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 18:54:37 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/19 02:24:11 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 22:23:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_result		init_spritesheet(t_spritesheet *const self,
 	size_t	i;
 
 	init_module(&self->module);
-	module_add(&self->module, &self->pixels, frame_from_bmp(args->path));
+	module_add(&self->module, &self->pixels, frame_from_file(args->path));
 	if (self->module.has_error)
 	{
 		destroy_spritesheet(self);

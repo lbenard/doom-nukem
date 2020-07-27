@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 19:16:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/27 01:53:22 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct	s_game
 	t_module				module;
 	t_window				window;
 	t_scene					*scene;
+	void					(*scene_destructor_fn)();
 	t_bool					has_scene_changed;
 	t_input					input;
 	t_entity_index			entity_index;
