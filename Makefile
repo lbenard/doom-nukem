@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/21 18:38:27 by mribouch         ###   ########.fr        #
+#    Updated: 2020/07/26 23:02:18 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,10 +90,8 @@ SRCS_LIST		=	main.c																			\
 																									\
 					engine/frame/frame.c															\
 					engine/frame/frame_from_file.c													\
-					engine/frame/frame_from_bmp.c													\
 					engine/frame/init.c																\
 					engine/frame/init_from_file.c													\
-					engine/frame/init_from_bmp.c													\
 					engine/frame/update.c															\
 					engine/frame/clear.c															\
 					engine/frame/fill.c																\
@@ -482,14 +480,14 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto# -g3 -fsanitize=address # -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g3 #-fsanitize=address # -Wno-deprecated
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)
-	LDFLAGS         :=  $(LDFLAGS) \
-                        -Wl,-rpath,$(SFML_FOLDER)/extlibs/libs-osx/Frameworks \
-                        -Wl,-rpath,$(SFML_FOLDER)/lib \
-                        -Wl,-rpath,$(CSFML_FOLDER)/lib
+	LDFLAGS			:=  $(LDFLAGS) \
+						-Wl,-rpath,$(SFML_FOLDER)/extlibs/libs-osx/Frameworks \
+						-Wl,-rpath,$(SFML_FOLDER)/lib \
+						-Wl,-rpath,$(CSFML_FOLDER)/lib
 	RUN_PREFIX		:=	LD_LIBRARY_PATH=CSFML/lib:SFML/lib
 	CFLAGS := $(CFLAGS) -Wno-deprecated-declarations
 endif

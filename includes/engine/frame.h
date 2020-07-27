@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:02:59 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:07:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/26 22:23:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ typedef struct		s_frame_args
 
 t_constructor		frame(const t_usize size, const t_rgba fill_color);
 t_constructor		frame_from_file(const char *const path);
-t_constructor		frame_from_bmp(const char *const path);
+// t_constructor		frame_from_bmp(const char *const path);
 
 t_result			init_frame(t_frame *const self,
 						const t_frame_args *const args);
 t_result			init_frame_from_file(t_frame *const self,
 						const t_frame_args *const args);
-t_result			init_frame_from_bmp(t_frame *const self,
-						const t_frame_args *const args);
+// t_result			init_frame_from_bmp(t_frame *const self,
+// 						const t_frame_args *const args);
 
 void				frame_update(t_frame *const self);
 void				frame_clear(t_frame *const self);
