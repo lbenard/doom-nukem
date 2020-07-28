@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 17:18:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 18:06:03 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ static void	add_modules(t_raycasting_scene *const self,
 	module_add(&self->super.module, &self->onepunchman_spritesheet,
 		spritesheet("resources/sprites/sprite-sheet-png-walking-2.bmp",
 			ft_usize(9, 4)));
+	module_add(&self->super.module, &self->ghast_spritesheet,
+		spritesheet("resources/sprites/ghast.bmp",
+			ft_usize(3, 4)));
 	module_add(&self->super.module, &self->hud_ray,
 		hud_game("resources/sprites/heart_disintegration.bmp",
 			"resources/sprites/sprite-sheet-png-walking-2.bmp"));
