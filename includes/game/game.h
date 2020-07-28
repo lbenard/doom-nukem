@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/27 01:53:22 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/27 18:24:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ typedef struct	s_game
 	struct s_entities
 	{
 		t_entity_descriptor	onepunchman;
-		// t_entity_descriptor	white_wool;
-		// t_entity_descriptor	acacia_log;
+		t_entity_descriptor	weird_alien;
 	}						entities_list;
 }				t_game;
 

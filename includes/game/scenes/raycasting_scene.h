@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 19:31:27 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/27 18:08:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ typedef struct	s_raycasting_scene
 	t_entity_list		monster_entities;
 	t_window			*window_ref;
 	t_sound				pistol;
-	t_spritesheet		ss;
+	t_spritesheet		alien_spritesheet;
+	t_spritesheet		onepunchman_spritesheet;
 	float				fov;
 }				t_raycasting_scene;
 

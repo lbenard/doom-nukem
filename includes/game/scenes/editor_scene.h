@@ -90,6 +90,7 @@ typedef struct	s_editor_scene
 		struct s_entities_group
 		{
 			t_entity_checkbox_entity	*onepunchman;
+			t_entity_checkbox_entity	*weird_alien;
 		}						entities_group;
 	}							hud;
 	t_editor_camera_entity		*camera_ref;

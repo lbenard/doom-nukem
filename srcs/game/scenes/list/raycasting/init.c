@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/27 17:56:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 17:16:10 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ static void	add_modules(t_raycasting_scene *const self,
 		sound("resources/sound/ar15-pistol-shot.wav"));
 	module_add(&self->super.module, &self->weapon.display_text,
 		text("haxorville.bmp", ft_usize(args->window->size.x, 9)));
-	module_add(&self->super.module, &self->ss,
+	module_add(&self->super.module, &self->alien_spritesheet,
 		spritesheet("resources/sprites/wow.bmp",
 			ft_usize(17, 8)));
+	module_add(&self->super.module, &self->onepunchman_spritesheet,
+		spritesheet("resources/sprites/sprite-sheet-png-walking-2.bmp",
+			ft_usize(9, 4)));
 	module_add(&self->super.module, &self->hud_ray,
 		hud_game("resources/sprites/heart_disintegration.bmp",
 			"resources/sprites/sprite-sheet-png-walking-2.bmp"));
@@ -65,7 +68,10 @@ static void	add_entities(t_raycasting_scene *const self)
 					/ sizeof(t_entity_descriptor),
 				node->name);
 			if (descriptor)
-				raycasting_scene_add_entity(self, descriptor, node->pos);
+			{
+				if (raycasting_scene_add_entity(self, descriptor, node->pos) == ERROR)
+					return ;
+			}
 		}
 	}
 }
@@ -90,7 +96,7 @@ static void	init_vars(t_raycasting_scene *const self,
 t_result	init_raycasting_scene(t_raycasting_scene *const self,
 				t_raycasting_scene_args *const args)
 {
-	if (!init_scene(&self->super, "Raycasting sandbox",
+	if (!init_scene(&self->super, "Raycasting",
 		raycasting_scene_update, raycasting_scene_render))
 	{
 		return (throw_result_str("init_raycasting_scene()",

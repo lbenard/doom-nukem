@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/26 23:02:18 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/27 18:17:58 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -359,6 +359,11 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/onepunchman/init.c											\
 					game/entities/list/onepunchman/update.c											\
 					game/entities/list/onepunchman/destroy.c										\
+																									\
+					game/entities/list/weird_alien/weird_alien_entity.c								\
+					game/entities/list/weird_alien/init.c											\
+					game/entities/list/weird_alien/update.c											\
+					game/entities/list/weird_alien/destroy.c										\
 																									\
 					game/entities/list/sprite/sprite_entity.c										\
 					game/entities/list/sprite/sprite_entity_size.c									\

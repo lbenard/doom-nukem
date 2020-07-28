@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:41:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 21:06:19 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/28 17:03:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "engine/a_star.h"
 #include <math.h>
 
-float	angle_gap(float f1, float f2)
+static float	angle_gap(float f1, float f2)
 {
 	float	result;
 	
@@ -30,7 +30,7 @@ float	angle_gap(float f1, float f2)
 	return (result);
 }
 
-float		compute_angle_to_player(t_monster_entity *self)
+static float	compute_angle_to_player(t_monster_entity *self)
 {
 	t_vec3f	player_pos;
 	t_vec3f	monster_pos;
@@ -48,7 +48,7 @@ float		compute_angle_to_player(t_monster_entity *self)
 	return (angle_gap(monster_angle, player_angle));
 }
 
-int		get_orientate_sprite(t_monster_entity *self)
+static int		get_orientate_sprite(t_monster_entity *self)
 {
 	float	angle;
 	float	angle_abs;
@@ -67,7 +67,7 @@ int		get_orientate_sprite(t_monster_entity *self)
 		return ((angle > 0) ? 5 : 3);
 }
 
-void	monster_entity_update(t_monster_entity *const self)
+void			monster_entity_update(t_monster_entity *const self)
 {
 	t_vec3f	position;
 	t_vec2f	next_pos;

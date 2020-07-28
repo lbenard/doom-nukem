@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:32:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 18:19:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/27 18:35:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,23 @@ static void	render_preview_buttons(t_editor_scene *const self,
 	}
 	if (hovered)
 		block_checkbox_entity_render(hovered, fb);
+}
+
+static void	render_entity_buttons(t_editor_scene *const self,
+				t_frame *const fb)
+{
+	t_entity_checkbox_entity	**list;
+	size_t						size;
+	size_t						i;
+
+	list = (t_entity_checkbox_entity**)&self->hud.entities_group;
+	size = sizeof(self->hud.entities_group) / sizeof(*list);
+	i = 0;
+	while (i < size)
+	{
+		entity_checkbox_entity_render(list[i], fb);
+		i++;
+	}
 }
 
 void	editor_scene_render(t_editor_scene *const self,
@@ -63,5 +80,5 @@ void	editor_scene_render(t_editor_scene *const self,
 	checkbox_entity_render(self->hud.create_group.show_blocks_ref, fb);
 	checkbox_entity_render(self->hud.create_group.show_entities_ref, fb);
 	render_preview_buttons(self, fb);
-	entity_checkbox_entity_render(self->hud.entities_group.onepunchman, fb);
+	render_entity_buttons(self, fb);
 }

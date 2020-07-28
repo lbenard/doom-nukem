@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 19:55:40 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 17:15:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,7 @@ void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
-	frame_fill(fb, ft_rgba(0, 0, 0, 255));
+	frame_fill(fb, ft_rgba(42, 0, 0, 255));
 	floor_raycasting(self, fb, self->player_ref->dir, self->player_ref->plane);
 	(void)ceiling_raycasting;
 	// ceiling_raycasting(self, fb, self->player_ref->dir, self->player_ref->plane);

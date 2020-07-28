@@ -6,19 +6,19 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 17:09:22 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/27 19:50:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/onepunchman_entity.h"
+#include "game/entities/weird_alien_entity.h"
 #include "game/scenes/raycasting_scene.h"
 #include "game/game.h"
 #include "engine/error.h"
 
 #include <stdio.h>
 
-t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
-				const t_onepunchman_entity_args *const args)
+t_result	init_weird_alien_entity(t_weird_alien_entity *const self,
+				const t_weird_alien_entity_args *const args)
 {
 	const t_raycasting_scene	*raycasting;
 
@@ -27,15 +27,15 @@ t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
 		monster_entity(
 			ft_monster_stats(args->pos,
 				100.0f,
-				10000.0f,
-				"One Punch Man"),
-			&raycasting->onepunchman_spritesheet,
+				10.0f,
+				"Weird Alien"),
+			&raycasting->alien_spritesheet,
 			raycasting->player_ref,
 			&raycasting->window_ref->frame)) == ERROR)
 	{
-		return (throw_result_str("init_onepunchman_entity()",
+		return (throw_result_str("init_weird_alien_entity()",
 			"failed to create monster entity"));
 	}
-	self->super.super.super.vtable.update = onepunchman_entity_update;
+	printf("created weird alien entity\n");
 	return (OK);
 }
