@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/27 19:50:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 19:22:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 #include "game/scenes/raycasting_scene.h"
 #include "game/game.h"
 #include "engine/error.h"
-
-#include <stdio.h>
 
 t_result	init_weird_alien_entity(t_weird_alien_entity *const self,
 				const t_weird_alien_entity_args *const args)
@@ -36,6 +34,5 @@ t_result	init_weird_alien_entity(t_weird_alien_entity *const self,
 		return (throw_result_str("init_weird_alien_entity()",
 			"failed to create monster entity"));
 	}
-	printf("created weird alien entity\n");
 	return (OK);
 }

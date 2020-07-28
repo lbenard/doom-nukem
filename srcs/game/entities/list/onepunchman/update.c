@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 17:12:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 19:24:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ void			onepunchman_entity_update(t_onepunchman_entity *const self)
 	}
 	else
 	{
-		self->super.animation.anim = get_orientate_sprite(self);
+		self->super.animation.anim = get_orientate_sprite(self) / 2;
 		self->super.animation.speed = 0.0f;
 	}
 }
