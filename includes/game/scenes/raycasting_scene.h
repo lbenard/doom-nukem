@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_scene.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 19:31:27 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 15:30:37 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_raycasting_scene
 	struct s_weapon_infos
 	{
 		t_weapon			weapon;
+		t_bool				reloading;
+		t_bool				shooting;
 		t_bool				just_shooted;
 		t_bool				just_reloaded;
 		t_bool				first_render;
@@ -73,6 +75,8 @@ typedef struct	s_raycasting_scene
 	t_entity_list		monster_entities;
 	t_window			*window_ref;
 	t_sound				pistol;
+	t_spritesheet		pistol_ss;
+	t_animation			pistol_anim;
 	t_spritesheet		ss;
 	float				fov;
 }				t_raycasting_scene;
@@ -115,6 +119,8 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 void			raycasting_scene_weapon_reload(t_raycasting_scene *const self);
 
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
+
+void	render_weapon(t_raycasting_scene *const self, t_frame *const fb);
 
 /*
 ** Utils

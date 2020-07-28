@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   animation.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 18:54:30 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/16 02:51:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 15:56:48 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ t_constructor	animation(int anim, int nb_sprite, float speed)
 		sizeof(t_animation), &args));
 }
 
-void			animation_update(t_animation *const anim, const t_spritesheet *const ss)
+void			animation_update(t_animation *const anim,
+	const t_spritesheet *const ss)
 {
 	anim->iter++;
-	if (anim->iter * anim->speed >= ss->grid_size.x)
+	if ((size_t)(anim->iter * anim->speed) >= ss->grid_size.x)
 		anim->iter = 0;
 }
 
