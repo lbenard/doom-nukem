@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 18:04:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 23:59:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "game/entities/image_entity.h"
 # include "game/entities/camera_entity.h"
 # include "game/entities/sprite_entity.h"
+# include "game/entities/button_entity.h"
 # include "game/entity_descriptor.h"
 # include "maths/vec2i.h"
 # include "maths/vec2f.h"
@@ -48,11 +49,16 @@ typedef struct	s_raycasting_scene
 {
 	t_scene				super;
 	t_map				map;
+	const char			*path;
 	t_rgb				ground_color;
 	t_rgb				sky_color;
 	t_frame				floor;
 	t_frame				ceiling;
 	t_frame				crosshair;
+	t_text				game_over;
+	double				death_time;
+	t_button_entity		*retry_button_ref;
+	t_button_entity		*give_up_button_ref;
 	t_array				zbuffer;
 	t_player_entity		*player_ref;
 	t_input_id			use_input;
@@ -94,6 +100,7 @@ t_constructor	raycasting_scene(t_window *const window,
 
 t_result		init_raycasting_scene(t_raycasting_scene *const self,
 					t_raycasting_scene_args *const args);
+t_result		init_assets(t_raycasting_scene *const self);
 
 void			raycasting_scene_update(t_raycasting_scene *const self);
 void			raycasting_scene_render(t_raycasting_scene *const self,
@@ -102,6 +109,8 @@ void			raycasting_scene_render_sprites(t_raycasting_scene *const self,
 					t_frame *const fb);
 void			raycasting_scene_render_weapon_display(
 					t_raycasting_scene *const self,
+					t_frame *const fb);
+void			raycasting_scene_render_weapon(t_raycasting_scene *const self,
 					t_frame *const fb);
 
 t_result		raycasting_scene_add_entity(t_raycasting_scene *const self,
@@ -122,26 +131,16 @@ void			raycasting_scene_weapon_reload(t_raycasting_scene *const self);
 
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
 
-void	render_weapon(t_raycasting_scene *const self, t_frame *const fb);
 
 /*
 ** Utils
 */
-
 typedef struct	s_ray
 {
 	t_vec2f	hit;
 	float	perpendicular_distance;
 	float	horizontal_ratio;
 }				t_ray;
-
-// typedef struct	s_casting
-// {
-// 	t_vec2i	pos;
-// 	t_vec2f	origin_to_side;
-// 	t_vec2f	side_to_side;
-// 	float	perpendicular_distance;
-// }				t_casting;
 
 t_ray			cast(const t_map *const map,
 					const t_vec2f pos,

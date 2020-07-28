@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 15:24:54 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/28 17:30:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 22:08:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ static void	render_weapon_reloading(t_raycasting_scene *const self)
 	}
 }
 
-void	render_weapon(t_raycasting_scene *const self, t_frame *const fb)
+void	raycasting_scene_render_weapon(t_raycasting_scene *const self,
+			t_frame *const fb)
 {
 	render_weapon_shooting(self);
 	render_weapon_reloading(self);

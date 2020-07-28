@@ -6,16 +6,17 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 17:20:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 23:57:10 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "game/scenes/raycasting_scene.h"
+#include "game/entities/monster_entity.h"
 #include "ft/mem.h"
 #include "maths/maths.h"
 #include "engine/delta.h"
-#include "game/entities/monster_entity.h"
+#include "engine/lookup_table.h"
 
 static t_rgba	color(const t_raycasting_scene *const self,
 					const t_ray *const ray,
@@ -232,6 +233,47 @@ void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 // 	frame_layer_transform_add(fb, animation_current(&self->pistol_anim, &self->pistol_ss), ft_frame_transform(ft_vec2f(0.5, 1), ft_isize(fb->size.x / 2, fb->size.y), ft_vec2f(3, 3), 255));
 // }
 
+static void	render_game_over(t_raycasting_scene *const self,
+				t_frame *const fb)
+{
+	float	scale;
+	t_u8	opacity;
+	double		wall;
+	t_usize		mid;
+	sfVector2i	mouse;
+
+	scale = 4 + ft_fmin((get_wall_time() - self->death_time) * 1.0f, 8.0f);
+	opacity = ft_fmin((get_wall_time() - self->death_time) * 32.0f, 255.0f);
+	frame_fill_blend(fb, ft_rgba(255, 0, 0, opacity), blend_add);
+	frame_layer_transform(fb, &self->game_over.target,
+		ft_frame_transform(ft_vec2f(0.5f, 1.5f),
+			ft_isize(fb->size.x / 2, fb->size.y / 2),
+			ft_vec2f(scale, scale),
+			opacity),
+		blend_invert);
+	wall = get_wall_time() / 5.0f;
+	mouse = sfMouse_getPositionRenderWindow(game_singleton()->window.window);
+	mid = ft_usize(self->window_ref->size.x / 2, self->window_ref->size.y / 2);
+	self->retry_button_ref->super.transform.position = ft_vec3f(
+		cosine_lookup(wall - (int)wall) * 10.0f + mid.x
+			- (mouse.x - (int)mid.x) / 50.0f
+			- (self->retry_button_ref->normal_texture.size.x / 2),
+		sine_lookup(wall - (int)wall) * 5.0f + mid.y + 45
+			- (mouse.y - (int)mid.y) / 50.0f
+			- (self->retry_button_ref->normal_texture.size.y / 2),
+		0.0f);
+	button_entity_render(self->retry_button_ref, fb);
+	self->give_up_button_ref->super.transform.position = ft_vec3f(
+		sine_lookup(wall - (int)wall) * 10.0f + mid.x
+			- (mouse.x - (int)mid.x) / 50.0f
+			- (self->give_up_button_ref->normal_texture.size.x / 2),
+		sine_lookup(wall - (int)wall) * 5.0f + mid.y + 125
+			- (mouse.y - (int)mid.y) / 50.0f
+			- (self->give_up_button_ref->normal_texture.size.y / 2),
+		0.0f);
+	button_entity_render(self->give_up_button_ref, fb);
+}
+
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
@@ -241,17 +283,22 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	// ceiling_raycasting(self, fb, self->player_ref->dir, self->player_ref->plane);
 	walls_raycasting(self, fb);
 	raycasting_scene_render_sprites(self, fb);
-	frame_layer_transform(fb, &self->crosshair,
-		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
-			ft_isize(fb->size.x / 2, fb->size.y / 2),
-			ft_vec2f(1.0f, 1.0f),
-			255),
-		blend_invert);
-	frame_fill_blend(fb,
-		ft_rgba(255, 255, 255,
-			63 - ft_fmin((get_wall_time() - self->weapon.weapon.last_shot) * 10.0f, 1.0f) * 63),
-		blend_add);
-	raycasting_scene_render_weapon_display(self, fb);
-	render_weapon(self, fb);
-	display_hud(self, fb);
+	if (!self->player_ref->is_dead)
+	{
+		frame_layer_transform(fb, &self->crosshair,
+			ft_frame_transform(ft_vec2f(0.5f, 0.5f),
+				ft_isize(fb->size.x / 2, fb->size.y / 2),
+				ft_vec2f(1.0f, 1.0f),
+				255),
+			blend_invert);
+		frame_fill_blend(fb,
+			ft_rgba(255, 255, 255,
+				63 - ft_fmin((get_wall_time() - self->weapon.weapon.last_shot) * 10.0f, 1.0f) * 63),
+			blend_add);
+		raycasting_scene_render_weapon_display(self, fb);
+		raycasting_scene_render_weapon(self, fb);
+		display_hud(self, fb);
+	}
+	else
+		render_game_over(self, fb);
 }

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:41:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 17:03:29 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 23:15:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void			monster_entity_update(t_monster_entity *const self)
 		{
 			if (self->player_ref->is_taking_damage == FALSE && distance < 1.5f)
 			{
-				take_damage(self->player_ref, 1);
+				player_entity_take_damage(self->player_ref, 1);
 				self->player_ref->is_taking_damage = TRUE;
 			}
 			self->player_ref->is_taking_damage = FALSE;

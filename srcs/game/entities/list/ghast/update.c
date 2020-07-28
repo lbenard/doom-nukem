@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 18:30:10 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 23:16:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void			ghast_entity_update(t_ghast_entity *const self)
 		{
 			if (self->super.player_ref->is_taking_damage == FALSE && distance < 1.5f)
 			{
-				take_damage(self->super.player_ref, self->super.damage);
+				player_entity_take_damage(self->super.player_ref, self->super.damage);
 				self->super.player_ref->is_taking_damage = TRUE;
 			}
 			self->super.player_ref->is_taking_damage = FALSE;

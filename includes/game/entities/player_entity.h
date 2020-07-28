@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_entity.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 18:40:14 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/28 23:15:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,11 @@ typedef struct	s_player_entity
 	t_vec3f			velocity;
 	t_bool			is_moving;
 	t_bool			is_taking_damage;
+	t_bool			is_dead;
 	const t_map		*map_ref;
 	float			speed;
 	float			fov;
-	int				health;
+	float			health;
 	t_vec2f			dir;
 	t_vec2f			plane;
 	t_input_id		forward;
@@ -66,15 +67,13 @@ typedef struct	s_player_entity_args
 	float			fov;
 }				t_player_entity_args;
 
-void			take_damage(t_player_entity *self, int damage);
-
 t_constructor	player_entity(const t_map *const map, const float fov);
 
 t_result		init_player_entity(t_player_entity *const self,
 					const t_player_entity_args *const args);
 
 void			player_entity_update(t_player_entity *const self);
-
+void			player_entity_take_damage(t_player_entity *self, int damage);
 
 t_bool			is_colliding(const t_map *const map,
 					const t_vec2f move,

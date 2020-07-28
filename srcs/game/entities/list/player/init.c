@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 12:57:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 18:46:39 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/28 22:16:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,9 @@ t_result		init_player_entity(t_player_entity *const self,
 	self->camera_up = input_get_id(&game_singleton()->input, "CameraUp");
 	self->camera_down = input_get_id(&game_singleton()->input, "CameraDown");
 	self->sprint = input_get_id(&game_singleton()->input, "Sprint");
-	self->health = 150;
+	self->health = 150.0f;
 	self->is_taking_damage = FALSE;
+	self->is_dead = FALSE;
 	if (self->super.module.has_error)
 	{
 		destroy_player_entity(self);

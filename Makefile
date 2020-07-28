@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/28 18:21:44 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/28 23:19:32 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -231,6 +231,7 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/player/player_entity.c										\
 					game/entities/list/player/init.c												\
 					game/entities/list/player/update.c												\
+					game/entities/list/player/take_damage.c											\
 					game/entities/list/player/is_colliding.c										\
 					game/entities/list/player/is_vertical_collide.c									\
 					game/entities/list/player/is_horizontal_collide.c								\
@@ -407,6 +408,7 @@ SRCS_LIST		=	main.c																			\
 																									\
 					game/scenes/list/raycasting/raycasting_scene.c									\
 					game/scenes/list/raycasting/init.c												\
+					game/scenes/list/raycasting/init_assets.c										\
 					game/scenes/list/raycasting/update.c											\
 					game/scenes/list/raycasting/render.c											\
 					game/scenes/list/raycasting/render_sprites.c									\

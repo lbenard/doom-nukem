@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 18:44:56 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/28 23:24:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,34 +90,30 @@ static void		wasd(t_player_entity *const self, t_vec3f rotation)
 
 }
 
-void			take_damage(t_player_entity *self, int damage)
-{
-	if (self->health - damage < 0)
-		self->health = 0;
-	else
-		self->health -= damage;
-}
-
 void			player_entity_update(t_player_entity *const self)
 {
 	float	rot_sin;
 	float	rot_cos;
 
-	orientation(self, &self->super.transform.rotation);
-	wasd(self, self->super.transform.rotation);
-	if (self->is_moving)
+	self->is_dead = self->health <= 0.0f;
+	if (!self->is_dead)
 	{
-		self->velocity = vec3f_scalar(self->velocity, get_last_delta());
-		self->velocity = vec3f_scalar(self->velocity, self->speed);
-		if (input_get(&game_singleton()->input, self->sprint))
-			self->velocity = vec3f_scalar(self->velocity, 2.0f);
+		orientation(self, &self->super.transform.rotation);
+		wasd(self, self->super.transform.rotation);
+		if (self->is_moving)
+		{
+			self->velocity = vec3f_scalar(self->velocity, get_last_delta());
+			self->velocity = vec3f_scalar(self->velocity, self->speed);
+			if (input_get(&game_singleton()->input, self->sprint))
+				self->velocity = vec3f_scalar(self->velocity, 2.0f);
+		}
+		else
+			self->velocity = vec3f_scalar(self->velocity, 0.8f);
+		self->velocity = move(self->map_ref, self->super.transform.position, self->velocity);
+		self->super.transform.position.x += self->velocity.x;
+		self->super.transform.position.y += self->velocity.y;
+		self->super.transform.position.z += self->velocity.z;
 	}
-	else
-		self->velocity = vec3f_scalar(self->velocity, 0.8f);
-	self->velocity = move(self->map_ref, self->super.transform.position, self->velocity);
-	self->super.transform.position.x += self->velocity.x;
-	self->super.transform.position.y += self->velocity.y;
-	self->super.transform.position.z += self->velocity.z;
 	rot_sin = sin(self->super.transform.rotation.y);
 	rot_cos = cos(self->super.transform.rotation.y);
 	self->dir = ft_vec2f(rot_cos, rot_sin);
