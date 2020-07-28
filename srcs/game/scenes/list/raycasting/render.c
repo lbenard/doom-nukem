@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 17:15:21 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 17:20:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,52 @@ void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 					fb->size.y - 64),ft_vec2f(fx, fx), 255), blend_add);
 }
 
+// void		render_weapon(t_raycasting_scene *const self,
+// 				t_frame *const fb)
+// {
+// 	if (self->weapon.just_shooted == TRUE)
+// 	{
+// 		self->pistol_anim.speed = 0.2;
+// 		self->weapon.shooting = TRUE;
+// 		self->pistol_anim.iter = 0;
+// 	}
+// 	if (self->weapon.shooting == TRUE)
+// 	{
+// 		if (self->pistol_anim.iter == self->pistol_ss.grid_size.x * (1 / 0.2) - 1)
+// 		{
+// 			self->pistol_anim.speed = 0;
+// 			self->pistol_anim.anim = 0;
+// 			self->weapon.shooting = FALSE;
+// 		}
+// 	}
+// 	if (self->weapon.just_reloaded == TRUE)
+// 	{
+// 		ft_putendl("fengjgikrhjhiojhioh");
+// 		self->pistol_anim.anim = 1;
+// 		self->pistol_anim.speed = 0.08;
+// 		self->weapon.reloading = TRUE;
+// 		self->pistol_anim.iter = 0;
+// 	}
+// 	if (self->weapon.reloading == TRUE)
+// 	{
+// 		if (self->pistol_anim.iter == self->pistol_ss.grid_size.x * (1 / 0.08) - 1 && self->pistol_anim.speed != 0)
+// 		{
+// 			ft_putendl("couilles");
+// 			self->pistol_anim.iter = 0;
+// 			self->pistol_anim.anim++;
+// 			if (self->pistol_anim.anim >= 3)
+// 			{
+// 				ft_putendl("seches");
+// 				self->pistol_anim.anim = 0;
+// 				self->pistol_anim.speed = 0;
+// 				self->weapon.reloading = FALSE;
+// 			}
+// 		}
+// 	}
+// 	// printf("iter = %d, index = %d\n", self->pistol_anim.iter, (int)(self->pistol_anim.iter * 0.05));
+// 	frame_layer_transform_add(fb, animation_current(&self->pistol_anim, &self->pistol_ss), ft_frame_transform(ft_vec2f(0.5, 1), ft_isize(fb->size.x / 2, fb->size.y), ft_vec2f(3, 3), 255));
+// }
+
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
@@ -206,5 +252,6 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 			63 - ft_fmin((get_wall_time() - self->weapon.weapon.last_shot) * 10.0f, 1.0f) * 63),
 		blend_add);
 	raycasting_scene_render_weapon_display(self, fb);
+	render_weapon(self, fb);
 	display_hud(self, fb);
 }

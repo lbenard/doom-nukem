@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 19:49:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 15:58:27 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,12 @@ void		raycasting_scene_update(t_raycasting_scene *const self)
 	self->weapon.just_shooted = FALSE;
 	self->weapon.just_reloaded = FALSE;
 	zbuffer(self, self->player_ref->dir, self->player_ref->plane);
-	if (input_get(&game_singleton()->input, self->weapon.reload_input) > 0.0f)
+	if (input_get(&game_singleton()->input, self->weapon.reload_input) > 0.0f && self->weapon.shooting == FALSE)
 		raycasting_scene_weapon_reload(self);
 	if (input_get(&game_singleton()->input, self->weapon.shoot_input) > 0.0f)
 		raycasting_scene_weapon_use(self);
 	door_trigger(self);
+	animation_update(&self->pistol_anim, &self->pistol_ss);
 	// cursor_set_pos(&self->window_ref->cursor, self->window_ref->window,
 	// 	ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2));
 }

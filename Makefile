@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/27 18:17:58 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/28 17:19:25 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -413,6 +413,7 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/weapon_use.c										\
 					game/scenes/list/raycasting/weapon_shoot.c										\
 					game/scenes/list/raycasting/weapon_reload.c										\
+					game/scenes/list/raycasting/render_weapon.c										\
 					game/scenes/list/raycasting/destroy.c											\
 					game/scenes/list/raycasting/cast.c												\
 																									\

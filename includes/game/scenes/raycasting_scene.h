@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/27 18:08:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/28 17:20:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct	s_raycasting_scene
 	struct s_weapon_infos
 	{
 		t_weapon			weapon;
+		t_bool				reloading;
+		t_bool				shooting;
 		t_bool				just_shooted;
 		t_bool				just_reloaded;
 		t_bool				first_render;
@@ -75,6 +77,8 @@ typedef struct	s_raycasting_scene
 	t_sound				pistol;
 	t_spritesheet		alien_spritesheet;
 	t_spritesheet		onepunchman_spritesheet;
+	t_spritesheet		pistol_ss;
+	t_animation			pistol_anim;
 	float				fov;
 }				t_raycasting_scene;
 
@@ -116,6 +120,8 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 void			raycasting_scene_weapon_reload(t_raycasting_scene *const self);
 
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
+
+void	render_weapon(t_raycasting_scene *const self, t_frame *const fb);
 
 /*
 ** Utils

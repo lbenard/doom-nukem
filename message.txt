@@ -1,0 +1,32 @@
+-textures
+0: resources/textures/pack/block/sandstone.png
+1: resources/textures/white_wool.png
+2: resources/textures/acacia_log.png
+
+-blocks
+0: 0
+1: 1
+2: 2
+
+-size
+height: 10
+width: 12
+
+-player
+spawn: 2 8
+
+-entities
+one_punch_man: 9.8055 1.1944
+
+-map
+: 222222222222
+: 2          2
+: 2          2
+: 2          2
+: 2          2
+: 2          2
+: 2          2
+: 2          2
+: 2          2
+: 222222222222
+
