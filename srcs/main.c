@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 20:52:45 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/29 18:23:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "game/scenes/menu_scene.h"
 #include "game/scenes/editor_scene.h"
 #include "game/scenes/noise_test_scene.h"
+#include "game/scenes/script_scene.h"
 // #include "game/scenes/sector_scene.h"
 #include "game/scenes/raycasting_scene.h"
 #include "game/events/events.h"
@@ -162,7 +163,6 @@ int	main(int ac, char **av)
 		return (!throw_error_str("main()", "failed to start game"));
 	register_inputs(game);
 	game_set_scene(menu_scene(&game->window, av[1]));
-	// game_set_scene(editor_scene(&game->window, av[1]));
 	if (!event_handler_add_callback(&game->event_handler,
 		new_close_game_event()))
 	{

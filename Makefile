@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/28 23:19:32 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/29 16:52:52 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -405,6 +405,13 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/noise_test/update.c											\
 					game/scenes/list/noise_test/render.c											\
 					game/scenes/list/noise_test/destroy.c											\
+																									\
+					game/scenes/list/script/script_scene.c											\
+					game/scenes/list/script/init.c													\
+					game/scenes/list/script/update.c												\
+					game/scenes/list/script/render.c												\
+					game/scenes/list/script/destroy.c												\
+					game/scenes/list/script/new_skip_event.c										\
 																									\
 					game/scenes/list/raycasting/raycasting_scene.c									\
 					game/scenes/list/raycasting/init.c												\
