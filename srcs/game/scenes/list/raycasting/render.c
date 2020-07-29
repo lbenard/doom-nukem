@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 23:57:10 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/29 03:06:51 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,8 +236,8 @@ void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 static void	render_game_over(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
-	float	scale;
-	t_u8	opacity;
+	float		scale;
+	t_u8		opacity;
 	double		wall;
 	t_usize		mid;
 	sfVector2i	mouse;

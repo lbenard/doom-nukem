@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_assets.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 23:17:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/29 15:21:04 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ t_result	init_assets(t_raycasting_scene *const self)
 	module_add(&self->super.module, &self->pistol_ss,
 		spritesheet("resources/sprites/pistol_spritesheet.bmp",
 			ft_usize(4, 4)));
+	module_add(&self->super.module, &self->shotgun_ss,
+		spritesheet("resources/sprites/shotgun_ss.bmp",
+			ft_usize(5, 4)));
 	module_add(&self->super.module, &self->pistol,
 		sound("resources/sound/ar15-pistol-shot.wav"));
 	module_add(&self->super.module, &self->alien_spritesheet,

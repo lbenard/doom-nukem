@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 00:01:07 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/29 15:38:53 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void		raycasting_scene_update(t_raycasting_scene *const self)
 		door_trigger(self);
 	}
 	animation_update(&self->pistol_anim, &self->pistol_ss);
+	animation_update(&self->shotgun_anim, &self->shotgun_ss);
 	// cursor_set_pos(&self->window_ref->cursor, self->window_ref->window,
 	// 	ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2));
 }

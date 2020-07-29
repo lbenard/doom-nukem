@@ -6,11 +6,12 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 20:30:16 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 13:55:58 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:52:09 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/raycasting_scene.h"
+#include "ft/str.h"
 
 void	raycasting_scene_weapon_reload(t_raycasting_scene *const self)
 {
@@ -30,5 +31,7 @@ void	raycasting_scene_weapon_reload(t_raycasting_scene *const self)
     self->weapon.weapon.clip += bullet_needed;
     self->weapon.weapon.ammo -= bullet_needed;
 	self->weapon.just_reloaded = TRUE;
+    if (ft_strcmp(self->weapon.weapon.name, "Shotgun") == 0)
+        self->weapon.shotgun = bullet_needed;
     return ;
 }

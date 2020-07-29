@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 00:09:07 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/29 18:33:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	add_modules(t_raycasting_scene *const self,
 	module_add(&self->super.module, &self->sprite_entities, entity_list());
 	module_add(&self->super.module, &self->monster_entities, entity_list());
 	module_add(&self->super.module, &self->pistol_anim, animation(0, 4, 0.0f));
+	module_add(&self->super.module, &self->shotgun_anim, animation(0, 5, 0.0f));
 	module_add(&self->super.module, &self->weapon.display_text,
 		text("haxorville.bmp", ft_usize(args->window->size.x, 9)));
 	module_add(&self->super.module, &self->game_over,
@@ -72,8 +73,9 @@ static void	init_vars(t_raycasting_scene *const self,
 	self->sky_color = ft_rgb(135, 206, 235);
 	self->fov = 90.0f * M_PI / 180.0f;
 	self->window_ref = args->window;
-	raycasting_scene_weapon_set_pistol(self);
+	// raycasting_scene_weapon_set_pistol(self);
 	// raycasting_scene_weapon_set_minigun(self);
+	raycasting_scene_weapon_set_shotgun(self);
 	self->weapon.just_shooted = FALSE;
 	self->weapon.just_reloaded = FALSE;
 	self->weapon.first_render = TRUE;

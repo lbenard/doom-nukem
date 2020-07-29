@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   weapon_shoot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 00:13:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/29 16:20:41 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/raycasting_scene.h"
 #include "game/entities/monster_entity.h"
+#include "ft/str.h"
+#include <math.h>
 
 static t_bool	is_targeting(const t_monster_entity *const monster,
 					const t_isize crosshair_pos,
@@ -55,6 +57,21 @@ static void		sort(t_raycasting_scene *const self)
 	}
 }
 
+int				distance_monster(t_raycasting_scene *const self,
+					t_monster_entity *monster)
+{
+	t_vec3f	monster_pos;
+	t_vec3f	player_pos;
+	int		distance;
+
+	monster_pos = monster->super.super.transform.position;
+	player_pos = self->player_ref->super.transform.position;
+	distance = sqrt(pow(monster_pos.x - player_pos.x, 2) +
+		pow(monster_pos.y - player_pos.y, 2));
+	distance = abs(distance);
+	return (distance);
+}
+
 t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 					const size_t ammo_amount)
 {
@@ -78,7 +95,13 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 		monster = (t_monster_entity*)((t_entity_node*)pos)->entity;
 		if (is_targeting(monster, crosshair_pos, wall))
 		{
-			monster->health -= self->weapon.weapon.damage * ammo_amount;
+			if (ft_strcmp(self->weapon.weapon.name, "Shotgun") == 0)
+			{
+
+				monster->health -= (self->weapon.weapon.damage / (distance_monster(self, monster))) * ammo_amount;
+			}
+			else
+				monster->health -= self->weapon.weapon.damage * ammo_amount;
 			if (monster->health <= 0.0f)
 				raycasting_scene_kill_monster(self, (t_entity*)monster);
 			break ;
