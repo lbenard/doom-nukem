@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_scene.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 23:59:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/29 15:48:03 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_raycasting_scene
 		t_input_id			reload_input;
 		char				display[10];
 		t_text				display_text;
+		int					shotgun;
 	}					weapon;
 	t_camera_entity		*camera_ref;
 	t_entity_list		sprite_entities;
@@ -85,7 +86,9 @@ typedef struct	s_raycasting_scene
 	t_spritesheet		onepunchman_spritesheet;
 	t_spritesheet		ghast_spritesheet;
 	t_spritesheet		pistol_ss;
+	t_spritesheet		shotgun_ss;
 	t_animation			pistol_anim;
+	t_animation			shotgun_anim;
 	float				fov;
 }				t_raycasting_scene;
 
@@ -122,6 +125,9 @@ void			raycasting_scene_kill_monster(t_raycasting_scene *const self,
 void			raycasting_scene_weapon_set_pistol(
 					t_raycasting_scene *const self);
 void			raycasting_scene_weapon_set_minigun(
+					t_raycasting_scene *const self);
+
+void			raycasting_scene_weapon_set_shotgun(
 					t_raycasting_scene *const self);
 
 void			raycasting_scene_weapon_use(t_raycasting_scene *const self);

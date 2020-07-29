@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/28 23:19:32 by lbenard          ###   ########.fr        #
+#    Updated: 2020/07/29 15:14:09 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -417,6 +417,7 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/kill_monster.c										\
 					game/scenes/list/raycasting/weapon_set_pistol.c									\
 					game/scenes/list/raycasting/weapon_set_minigun.c								\
+					game/scenes/list/raycasting/weapon_set_shotgun.c								\
 					game/scenes/list/raycasting/weapon_use.c										\
 					game/scenes/list/raycasting/weapon_shoot.c										\
 					game/scenes/list/raycasting/weapon_reload.c										\
