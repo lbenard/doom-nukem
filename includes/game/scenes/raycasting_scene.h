@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 15:48:03 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/30 16:36:24 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,12 @@ typedef struct	s_raycasting_scene
 	t_spritesheet		ghast_spritesheet;
 	t_spritesheet		pistol_ss;
 	t_spritesheet		shotgun_ss;
+	t_spritesheet		minigun_ss;
 	t_animation			pistol_anim;
 	t_animation			shotgun_anim;
+	t_animation			minigun_anim;
+	t_bool				end_anim;
+	t_bool				last_shot;
 	float				fov;
 }				t_raycasting_scene;
 
