@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_assets.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/30 04:09:28 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/31 17:31:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_result	init_assets(t_raycasting_scene *const self)
 			ft_usize(9, 4)));
 	module_add(&self->super.module, &self->ghast_spritesheet,
 		spritesheet("resources/sprites/ghast.bmp",
-			ft_usize(3, 4)));
+			ft_usize(3, 5)));
 	module_add(&self->super.module, &self->hud_ray,
 		hud_game("resources/sprites/heart_disintegration.bmp",
 			"resources/sprites/sprite-sheet-png-walking-2.bmp"));
