@@ -48,23 +48,55 @@ static float	compute_angle_to_player(t_monster_entity *self)
 	return (angle_gap(monster_angle, player_angle));
 }
 
+
+/* 
+ n = orientations amount necessarily even & >= 4
+ angle = [-PI, PI] angle between monster direction and direction to player
+ angle_abs = [0, PI]
+ check_amount = number of sprite side orientations / 2
+
+ Exemple:
+ 	-spritesheet orientation list order:
+		[0,    1,     2,      3,       ..., even,   odd]
+	 	[back, front, left_1, right_1, ..., left_n, right_n]
+*/
+
+#define BACK 0
+#define FRONT 1
+#define LEFT_EVEN 0
+#define RIGHT_ODD 1
+
+static int		get_spritesheet_index(float angle, int n)
+{
+	float	angle_abs;
+	int		check_amount;
+	t_vec2i	range;
+	int		i;
+
+	check_amount = (n - 2) / 2
+	angle_abs = fabsf(angle);
+	range = ft_vec2i(0, 1);
+
+	if (range.x * (PI / n) <= angle_abs && angle_abs <= range.y * (PI / n))
+		return BACK;
+	i = -1;
+	while (++i < check_amount)
+	{
+		range = ft_vec2i(range.y, range.y + 2);
+		if (range.x * (PI / n) <= angle_abs && angle_abs <= range.y * (PI / n))
+			return (i + (angle < 0 ? RIGHT_ODD : LEFT_EVEN);
+	}
+	return FRONT;
+}
+
 static int		get_orientate_sprite(t_monster_entity *self)
 {
 	float	angle;
-	float	angle_abs;
+	int		orientations;
 
 	angle = compute_angle_to_player(self);
-	angle_abs = fabsf(angle);
-	if (angle_abs <= PI / 8.0f)
-		return (0);
-	else if (angle_abs >= PI * (7.0f / 8.0f))
-		return (4);
-	else if (angle_abs <= PI * (3.0f / 8.0f))
-		return ((angle > 0) ? 7 : 1);
-	else if (angle_abs <= PI * (5.0f / 8.0f))
-		return ((angle > 0) ? 6 : 2);
-	else
-		return ((angle > 0) ? 5 : 3);
+	orientations = self->spritesheet_ref->grid_size.y;
+	return (get_spritesheet_index(angle, orientations));
 }
 
 void			monster_entity_update(t_monster_entity *const self)
