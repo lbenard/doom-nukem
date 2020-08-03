@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 00:57:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 01:14:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ t_result	init_assets(t_raycasting_scene *const self)
 	module_add(&self->super.module, &self->shotgun_ss,
 		spritesheet("resources/sprites/shotgun_ss.bmp",
 			ft_usize(5, 4)));
+	module_add(&self->super.module, &self->minigun_ss,
+		spritesheet("resources/sprites/minigun_ss.bmp",
+			ft_usize(4, 2)));
 	module_add(&self->super.module, &self->pistol,
 		sound("resources/sound/ar15-pistol-shot.wav"));
 	module_add(&self->super.module, &self->alien_spritesheet,

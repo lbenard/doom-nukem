@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/31 17:36:54 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 01:14:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,12 @@ typedef struct	s_raycasting_scene
 	t_spritesheet		ghast_spritesheet;
 	t_spritesheet		pistol_ss;
 	t_spritesheet		shotgun_ss;
+	t_spritesheet		minigun_ss;
 	t_animation			pistol_anim;
 	t_animation			shotgun_anim;
+	t_animation			minigun_anim;
+	t_bool				end_anim;
+	t_bool				last_shot;
 	float				fov;
 }				t_raycasting_scene;
 

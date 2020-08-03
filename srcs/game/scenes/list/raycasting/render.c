@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 01:03:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 01:14:17 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,6 +314,11 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 		// 	ft_rgba(255, 255, 255,
 		// 		63 - ft_fmin((get_wall_time() - self->weapon.weapon.last_shot) * 10.0f, 1.0f) * 63),
 		// 	blend_add);
+		if (ft_strcmp(self->weapon.weapon.name, "Minigun" ) != 0 || self->weapon.shooting == TRUE)
+		frame_fill_blend(fb,
+			ft_rgba(255, 255, 255,
+				63 - ft_fmin((get_wall_time() - self->weapon.weapon.last_shot) * 10.0f, 1.0f) * 63),
+			blend_add);
 		raycasting_scene_render_weapon_display(self, fb);
 		raycasting_scene_render_weapon(self, fb);
 		display_hud(self, fb);

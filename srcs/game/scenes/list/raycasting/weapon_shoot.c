@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 16:20:41 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/31 15:38:56 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "game/entities/monster_entity.h"
 #include "ft/str.h"
 #include <math.h>
+#include <stdio.h>
 
 static t_bool	is_targeting(const t_monster_entity *const monster,
 					const t_isize crosshair_pos,
@@ -81,10 +82,14 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 	t_list_head			*pos;
 	t_monster_entity	*monster;
 
-	if (!use_ammo(&self->weapon.weapon, ammo_amount))
-		return (FALSE);
+	if (ft_strcmp(self->weapon.weapon.name, "Minigun") != 0 || self->weapon.shooting == TRUE)
+		if (use_ammo(&self->weapon.weapon, ammo_amount) == FALSE)
+			return (FALSE);
+	// if (!use_ammo(&self->weapon.weapon, ammo_amount))
+	// 	return (FALSE);
 	sort(self);
-	sound_play(&self->pistol);
+	if (ft_strcmp(self->weapon.weapon.name, "Minigun") != 0 || self->end_anim == TRUE)
+		sound_play(&self->pistol);
 	crosshair_pos.x = self->window_ref->size.x / 2;
 	crosshair_pos.y = self->window_ref->size.y / 2;
 	zbuffer = (t_ray*)self->zbuffer.array;
@@ -97,8 +102,15 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 		{
 			if (ft_strcmp(self->weapon.weapon.name, "Shotgun") == 0)
 			{
-
-				monster->health -= (self->weapon.weapon.damage / (distance_monster(self, monster))) * ammo_amount;
+				printf("degats = %f\n", (self->weapon.weapon.damage / (distance_monster(self, monster) * 0.3 + 1)) * ammo_amount);
+				monster->health -= (self->weapon.weapon.damage / (distance_monster(self, monster) * 0.3 + 1)) * ammo_amount;
+			}
+			else if (ft_strcmp(self->weapon.weapon.name, "Minigun") == 0)
+			{
+				ft_putendl("je rentre bien dedans ?");
+				self->weapon.just_shooted = TRUE;
+				if (self->end_anim == TRUE)
+					monster->health -= self->weapon.weapon.damage * ammo_amount;
 			}
 			else
 				monster->health -= self->weapon.weapon.damage * ammo_amount;
