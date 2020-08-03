@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 18:33:15 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/31 16:32:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ static void	init_vars(t_raycasting_scene *const self,
 	self->fov = 90.0f * M_PI / 180.0f;
 	self->window_ref = args->window;
 	// raycasting_scene_weapon_set_pistol(self);
-	// raycasting_scene_weapon_set_minigun(self);
-	raycasting_scene_weapon_set_shotgun(self);
+	raycasting_scene_weapon_set_minigun(self);
+	// raycasting_scene_weapon_set_shotgun(self);
 	self->weapon.just_shooted = FALSE;
 	self->weapon.just_reloaded = FALSE;
 	self->weapon.first_render = TRUE;
@@ -107,6 +107,8 @@ static void	add_death_buttons(t_raycasting_scene *const self,
 		self->give_up_button_ref->super.transform.position = ft_vec3f(-9999.0f, -9999.0f, 0.0f);
 }
 
+#include <stdio.h>
+
 t_result	init_raycasting_scene(t_raycasting_scene *const self,
 				t_raycasting_scene_args *const args)
 {
@@ -132,5 +134,6 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 	text_set_ref(&self->game_over,
 		static_string_as_ref(ft_static_string("ur ded lol")));
 	text_render(&self->game_over, ft_text_settings(ft_isize(0, 0), 9));
+	cursor_set_visibility(&self->window_ref->cursor, TRUE);
 	return (OK);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_scene.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 15:48:03 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/07/31 17:36:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct	s_raycasting_scene
 	t_frame				crosshair;
 	t_text				game_over;
 	double				death_time;
+	t_frame				game_over_background;
 	t_button_entity		*retry_button_ref;
 	t_button_entity		*give_up_button_ref;
 	t_array				zbuffer;
