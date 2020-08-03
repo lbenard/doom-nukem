@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/29 18:24:54 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/04 00:02:59 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,7 @@ SRCS_LIST		=	main.c																			\
 					engine/input/get.c																\
 					engine/input/update.c															\
 					engine/input/destroy.c															\
+					engine/input/new_event_update_event.c											\
 																									\
 					engine/lookup_table/cosine.c													\
 					engine/lookup_table/sine.c														\

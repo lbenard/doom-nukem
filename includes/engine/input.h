@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 10:39:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/12 00:43:22 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/30 20:22:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ float				input_get(t_input *const self, const t_input_id id);
 void				input_update(t_input *const self);
 
 void				destroy_input(t_input *const self);
+
+t_callback_node	*new_event_update_event(void);
 
 #endif
