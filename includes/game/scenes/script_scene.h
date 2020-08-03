@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 00:40:26 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 16:49:31 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/30 21:41:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct	s_script_scene
 	t_scene		super;
 	t_window	*window;
 	const char	*path;
+	t_text		skip_text;
 	const char	*paragraph1;
 	char		*writing_paragraph1;
 	t_text		paragraph1_text;
@@ -33,6 +34,7 @@ typedef struct	s_script_scene
 	double		keystroke_time;
 	double		text_finished_time;
 	t_bool		skip;
+	float		speed;
 }				t_script_scene;
 
 typedef struct	s_script_scene_args

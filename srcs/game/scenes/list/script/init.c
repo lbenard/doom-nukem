@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 00:49:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 16:52:30 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/30 21:39:53 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,8 @@
 #include "engine/delta.h"
 #include "ft/str.h"
 
-#include <stdio.h>
-#include "game/game.h"
-
-t_result		init_script_scene(t_script_scene *const self,
-					t_script_scene_args *const args)
+static t_result	paragraphs(t_script_scene *const self)
 {
-	if (init_scene(&self->super,
-		"Script",
-		script_scene_update,
-		script_scene_render) == ERROR)
-	{
-		destroy_scene(&self->super);
-		return (throw_result_str("init_script_scene()",
-			"failed to create scene"));
-	}
-	self->window = args->window;
-	self->path = args->path;
-	self->text_finished_time = 0.0;
-	self->skip = FALSE;
 	self->paragraph1 =
 		"          During a long and furious battle against this\n"
 		"  segfault you've been having for the last couple of hours, your\n"
@@ -58,11 +41,39 @@ t_result		init_script_scene(t_script_scene *const self,
 		text("haxorville.bmp", ft_usize(5 * 67, 9 * 5)));
 	module_add(&self->super.module, &self->paragraph2_text,
 		text("haxorville.bmp", ft_usize(5 * 66, 9 * 3)));
+	module_add(&self->super.module, &self->skip_text,
+		text("haxorville.bmp", ft_usize(5 * 21, 9 * 1)));
+	return (self->super.module.has_error ? ERROR : OK);
+}
+
+t_result		init_script_scene(t_script_scene *const self,
+					t_script_scene_args *const args)
+{
+	if (init_scene(&self->super,
+		"Script",
+		script_scene_update,
+		script_scene_render) == ERROR)
+	{
+		destroy_scene(&self->super);
+		return (throw_result_str("init_script_scene()",
+			"failed to create scene"));
+	}
+	self->window = args->window;
+	self->path = args->path;
+	self->text_finished_time = 0.0;
+	self->skip = FALSE;
+	self->last_keystroke = get_wall_time();
+	self->keystroke_time = 0.1;
+	self->speed = 0.0f;
+	if (paragraphs(self) == ERROR)
+	{
+		destroy_script_scene(self);
+		return (throw_result_str("init_script_scene()",
+			"failed to create paragraphs"));
+	}
 	module_add(&self->super.module, &self->tig,
 		frame_from_file("resources/textures/tig.bmp"));
 	event_handler_add_callback(&self->super.input_manager, new_skip_event());
-	self->last_keystroke = get_wall_time();
-	self->keystroke_time = 0.1;
 	if (self->super.module.has_error)
 	{
 		destroy_script_scene(self);
@@ -73,6 +84,10 @@ t_result		init_script_scene(t_script_scene *const self,
 		static_string_as_ref(ft_static_string(self->writing_paragraph1)));
 	text_set_ref(&self->paragraph2_text,
 		static_string_as_ref(ft_static_string(self->writing_paragraph2)));
+	text_set_ref(&self->skip_text,
+		static_string_as_ref(ft_static_string("Press any key to skip")));
+	text_render(&self->skip_text, ft_text_settings(ft_isize(0, 0), 9));
+	frame_fill_blend(&self->skip_text.target, ft_rgba(255, 255, 255, 255), blend_colorize);
 	frame_fill_blend(&self->tig, ft_rgba(255, 255, 255, 255), blend_invert);
 	cursor_set_visibility(&self->window->cursor, FALSE);
 	return (OK);

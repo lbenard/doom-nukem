@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 16:47:44 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 16:53:08 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/30 21:43:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void		skip(t_script_scene *const self, sfEvent *event)
 {
 	if (event->type == sfEvtKeyPressed)
 		self->skip = TRUE;
+	if (event->type == sfEvtMouseWheelScrolled)
+		self->speed = 4.0f;
 }
 
 t_callback_node	*new_skip_event(void)
