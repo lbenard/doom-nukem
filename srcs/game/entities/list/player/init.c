@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 12:57:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 22:16:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/30 22:15:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_result		init_player_entity(t_player_entity *const self,
 	init_entity_default(&self->super, entity_vtable(player_entity_update));
 	self->velocity = ft_vec3f(0.0f, 0.0f, 0.0f);
 	self->is_moving = FALSE;
+	self->is_flying = FALSE;
 	self->map_ref = args->map;
 	self->speed = 3.0f;
 	self->fov = args->fov;
@@ -78,6 +79,7 @@ t_result		init_player_entity(t_player_entity *const self,
 	self->camera_up = input_get_id(&game_singleton()->input, "CameraUp");
 	self->camera_down = input_get_id(&game_singleton()->input, "CameraDown");
 	self->sprint = input_get_id(&game_singleton()->input, "Sprint");
+	self->toggle_flight = input_get_id(&game_singleton()->input, "ToggleFlight");
 	self->health = 150.0f;
 	self->is_taking_damage = FALSE;
 	self->is_dead = FALSE;

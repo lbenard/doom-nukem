@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 00:34:21 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/05 00:57:15 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,10 @@
 void			go_fireball(t_ghast_entity *self)
 {
 	t_vec3f				monster_pos;
-	// t_vec3f				monster_dir;
 	t_vec3f				direction;
 	t_raycasting_scene	*scene;
 
 	monster_pos = self->super.super.super.transform.position;
-	// monster_dir = self->super.super.super.transform.direction;
 	scene = (t_raycasting_scene*)game_singleton()->scene;
 	direction = ft_vec3f(self->super.player_ref->super.transform.position.x -
 		monster_pos.x, self->super.player_ref->super.transform.position.y -
@@ -85,7 +83,6 @@ void			go_fireball(t_ghast_entity *self)
 	direction = vec3f_normalize(direction);
 	entity_list_add_entity(&scene->super.entities,
 		fireball_entity(monster_pos, direction, self->super.player_ref));
-	// ft_putendl("bon j'ai bien créé cte merde ?");
 }
 
 void			ghast_entity_update(t_ghast_entity *const self)
@@ -114,7 +111,6 @@ void			ghast_entity_update(t_ghast_entity *const self)
 		+ difference.z * difference.z; 
 	if (distance < 50)
 	{
-		// ft_putendl("ca crash ou pas");
 		// ft_putendl("ya un pb ?");
 		self->super.animation.speed = 0.4;
 		self->super.animation.speed = 0.1f;
@@ -142,9 +138,6 @@ void			ghast_entity_update(t_ghast_entity *const self)
 		// 	self->super.player_ref->super);
 		if (self->last_shot_time == 0.0)
 			self->last_shot_time = get_wall_time();
-		// printf("last shot time = %f\n", self->last_shot_time);
-		// printf("wall time = %f\n", get_wall_time());
-		// printf("addition wall lastshot = %f\n", self->last_shot_time + self->shoot_time);
 		if (self->last_shot_time + self->shoot_time < get_wall_time())
 		{
 			self->just_shoot = TRUE;

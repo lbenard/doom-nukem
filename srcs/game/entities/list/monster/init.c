@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 01:08:50 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 21:15:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/monster_entity.h"
+#include "game/scenes/raycasting_scene.h"
 #include "engine/error.h"
 #include "ft/str.h"
 
@@ -19,15 +20,21 @@ t_result	init_monster_entity(t_monster_entity *const self,
 {
 	if (static_module_create(self, sprite_entity_size(
 		ft_vec3f(args->pos.x, args->pos.y, 0.0f),
-		args->spritesheet_ref->sprite_size, args->player_ref, args->frame_ref))
+		args->spritesheet_ref->sprite_size, args->ctx))
 		== ERROR)
 	{
 		return (throw_result_str("init_monster_entity()",
 			"failed to create parent class"));
 	}
+	if (!entity_list_add_entity_ref(&args->ctx->monster_entities, (t_entity*)self))
+	{
+		destroy_monster_entity(self);
+		return (throw_result_str("init_monster_entity()",
+			"failed to add monster to list"));
+	}
 	self->super.super.vtable.update = monster_entity_update;
 	self->spritesheet_ref = args->spritesheet_ref;
-	self->player_ref = args->player_ref;
+	self->player_ref = args->ctx->player_ref;
 	self->full_health = args->health;
 	self->health = args->health;
 	self->damage = args->damage;

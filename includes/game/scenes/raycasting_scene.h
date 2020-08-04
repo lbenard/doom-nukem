@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 01:14:44 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 20:56:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "game/entities/player_entity.h"
 # include "game/entities/image_entity.h"
 # include "game/entities/camera_entity.h"
-# include "game/entities/sprite_entity.h"
 # include "game/entities/button_entity.h"
+# include "game/entities/weapon_entity.h"
 # include "game/entity_descriptor.h"
 # include "maths/vec2i.h"
 # include "maths/vec2f.h"
@@ -64,6 +64,7 @@ typedef struct	s_raycasting_scene
 	t_player_entity		*player_ref;
 	t_input_id			use_input;
 	t_hud_game			hud_ray;
+	t_weapon_entity		*weapon_ref;
 	struct s_weapon_infos
 	{
 		t_weapon			weapon;

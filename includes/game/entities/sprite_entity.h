@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_entity.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 23:33:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 01:01:12 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 20:58:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include "engine/frame.h"
 # include "game/entities/player_entity.h"
 
-typedef struct			s_sprite_entity	t_sprite_entity;
+typedef struct			s_sprite_entity t_sprite_entity;
+typedef struct			s_raycasting_scene t_raycasting_scene;
 
 typedef struct			s_sprite_entity_vtable
 {
@@ -44,18 +45,15 @@ typedef struct			s_sprite_entity_args
 	t_vec3f					pos;
 	const char				*texture_path;
 	t_usize					sprite_size;
-	const t_player_entity	*player_ref;
-	const t_frame			*frame_ref;
+	t_raycasting_scene		*ctx;
 }						t_sprite_entity_args;
 
 t_constructor			sprite_entity(const t_vec3f pos,
 							const char *texture_path,
-							const t_player_entity *const player_ref,
-							const t_frame *const frame_ref);
+							t_raycasting_scene *const ctx);
 t_constructor			sprite_entity_size(const t_vec3f pos,
 							const t_usize sprite_size,
-							const t_player_entity *const player_ref,
-							const t_frame *const frame_ref);
+							t_raycasting_scene *const ctx);
 
 t_result				init_sprite_entity(t_sprite_entity *const self,
 							t_sprite_entity_args *const args);

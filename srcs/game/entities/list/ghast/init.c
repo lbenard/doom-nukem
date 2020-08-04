@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 00:25:11 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/05 00:57:02 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 #include "game/game.h"
 #include "engine/error.h"
 
-#include <stdio.h>
-
 t_result	init_ghast_entity(t_ghast_entity *const self,
 				const t_ghast_entity_args *const args)
 {
-	const t_raycasting_scene	*raycasting;
+	t_raycasting_scene	*raycasting;
 
 	raycasting = (t_raycasting_scene*)args->scene;
 	if (static_module_create(self,
@@ -30,8 +28,7 @@ t_result	init_ghast_entity(t_ghast_entity *const self,
 				10.0f,
 				"Ghast"),
 			&raycasting->ghast_spritesheet,
-			raycasting->player_ref,
-			&raycasting->window_ref->frame)) == ERROR)
+			raycasting)) == ERROR)
 	{
 		return (throw_result_str("init_ghast_entity()",
 			"failed to create monster entity"));

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 17:09:22 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 21:06:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
 				const t_onepunchman_entity_args *const args)
 {
-	const t_raycasting_scene	*raycasting;
+	t_raycasting_scene	*raycasting;
 
 	raycasting = (t_raycasting_scene*)args->scene;
 	if (static_module_create(self,
@@ -30,8 +30,7 @@ t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
 				10000.0f,
 				"One Punch Man"),
 			&raycasting->onepunchman_spritesheet,
-			raycasting->player_ref,
-			&raycasting->window_ref->frame)) == ERROR)
+			raycasting)) == ERROR)
 	{
 		return (throw_result_str("init_onepunchman_entity()",
 			"failed to create monster entity"));
