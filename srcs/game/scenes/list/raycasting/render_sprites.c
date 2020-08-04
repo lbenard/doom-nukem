@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 19:36:56 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 23:03:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,44 @@
 static void	sort(t_raycasting_scene *const self)
 {
 	t_list_head		*pos;
+	t_list_head		*next;
+	t_list_head		*left;
+	t_list_head		*right;
 	t_sprite_entity	*sprite;
 	t_sprite_entity	*next_sprite;
 
 	pos = &self->sprite_entities.list;
 	while ((pos = pos->next) != &self->sprite_entities.list)
 	{
-		if (pos == self->sprite_entities.list.next)
-			printf("FIRST\n\n");
-		printf("debut boucle\n");
+		if (pos->next == &self->sprite_entities.list)
+			break ;
+		sprite = (t_sprite_entity*)((t_entity_node*)pos)->entity;
+		next = pos->next;
+		next_sprite = (t_sprite_entity*)((t_entity_node*)next)->entity;
+		if (sprite->perpendicular_distance
+			< next_sprite->perpendicular_distance)
+		{
+			left = pos->prev;
+			right = next->next;
+			left->next = next;
+			right->prev = pos;
+			pos->prev = next;
+			pos->next = right;
+			next->prev = left;
+			next->next = pos;
+			pos = &self->sprite_entities.list;
+			continue ;
+		}
+	}
+	pos = &self->sprite_entities.list;
+	while ((pos = pos->next) != &self->sprite_entities.list)
+	{
 		if (pos->next == &self->sprite_entities.list)
 			break ;
 		sprite = (t_sprite_entity*)((t_entity_node*)pos)->entity;
 		next_sprite = (t_sprite_entity*)((t_entity_node*)pos->next)->entity;
-		printf("avant le if\n");
-		printf("perpd sprite = %f, perpd nextsprite = %f\n", sprite->perpendicular_distance, next_sprite->perpendicular_distance);
-		if (sprite->perpendicular_distance
-			< next_sprite->perpendicular_distance)
-		{
-			printf("avant le move\n");
-			list_move(pos, pos->prev);
-			printf("apres le move\n");
-			pos = &self->sprite_entities.list;
-			continue ;
-		}
+		if (sprite->perpendicular_distance < next_sprite->perpendicular_distance)
+			exit(0);
 	}
 }
 

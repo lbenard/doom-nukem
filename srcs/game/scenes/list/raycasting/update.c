@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 19:20:22 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 22:13:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,33 +91,22 @@ static void	door_trigger(t_raycasting_scene *const self)
 
 void		raycasting_scene_update(t_raycasting_scene *const self)
 {
-	printf("avant list update\n");
-	printf("listsize = %zu\n", list_size(&self->super.entities.list));
-	printf("listsize sprite = %zu\n", list_size(&self->sprite_entities.list));
 	entity_list_update(&self->super.entities);
-	printf("listsize = %zu\n", list_size(&self->super.entities.list));
-	printf("listsize sprite = %zu\n", list_size(&self->sprite_entities.list));
-	printf("apres list update\n");
-	printf("1 debug\n");
 	if (self->retry_button_ref->is_clicked)
 	{
 		game_set_scene(raycasting_scene(self->window_ref, self->path));
 		return ;
 	}
-	printf("2 debug\n");
 	if (self->give_up_button_ref->is_clicked)
 	{
 		game_set_scene(menu_scene(self->window_ref, self->path));
 		return ;
 	}
-	printf("3 debug\n");
 	if (self->player_ref->is_dead && self->death_time == 0.0f)
 		self->death_time = get_wall_time();
-	printf("4 debug\n");
 	self->weapon.just_shooted = FALSE;
 	self->weapon.just_reloaded = FALSE;
 	zbuffer(self, self->player_ref->dir, self->player_ref->plane);
-	printf("5 debug\n");
 	if (!self->player_ref->is_dead)
 	{
 		if (input_get(&game_singleton()->input, self->weapon.reload_input) > 0.0f && self->weapon.shooting == FALSE)
@@ -126,11 +115,10 @@ void		raycasting_scene_update(t_raycasting_scene *const self)
 			raycasting_scene_weapon_use(self);
 		door_trigger(self);
 	}
-	printf("6 debug\n");
 	animation_update(&self->pistol_anim, &self->pistol_ss);
 	animation_update(&self->shotgun_anim, &self->shotgun_ss);
 	animation_update(&self->minigun_anim, &self->minigun_ss);
-	printf("7 debug\n");
 	// cursor_set_pos(&self->window_ref->cursor, self->window_ref->window,
 	// 	ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2));
+	printf("sprites: %lu\n", list_size(&self->sprite_entities.list));
 }

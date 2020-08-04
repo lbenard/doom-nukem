@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 23:24:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/31 17:08:53 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,12 @@ void			player_entity_update(t_player_entity *const self)
 	self->is_dead = self->health <= 0.0f;
 	if (!self->is_dead)
 	{
+		if (input_get(&game_singleton()->input, self->toggle_flight) > 0.0f)
+			self->is_flying = !self->is_flying;
+		if (self->is_flying)
+			self->super.transform.position.z += 0.1f * get_last_delta();
+		else
+			self->super.transform.position.z = 0.0f;
 		orientation(self, &self->super.transform.rotation);
 		wasd(self, self->super.transform.rotation);
 		if (self->is_moving)

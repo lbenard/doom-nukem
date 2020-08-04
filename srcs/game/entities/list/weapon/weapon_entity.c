@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_entity.c                                    :+:      :+:    :+:   */
+/*   weapon_entity.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/29 20:55:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 20:58:56 by lbenard          ###   ########.fr       */
+/*   Created: 2020/08/04 02:18:05 by lbenard           #+#    #+#             */
+/*   Updated: 2020/08/04 03:27:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/sprite_entity.h"
+#include "game/entities/weapon_entity.h"
 
-t_constructor	sprite_entity(const t_vec3f pos,
-					const char *texture_path,
-					t_raycasting_scene *const ctx)
+t_constructor	weapon_entity(const t_spritesheet *const spritesheet_ref,
+					const char *const icon_path,
+					const t_weapon_specs specs)
 {
-	static t_sprite_entity_args	args;
+	static t_weapon_entity_args	args;
 
-	args.pos = pos;
-	args.texture_path = texture_path;
-	args.ctx = ctx;
-	return (ft_constructor(init_sprite_entity,
-		destroy_sprite_entity,
-		sizeof(t_sprite_entity),
+	args.spritesheet_ref = spritesheet_ref;
+	args.icon_path = icon_path;
+	args.specs = specs;
+	return (ft_constructor(init_weapon_entity,
+		destroy_weapon_entity,
+		sizeof(t_weapon_entity),
 		&args));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monster_entity.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:14:59 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/03 15:31:48 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 21:05:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 t_constructor	monster_entity(const t_monster_stats stats,
 					const t_spritesheet *const spritesheet_ref,
-					t_player_entity *player_ref,
-					const t_frame *const frame_ref)
+					t_raycasting_scene *const ctx)
 {
 	static t_monster_entity_args	args;
 
@@ -24,8 +23,7 @@ t_constructor	monster_entity(const t_monster_stats stats,
 	args.damage = stats.damage;
 	args.name = stats.name;
 	args.spritesheet_ref = spritesheet_ref;
-	args.player_ref = player_ref;
-	args.frame_ref = frame_ref;
+	args.ctx = ctx;
 	return (ft_constructor(init_monster_entity,
 		destroy_monster_entity,
 		sizeof(t_monster_entity),

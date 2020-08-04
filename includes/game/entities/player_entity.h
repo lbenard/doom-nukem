@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 23:15:41 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/30 22:14:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct	s_player_entity
 	t_bool			is_moving;
 	t_bool			is_taking_damage;
 	t_bool			is_dead;
+	t_bool			is_flying;
 	const t_map		*map_ref;
 	float			speed;
 	float			fov;
@@ -59,6 +60,7 @@ typedef struct	s_player_entity
 	t_input_id		camera_up;
 	t_input_id		camera_down;
 	t_input_id		sprint;
+	t_input_id		toggle_flight;
 }				t_player_entity;
 
 typedef struct	s_player_entity_args

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fireball.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 18:27:11 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/04 18:41:09 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 21:11:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ void			fireball_entity_update(t_fireball_entity *const self)
 		entity_list_remove(&scene->super.entities, &self->super.super);
 		return ;
 	}
-	// (void)self;
-	ft_putendl("ouais mon gars");
 }
 
 t_result		init_fireball_entity(t_fireball_entity *const self,
@@ -54,8 +52,7 @@ t_result		init_fireball_entity(t_fireball_entity *const self,
 
 	scene = (t_raycasting_scene*)game_singleton()->scene;
 	if (static_module_create(self,
-		sprite_entity(args->pos, args->texture_path,
-			args->player_ref, &scene->window_ref->frame)) == ERROR)
+		sprite_entity(args->pos, args->texture_path, scene)) == ERROR)
 	{
 		return (throw_result_str("init_fireball_entity()",
 			"failed to create fireball entity"));
@@ -82,8 +79,5 @@ t_constructor	fireball_entity(const t_vec3f pos, const t_vec3f direction,
 
 void	destroy_fireball_entity(t_fireball_entity *const self)
 {
-	(void)self;
-	ft_putendl("je detruis");
 	destroy_sprite_entity(&self->super);
-	ft_putendl("apres desrtroy sprite entity");
 }

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 19:39:43 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 18:16:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 21:15:10 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,9 @@ t_result	raycasting_scene_add_entity(t_raycasting_scene *const self,
 				const t_vec2f pos)
 {
 	t_entity	*entity;
-	t_game		*game;
 
 	if (!(entity = entity_list_add_entity(&self->super.entities,
 		entity_descriptor->constructor_fn((t_scene*)self, pos))))
 		return (ERROR);
-	game = game_singleton();
-	if (entity_descriptor == &game->entities_list.onepunchman
-		|| entity_descriptor == &game->entities_list.weird_alien
-		|| entity_descriptor == &game->entities_list.ghast)
-	{
-		entity_list_add_entity_ref(&self->sprite_entities, entity);
-		entity_list_add_entity_ref(&self->monster_entities, entity);
-	}
 	return (OK);
 }

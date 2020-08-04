@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 19:22:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 21:06:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 t_result	init_weird_alien_entity(t_weird_alien_entity *const self,
 				const t_weird_alien_entity_args *const args)
 {
-	const t_raycasting_scene	*raycasting;
+	t_raycasting_scene	*raycasting;
 
 	raycasting = (t_raycasting_scene*)args->scene;
 	if (static_module_create(self,
@@ -28,8 +28,7 @@ t_result	init_weird_alien_entity(t_weird_alien_entity *const self,
 				10.0f,
 				"Weird Alien"),
 			&raycasting->alien_spritesheet,
-			raycasting->player_ref,
-			&raycasting->window_ref->frame)) == ERROR)
+			raycasting)) == ERROR)
 	{
 		return (throw_result_str("init_weird_alien_entity()",
 			"failed to create monster entity"));
