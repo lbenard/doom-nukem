@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/31 17:31:11 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 01:14:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_result	init_assets(t_raycasting_scene *const self)
 		frame_from_file("resources/textures/coarse_dirt.bmp"));
 	module_add(&self->super.module, &self->crosshair,
 		frame_from_file("resources/textures/crosshair-downscale.bmp"));
+	module_add(&self->super.module, &self->game_over_background,
+		frame_from_file("resources/textures/blood-background.bmp"));
 	module_add(&self->super.module, &self->pistol_ss,
 		spritesheet("resources/sprites/pistol_spritesheet.bmp",
 			ft_usize(4, 4)));

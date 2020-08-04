@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:07:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 19:17:56 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/30 20:32:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	game_loop(void)
 
 	game = game_singleton();
 	last_time = get_wall_time();
+	input_update(&game->input);
 	while (sfRenderWindow_pollEvent(game->window.window, &event))
 		event_handler_call(&game->event_handler, &event);
-	input_update(&game->input);
 	if (game->scene)
 		game->scene->update_fn(game->scene);
 	if (game->module.has_error)

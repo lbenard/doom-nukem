@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 22:12:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 21:08:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/30 20:10:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ static float	update_event(const t_input_event *const event)
 	int	multiplier;
 
 	multiplier = (event->invert) ? -1 : 1;
-	if (event->type == KEY)
+	if (event->type == KEY && event->key.hold)
 	{
 		if (sfKeyboard_isKeyPressed(event->code))
 			return (1.0f * multiplier);
 		return (0.0f);
 	}
-	if (event->type == MOUSE)
+	if (event->type == MOUSE && event->mouse.hold)
 	{
 		if (sfMouse_isButtonPressed(event->code))
 			return (1.0f * multiplier);

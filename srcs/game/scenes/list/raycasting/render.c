@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 19:24:32 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 19:51:06 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static t_rgba	color(const t_raycasting_scene *const self,
 {
 	const t_frame	*texture;
 	t_rgba			ret;
+	float			darkness;
 
 	if (ray->hit.x >= self->map.size.x || ray->hit.y >= self->map.size.y
 		|| ray->hit.x < 0 || ray->hit.y < 0)
@@ -33,9 +34,14 @@ static t_rgba	color(const t_raycasting_scene *const self,
 			+ (int)ray->hit.x].texture_ref;
 	ret = texture->pixels[(int)(ray->horizontal_ratio * texture->size.x)
 		+ (int)(vertical * texture->size.y) * texture->size.x];
-	ret.c.r /= (ray->perpendicular_distance / 3.0f) + 1;
-	ret.c.g /= (ray->perpendicular_distance / 3.0f) + 1;
-	ret.c.b /= (ray->perpendicular_distance / 3.0f) + 1;
+	darkness = (ray->perpendicular_distance / 10.0f
+		* (1.0f + (ft_fmin((get_wall_time() - self->weapon.weapon.last_shot)
+		* 10.0f, 1.0f) * 2))) + 1.0f;
+	ret.c.r /= darkness;
+	ret.c.g /= darkness;
+	ret.c.b /= darkness;
+	if (self->weapon.shooting)
+		ret = ft_rgba(255, 255, 255, 255);
 	return (ret);
 }
 
@@ -100,11 +106,12 @@ static void	floor_raycasting(t_raycasting_scene *const self,
 	float	darkness_value;
 
 	i.y = target->size.y / 2 + self->player_ref->super.transform.rotation.x;
-	darkness_step = 1.0f / target->size.y / 2 * 10.0f;
-	darkness_value = 0.0f;
+	darkness_step = 1.0f / target->size.y * 2.0f;
+	darkness_value = 0.4f;
 	while (i.y < target->size.y)
 	{
-		distance = (target->size.y / 2.0f)
+		distance = (target->size.y / (2.0f / (1.0f + self->player_ref->super.transform.position.z * 2)))
+		// distance = (target->size.y / (2.0f / 3.0f))
 			/ (i.y - self->player_ref->super.transform.rotation.x
 			- target->size.y / 2.0f);
 		floor.x = self->player_ref->super.transform.position.x + distance
@@ -142,16 +149,22 @@ static void	walls_raycasting(t_raycasting_scene *const self,
 	ssize_t	start_y;
 	ssize_t	end_y;
 	t_ray	*ray;
+	float	player_size;
 
+	player_size = 0.5f;
 	i.x = 0;
 	while (i.x < target->size.x)
 	{
 		ray = &((t_ray*)self->zbuffer.array)[i.x];
 		size = target->size.x / ray->perpendicular_distance
 			* ((float)target->size.y / target->size.x);
-		start_y = (ssize_t)(target->size.y - size) / 2
+		start_y = (ssize_t)(target->size.y) / 2
+			- (player_size - self->player_ref->super.transform.position.z) * size
 			+ self->player_ref->super.transform.rotation.x;
 		end_y = start_y + size;
+		// start_y = (ssize_t)(target->size.y - size) / 2
+		// 	+ self->player_ref->super.transform.rotation.x;
+		// end_y = start_y + size;
 		i.y = (size_t)ft_ssmax(start_y, 0);
 		while ((ssize_t)i.y < end_y && i.y < target->size.y)
 		{
@@ -244,7 +257,13 @@ static void	render_game_over(t_raycasting_scene *const self,
 
 	scale = 4 + ft_fmin((get_wall_time() - self->death_time) * 1.0f, 8.0f);
 	opacity = ft_fmin((get_wall_time() - self->death_time) * 32.0f, 255.0f);
-	frame_fill_blend(fb, ft_rgba(255, 0, 0, opacity), blend_add);
+	frame_layer_transform_add(fb,
+		&self->game_over_background,
+		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
+		ft_isize(fb->size.x / 2, fb->size.y / 2),
+		ft_vec2f(fb->size.x / (float)self->game_over_background.size.x,
+			fb->size.y / (float)self->game_over_background.size.y),
+		opacity));
 	frame_layer_transform(fb, &self->game_over.target,
 		ft_frame_transform(ft_vec2f(0.5f, 1.5f),
 			ft_isize(fb->size.x / 2, fb->size.y / 2),
@@ -296,6 +315,10 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 				255),
 			blend_invert);
 		printf("debug render 5\n");
+		// frame_fill_blend(fb,
+		// 	ft_rgba(255, 255, 255,
+		// 		63 - ft_fmin((get_wall_time() - self->weapon.weapon.last_shot) * 10.0f, 1.0f) * 63),
+		// 	blend_add);
 		if (ft_strcmp(self->weapon.weapon.name, "Minigun" ) != 0 || self->weapon.shooting == TRUE)
 		frame_fill_blend(fb,
 			ft_rgba(255, 255, 255,

@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 02:06:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 18:53:50 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 20:02:20 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 typedef struct	s_ghast_entity
 {
 	t_monster_entity	super;
-	t_fireball_entity	fireball;
 	float				shoot_time;
 	double				last_shot_time;
 }				t_ghast_entity;

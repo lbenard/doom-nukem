@@ -6,7 +6,7 @@
 #    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/04 19:49:14 by mribouch         ###   ########.fr        #
+#    Updated: 2020/08/04 20:14:20 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,6 +121,7 @@ SRCS_LIST		=	main.c																			\
 					engine/input/get.c																\
 					engine/input/update.c															\
 					engine/input/destroy.c															\
+					engine/input/new_event_update_event.c											\
 																									\
 					engine/lookup_table/cosine.c													\
 					engine/lookup_table/sine.c														\
@@ -502,7 +503,7 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g3 #-fsanitize=address # -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g3 -fsanitize=address # -Wno-deprecated
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/31 15:43:30 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 01:14:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ static void	add_death_buttons(t_raycasting_scene *const self,
 		self->give_up_button_ref->super.transform.position = ft_vec3f(-9999.0f, -9999.0f, 0.0f);
 }
 
+#include <stdio.h>
+
 t_result	init_raycasting_scene(t_raycasting_scene *const self,
 				t_raycasting_scene_args *const args)
 {
@@ -135,5 +137,6 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 	text_set_ref(&self->game_over,
 		static_string_as_ref(ft_static_string("ur ded lol")));
 	text_render(&self->game_over, ft_text_settings(ft_isize(0, 0), 9));
+	cursor_set_visibility(&self->window_ref->cursor, TRUE);
 	return (OK);
 }

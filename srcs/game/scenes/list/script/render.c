@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:36:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 04:29:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/07/30 21:28:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,10 @@ void	script_scene_render(t_script_scene *const self,
 				ft_vec2f(1.0f, 1.0f),
 				tig_fade * 255));
 	}
+	frame_layer_transform_add(fb,
+		&self->skip_text.target,
+		ft_frame_transform(ft_vec2f(1.0f, 1.0f),
+			ft_isize(fb->size.x - 10, fb->size.y - 10),
+			ft_vec2f(2.0f, 2.0f),
+			127));
 }
