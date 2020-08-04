@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 18:30:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 19:09:42 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ t_result	init_ghast_entity(t_ghast_entity *const self,
 			"failed to create monster entity"));
 	}
 	self->super.super.super.vtable.update = ghast_entity_update;
+	self->shoot_time = 3.0;
+	self->last_shot_time = 0.0;
 	return (OK);
 }

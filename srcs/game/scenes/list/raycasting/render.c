@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/31 15:44:10 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 19:24:32 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -278,11 +278,15 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
 	frame_fill(fb, ft_rgba(42, 0, 0, 255));
+	printf("debug render 1\n");
 	floor_raycasting(self, fb, self->player_ref->dir, self->player_ref->plane);
+	printf("debug render 2\n");
 	(void)ceiling_raycasting;
 	// ceiling_raycasting(self, fb, self->player_ref->dir, self->player_ref->plane);
 	walls_raycasting(self, fb);
+	printf("debug render 3\n");
 	raycasting_scene_render_sprites(self, fb);
+	printf("debug render 4\n");
 	if (!self->player_ref->is_dead)
 	{
 		frame_layer_transform(fb, &self->crosshair,
@@ -291,14 +295,17 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 				ft_vec2f(1.0f, 1.0f),
 				255),
 			blend_invert);
+		printf("debug render 5\n");
 		if (ft_strcmp(self->weapon.weapon.name, "Minigun" ) != 0 || self->weapon.shooting == TRUE)
 		frame_fill_blend(fb,
 			ft_rgba(255, 255, 255,
 				63 - ft_fmin((get_wall_time() - self->weapon.weapon.last_shot) * 10.0f, 1.0f) * 63),
 			blend_add);
+		printf("debug render 6\n");
 		raycasting_scene_render_weapon_display(self, fb);
 		raycasting_scene_render_weapon(self, fb);
 		display_hud(self, fb);
+		printf("debug render 7\n");
 	}
 	else
 		render_game_over(self, fb);

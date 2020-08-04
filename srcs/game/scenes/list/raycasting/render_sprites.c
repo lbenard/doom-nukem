@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/21 04:21:10 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 19:36:56 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,21 @@ static void	sort(t_raycasting_scene *const self)
 	pos = &self->sprite_entities.list;
 	while ((pos = pos->next) != &self->sprite_entities.list)
 	{
+		if (pos == self->sprite_entities.list.next)
+			printf("FIRST\n\n");
+		printf("debut boucle\n");
 		if (pos->next == &self->sprite_entities.list)
 			break ;
 		sprite = (t_sprite_entity*)((t_entity_node*)pos)->entity;
 		next_sprite = (t_sprite_entity*)((t_entity_node*)pos->next)->entity;
+		printf("avant le if\n");
+		printf("perpd sprite = %f, perpd nextsprite = %f\n", sprite->perpendicular_distance, next_sprite->perpendicular_distance);
 		if (sprite->perpendicular_distance
 			< next_sprite->perpendicular_distance)
 		{
+			printf("avant le move\n");
 			list_move(pos, pos->prev);
+			printf("apres le move\n");
 			pos = &self->sprite_entities.list;
 			continue ;
 		}
@@ -157,7 +164,11 @@ static void	monsters(t_raycasting_scene *const self,
 void		raycasting_scene_render_sprites(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
+	printf("avant sort\n");
 	sort(self);
+	printf("avant render\n");
 	render_sprites(self, fb);	
+	printf("avant monster\n");
 	monsters(self, fb);
+	printf("apres monster\n");
 }

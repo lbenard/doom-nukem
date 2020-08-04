@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/07/29 18:24:54 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/04 19:49:14 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -370,6 +370,7 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/ghast/init.c													\
 					game/entities/list/ghast/update.c												\
 					game/entities/list/ghast/destroy.c												\
+					game/entities/list/ghast/fireball.c												\
 																									\
 					game/entities/list/sprite/sprite_entity.c										\
 					game/entities/list/sprite/sprite_entity_size.c									\
