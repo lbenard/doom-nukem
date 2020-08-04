@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 18:27:11 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/04 18:41:09 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/04 22:26:52 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void			fireball_entity_update(t_fireball_entity *const self)
 	t_vec3f	direction;
 	t_vec3f	player_pos;
 	t_vec3f	difference;
-	int		distance;
+	float	distance;
 	t_raycasting_scene	*scene;
 
 	sprite_entity_update(&self->super);
@@ -37,14 +37,14 @@ void			fireball_entity_update(t_fireball_entity *const self)
 	self->super.super.transform.position.x += direction.x;
 	self->super.super.transform.position.y += direction.y;
 	self->super.super.transform.position.z += direction.z;
-	if (distance <= 1)
+	if (distance <= 0.5)
 	{
 		player_entity_take_damage(scene->player_ref, self->damage);
 		entity_list_remove(&scene->super.entities, &self->super.super);
 		return ;
 	}
 	// (void)self;
-	ft_putendl("ouais mon gars");
+	// ft_putendl("ouais mon gars");
 }
 
 t_result		init_fireball_entity(t_fireball_entity *const self,

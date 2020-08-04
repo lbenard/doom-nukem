@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 02:06:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 20:02:20 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/05 00:26:04 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct	s_ghast_entity
 	t_monster_entity	super;
 	float				shoot_time;
 	double				last_shot_time;
+	t_bool				just_shoot;
 }				t_ghast_entity;
 
 typedef struct	s_ghast_entity_args

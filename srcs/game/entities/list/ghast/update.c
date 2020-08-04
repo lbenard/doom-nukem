@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 19:12:07 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/05 00:34:21 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void			go_fireball(t_ghast_entity *self)
 	direction = vec3f_normalize(direction);
 	entity_list_add_entity(&scene->super.entities,
 		fireball_entity(monster_pos, direction, self->super.player_ref));
-	ft_putendl("bon j'ai bien créé cte merde ?");
+	// ft_putendl("bon j'ai bien créé cte merde ?");
 }
 
 void			ghast_entity_update(t_ghast_entity *const self)
@@ -99,7 +99,8 @@ void			ghast_entity_update(t_ghast_entity *const self)
 
 	sprite_entity_update(&self->super.super);
 	animation_update(&self->super.animation, self->super.spritesheet_ref);
-	self->super.animation.speed = 0;
+	if (self->just_shoot == FALSE)
+		self->super.animation.speed = 0;
 	frame_layer_opaque(&self->super.super.texture,
 		animation_current(&self->super.animation, self->super.spritesheet_ref),
 		ft_isize(0, 0));
@@ -113,7 +114,7 @@ void			ghast_entity_update(t_ghast_entity *const self)
 		+ difference.z * difference.z; 
 	if (distance < 50)
 	{
-		ft_putendl("ca crash ou pas");
+		// ft_putendl("ca crash ou pas");
 		// ft_putendl("ya un pb ?");
 		self->super.animation.speed = 0.4;
 		self->super.animation.speed = 0.1f;
@@ -141,13 +142,26 @@ void			ghast_entity_update(t_ghast_entity *const self)
 		// 	self->super.player_ref->super);
 		if (self->last_shot_time == 0.0)
 			self->last_shot_time = get_wall_time();
-		printf("last shot time = %f\n", self->last_shot_time);
-		printf("wall time = %f\n", get_wall_time());
-		printf("addition wall lastshot = %f\n", self->last_shot_time + self->shoot_time);
+		// printf("last shot time = %f\n", self->last_shot_time);
+		// printf("wall time = %f\n", get_wall_time());
+		// printf("addition wall lastshot = %f\n", self->last_shot_time + self->shoot_time);
 		if (self->last_shot_time + self->shoot_time < get_wall_time())
 		{
+			self->just_shoot = TRUE;
+			self->super.animation.iter = 0;
+			self->super.animation.anim = 4;
+			self->super.animation.speed = 0.1f;
 			go_fireball(self);
 			self->last_shot_time = get_wall_time();
+		}
+		// printf("anim = %d, index = %f, iter = %d\n", self->super.animation.anim, self->super.spritesheet_ref->grid_size.x * (1 / 0.1) - 1, self->super.animation.iter);
+		if (self->super.animation.anim == 4 && self->super.animation.iter ==
+			(int)(self->super.spritesheet_ref->grid_size.x * (1 / 0.1) - 1))
+		{
+			// printf("fin de l'animation ?\n");
+			self->super.animation.speed = 0;
+			self->super.animation.anim = 0;
+			self->just_shoot = FALSE;
 		}
 		// if (self->super.is_star == FALSE)
 		// {
@@ -176,6 +190,9 @@ void			ghast_entity_update(t_ghast_entity *const self)
 	else
 	{
 		// self->super.animation.anim = get_orientate_sprite(self);
+		self->super.animation.iter = 0;
+		self->super.animation.speed = 0;
+		self->super.animation.anim = 0;
 		self->last_shot_time = 0.0;
 		self->super.animation.speed = 0.0f;
 	}
