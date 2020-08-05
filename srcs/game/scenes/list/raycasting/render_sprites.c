@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 23:03:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/05 15:05:30 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,7 @@ static void	monsters(t_raycasting_scene *const self,
 void		raycasting_scene_render_sprites(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
-	printf("avant sort\n");
 	sort(self);
-	printf("avant render\n");
 	render_sprites(self, fb);	
-	printf("avant monster\n");
 	monsters(self, fb);
-	printf("apres monster\n");
 }

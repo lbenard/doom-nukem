@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon_shoot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/31 15:38:56 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/05 15:51:05 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,9 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 		if (is_targeting(monster, crosshair_pos, wall))
 		{
 			if (ft_strcmp(self->weapon.weapon.name, "Shotgun") == 0)
-			{
-				printf("degats = %f\n", (self->weapon.weapon.damage / (distance_monster(self, monster) * 0.3 + 1)) * ammo_amount);
 				monster->health -= (self->weapon.weapon.damage / (distance_monster(self, monster) * 0.3 + 1)) * ammo_amount;
-			}
 			else if (ft_strcmp(self->weapon.weapon.name, "Minigun") == 0)
 			{
-				ft_putendl("je rentre bien dedans ?");
 				self->weapon.just_shooted = TRUE;
 				if (self->end_anim == TRUE)
 					monster->health -= self->weapon.weapon.damage * ammo_amount;
