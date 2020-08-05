@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/04 20:14:20 by mribouch         ###   ########.fr        #
+#    Updated: 2020/08/05 16:12:17 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -422,6 +422,7 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/render.c											\
 					game/scenes/list/raycasting/render_sprites.c									\
 					game/scenes/list/raycasting/render_weapon_display.c								\
+					game/scenes/list/raycasting/render_tooltip.c									\
 					game/scenes/list/raycasting/add_entity.c										\
 					game/scenes/list/raycasting/kill_monster.c										\
 					game/scenes/list/raycasting/weapon_set_pistol.c									\
