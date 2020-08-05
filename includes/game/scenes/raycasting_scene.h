@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 20:56:08 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/05 16:07:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ typedef struct	s_raycasting_scene
 	t_frame				floor;
 	t_frame				ceiling;
 	t_frame				crosshair;
+	t_spritesheet		use_key_spritesheet;
+	t_animation			use_key_animation;
+	t_text				use_key_text;
 	t_text				game_over;
 	double				death_time;
 	t_frame				game_over_background;
@@ -120,6 +123,8 @@ void			raycasting_scene_render_weapon_display(
 					t_raycasting_scene *const self,
 					t_frame *const fb);
 void			raycasting_scene_render_weapon(t_raycasting_scene *const self,
+					t_frame *const fb);
+void			raycasting_scene_render_tooltip(t_raycasting_scene *const self,
 					t_frame *const fb);
 
 t_result		raycasting_scene_add_entity(t_raycasting_scene *const self,

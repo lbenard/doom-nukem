@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 15:49:41 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/05 16:12:37 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 				ft_isize(fb->size.x / 2 - 
 					self->hud_ray.heart_ss.grid_size.x / 2,
 					fb->size.y - 64),ft_vec2f(fx, fx), 255), blend_add);
+	raycasting_scene_render_tooltip(self, fb);
 }
 
 // void		render_weapon(t_raycasting_scene *const self,

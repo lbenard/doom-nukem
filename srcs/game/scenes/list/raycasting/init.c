@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 15:51:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/05 16:04:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,23 @@ static void	add_death_buttons(t_raycasting_scene *const self,
 		self->give_up_button_ref->super.transform.position = ft_vec3f(-9999.0f, -9999.0f, 0.0f);
 }
 
-#include <stdio.h>
+static void	init_use_key_tooltip(t_raycasting_scene *const self)
+{
+	module_add(&self->super.module, &self->use_key_spritesheet,
+		spritesheet("resources/sprites/use_key.bmp", ft_usize(2, 1)));
+	module_add(&self->super.module, &self->use_key_animation,
+		animation(0, 2, 0.1f));
+	module_add(&self->super.module, &self->use_key_text,
+		text("haxorville.bmp", ft_usize(5 * ft_strlen("Press"), 9)));
+	if (self->super.module.has_error == FALSE)
+	{
+		text_set_ref(&self->use_key_text,
+			static_string_as_ref(ft_static_string("Press")));
+		text_render(&self->use_key_text, ft_text_settings(ft_isize(0, 0), 9));
+		frame_fill_blend(&self->use_key_text.target,
+			ft_rgba(255, 255, 255, 255), blend_colorize);
+	}
+}
 
 t_result	init_raycasting_scene(t_raycasting_scene *const self,
 				t_raycasting_scene_args *const args)
@@ -124,6 +140,7 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 	}
 	init_vars(self, args);
 	add_modules(self, args);
+	init_use_key_tooltip(self);
 	if (!self->super.module.has_error)
 	{
 		add_entities(self);
