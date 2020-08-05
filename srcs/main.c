@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 18:23:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/04 20:17:42 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,28 @@ void	register_inputs(t_game *const game)
 	input_attach(&game->input, right, ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&game->input, right,
 		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
+	
+	int	turn_left = input_register(&game->input, "TurnLeft");
+	input_attach(&game->input, turn_left, ft_key_event(sfKeyLeft, KEY_HOLD));
+
+	int	turn_right = input_register(&game->input, "TurnRight");
+	input_attach(&game->input, turn_right, ft_key_event(sfKeyRight, KEY_HOLD));
+
+	int	sprint = input_register(&game->input, "Sprint");
+	input_attach(&game->input, sprint, ft_key_event(sfKeyLShift, KEY_HOLD));
+	input_attach(&game->input, sprint,
+		ft_button_event(0, XBOX_A, INPUT_NO_FLAG));
+
+	int	toggle_flight = input_register(&game->input, "ToggleFlight");
+	input_attach(&game->input, toggle_flight, ft_key_event(sfKeyF, 0));
 
 	int use = input_register(&game->input, "Use");
-	input_attach(&game->input, use, ft_key_event(sfKeyE, 0));
+	input_attach(&game->input, use, ft_key_event(sfKeyE, KEY_HOLD));
 	input_attach(&game->input, use, ft_button_event(0, XBOX_A, 0));
 
 	int shoot = input_register(&game->input, "Shoot");
-	input_attach(&game->input, shoot, ft_mouse_event(sfMouseLeft, 0));
-	input_attach(&game->input, shoot, ft_key_event(sfKeySpace, 0));
+	input_attach(&game->input, shoot, ft_mouse_event(sfMouseLeft, MOUSE_HOLD));
+	input_attach(&game->input, shoot, ft_key_event(sfKeySpace, KEY_HOLD));
 	input_attach(&game->input, shoot,
 		ft_stick_event(0, XBOX_RTRIGGER, 20.0f, 0));
 
@@ -117,11 +131,6 @@ void	register_inputs(t_game *const game)
 	int editor_camera_zoom = input_register(&game->input, "EditorCameraZoom");
 	input_attach(&game->input, editor_camera_zoom, ft_key_event(sfKeyAdd, KEY_HOLD));
 	input_attach(&game->input, editor_camera_zoom, ft_key_event(sfKeyPageUp, KEY_HOLD));
-	
-	int	sprint = input_register(&game->input, "Sprint");
-	input_attach(&game->input, sprint, ft_key_event(sfKeyLShift, KEY_HOLD));
-	input_attach(&game->input, sprint,
-		ft_button_event(0, XBOX_A, INPUT_NO_FLAG));
 
 	int	quit = input_register(&game->input, "Quit");
 	input_attach(&game->input, quit, ft_key_event(sfKeyEscape, 0));
@@ -142,12 +151,6 @@ void	register_inputs(t_game *const game)
 	// input_register(&game->input, "Backward");
 	// input_register(&game->input, "Left");
 	// input_register(&game->input, "Right");
-	input_register(&game->input, "TurnLeft");
-	int	turn_left = input_get_id(&game->input, "TurnLeft");
-	input_attach(&game->input, turn_left, ft_key_event(sfKeyLeft, KEY_HOLD));
-	input_register(&game->input, "TurnRight");
-	int	turn_right = input_get_id(&game->input, "TurnRight");
-	input_attach(&game->input, turn_right, ft_key_event(sfKeyRight, KEY_HOLD));
 
 	// input_get(&game->input, forward);
 }

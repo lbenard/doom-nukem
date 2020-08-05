@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 17:14:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/05 15:51:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ static void	init_vars(t_raycasting_scene *const self,
 	self->end_anim = FALSE;
 	self->last_shot = FALSE;
 	self->weapon_ref = NULL;
-	// raycasting_scene_weapon_set_pistol(self);
-	raycasting_scene_weapon_set_minigun(self);
+	raycasting_scene_weapon_set_pistol(self);
+	// raycasting_scene_weapon_set_minigun(self);
 	// raycasting_scene_weapon_set_shotgun(self);
 	self->weapon.just_shooted = FALSE;
 	self->weapon.just_reloaded = FALSE;
