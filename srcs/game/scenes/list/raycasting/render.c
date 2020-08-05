@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 16:12:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/05 23:05:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 	float	amplitude;
 	float	fx;
 
-	perc_sprite = 100 * self->player_ref->health / 150;
+	perc_sprite = ft_max(100 * self->player_ref->health / 150, 0);
 	index_sprite = ((float)self->hud_ray.heart_ss.grid_size.x / 100.0f)
 		* perc_sprite;
 	amplitude = 4.0f - 0.3 * (8 - index_sprite);
@@ -192,7 +192,7 @@ void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 		i = 0;
 	fx = 2 + cos((i - 0.523) * 3)*sin((i - 0.523))/((i - 0.523) * amplitude);
 	frame_layer_transform(fb,
-		&self->hud_ray.heart_ss.sprite[8 - (int)index_sprite],
+		&self->hud_ray.heart_ss.sprite[8 - ft_max(ft_min(index_sprite, 8), 1)],
 			ft_frame_transform(ft_vec2f(0.5f, 1.0f),
 				ft_isize(fb->size.x / 2 - 
 					self->hud_ray.heart_ss.grid_size.x / 2,
