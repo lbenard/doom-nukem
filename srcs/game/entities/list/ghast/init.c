@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 00:57:02 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/06 18:46:55 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,12 @@ t_result	init_ghast_entity(t_ghast_entity *const self,
 	self->shoot_time = 3.0;
 	self->last_shot_time = 0.0;
 	self->just_shoot = FALSE;
+	self->move_side = FALSE;
+	self->last_pos.x = 0;
+	self->last_pos.y = 0;
+	self->last_pos.z = 0;
+	self->side_move.x = 0;
+	self->side_move.y = 0;
+	self->side_move.z = 0;
 	return (OK);
 }
