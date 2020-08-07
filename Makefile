@@ -6,7 +6,7 @@
 #    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/06 23:54:38 by mribouch         ###   ########.fr        #
+#    Updated: 2020/08/07 14:28:48 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -373,6 +373,11 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/ghast/destroy.c												\
 					game/entities/list/ghast/fireball.c												\
 					game/entities/list/ghast/shot_fireball.c										\
+																									\
+					game/entities/list/nyarlathotep/nyarlathotep_entity.c							\
+					game/entities/list/nyarlathotep/init.c											\
+					game/entities/list/nyarlathotep/update.c										\
+					game/entities/list/nyarlathotep/destroy.c										\
 																									\
 					game/entities/list/sprite/sprite_entity.c										\
 					game/entities/list/sprite/sprite_entity_size.c									\

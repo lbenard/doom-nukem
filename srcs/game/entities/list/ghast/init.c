@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/06 18:46:55 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/07 00:20:28 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_result	init_ghast_entity(t_ghast_entity *const self,
 		monster_entity(
 			ft_monster_stats(args->pos,
 				100.0f,
-				10.0f,
+				0.0f,
 				"Ghast"),
 			&raycasting->ghast_spritesheet,
 			raycasting)) == ERROR)

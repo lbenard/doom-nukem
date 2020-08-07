@@ -1,32 +1,47 @@
--textures
-0: resources/textures/pack/block/sandstone.png
-1: resources/textures/white_wool.png
-2: resources/textures/acacia_log.png
-
--blocks
-0: 0
-1: 1
-2: 2
-
 -size
-height: 10
-width: 12
+height: 34
+width: 25
 
 -player
-spawn: 2 8
+spawn: 2 18
 
 -entities
-one_punch_man: 9.8055 1.1944
+ghast: 19.9898 3.0567
+nyarlathotep: 18.3839 17.8205
 
 -map
-: 222222222222
-: 2          2
-: 2          2
-: 2          2
-: 2          2
-: 2          2
-: 2          2
-: 2          2
-: 2          2
-: 222222222222
+: 2222222225255555555555555
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 2                       5
+: 5                       5
+: 5                       5
+: 5555555555555555555555555
 
