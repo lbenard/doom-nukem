@@ -16,18 +16,22 @@
 #include "engine/a_star.h"
 #include <math.h>
 
-static float	angle_gap(float f1, float f2)
+static int		diamond_angle(float x, float y)
 {
-	float	result;
-	
-	f1 += PI;
-	f2 += PI;
-	result =  ((f1 > f2) ? f1 - f2 : -(f2 - f1));
-	if (result > PI)
-		result = -(2 * PI - result);
-	if (result < -PI)
-		result = (result + 2 * PI);
-	return (result);
+	if (y >= 0)
+        return (x >= 0 ? y / (x + y) : 1 - x / (-x + y));
+    else
+        return (x < 0 ? 2 - y / (-x - y) : 3 + x / (x - y));
+}
+
+static int		angle_gap(float p, float m)
+{
+  float diff;
+  
+  diff = p - m;
+  if (diff < 0)
+  	return diff + 4;
+  return diff;
 }
 
 static float	compute_angle_to_player(t_monster_entity *self)
@@ -42,61 +46,55 @@ static float	compute_angle_to_player(t_monster_entity *self)
 	monster_pos = self->super.super.transform.position;
 	dir_to_player = ft_vec3f(player_pos.x - monster_pos.x,
 						player_pos.y - monster_pos.y, 0);
-	monster_angle = atan2f(self->super.super.transform.direction.x,
+	monster_angle = diamond_angle(self->super.super.transform.direction.x,
 		self->super.super.transform.direction.y);
-	player_angle = atan2f(dir_to_player.x, dir_to_player.y);
-	return (angle_gap(monster_angle, player_angle));
+	player_angle = diamond_angle(dir_to_player.x, dir_to_player.y);
+	return (angle_gap(player_angle, monster_angle));
 }
 
-
-/* 
- n = orientations amount necessarily even & >= 4
- angle = [-PI, PI] angle between monster direction and direction to player
- angle_abs = [0, PI]
- check_amount = number of sprite side orientations / 2
-
- Exemple:
- 	-spritesheet orientation list order:
-		[0,    1,     2,      3,       ..., even,   odd]
-	 	[back, front, left_1, right_1, ..., left_n, right_n]
-*/
-
-#define BACK 0
-#define FRONT 1
-#define LEFT_EVEN 0
-#define RIGHT_ODD 1
-
-static int		get_spritesheet_index(float angle, int n)
+static int				face4(float a)
 {
-	float	angle_abs;
-	int		check_amount;
-	t_vec2i	range;
+  if (a >= 3.5 || a <= 0.5)
+  	return (0);
+  if (0.5 <= a && a <= 1.5)
+  	return (1);
+  if (1.5 <= a && a <= 2.5)
+  	return (2);
+  return (3);
+}
+
+static int				face_n(float a, int n)
+{
+	float	face;
+	float	half;
+	t_vec3f	range;
 	int		i;
 
-	check_amount = (n - 2) / 2
-	angle_abs = fabsf(angle);
-	range = ft_vec2i(0, 1);
+	face = 4 / n;
+	half = face / 2;
+	range = ft_vec2f(4 - half, half);
+	if (a >= range.min || a <= range.max)
+		return (0);
 
-	if (range.x * (PI / n) <= angle_abs && angle_abs <= range.y * (PI / n))
-		return BACK;
-	i = -1;
-	while (++i < check_amount)
-	{
-		range = ft_vec2i(range.y, range.y + 2);
-		if (range.x * (PI / n) <= angle_abs && angle_abs <= range.y * (PI / n))
-			return (i + (angle < 0 ? RIGHT_ODD : LEFT_EVEN);
+	i = 0;
+	range = ft_vec2f(half, half + face);
+	while (++i < n - 1) {
+		if (range.min <= a && a <= range.max)
+			return (i);
+		range.min += face;
+		range.max += face;
 	}
-	return FRONT;
+	return (n - 1);
 }
 
 static int		get_orientate_sprite(t_monster_entity *self)
 {
-	float	angle;
-	int		orientations;
+	float	angle
+	int		index;
 
 	angle = compute_angle_to_player(self);
-	orientations = self->spritesheet_ref->grid_size.y;
-	return (get_spritesheet_index(angle, orientations));
+	index = face_n(angle, self->spritesheet_ref->grid_size.y);
+	return (index);
 }
 
 void			monster_entity_update(t_monster_entity *const self)
