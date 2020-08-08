@@ -67,29 +67,29 @@ static int				face_n(float a, int n)
 {
 	float	face;
 	float	half;
-	t_vec3f	range;
+	t_vec2f	range;
 	int		i;
 
 	face = 4 / n;
 	half = face / 2;
 	range = ft_vec2f(4 - half, half);
-	if (a >= range.min || a <= range.max)
+	if (a >= range.x || a <= range.y)
 		return (0);
 
 	i = 0;
 	range = ft_vec2f(half, half + face);
 	while (++i < n - 1) {
-		if (range.min <= a && a <= range.max)
+		if (range.x <= a && a <= range.y)
 			return (i);
-		range.min += face;
-		range.max += face;
+		range.x += face;
+		range.y += face;
 	}
 	return (n - 1);
 }
 
 static int		get_orientate_sprite(t_monster_entity *self)
 {
-	float	angle
+	float	angle;
 	int		index;
 
 	angle = compute_angle_to_player(self);
