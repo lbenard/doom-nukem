@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monster_entity.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:07:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 21:03:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/08 15:42:14 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ typedef struct	s_monster_entity
 	float					health;
 	float					damage;
 	const char				*name;
+	int						distance_agro;
+	int						max_distance_agro;
 	t_star					a_star;
 	t_bool					is_star;
+	t_bool					agro;
 	t_text					name_text;
 }				t_monster_entity;
 

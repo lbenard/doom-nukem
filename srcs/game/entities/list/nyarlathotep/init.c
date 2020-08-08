@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 01:23:22 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/07 01:59:05 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/08 15:42:10 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_result	init_nyarlathotep_entity(t_nyarlathotep_entity *const self,
 		monster_entity(
 			ft_monster_stats(args->pos,
 				200.0f,
-				10.0f,
+				5.0f,
 				"Nyarlathotep"),
 			&scene->nyarlathotep_spritesheet,
 			scene)) == ERROR)
@@ -33,5 +33,12 @@ t_result	init_nyarlathotep_entity(t_nyarlathotep_entity *const self,
 			"failed to create monster entity"));
 	}
 	self->super.super.super.vtable.update = nyarlathotep_entity_update;
+	self->end_circle = FALSE;
+	self->end_move = FALSE;
+	self->is_moving = FALSE;
+	self->stuck = FALSE;
+	self->unstuck_time = 0.0;
+	self->super.distance_agro = 60;
+	self->super.max_distance_agro = 80;
 	return (OK);
 }

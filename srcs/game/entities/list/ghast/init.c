@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/07 00:20:28 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/08 18:19:57 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ t_result	init_ghast_entity(t_ghast_entity *const self,
 	self->side_move.x = 0;
 	self->side_move.y = 0;
 	self->side_move.z = 0;
+	self->super.distance_agro = 40;
+	self->super.max_distance_agro = 60;
 	return (OK);
 }

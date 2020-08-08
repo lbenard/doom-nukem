@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 00:50:39 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/07 01:40:05 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/07 22:48:19 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@
 typedef struct			s_nyarlathotep_entity
 {
 	t_monster_entity	super;
+	t_vec3f				dir_move;
+	t_vec3f				last_pos;
+	t_bool				end_circle;
+	t_bool				end_move;
+	t_bool				is_moving;
+	t_bool				stuck;
+	double				unstuck_time;
 }						t_nyarlathotep_entity;
 
 typedef struct			s_nyarlathotep_entity_args

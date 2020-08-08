@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 21:15:56 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/08 15:42:13 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ t_result	init_monster_entity(t_monster_entity *const self,
 	self->name = args->name;
 	self->is_star = FALSE;
 	self->super.super.transform.direction = ft_vec3f(0, 1, 0);
+	self->agro = FALSE;
+	self->distance_agro = 30;
+	self->max_distance_agro = 50;
 	module_add(&self->super.super.module, &self->animation,
 		animation(0, args->spritesheet_ref->nb_sprite, 1.0f));
 	module_add(&self->super.super.module, &self->name_text,
