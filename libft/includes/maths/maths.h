@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:47:43 by lbenard           #+#    #+#             */
-/*   Updated: 2019/11/18 21:26:21 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/08 19:12:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int		ft_max(int a, int b);
 float	ft_fabs(float i);
 float	ft_fmin(float a, float b);
 float	ft_fmax(float a, float b);
+
+double	ft_dabs(double i);
+double	ft_dmin(double a, double b);
+double	ft_dmax(double a, double b);
 
 size_t	ft_smin(size_t a, size_t b);
 size_t	ft_smax(size_t a, size_t b);

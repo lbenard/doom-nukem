@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 15:05:30 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/08 19:55:04 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,6 @@ static void	sort(t_raycasting_scene *const self)
 			continue ;
 		}
 	}
-	pos = &self->sprite_entities.list;
-	while ((pos = pos->next) != &self->sprite_entities.list)
-	{
-		if (pos->next == &self->sprite_entities.list)
-			break ;
-		sprite = (t_sprite_entity*)((t_entity_node*)pos)->entity;
-		next_sprite = (t_sprite_entity*)((t_entity_node*)pos->next)->entity;
-		if (sprite->perpendicular_distance < next_sprite->perpendicular_distance)
-			exit(0);
-	}
 }
 
 static void	render_sprites(t_raycasting_scene *const self,
@@ -94,17 +84,12 @@ static void	render_sprites(t_raycasting_scene *const self,
 					* sprite_texture->size.y;
 				t_rgba	sprite_color = sprite_texture->pixels[sprite_px.y
 					* sprite_texture->size.x + sprite_px.x];
-				if (!(sprite_color.c.r == 255
-					&& sprite_color.c.g == 255
-					&& sprite_color.c.b == 255))
-				{
-					sprite_color.c.r /= (sprite->perpendicular_distance / 3.0f) + 1;
-					sprite_color.c.g /= (sprite->perpendicular_distance / 3.0f) + 1;
-					sprite_color.c.b /= (sprite->perpendicular_distance / 3.0f) + 1;
-					fb->pixels[i.y * fb->size.x + i.x] =
-						blend_add(fb->pixels[i.y * fb->size.x + i.x],
-						sprite_color);
-				}
+				sprite_color.c.r /= (sprite->perpendicular_distance / 3.0f) + 1;
+				sprite_color.c.g /= (sprite->perpendicular_distance / 3.0f) + 1;
+				sprite_color.c.b /= (sprite->perpendicular_distance / 3.0f) + 1;
+				fb->pixels[i.y * fb->size.x + i.x] =
+					blend_add(fb->pixels[i.y * fb->size.x + i.x],
+					sprite_color);
 				i.y++;
 			}
 			i.x++;

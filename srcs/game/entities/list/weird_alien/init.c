@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 21:06:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/10 18:28:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_result	init_weird_alien_entity(t_weird_alien_entity *const self,
 				100.0f,
 				10.0f,
 				"Weird Alien"),
-			&raycasting->alien_spritesheet,
+			&raycasting->assets.alien_spritesheet,
 			raycasting)) == ERROR)
 	{
 		return (throw_result_str("init_weird_alien_entity()",

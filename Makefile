@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/05 16:12:17 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/10 19:02:15 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -381,6 +381,17 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/sprite/update.c												\
 					game/entities/list/sprite/vtable.c												\
 																									\
+					game/entities/list/weapon/ft_weapon_specs_default.c								\
+					game/entities/list/weapon/weapon_entity.c										\
+					game/entities/list/weapon/init.c												\
+					game/entities/list/weapon/update.c												\
+					game/entities/list/weapon/destroy.c												\
+																									\
+					game/entities/list/pistol/pistol_entity.c										\
+					game/entities/list/pistol/init.c												\
+					game/entities/list/pistol/update.c												\
+					game/entities/list/pistol/destroy.c												\
+																									\
 					game/events/close_game_event.c													\
 																									\
 					game/scenes/list/editor/editor_scene.c											\
@@ -425,9 +436,6 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/render_tooltip.c									\
 					game/scenes/list/raycasting/add_entity.c										\
 					game/scenes/list/raycasting/kill_monster.c										\
-					game/scenes/list/raycasting/weapon_set_pistol.c									\
-					game/scenes/list/raycasting/weapon_set_minigun.c								\
-					game/scenes/list/raycasting/weapon_set_shotgun.c								\
 					game/scenes/list/raycasting/weapon_use.c										\
 					game/scenes/list/raycasting/weapon_shoot.c										\
 					game/scenes/list/raycasting/weapon_reload.c										\
@@ -504,7 +512,7 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g3 -fsanitize=address # -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto# -fsanitize=address # -Wno-deprecated
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)

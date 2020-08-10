@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 21:04:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:22:55 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/10 19:27:47 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static void	itoa_limit(char *const dest, size_t n, size_t limit)
 
 static void	update_display(t_raycasting_scene *const self)
 {
-	itoa_limit(self->weapon.display, self->weapon.weapon.clip, 4);
+	itoa_limit(self->weapon.display, self->entities.weapon_ref->specs.clip, 4);
 	ft_strcat(self->weapon.display, "/");
 	itoa_limit(self->weapon.display + ft_strlen(self->weapon.display),
-		self->weapon.weapon.ammo, 4);
+		self->weapon.ammo, 4);
 	text_set_ref(&self->weapon.display_text,
 		static_string_as_ref(ft_static_string(self->weapon.display)));
 	text_render(&self->weapon.display_text,
@@ -58,15 +58,18 @@ static void	update_display(t_raycasting_scene *const self)
 void	raycasting_scene_render_weapon_display(t_raycasting_scene *const self,
 			t_frame *const fb)
 {
-	if (self->weapon.first_render
-		|| self->weapon.just_shooted
-		|| self->weapon.just_reloaded)
-		update_display(self);
-	self->weapon.first_render = FALSE;
-	frame_layer_transform_add(fb,
-		&self->weapon.display_text.target,
-		ft_frame_transform(ft_vec2f(0.0f, 1.0f),
-			ft_isize(10 - 2, fb->size.y - 5 - 2),
-			ft_vec2f(3.0f, 3.0f),
-			255));
+	if (self->entities.weapon_ref)
+	{
+		if (self->entities.weapon_ref->first_render
+			|| self->entities.weapon_ref->just_shooted
+			|| self->entities.weapon_ref->just_reloaded)
+			update_display(self);
+		self->entities.weapon_ref->first_render = FALSE;
+		frame_layer_transform_add(fb,
+			&self->weapon.display_text.target,
+			ft_frame_transform(ft_vec2f(0.0f, 1.0f),
+				ft_isize(10 - 2, fb->size.y - 5 - 2),
+				ft_vec2f(3.0f, 3.0f),
+				255));
+	}
 }

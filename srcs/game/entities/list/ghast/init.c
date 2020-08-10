@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 00:57:02 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/10 18:28:05 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_result	init_ghast_entity(t_ghast_entity *const self,
 				100.0f,
 				10.0f,
 				"Ghast"),
-			&raycasting->ghast_spritesheet,
+			&raycasting->assets.ghast_spritesheet,
 			raycasting)) == ERROR)
 	{
 		return (throw_result_str("init_ghast_entity()",

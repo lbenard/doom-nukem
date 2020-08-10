@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 16:07:57 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 16:21:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/10 18:46:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static void	render_tooltip(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
 	frame_layer_transform_add(fb,
-		&self->use_key_text.target,
+		&self->assets.use_key_text.target,
 		ft_frame_transform(ft_vec2f(0.0f, 0.5f),
 			ft_isize(fb->size.x / 2 + 20, fb->size.y / 2 + 20),
 			ft_vec2f(2.0f, 2.0f),
 			255));
 	frame_layer_transform_add(fb,
-		animation_current(&self->use_key_animation,
-			&self->use_key_spritesheet),
+		animation_current(&self->assets.use_key_animation,
+			&self->assets.use_key_spritesheet),
 		ft_frame_transform(ft_vec2f(0.0f, 0.5f),
-			ft_isize(fb->size.x / 2 + self->use_key_text.target.size.x * 2 + 25,
+			ft_isize(fb->size.x / 2 + self->assets.use_key_text.target.size.x * 2 + 25,
 				fb->size.y / 2 + 20),
 			ft_vec2f(2.0f, 2.0f),
 			255));

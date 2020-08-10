@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fireball.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 18:27:11 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/05 00:43:19 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/10 21:08:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,24 @@ void			fireball_entity_update(t_fireball_entity *const self)
 	float	distance;
 	t_raycasting_scene	*scene;
 
-	sprite_entity_update(&self->super);
 	scene = (t_raycasting_scene*)game_singleton()->scene;
 	direction = self->super.super.transform.direction;
 	player_pos = self->super.player_ref->super.transform.position;
 	difference = ft_vec3f(player_pos.x - self->super.super.transform.position.x,
     	player_pos.y - self->super.super.transform.position.y,
-   			 player_pos.z - self->super.super.transform.position.z);
+		player_pos.z - self->super.super.transform.position.z);
 	distance = difference.x * difference.x
 		+ difference.y * difference.y
-			+ difference.z * difference.z; 
+		+ difference.z * difference.z;
 	direction = vec3f_scalar(direction, get_last_delta());
 	direction = vec3f_scalar(direction, 6);
 	self->super.super.transform.position.x += direction.x;
 	self->super.super.transform.position.y += direction.y;
 	self->super.super.transform.position.z += direction.z;
+	sprite_entity_update(&self->super);
 	if (distance <= 0.5)
 	{
-		player_entity_take_damage(scene->player_ref, self->damage);
+		player_entity_take_damage(scene->entities.player_ref, self->damage);
 		entity_list_remove(&scene->super.entities, &self->super.super);
 		return ;
 	}
@@ -58,7 +58,10 @@ t_result		init_fireball_entity(t_fireball_entity *const self,
 			"failed to create fireball entity"));
 	}
 	self->super.super.transform.position = args->pos;
+	self->super.super.transform.position.z = 0.3f;
 	self->super.super.transform.direction = args->direction;
+	self->super.super.transform.scale.x = 0.2f;
+	self->super.super.transform.scale.y = 0.2f;
 	self->damage = 50;
 	self->super.super.vtable.update = fireball_entity_update;
 	return (OK);

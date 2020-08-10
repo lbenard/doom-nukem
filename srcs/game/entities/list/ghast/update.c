@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 00:57:15 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/07 23:06:36 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,12 @@ void			go_fireball(t_ghast_entity *self)
 
 	monster_pos = self->super.super.super.transform.position;
 	scene = (t_raycasting_scene*)game_singleton()->scene;
-	direction = ft_vec3f(self->super.player_ref->super.transform.position.x -
-		monster_pos.x, self->super.player_ref->super.transform.position.y -
-			monster_pos.y, self->super.player_ref->super.transform.position.z -
-				monster_pos.z);
+	direction.x = self->super.player_ref->super.transform.position.x -
+		monster_pos.x;
+	direction.y = self->super.player_ref->super.transform.position.y -
+		monster_pos.y;
+	direction.z = self->super.player_ref->super.transform.position.z -
+		monster_pos.z;
 	direction = vec3f_normalize(direction);
 	entity_list_add_entity(&scene->super.entities,
 		fireball_entity(monster_pos, direction, self->super.player_ref));

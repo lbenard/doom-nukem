@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/31 17:08:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/09 20:05:37 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static void		wasd(t_player_entity *const self, t_vec3f rotation)
 		self->velocity.x -= rotation_trigonometry.y * d;
 		self->velocity.y += rotation_trigonometry.x * d;
 	}
-
 }
 
 void			player_entity_update(t_player_entity *const self)

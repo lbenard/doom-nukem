@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 16:13:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/10 19:27:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "game/scenes/menu_scene.h"
 #include "engine/delta.h"
 #include "game/game.h"
-
-#include <stdio.h>
 
 static void	zbuffer(t_raycasting_scene *const self,
 				const t_vec2f dir,
@@ -34,8 +32,8 @@ static void	zbuffer(t_raycasting_scene *const self,
 	{
 		camera_x = 2.0f * i / (float)length - 1;
 		buffer[i] = cast(&self->map,
-			ft_vec2f(self->player_ref->super.transform.position.x,
-				self->player_ref->super.transform.position.y),
+			ft_vec2f(self->entities.player_ref->super.transform.position.x,
+				self->entities.player_ref->super.transform.position.y),
 			ft_vec2f(dir.x + plane.x * camera_x, dir.y + plane.y * camera_x));
 		i++;
 	}
@@ -55,7 +53,7 @@ static void	remove_door(t_raycasting_scene *const self, char id)
 			{
 				self->map.map[self->map.size.x * i.y + i.x].id = ' ';
 				self->map.map[self->map.size.x * i.y + i.x].texture_ref = NULL;
-				zbuffer(self, self->player_ref->dir, self->player_ref->plane);
+				zbuffer(self, self->entities.player_ref->dir, self->entities.player_ref->plane);
 			}
 			i.x++;
 		}
@@ -71,7 +69,7 @@ static void	door_trigger(t_raycasting_scene *const self)
 	t_wall	*wall;
 
 	game = game_singleton();
-	if (input_get(&game->input, self->use_input) > 0.0f)
+	if (input_get(&game->input, self->inputs.use) > 0.0f)
 	{
 		zbuffer = (t_ray*)self->zbuffer.array;
 		mid_ray = &zbuffer[self->window_ref->size.x / 2];
@@ -89,36 +87,45 @@ static void	door_trigger(t_raycasting_scene *const self)
 	}
 }
 
+#include <stdio.h>
+
 void		raycasting_scene_update(t_raycasting_scene *const self)
 {
+	// printf("before entity update (%lu)\n", list_size(&self->super.entities.list));
 	entity_list_update(&self->super.entities);
-	if (self->retry_button_ref->is_clicked)
+	// printf("after entity update  (%lu)\n", list_size(&self->super.entities.list));
+	if (self->entities.retry_button_ref->is_clicked)
 	{
 		game_set_scene(raycasting_scene(self->window_ref, self->path));
 		return ;
 	}
-	if (self->give_up_button_ref->is_clicked)
+	if (self->entities.give_up_button_ref->is_clicked)
 	{
+		// printf("gave up lol\n");
 		game_set_scene(menu_scene(self->window_ref, self->path));
 		return ;
 	}
-	if (self->player_ref->is_dead && self->death_time == 0.0f)
+	if (self->entities.player_ref->is_dead && self->death_time == 0.0f)
 		self->death_time = get_wall_time();
-	self->weapon.just_shooted = FALSE;
-	self->weapon.just_reloaded = FALSE;
-	zbuffer(self, self->player_ref->dir, self->player_ref->plane);
-	if (!self->player_ref->is_dead)
+	zbuffer(self, self->entities.player_ref->dir, self->entities.player_ref->plane);
+	if (!self->entities.player_ref->is_dead)
 	{
-		if (input_get(&game_singleton()->input, self->weapon.reload_input) > 0.0f && self->weapon.shooting == FALSE)
-			raycasting_scene_weapon_reload(self);
-		if (input_get(&game_singleton()->input, self->weapon.shoot_input) > 0.0f)
-			raycasting_scene_weapon_use(self);
+		if (self->entities.weapon_ref)
+		{
+			if (input_get(&game_singleton()->input,
+				self->inputs.reload) > 0.0f
+				&& self->entities.weapon_ref->shooting == FALSE
+				&& !self->entities.weapon_ref->reloading)
+				self->entities.weapon_ref->trigger_reloading = TRUE;
+			if (self->entities.weapon_ref->just_reloaded)
+				raycasting_scene_weapon_reload(self);
+			else if (input_get(&game_singleton()->input, self->inputs.shoot) > 0.0f
+				&& !self->entities.weapon_ref->reloading)
+				raycasting_scene_weapon_use(self);
+		}
 		door_trigger(self);
 	}
-	animation_update(&self->pistol_anim, &self->pistol_ss);
-	animation_update(&self->shotgun_anim, &self->shotgun_ss);
-	animation_update(&self->minigun_anim, &self->minigun_ss);
-	animation_update(&self->use_key_animation, &self->use_key_spritesheet);
+	animation_update(&self->assets.use_key_animation, &self->assets.use_key_spritesheet);
 	// cursor_set_pos(&self->window_ref->cursor, self->window_ref->window,
 	// 	ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2));
 }

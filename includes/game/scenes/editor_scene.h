@@ -92,6 +92,7 @@ typedef struct	s_editor_scene
 			t_entity_checkbox_entity	*onepunchman;
 			t_entity_checkbox_entity	*weird_alien;
 			t_entity_checkbox_entity	*ghast;
+			t_entity_checkbox_entity	*pistol;
 		}						entities_group;
 	}							hud;
 	t_editor_camera_entity		*camera_ref;

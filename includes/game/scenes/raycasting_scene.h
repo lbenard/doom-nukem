@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 16:07:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/10 19:26:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,74 +31,62 @@
 # include "maths/vec2f.h"
 # include "game/hud_game.h"
 
-typedef struct	s_weapon
-{
-	char	*name;
-	size_t	ammo;
-	size_t	clip;
-	size_t	clip_size;
-	float	damage;
-	float	shoot_time;
-	double	last_shot;
-}				t_weapon;
-
 /*
 ** Raycasting level scene
 */
 typedef struct	s_raycasting_scene
 {
-	t_scene				super;
-	t_map				map;
-	const char			*path;
-	t_rgb				ground_color;
-	t_rgb				sky_color;
-	t_frame				floor;
-	t_frame				ceiling;
-	t_frame				crosshair;
-	t_spritesheet		use_key_spritesheet;
-	t_animation			use_key_animation;
-	t_text				use_key_text;
-	t_text				game_over;
-	double				death_time;
-	t_frame				game_over_background;
-	t_button_entity		*retry_button_ref;
-	t_button_entity		*give_up_button_ref;
-	t_array				zbuffer;
-	t_player_entity		*player_ref;
-	t_input_id			use_input;
-	t_hud_game			hud_ray;
-	t_weapon_entity		*weapon_ref;
+	t_scene			super;
+	t_map			map;
+	const char		*path;
+	t_window		*window_ref;
+	t_hud_game		hud_ray;
+	t_entity_list	sprite_entities;
+	t_entity_list	monster_entities;
+	t_entity_list	weapon_entities;
+	double			death_time;
+	float			fov;
+	t_array			zbuffer;
+	struct s_assets
+	{
+		t_frame			floor;
+		t_frame			ceiling;
+		t_frame			crosshair;
+		t_spritesheet	use_key_spritesheet;
+		t_animation		use_key_animation;
+		t_text			use_key_text;
+		t_frame			game_over_background;
+		t_text			game_over;
+		t_sound			pistol_sound;
+		t_spritesheet	alien_spritesheet;
+		t_spritesheet	onepunchman_spritesheet;
+		t_spritesheet	ghast_spritesheet;
+		t_spritesheet	pistol_spritesheet;
+		t_spritesheet	shotgun_spritesheet;
+		t_spritesheet	minigun_spritesheet;
+	}				assets;
+	struct s_inputs
+	{
+		t_input_id	use;
+		t_input_id	shoot;
+		t_input_id	reload;
+	}				inputs;
+	struct s_entities_ref
+	{
+		t_camera_entity	*camera_ref;
+		t_button_entity	*retry_button_ref;
+		t_button_entity	*give_up_button_ref;
+		t_player_entity	*player_ref;
+		t_weapon_entity	*weapon_ref;
+
+	}				entities;
 	struct s_weapon_infos
 	{
-		t_weapon			weapon;
-		t_bool				reloading;
-		t_bool				shooting;
-		t_bool				just_shooted;
-		t_bool				just_reloaded;
-		t_bool				first_render;
-		t_input_id			shoot_input;
-		t_input_id			reload_input;
-		char				display[10];
-		t_text				display_text;
-		int					shotgun;
-	}					weapon;
-	t_camera_entity		*camera_ref;
-	t_entity_list		sprite_entities;
-	t_entity_list		monster_entities;
-	t_window			*window_ref;
-	t_sound				pistol;
-	t_spritesheet		alien_spritesheet;
-	t_spritesheet		onepunchman_spritesheet;
-	t_spritesheet		ghast_spritesheet;
-	t_spritesheet		pistol_ss;
-	t_spritesheet		shotgun_ss;
-	t_spritesheet		minigun_ss;
-	t_animation			pistol_anim;
-	t_animation			shotgun_anim;
-	t_animation			minigun_anim;
-	t_bool				end_anim;
-	t_bool				last_shot;
-	float				fov;
+		size_t	ammo;
+		double	last_shot;
+		char	display[10];
+		t_text	display_text;
+	}				weapon;
 }				t_raycasting_scene;
 
 typedef struct	s_raycasting_scene_args
