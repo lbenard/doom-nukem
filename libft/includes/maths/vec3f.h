@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3f.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:21:15 by lbenard           #+#    #+#             */
-/*   Updated: 2019/09/28 15:37:14 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/08 20:48:27 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ float			vec3f_dot(t_vec3f a, t_vec3f b);
 t_vec3f			vec3f_scalar(t_vec3f src, float a);
 float			vec3f_distance(t_vec3f a, t_vec3f b);
 t_vec3f			vec3f_normalize(t_vec3f src);
+t_vec3f			vec3f_addition(t_vec3f a, t_vec3f b);
 
 /*
 ** Casts

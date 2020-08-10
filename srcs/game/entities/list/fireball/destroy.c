@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/07 01:41:44 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/10 16:15:21 by mribouch         ###   ########.fr       */
+/*   Created: 2020/08/10 17:48:35 by mribouch          #+#    #+#             */
+/*   Updated: 2020/08/10 17:49:06 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/nyarlathotep_entity.h"
+#include "game/entities/fireball_entity.h"
 
-void	destroy_nyarlathotep_entity(t_nyarlathotep_entity *const self)
+void			destroy_fireball_entity(t_fireball_entity *const self)
 {
-	destroy_module(&self->super.super.super.module);
+	destroy_sprite_entity(&self->super);
 }

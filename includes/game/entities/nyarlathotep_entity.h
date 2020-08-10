@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 00:50:39 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/07 22:48:19 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/10 15:59:00 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct			s_nyarlathotep_entity
 	t_bool				end_move;
 	t_bool				is_moving;
 	t_bool				stuck;
+	int					angle;
 	double				unstuck_time;
 }						t_nyarlathotep_entity;
 
@@ -45,5 +46,8 @@ void					nyarlathotep_entity_update(
 
 void					destroy_nyarlathotep_entity(
 	t_nyarlathotep_entity *const self);
+
+void					rotate_nyarlathotep(t_nyarlathotep_entity *self,
+	t_raycasting_scene *scene, t_vec3f velocity);
 
 #endif

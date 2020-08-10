@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   vec3f_addition.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/07 01:41:44 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/10 16:15:21 by mribouch         ###   ########.fr       */
+/*   Created: 2020/08/08 20:38:50 by mribouch          #+#    #+#             */
+/*   Updated: 2020/08/10 15:24:19 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/nyarlathotep_entity.h"
+#include "maths/vec3f.h"
 
-void	destroy_nyarlathotep_entity(t_nyarlathotep_entity *const self)
+t_vec3f	vec3f_addition(t_vec3f a, t_vec3f b)
 {
-	destroy_module(&self->super.super.super.module);
+	t_vec3f	ret;
+
+	ret.x = a.x + b.x;
+	ret.y = a.y + b.y;
+	ret.z = a.z + b.z;
+
+	return (ret);
 }
