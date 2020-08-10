@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:07:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 15:43:17 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/10 18:13:25 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include "game/entities/player_entity.h"
 # include "engine/a_star.h"
 
-typedef struct	s_raycasting_scene t_raycasting_scene;
+typedef struct s_raycasting_scene	t_raycasting_scene;
 
 typedef struct	s_monster_entity
 {
@@ -72,8 +72,6 @@ t_result		init_monster_entity(t_monster_entity *const self,
 					const t_monster_entity_args *const args);
 
 void			monster_entity_update(t_monster_entity *const self);
-// void			monster_entity_render(t_monster_entity *const self,
-// 					t_frame *const fb);
 
 void			destroy_monster_entity(t_monster_entity *const self);
 

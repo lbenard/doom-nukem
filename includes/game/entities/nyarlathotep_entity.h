@@ -6,14 +6,14 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 00:50:39 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/10 15:59:00 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/10 18:15:57 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NYARLATHOTEP_ENTITY
-# define NYARLATHOTEP_ENTITY
+#ifndef NYARLATHOTEP_ENTITY_H
+# define NYARLATHOTEP_ENTITY_H
 
-#include "game/entities/monster_entity.h"
+# include "game/entities/monster_entity.h"
 
 typedef struct			s_nyarlathotep_entity
 {
