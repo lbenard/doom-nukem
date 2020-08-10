@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   nyarlathotep_entity.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/19 19:39:11 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 17:02:20 by mribouch         ###   ########.fr       */
+/*   Created: 2020/08/07 01:08:03 by mribouch          #+#    #+#             */
+/*   Updated: 2020/08/10 16:16:14 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/monster_entity.h"
-#include "game/scenes/raycasting_scene.h"
+#include "game/entities/nyarlathotep_entity.h"
 
-void	destroy_monster_entity(t_monster_entity *const self)
+t_constructor	nyarlathotep_entity(t_scene *const scene, const t_vec2f pos)
 {
-	t_raycasting_scene	*ctx;
+	static t_nyarlathotep_entity_args args;
 
-	ctx = (t_raycasting_scene*)game_singleton()->scene;
-	destroy_sprite_entity(&self->super);
-	entity_list_remove(&ctx->monster_entities, (t_entity*)self);
+	args.scene = scene;
+	args.pos = pos;
+	return (ft_constructor(init_nyarlathotep_entity,
+		destroy_nyarlathotep_entity, sizeof(t_nyarlathotep_entity), &args));
 }

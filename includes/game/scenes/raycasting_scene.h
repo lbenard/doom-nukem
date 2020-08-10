@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 19:26:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/10 21:23:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct	s_raycasting_scene
 		t_spritesheet	alien_spritesheet;
 		t_spritesheet	onepunchman_spritesheet;
 		t_spritesheet	ghast_spritesheet;
+        t_spritesheet	nyarlathotep_spritesheet;
 		t_spritesheet	pistol_spritesheet;
 		t_spritesheet	shotgun_spritesheet;
 		t_spritesheet	minigun_spritesheet;

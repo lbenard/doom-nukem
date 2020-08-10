@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ghast_entity.c                                     :+:      :+:    :+:   */
+/*   fireball.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/16 18:47:17 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 16:17:26 by mribouch         ###   ########.fr       */
+/*   Created: 2020/08/10 17:43:31 by mribouch          #+#    #+#             */
+/*   Updated: 2020/08/10 17:45:58 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/ghast_entity.h"
+#include "game/entities/fireball_entity.h"
 
-t_constructor	ghast_entity(t_scene *const scene, const t_vec2f pos)
+t_constructor	fireball_entity(const t_vec3f pos, const t_vec3f direction,
+	t_player_entity *player_ref)
 {
-	static t_ghast_entity_args	args;
+	static t_fireball_entity_args args;
 
-	args.scene = scene;
 	args.pos = pos;
-	return (ft_constructor(init_ghast_entity,
-		destroy_ghast_entity,
-		sizeof(t_ghast_entity),
-		&args));
+	args.direction = direction;
+	args.texture_path = "resources/sprites/fireball.bmp";
+	args.player_ref = player_ref;
+	return (ft_constructor(init_fireball_entity, destroy_fireball_entity,
+		sizeof(t_fireball_entity), &args));
 }

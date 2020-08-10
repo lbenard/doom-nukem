@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ghast_entity.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 02:06:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/05 00:26:04 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/10 21:21:10 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ typedef struct	s_ghast_entity
 	float				shoot_time;
 	double				last_shot_time;
 	t_bool				just_shoot;
+	t_bool				move_side;
+	t_vec3f				last_pos;
+	t_vec3f				side_move;
 }				t_ghast_entity;
 
 typedef struct	s_ghast_entity_args
@@ -37,6 +40,7 @@ t_result		init_ghast_entity(t_ghast_entity *const self,
 					const t_ghast_entity_args *const args);
 
 void			ghast_entity_update(t_ghast_entity *const self);
+void			shot_fireball(t_ghast_entity *self);
 
 void			destroy_ghast_entity(t_ghast_entity *const self);
 

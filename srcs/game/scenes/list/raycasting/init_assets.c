@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 18:31:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/10 21:23:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ t_result	init_assets(t_raycasting_scene *const self)
 	module_add(&self->super.module, &self->assets.ghast_spritesheet,
 		spritesheet("resources/sprites/ghast.bmp",
 			ft_usize(3, 5)));
+	module_add(&self->super.module, &self->assets.nyarlathotep_spritesheet,
+		spritesheet("resources/sprites/nyarlathotep.bmp",
+			ft_usize(3, 4)));
 	module_add(&self->super.module, &self->hud_ray,
 		hud_game("resources/sprites/heart_disintegration.bmp",
 			"resources/sprites/sprite-sheet-png-walking-2.bmp"));

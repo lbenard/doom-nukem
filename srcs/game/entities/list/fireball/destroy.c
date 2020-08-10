@@ -5,19 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/19 19:39:11 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 17:02:20 by mribouch         ###   ########.fr       */
+/*   Created: 2020/08/10 17:48:35 by mribouch          #+#    #+#             */
+/*   Updated: 2020/08/10 17:49:06 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/monster_entity.h"
-#include "game/scenes/raycasting_scene.h"
+#include "game/entities/fireball_entity.h"
 
-void	destroy_monster_entity(t_monster_entity *const self)
+void			destroy_fireball_entity(t_fireball_entity *const self)
 {
-	t_raycasting_scene	*ctx;
-
-	ctx = (t_raycasting_scene*)game_singleton()->scene;
 	destroy_sprite_entity(&self->super);
-	entity_list_remove(&ctx->monster_entities, (t_entity*)self);
 }

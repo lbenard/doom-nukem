@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   vec3f_addition.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/19 19:39:11 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 17:02:20 by mribouch         ###   ########.fr       */
+/*   Created: 2020/08/08 20:38:50 by mribouch          #+#    #+#             */
+/*   Updated: 2020/08/10 15:24:19 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/monster_entity.h"
-#include "game/scenes/raycasting_scene.h"
+#include "maths/vec3f.h"
 
-void	destroy_monster_entity(t_monster_entity *const self)
+t_vec3f	vec3f_addition(t_vec3f a, t_vec3f b)
 {
-	t_raycasting_scene	*ctx;
+	t_vec3f	ret;
 
-	ctx = (t_raycasting_scene*)game_singleton()->scene;
-	destroy_sprite_entity(&self->super);
-	entity_list_remove(&ctx->monster_entities, (t_entity*)self);
+	ret.x = a.x + b.x;
+	ret.y = a.y + b.y;
+	ret.z = a.z + b.z;
+
+	return (ret);
 }
