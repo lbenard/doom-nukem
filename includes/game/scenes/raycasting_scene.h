@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 14:38:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/12 17:52:32 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include "engine/spritesheet.h"
 # include "game/entities/player_entity.h"
 # include "game/entities/image_entity.h"
-# include "game/entities/camera_entity.h"
 # include "game/entities/button_entity.h"
 # include "game/entities/weapon_entity.h"
 # include "game/entity_descriptor.h"
@@ -75,7 +74,6 @@ typedef struct	s_raycasting_scene
 	}				inputs;
 	struct s_entities_ref
 	{
-		t_camera_entity	*camera_ref;
 		t_button_entity	*retry_button_ref;
 		t_button_entity	*give_up_button_ref;
 		t_player_entity	*player_ref;
