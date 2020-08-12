@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 01:34:02 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:30:01 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	register_inputs(t_game *const game)
 		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
 
 	int jump = input_register(&game->input, "Jump");
-	input_attach(&game->input, jump, ft_key_event(sfKeyC, KEY_HOLD));
+	input_attach(&game->input, jump, ft_key_event(sfKeySpace, KEY_HOLD));
 	input_attach(&game->input, jump,
 		ft_button_event(0, XBOX_B, 0));
 
@@ -80,7 +80,7 @@ void	register_inputs(t_game *const game)
 
 	int shoot = input_register(&game->input, "Shoot");
 	input_attach(&game->input, shoot, ft_mouse_event(sfMouseLeft, MOUSE_HOLD));
-	input_attach(&game->input, shoot, ft_key_event(sfKeySpace, KEY_HOLD));
+	input_attach(&game->input, shoot, ft_key_event(sfKeyEnter, KEY_HOLD));
 	input_attach(&game->input, shoot,
 		ft_stick_event(0, XBOX_RTRIGGER, 20.0f, 0));
 
