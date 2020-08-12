@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 20:17:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/12 01:34:02 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ void	register_inputs(t_game *const game)
 	input_attach(&game->input, right, ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&game->input, right,
 		ft_stick_event(0, XBOX_LSTICK_X, 20.0f, STICK_POSITIVE));
+
+	int jump = input_register(&game->input, "Jump");
+	input_attach(&game->input, jump, ft_key_event(sfKeyC, KEY_HOLD));
+	input_attach(&game->input, jump,
+		ft_button_event(0, XBOX_B, 0));
+
+	int crouch = input_register(&game->input, "Crouch");
+	input_attach(&game->input, crouch, ft_key_event(sfKeyLControl, KEY_HOLD));
+	input_attach(&game->input, crouch,
+		ft_button_event(0, XBOX_Y, 0));
 	
 	int	turn_left = input_register(&game->input, "TurnLeft");
 	input_attach(&game->input, turn_left, ft_key_event(sfKeyLeft, KEY_HOLD));

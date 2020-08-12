@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/10 21:16:27 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/12 02:10:21 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -242,6 +242,8 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/player/south_west_rebound.c									\
 					game/entities/list/player/north_west_rebound.c									\
 					game/entities/list/player/destroy.c												\
+					game/entities/list/player/jump.c												\
+					game/entities/list/player/crouch.c												\
 																									\
 					game/entities/list/camera/camera_entity.c										\
 					game/entities/list/camera/init.c												\

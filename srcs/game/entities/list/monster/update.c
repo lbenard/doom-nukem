@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:41:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 16:59:41 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/12 01:46:11 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include "engine/a_star.h"
 #include <math.h>
 
-int		get_distance_vec(t_vec3f source, t_vec3f target)
+float		get_distance_vec(t_vec3f source, t_vec3f target)
 {
 	t_vec3f	difference;
-	int		distance;
+	float		distance;
 
 	difference = ft_vec3f(target.x - source.x, target.y - source.y,
 		target.z - source.z);

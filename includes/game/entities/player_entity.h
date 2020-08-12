@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_entity.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/30 22:14:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/11 21:53:37 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ typedef struct	s_player_entity
 	t_bool			is_taking_damage;
 	t_bool			is_dead;
 	t_bool			is_flying;
+	t_bool			is_jumping;
+	t_bool			just_jump;
+	t_bool			is_crouching;
 	const t_map		*map_ref;
 	float			speed;
 	float			fov;
@@ -61,6 +64,8 @@ typedef struct	s_player_entity
 	t_input_id		camera_down;
 	t_input_id		sprint;
 	t_input_id		toggle_flight;
+	t_input_id		jump;
+	t_input_id		crouch;
 }				t_player_entity;
 
 typedef struct	s_player_entity_args
@@ -93,5 +98,9 @@ t_vec3f			south_west_rebound(const t_vec3f vel);
 t_vec3f			north_west_rebound(const t_vec3f vel);
 
 void			destroy_player_entity(t_player_entity *const self);
+
+void			jump(t_player_entity *self);
+
+void			crouch(t_player_entity *self);
 
 #endif

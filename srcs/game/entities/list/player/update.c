@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/09 20:05:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/12 01:38:22 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "game/game.h"
 #include "engine/delta.h"
 #include "maths/maths.h"
+
+#include <stdio.h>
 
 static t_vec3f	move(const t_map *const map, t_vec3f pos, t_vec3f vel)
 {
@@ -101,10 +103,28 @@ void			player_entity_update(t_player_entity *const self)
 			self->is_flying = !self->is_flying;
 		if (self->is_flying)
 			self->super.transform.position.z += 0.1f * get_last_delta();
-		else
-			self->super.transform.position.z = 0.0f;
+		// else
+		// 	self->super.transform.position.z = 0.0f;
 		orientation(self, &self->super.transform.rotation);
 		wasd(self, self->super.transform.rotation);
+		// printf("res etat = %f\n", input_get(&game_singleton()->input, self->crouch));
+		if (input_get(&game_singleton()->input, self->jump) > 0.0f || self->just_jump == TRUE)
+		{
+			self->just_jump = TRUE;
+			jump(self);
+		}
+		if (input_get(&game_singleton()->input, self->crouch) > 0.0f)
+			crouch(self);
+		if (self->is_crouching == TRUE && input_get(&game_singleton()->input, self->crouch) <= 0.0f)
+		{
+			self->is_crouching = FALSE;
+			self->super.transform.position.z = 0;
+		}
+		// if (input_get(&game_singleton()->input, self->crouch) > 0.0f && self->is_crouching == TRUE)
+		// {
+		// 	self->is_crouching = FALSE;
+		// 	self->super.transform.position.z = 0.0f;
+		// }
 		if (self->is_moving)
 		{
 			self->velocity = vec3f_scalar(self->velocity, get_last_delta());
@@ -117,7 +137,7 @@ void			player_entity_update(t_player_entity *const self)
 		self->velocity = move(self->map_ref, self->super.transform.position, self->velocity);
 		self->super.transform.position.x += self->velocity.x;
 		self->super.transform.position.y += self->velocity.y;
-		self->super.transform.position.z += self->velocity.z;
+		// self->super.transform.position.z += self->velocity.z;
 	}
 	rot_sin = sin(self->super.transform.rotation.y);
 	rot_cos = cos(self->super.transform.rotation.y);
