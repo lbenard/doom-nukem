@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 22:26:28 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/12 14:38:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct	s_raycasting_scene
 		t_text			use_key_text;
 		t_frame			game_over_background;
 		t_text			game_over;
+		t_frame			fireball;
 		t_spritesheet	alien_spritesheet;
 		t_spritesheet	onepunchman_spritesheet;
 		t_spritesheet	ghast_spritesheet;

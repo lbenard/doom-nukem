@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 17:47:50 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/12 02:09:41 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/12 14:41:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/fireball_entity.h"
 #include "engine/delta.h"
-
-#include <stdio.h>
 
 void			fireball_entity_update(t_fireball_entity *const self)
 {
@@ -34,6 +32,17 @@ void			fireball_entity_update(t_fireball_entity *const self)
 	if (distance <= 0.35f)
 	{
 		player_entity_take_damage(scene->entities.player_ref, self->damage);
+		entity_list_remove(&scene->super.entities, &self->super.super);
+		return ;
+	}
+	if (self->super.super.transform.position.x < 0.0f
+		|| self->super.super.transform.position.y < 0.0f
+		|| self->super.super.transform.position.x >= self->map_ref->size.x
+		|| self->super.super.transform.position.y >= self->map_ref->size.y
+		|| self->map_ref->map[(int)self->super.super.transform.position.y
+			* self->map_ref->size.x
+			+ (int)self->super.super.transform.position.x].id != ' ')
+	{
 		entity_list_remove(&scene->super.entities, &self->super.super);
 		return ;
 	}

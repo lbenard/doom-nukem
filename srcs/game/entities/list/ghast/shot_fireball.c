@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shot_fireball.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 23:38:52 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/08 18:15:15 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/12 14:43:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	go_fireball(t_ghast_entity *self)
 				monster_pos.z);
 	direction = vec3f_normalize(direction);
 	entity_list_add_entity(&scene->super.entities,
-		fireball_entity(monster_pos, direction, self->super.player_ref));
+		fireball_entity(monster_pos, direction));
 }
 
 void		shot_fireball(t_ghast_entity *self)
