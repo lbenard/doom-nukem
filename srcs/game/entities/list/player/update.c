@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 17:16:11 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/12 18:29:37 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include "game/game.h"
 #include "engine/delta.h"
 #include "maths/maths.h"
-
-#include <stdio.h>
 
 static t_vec3f	move(const t_map *const map, t_vec3f pos, t_vec3f vel)
 {
@@ -97,10 +95,10 @@ static void		player_gravity(t_player_entity *const self)
 	float	g;
 
 	weight = 0.07f;
-	g = 5.0f;
+	g = 7.5f * get_last_delta();
 	if (!self->is_flying)
 	{
-		self->super.transform.direction.z -= ((weight * g) * (1.0f / 30.0f));
+		self->super.transform.direction.z -= weight * g;
 		self->super.transform.position.z += self->super.transform.direction.z;
 		if (self->super.transform.position.z <= 0.0f)
 		{
@@ -122,22 +120,29 @@ void			player_entity_update(t_player_entity *const self)
 	{
 		if (input_get(&game_singleton()->input, self->toggle_flight) > 0.0f)
 			self->is_flying = !self->is_flying;
-		if (self->is_flying)
-			self->super.transform.position.z += 1.0f * get_last_delta();
 		orientation(self, &self->super.transform.rotation);
 		wasd(self, self->super.transform.rotation);
-		player_gravity(self);
-		if (input_get(&game_singleton()->input, self->jump) > 0.0f || self->just_jump == TRUE)
+		if (self->is_flying)
 		{
-			self->just_jump = TRUE;
-			jump(self);
+			self->super.transform.position.z += 3.0f
+				* input_get(&game_singleton()->input, self->jump)
+				* get_last_delta();
+			self->super.transform.position.z -= 3.0f
+				* input_get(&game_singleton()->input, self->crouch)
+				* get_last_delta();
 		}
-		if (input_get(&game_singleton()->input, self->crouch) > 0.0f)
-			crouch(self);
-		if (self->is_crouching == TRUE && input_get(&game_singleton()->input, self->crouch) <= 0.0f)
+		else
 		{
-			self->is_crouching = FALSE;
-			self->super.transform.position.z = 0;
+			player_gravity(self);
+			if (input_get(&game_singleton()->input, self->jump) > 0.0f)
+				jump(self);
+			if (input_get(&game_singleton()->input, self->crouch) > 0.0f)
+				crouch(self);
+			if (self->is_crouching == TRUE && input_get(&game_singleton()->input, self->crouch) <= 0.0f)
+			{
+				self->is_crouching = FALSE;
+				self->super.transform.position.z = 0.0f;
+			}
 		}
 		if (self->is_moving)
 		{
