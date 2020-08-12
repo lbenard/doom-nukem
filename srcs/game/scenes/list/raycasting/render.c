@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 19:19:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/12 18:50:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ static void	ceiling_raycasting(const t_raycasting_scene *const self,
 	float	darkness_step;
 	float	darkness_value;
 
+	if (self->entities.player_ref->super.transform.position.z >= 0.5f)
+		return ;
 	i.y = target->size.y / 2 - self->entities.player_ref->super.transform.rotation.x;
-	darkness_step = 1.0f / target->size.y / 2 * 5.0f;
-	darkness_value = 0.0f;
+	darkness_step = 1.0f / target->size.y * 2.0f;
+	darkness_value = 0.4f;
 	while (i.y < target->size.y)
 	{
-		distance = (target->size.y / 1.0f)
+		distance = (target->size.y / (2.0f / (1.0f - self->entities.player_ref->super.transform.position.z * 2)))
 			/ (i.y + self->entities.player_ref->super.transform.rotation.x
 			- target->size.y / 2.0f);
 		floor.x = self->entities.player_ref->super.transform.position.x + distance
@@ -104,13 +106,14 @@ static void	floor_raycasting(t_raycasting_scene *const self,
 	float	darkness_step;
 	float	darkness_value;
 
+	if (self->entities.player_ref->super.transform.position.z <= -0.5f)
+		return ;
 	i.y = target->size.y / 2 + self->entities.player_ref->super.transform.rotation.x;
 	darkness_step = 1.0f / target->size.y * 2.0f;
 	darkness_value = 0.4f;
 	while (i.y < target->size.y)
 	{
 		distance = (target->size.y / (2.0f / (1.0f + self->entities.player_ref->super.transform.position.z * 2)))
-		// distance = (target->size.y / (2.0f / 3.0f))
 			/ (i.y - self->entities.player_ref->super.transform.rotation.x
 			- target->size.y / 2.0f);
 		floor.x = self->entities.player_ref->super.transform.position.x + distance
@@ -144,7 +147,7 @@ static void	walls_raycasting(t_raycasting_scene *const self,
 				t_frame *const target)
 {
 	t_usize	i;
-	size_t	size;
+	float	size;
 	ssize_t	start_y;
 	ssize_t	end_y;
 	t_ray	*ray;
@@ -155,15 +158,12 @@ static void	walls_raycasting(t_raycasting_scene *const self,
 	while (i.x < target->size.x)
 	{
 		ray = &((t_ray*)self->zbuffer.array)[i.x];
-		size = target->size.x / ray->perpendicular_distance
+		size = (float)target->size.x / ray->perpendicular_distance
 			* ((float)target->size.y / target->size.x);
 		start_y = (ssize_t)(target->size.y) / 2
 			- (player_size - self->entities.player_ref->super.transform.position.z) * size
 			+ self->entities.player_ref->super.transform.rotation.x;
 		end_y = start_y + size;
-		// start_y = (ssize_t)(target->size.y - size) / 2
-		// 	+ self->entities.player_ref->super.transform.rotation.x;
-		// end_y = start_y + size;
 		i.y = (size_t)ft_ssmax(start_y, 0);
 		while ((ssize_t)i.y < end_y && i.y < target->size.y)
 		{
@@ -298,8 +298,7 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 {
 	frame_fill(fb, ft_rgba(42, 0, 0, 255));
 	floor_raycasting(self, fb, self->entities.player_ref->dir, self->entities.player_ref->plane);
-	(void)ceiling_raycasting;
-	// ceiling_raycasting(self, fb, self->entities.player_ref->dir, self->entities.player_ref->plane);
+	ceiling_raycasting(self, fb, self->entities.player_ref->dir, self->entities.player_ref->plane);
 	walls_raycasting(self, fb);
 	raycasting_scene_render_sprites(self, fb);
 	if (!self->entities.player_ref->is_dead)
