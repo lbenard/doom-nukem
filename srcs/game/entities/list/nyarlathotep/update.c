@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 01:43:57 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/10 21:25:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/13 00:12:08 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	nyarlathotep_entity_update(t_nyarlathotep_entity *const self)
 		self->super.agro = TRUE;
 		self->super.animation.speed = 0.4f;
 		self->is_moving = TRUE;
-		a_star_attack(&self->super, distance, 5.5);
+		a_star_attack(&self->super, distance, 4.5);
 	}
 	else
 	{
