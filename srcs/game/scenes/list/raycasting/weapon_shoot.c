@@ -6,15 +6,15 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 19:21:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/12 02:44:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "engine/delta.h"
 #include "game/scenes/raycasting_scene.h"
 #include "game/entities/monster_entity.h"
 #include "ft/str.h"
 #include <math.h>
-#include <stdio.h>
 
 static t_bool	is_targeting(const t_monster_entity *const monster,
 					const t_isize crosshair_pos,
@@ -30,10 +30,10 @@ static t_bool	is_targeting(const t_monster_entity *const monster,
 static t_bool	use_ammo(t_weapon_entity *const weapon,
 					const size_t ammo_amount)
 {
-    if (weapon->specs.clip < ammo_amount)
-        return (FALSE);
-    weapon->specs.clip -= ammo_amount;
-    return (TRUE);
+	if (weapon->specs.clip < ammo_amount)
+		return (FALSE);
+	weapon->specs.clip -= ammo_amount;
+	return (TRUE);
 }
 
 static void		sort(t_raycasting_scene *const self)
@@ -97,6 +97,7 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 	if (use_ammo(self->entities.weapon_ref, ammo_amount) == FALSE)
 		return (FALSE);
 	sort(self);
+	self->weapon.last_shot = get_wall_time();
 	if (self->entities.weapon_ref->sound_ref)
 		sound_play(self->entities.weapon_ref->sound_ref);
 	crosshair_pos.x = self->window_ref->size.x / 2;
