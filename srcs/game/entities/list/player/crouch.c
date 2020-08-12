@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   crouch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 21:06:50 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/12 01:48:18 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/12 15:47:04 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	crouch(t_player_entity *self)
 {
+	if (!self->is_jumping && !self->is_flying)
+	{
 		self->super.transform.position.z = -0.30;
 		self->is_crouching = TRUE;
+	}
 }
