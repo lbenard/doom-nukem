@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/07 18:55:25 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/15 02:55:07 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/12 19:06:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ typedef struct	s_spritesheet_args
 	t_usize		grid_size;
 }				t_spritesheet_args;
 
+t_constructor	spritesheet(const char *const path, const t_usize grid_size);
+
 t_result		init_spritesheet(t_spritesheet *const self,
 					t_spritesheet_args *const args);
+
 void			destroy_spritesheet(t_spritesheet *const self);
-t_constructor	spritesheet(const char *const path, const t_usize grid_size);
 
 #endif

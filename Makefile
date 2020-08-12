@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/12 02:16:27 by mribouch         ###   ########.fr        #
+#    Updated: 2020/08/12 19:04:06 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,18 @@ SRCS_LIST		=	main.c																			\
 					engine/array/init.c																\
 					engine/array/destroy.c															\
 																									\
-					engine/a_star/init.c															\
 					engine/a_star/a_star.c															\
+					engine/a_star/init.c															\
 					engine/a_star/analyse.c															\
 					engine/a_star/child.c															\
 					engine/a_star/list.c															\
 					engine/a_star/node.c															\
+																									\
+					engine/animation/animation.c													\
+					engine/animation/init.c															\
+					engine/animation/update.c														\
+					engine/animation/current.c														\
+					engine/animation/destroy.c														\
 																									\
 					engine/ascii_font/ascii_font.c													\
 					engine/ascii_font/init.c														\
@@ -187,6 +193,10 @@ SRCS_LIST		=	main.c																			\
 					engine/scene/init.c																\
 					engine/scene/destroy.c															\
 																									\
+					engine/spritesheet/spritesheet.c												\
+					engine/spritesheet/init.c														\
+					engine/spritesheet/destroy.c													\
+																									\
 					engine/text/text.c																\
 					engine/text/init.c																\
 					engine/text/set.c																\
@@ -225,9 +235,6 @@ SRCS_LIST		=	main.c																			\
 					game/entity_descriptor/from_name.c												\
 					game/entity_descriptor/destroy.c												\
 																									\
-					game/animation/spritesheet.c													\
-					game/animation/animation.c														\
-																									\
 					game/entities/list/player/ft_corners.c											\
 					game/entities/list/player/player_entity.c										\
 					game/entities/list/player/init.c												\
@@ -244,12 +251,6 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/player/destroy.c												\
 					game/entities/list/player/jump.c												\
 					game/entities/list/player/crouch.c												\
-																									\
-					game/entities/list/camera/camera_entity.c										\
-					game/entities/list/camera/init.c												\
-					game/entities/list/camera/update.c												\
-					game/entities/list/camera/render.c												\
-					game/entities/list/camera/destroy.c												\
 																									\
 					game/entities/list/button/button_entity.c										\
 					game/entities/list/button/dynamic_button_entity.c								\
@@ -428,12 +429,6 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/menu/render.c													\
 					game/scenes/list/menu/destroy.c													\
 																									\
-					game/scenes/list/noise_test/noise_test_scene.c									\
-					game/scenes/list/noise_test/init.c												\
-					game/scenes/list/noise_test/update.c											\
-					game/scenes/list/noise_test/render.c											\
-					game/scenes/list/noise_test/destroy.c											\
-																									\
 					game/scenes/list/script/script_scene.c											\
 					game/scenes/list/script/init.c													\
 					game/scenes/list/script/update.c												\
@@ -464,34 +459,6 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/render_weapon.c										\
 					game/scenes/list/raycasting/destroy.c											\
 					game/scenes/list/raycasting/cast.c												\
-																									\
-					game/scenes/list/sector/sector_scene.c											\
-					game/scenes/list/sector/init.c													\
-					game/scenes/list/sector/update.c												\
-					game/scenes/list/sector/render.c												\
-					game/scenes/list/sector/destroy.c												\
-																									\
-					game/map_parser/check/close_curly_braces.c										\
-					game/map_parser/check/curly_braces.c											\
-					game/map_parser/check/open_curly_braces.c										\
-					game/map_parser/check/utility.c													\
-					game/map_parser/debug/debug.c													\
-					game/map_parser/get_data_in_string/get_index.c									\
-					game/map_parser/get_data_in_string/get_key.c									\
-					game/map_parser/get_data_in_string/get_value_type.c								\
-					game/map_parser/get_data_in_string/get_value.c									\
-					game/map_parser/object/getter/get_child_object.c								\
-					game/map_parser/object/getter/get_float_value.c									\
-					game/map_parser/object/getter/get_int_value.c									\
-					game/map_parser/object/getter/get_string_value.c								\
-					game/map_parser/object/create.c													\
-					game/map_parser/object/free.c													\
-					game/map_parser/read_file/get_file_datas.c										\
-					game/map_parser/split_data/free_string_array.c									\
-					game/map_parser/split_data/new_string_array.c									\
-					game/map_parser/split_data/split_data.c											\
-					game/map_parser/parser.c														\
-					game/map_parser/to_object.c														\
 																									\
 					game/hud/hud_game.c
 
