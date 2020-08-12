@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 21:23:35 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/10 22:26:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ typedef struct	s_raycasting_scene
 	const char		*path;
 	t_window		*window_ref;
 	t_hud_game		hud_ray;
-	t_entity_list	sprite_entities;
-	t_entity_list	monster_entities;
-	t_entity_list	weapon_entities;
 	double			death_time;
 	float			fov;
 	t_array			zbuffer;
+	t_entity_list	sprite_entities;
+	t_entity_list	monster_entities;
+	t_entity_list	weapon_entities;
 	struct s_assets
 	{
 		t_frame			floor;
@@ -57,12 +57,12 @@ typedef struct	s_raycasting_scene
 		t_text			use_key_text;
 		t_frame			game_over_background;
 		t_text			game_over;
-		t_sound			pistol_sound;
 		t_spritesheet	alien_spritesheet;
 		t_spritesheet	onepunchman_spritesheet;
 		t_spritesheet	ghast_spritesheet;
-        t_spritesheet	nyarlathotep_spritesheet;
+		t_spritesheet	nyarlathotep_spritesheet;
 		t_spritesheet	pistol_spritesheet;
+		t_sound			pistol_sound;
 		t_spritesheet	shotgun_spritesheet;
 		t_spritesheet	minigun_spritesheet;
 	}				assets;
@@ -101,7 +101,22 @@ t_constructor	raycasting_scene(t_window *const window,
 
 t_result		init_raycasting_scene(t_raycasting_scene *const self,
 					t_raycasting_scene_args *const args);
-t_result		init_assets(t_raycasting_scene *const self);
+void			init_raycasting_scene_vars(t_raycasting_scene *const self,
+					t_raycasting_scene_args *const args);
+void			init_raycasting_scene_modules(
+					t_raycasting_scene *const self);
+void			init_raycasting_scene_entity_lists(
+					t_raycasting_scene *const self);
+void			init_raycasting_scene_assets(
+					t_raycasting_scene *const self);
+void			init_raycasting_scene_inputs(
+					t_raycasting_scene *const self);
+void			init_raycasting_scene_weapon(
+					t_raycasting_scene *const self);
+void			raycasting_scene_add_entities(
+					t_raycasting_scene *const self);
+void			raycasting_scene_add_death_buttons(
+					t_raycasting_scene *const self);
 
 void			raycasting_scene_update(t_raycasting_scene *const self);
 void			raycasting_scene_render(t_raycasting_scene *const self,
