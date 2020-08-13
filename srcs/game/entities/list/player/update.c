@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 18:29:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/13 03:25:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ void			player_entity_update(t_player_entity *const self)
 			self->velocity = vec3f_normalize(self->velocity);
 			self->velocity = vec3f_scalar(self->velocity, get_last_delta());
 			self->velocity = vec3f_scalar(self->velocity, self->speed);
+			if (self->is_crouching)
+				self->velocity = vec3f_scalar(self->velocity, 0.5f);
 			if (input_get(&game_singleton()->input, self->sprint))
 				self->velocity = vec3f_scalar(self->velocity, 2.0f);
 		}
