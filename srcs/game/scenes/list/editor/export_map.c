@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:17:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/28 19:12:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/13 13:22:51 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,52 +22,6 @@
 #include "ft/str.h"
 #include "ft/io.h"
 #include "ft/mem.h"
-
-// static t_result	write_textures(t_game *const game, const int fd)
-// {
-// 	t_block_descriptor	*list;
-// 	size_t						i;
-
-// 	errno = 0;
-// 	ft_putstr_fd("-textures\n", fd);
-// 	list = (t_block_descriptor*)&game->blocks_list;
-// 	i = 0;
-// 	while (i < sizeof(game->blocks_list) / sizeof(t_block_descriptor))
-// 	{
-// 		ft_putchar_fd(list[i].id, fd);
-// 		ft_putstr_fd(": ", fd);
-// 		ft_putstr_fd(list[i].path, fd);
-// 		ft_putchar_fd('\n', fd);
-// 		i++;
-// 	}
-// 	ft_putchar_fd('\n', fd);
-// 	if (errno)
-// 		return (throw_result("write_textures()"));
-// 	return (OK);
-// }
-
-// static t_result	write_blocks(t_game *const game, const int fd)
-// {
-// 	t_block_descriptor	*list;
-// 	size_t						i;
-
-// 	errno = 0;
-// 	ft_putstr_fd("-blocks\n", fd);
-// 	list = (t_block_descriptor*)&game->blocks_list;
-// 	i = 0;
-// 	while (i < sizeof(game->blocks_list) / sizeof(t_block_descriptor))
-// 	{
-// 		ft_putchar_fd(list[i].id, fd);
-// 		ft_putstr_fd(": ", fd);
-// 		ft_putchar_fd(list[i].id, fd);
-// 		ft_putchar_fd('\n', fd);
-// 		i++;
-// 	}
-// 	ft_putchar_fd('\n', fd);
-// 	if (errno)
-// 		return (throw_result("write_blocks()"));
-// 	return (OK);
-// }
 
 static t_result	write_map_size(const int fd, const t_usize size)
 {
@@ -92,9 +46,9 @@ static t_result	write_player_spawn(const int fd,
 	errno = 0;
 	ft_putstr_fd("-player\n", fd);
 	ft_putstr_fd("spawn: ", fd);
-	ft_putnbr_fd((int)player->super.super.transform.position.x - origin.x, fd);
+	ft_putfloat_fd(player->super.super.transform.position.x - origin.x, fd);
 	ft_putchar_fd(' ', fd);
-	ft_putnbr_fd((int)player->super.super.transform.position.y - origin.y, fd);
+	ft_putfloat_fd(player->super.super.transform.position.y - origin.y, fd);
 	ft_putchar_fd('\n', fd);
 	ft_putchar_fd('\n', fd);
 	if (errno)

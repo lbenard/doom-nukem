@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 22:37:03 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 21:25:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/13 13:26:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ t_bool	entity_component_entity_is_hovered(t_component_entity *const self,
 			const t_isize mouse_pos)
 {
 	t_isize	entity_pos;
+	t_isize	texture_size;
 
 	entity_pos = component_entity_screen_pos(self, camera, frame);
-	return (mouse_pos.x >= entity_pos.x
-		&& mouse_pos.x < entity_pos.x + camera->grid_unit
-			* camera->super.transform.scale.x
-		&& mouse_pos.y >= entity_pos.y
-		&& mouse_pos.y < entity_pos.y + camera->grid_unit
-			* camera->super.transform.scale.y);
+	texture_size.x = camera->grid_unit * camera->super.transform.scale.x;
+	texture_size.y = camera->grid_unit * camera->super.transform.scale.y;
+	return (mouse_pos.x >= entity_pos.x - texture_size.x / 2
+		&& mouse_pos.x < entity_pos.x + texture_size.x / 2
+		&& mouse_pos.y >= entity_pos.y - texture_size.y / 2
+		&& mouse_pos.y < entity_pos.y + texture_size.y / 2);
 }

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 22:35:59 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 21:26:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/13 13:23:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	entity_component_entity_render(t_component_entity *const self,
 		* camera->super.transform.scale.y;
 	frame_layer_transform_add(fb,
 		&cast->entity->icon,
-		ft_frame_transform(ft_vec2f(0.0f, 0.0f),
+		ft_frame_transform(ft_vec2f(0.5f, 0.5f),
 			component_entity_screen_pos(self, camera, fb),
 			scale,
 		(self->is_moved) ? 127 : 255));

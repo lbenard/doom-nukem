@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 18:50:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/13 00:01:35 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,43 @@
 #include "engine/delta.h"
 #include "engine/lookup_table.h"
 
+t_rgba		ft_get_lerp_col(t_rgba color1, float dist, float value)
+{
+	t_rgba	c1;
+	int		color;
+
+	c1 = color1;
+	dist /= 2;
+	if (value < 1.0f)
+		value = 1.0f;
+	color = c1.c.r / (dist * value);
+	if (color >= 0 && color <= 255)
+		c1.c.r = color;
+	else
+		return (ft_rgba(255, 255, 255, 255));
+	color = c1.c.g / (dist * value);
+	if (color >= 0 && color <= 255)
+		c1.c.g = color;
+	else
+		return (ft_rgba(255, 255, 255, 255));
+	color = c1.c.b / (dist * value);
+	if (color >= 0 && color <= 255)
+		c1.c.b = color;
+	else
+		return (ft_rgba(255, 255, 255, 255));
+	return (c1);
+}
+
 static t_rgba	color(const t_raycasting_scene *const self,
 					const t_ray *const ray,
 					const float vertical)
 {
 	const t_frame	*texture;
 	t_rgba			ret;
-	float			darkness;
+	float			darkness_value;
+	float			time;
 
+	time = get_wall_time() - self->weapon.last_shot;
 	if (ray->hit.x >= self->map.size.x || ray->hit.y >= self->map.size.y
 		|| ray->hit.x < 0 || ray->hit.y < 0)
 		texture = &self->assets.floor;
@@ -34,13 +63,15 @@ static t_rgba	color(const t_raycasting_scene *const self,
 			+ (int)ray->hit.x].texture_ref;
 	ret = texture->pixels[(int)(ray->horizontal_ratio * texture->size.x)
 		+ (int)(vertical * texture->size.y) * texture->size.x];
-	darkness = (ray->perpendicular_distance / 3.0f) + 1.0f;
-	darkness = (ray->perpendicular_distance / 10.0f
-		* (1.0f + (ft_fmin((get_wall_time() - self->weapon.last_shot)
-		* 10.0f, 1.0f) * 2))) + 1.0f;
-	ret.c.r /= darkness;
-	ret.c.g /= darkness;
-	ret.c.b /= darkness;
+	// darkness = (ray->perpendicular_distance / 3.0f) + 1.0f;
+	// darkness = (ray->perpendicular_distance / 10.0f
+	// 	* (1.0f + (ft_fmin((get_wall_time() - self->weapon.last_shot)
+	// 	* 10.0f, 1.0f) * 2))) + 1.0f;
+	if (time >= 0.0f && time <= 0.3f)
+		darkness_value = 2.0f * (time * 3.33f);
+	else
+		darkness_value = 2.0f;
+	ret = ft_get_lerp_col(ret, ray->perpendicular_distance, darkness_value);
 	return (ret);
 }
 
@@ -53,14 +84,15 @@ static void	ceiling_raycasting(const t_raycasting_scene *const self,
 	t_vec2f	floor;
 	t_vec2i	t;
 	float	distance;
-	float	darkness_step;
+	float	time;
 	float	darkness_value;
 
+	time = get_wall_time() - self->weapon.last_shot;
 	if (self->entities.player_ref->super.transform.position.z >= 0.5f)
 		return ;
 	i.y = target->size.y / 2 - self->entities.player_ref->super.transform.rotation.x;
-	darkness_step = 1.0f / target->size.y * 2.0f;
-	darkness_value = 0.4f;
+	// darkness_step = 1.0f / target->size.y * 2.0f;
+	// darkness_value = 0.4f;
 	while (i.y < target->size.y)
 	{
 		distance = (target->size.y / (2.0f / (1.0f - self->entities.player_ref->super.transform.position.z * 2)))
@@ -82,14 +114,19 @@ static void	ceiling_raycasting(const t_raycasting_scene *const self,
 			floor.y += distance * (dir.y + plane.y - (dir.y - plane.y))
 				/ target->size.x;
 			t_rgba	floor_color = self->assets.ceiling.pixels[self->assets.ceiling.size.x * t.y + t.x];
-			floor_color.c.r *= ft_fmin(darkness_value, 1.0f);
-			floor_color.c.g *= ft_fmin(darkness_value, 1.0f);
-			floor_color.c.b *= ft_fmin(darkness_value, 1.0f);
+			if (time >= 0.0f && time <= 0.3f)
+				darkness_value = 2.0f * (time * 3.33f);
+			else
+				darkness_value = 2.0f;
+			floor_color = ft_get_lerp_col(floor_color, distance, darkness_value);
+			// floor_color.c.r *= ft_fmin(darkness_value, 1.0f);
+			// floor_color.c.g *= ft_fmin(darkness_value, 1.0f);
+			// floor_color.c.b *= ft_fmin(darkness_value, 1.0f);
 			target->pixels[(target->size.y - i.y - 1) * target->size.x + i.x] =
 				floor_color;
 			i.x++;
 		}
-		darkness_value += darkness_step;
+		// darkness_value += darkness_step;
 		i.y++;
 	}
 }
@@ -103,14 +140,13 @@ static void	floor_raycasting(t_raycasting_scene *const self,
 	t_vec2f	floor;
 	t_vec2i	t;
 	float	distance;
-	float	darkness_step;
+	float	time;
 	float	darkness_value;
 
+	time = get_wall_time() - self->weapon.last_shot;
 	if (self->entities.player_ref->super.transform.position.z <= -0.5f)
 		return ;
 	i.y = target->size.y / 2 + self->entities.player_ref->super.transform.rotation.x;
-	darkness_step = 1.0f / target->size.y * 2.0f;
-	darkness_value = 0.4f;
 	while (i.y < target->size.y)
 	{
 		distance = (target->size.y / (2.0f / (1.0f + self->entities.player_ref->super.transform.position.z * 2)))
@@ -132,13 +168,14 @@ static void	floor_raycasting(t_raycasting_scene *const self,
 			floor.y += distance * (dir.y + plane.y - (dir.y - plane.y))
 				/ target->size.x;
 			t_rgba	floor_color = self->assets.floor.pixels[self->assets.floor.size.x * t.y + t.x];
-			floor_color.c.r *= ft_fmin(darkness_value, 1.0f);
-			floor_color.c.g *= ft_fmin(darkness_value, 1.0f);
-			floor_color.c.b *= ft_fmin(darkness_value, 1.0f);
+			if (time >= 0.0f && time <= 0.3f)
+				darkness_value = 2.0f * (time * 3.33f);
+			else
+				darkness_value = 2.0f;
+			floor_color = ft_get_lerp_col(floor_color, distance, darkness_value);
 			target->pixels[i.y * target->size.x + i.x] = floor_color;
 			i.x++;
 		}
-		darkness_value += darkness_step;
 		i.y++;
 	}
 }

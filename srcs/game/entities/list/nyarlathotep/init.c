@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 01:23:22 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/10 21:25:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/13 00:11:05 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_result	init_nyarlathotep_entity(t_nyarlathotep_entity *const self,
 	if (static_module_create(self,
 		monster_entity(
 			ft_monster_stats(args->pos,
-				200.0f,
+				150.0f,
 				5.0f,
 				"Nyarlathotep"),
 			&scene->assets.nyarlathotep_spritesheet,

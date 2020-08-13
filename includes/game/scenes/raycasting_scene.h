@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 17:52:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/13 00:22:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,7 @@ void			raycasting_scene_weapon_reload(t_raycasting_scene *const self);
 
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
 
-
+t_rgba			ft_get_lerp_col(t_rgba color1, float dist, float value);
 /*
 ** Utils
 */
