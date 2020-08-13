@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/13 00:01:35 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/13 18:59:56 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_rgba		ft_get_lerp_col(t_rgba color1, float dist, float value)
 	dist /= 2;
 	if (value < 1.0f)
 		value = 1.0f;
+	if (dist <= 0.3)
+		dist = 0.3;
 	color = c1.c.r / (dist * value);
 	if (color >= 0 && color <= 255)
 		c1.c.r = color;
