@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:07:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 01:44:34 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/14 17:54:45 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_monster_entity
 	t_star					a_star;
 	t_bool					is_star;
 	t_bool					agro;
+	double					last_damage;
 	t_text					name_text;
 }				t_monster_entity;
 
@@ -79,6 +80,7 @@ int				get_orientate_sprite(t_monster_entity *self);
 void			a_star_attack(t_monster_entity *self,
 					int distance,
 					float speed);
+void			agro_if_take_damage(t_monster_entity *self);
 
 void			destroy_monster_entity(t_monster_entity *const self);
 

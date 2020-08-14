@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon_shoot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 02:44:43 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/14 17:34:15 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,11 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 		if (is_targeting(monster, crosshair_pos, wall))
 		{
 			if (self->entities.weapon_ref->specs.decay == 0.0f)
+			{
 				monster->health -= self->entities.weapon_ref->specs.damage
 					* ammo_amount;
+				monster->last_damage = get_wall_time();
+			}
 			else
 				monster->health -= (self->entities.weapon_ref->specs.damage
 					/ (distance_monster(self, monster)
