@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 22:22:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 22:32:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/14 15:32:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	raycasting_scene_add_entities(t_raycasting_scene *const self)
 	if (!self->super.module.has_error)
 		self->entities.player_ref = (t_player_entity*)entity_list_add_entity(
 			&self->super.entities, player_entity(&self->map, self->fov));
-	if (!self->super.entities.module.has_error)
+	if (!self->super.module.has_error && !self->super.entities.module.has_error)
 	{
 		pos = &self->map.entities;
 		while ((pos = pos->next) != &self->map.entities)
