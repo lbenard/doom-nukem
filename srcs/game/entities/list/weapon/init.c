@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 02:19:58 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 19:34:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 20:49:37 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_result	init_weapon_entity(t_weapon_entity *const self,
 	self->reloading = FALSE;
 	self->shooting = FALSE;
 	self->trigger_reloading = FALSE;
+	self->stopped_shooting = FALSE;
 	self->just_shooted = FALSE;
 	self->just_reloaded = FALSE;
 	self->load_start = 0.0;

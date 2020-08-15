@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 14:44:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 19:46:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ static void	init_weapons(t_raycasting_scene *const self)
 	module_add(&self->super.module, &self->assets.pistol_spritesheet,
 		spritesheet("resources/sprites/pistol_spritesheet.bmp",
 			ft_usize(4, 4)));
-	module_add(&self->super.module, &self->assets.pistol_sound,
-		sound("resources/sound/ar15-pistol-shot.wav"));
+	// module_add(&self->super.module, &self->assets.pistol_sound,
+	// 	sound("resources/sound/ar15-pistol-shot.wav"));
 	module_add(&self->super.module, &self->assets.shotgun_spritesheet,
 		spritesheet("resources/sprites/shotgun_ss.bmp", ft_usize(5, 4)));
 	module_add(&self->super.module, &self->assets.minigun_spritesheet,

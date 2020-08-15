@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 03:55:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 20:49:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,12 @@ void		raycasting_scene_update(t_raycasting_scene *const self)
 			else if (input_get(&game_singleton()->input, self->inputs.shoot) > 0.0f
 				&& !self->entities.weapon_ref->reloading)
 				raycasting_scene_weapon_use(self);
+			else
+			{
+				self->entities.weapon_ref->stopped_shooting = TRUE;
+				self->entities.weapon_ref->loading = FALSE;
+				self->entities.weapon_ref->load_start = 0.0;
+			}
 		}
 		door_trigger(self);
 	}
