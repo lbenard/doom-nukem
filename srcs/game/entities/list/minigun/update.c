@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:40:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 21:43:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:31:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	minigun_entity_update(t_minigun_entity *const self)
 {
-	sprite_entity_update(&self->super.super);
+	weapon_entity_update(&self->super);
 	animation_update(&self->animation, self->super.hud_ref);
 	self->super.just_reloaded = FALSE;
 	if (self->super.stopped_shooting)

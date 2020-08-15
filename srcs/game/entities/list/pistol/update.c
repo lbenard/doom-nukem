@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:40:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 17:45:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:29:37 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pistol_entity_update(t_pistol_entity *const self)
 {
-	sprite_entity_update(&self->super.super);
+	weapon_entity_update(&self->super);
 	animation_update(&self->animation, self->super.hud_ref);
 	self->super.just_reloaded = FALSE;
 	if (self->super.trigger_reloading)

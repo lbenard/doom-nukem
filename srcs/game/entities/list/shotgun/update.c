@@ -6,22 +6,19 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:40:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 20:27:22 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:29:53 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/shotgun_entity.h"
 
-#include <stdio.h>
-
 void	shotgun_entity_update(t_shotgun_entity *const self)
 {
-	sprite_entity_update(&self->super.super);
+	weapon_entity_update(&self->super);
 	animation_update(&self->animation, self->super.hud_ref);
 	self->super.just_reloaded = FALSE;
 	if (self->super.trigger_reloading)
 	{
-		printf("reloading\n");
 		self->super.reloading = TRUE;
 		if (self->super.specs.clip == 1)
 			self->animation.anim = 3;
@@ -32,11 +29,9 @@ void	shotgun_entity_update(t_shotgun_entity *const self)
 	}
 	if (self->super.reloading)
 	{
-		printf("oui bonjour pouce bleu\n");
 		if (self->animation.iter >= self->super.hud_ref->grid_size.x *
 			(1 / 0.08) - 1 && self->animation.speed >= 0.0f)
 		{
-			printf("caca lol pipi\n");
 			self->animation.iter = 0;
 			if (self->super.specs.clip == 0)
 				self->animation.anim++;
@@ -58,7 +53,6 @@ void	shotgun_entity_update(t_shotgun_entity *const self)
 	}
 	if (self->super.shooting == TRUE)
 	{
-		printf("iter: %d\n", self->animation.iter);
 		if (self->animation.iter
 			>= self->super.hud_ref->grid_size.x * (1 / 0.5) - 1)
 		{

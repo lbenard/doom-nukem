@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 14:53:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:41:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct	s_raycasting_scene
 		t_input_id	use;
 		t_input_id	shoot;
 		t_input_id	reload;
+		t_input_id	pick;
 	}				inputs;
 	struct s_entities_ref
 	{
