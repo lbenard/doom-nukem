@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/13 18:59:56 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/15 04:47:25 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,57 @@
 #include "engine/delta.h"
 #include "engine/lookup_table.h"
 
+#include <stdio.h>
+
+t_rgba		highest_value(t_rgba color1)
+{
+	float	highest_value;
+	float	max_distance;
+	t_rgba	ret;
+
+	if (color1.c.r >= color1.c.g)
+		highest_value = color1.c.r;
+	else
+		highest_value = color1.c.g;
+	if (color1.c.b > highest_value)
+		highest_value = color1.c.b;
+
+	max_distance = (float)(highest_value / 255);
+	ret = ft_rgba((color1.c.r / max_distance), (color1.c.g / max_distance),
+		(color1.c.b / max_distance), 255);
+	// printf("value = %f, max distance = %f, r = %d, g = %d, b = %d\n", highest_value, max_distance, ret.c.r, ret.c.g, ret.c.b);
+	return (ret);
+}
+
 t_rgba		ft_get_lerp_col(t_rgba color1, float dist, float value)
 {
 	t_rgba	c1;
+	t_rgba	tmp;
 	int		color;
 
 	c1 = color1;
 	dist /= 2;
+	tmp.c.a = c1.c.a;
 	if (value < 1.0f)
 		value = 1.0f;
 	if (dist <= 0.3)
 		dist = 0.3;
 	color = c1.c.r / (dist * value);
 	if (color >= 0 && color <= 255)
-		c1.c.r = color;
+		tmp.c.r = color;
 	else
-		return (ft_rgba(255, 255, 255, 255));
+		return (highest_value(c1));
 	color = c1.c.g / (dist * value);
 	if (color >= 0 && color <= 255)
-		c1.c.g = color;
+		tmp.c.g = color;
 	else
-		return (ft_rgba(255, 255, 255, 255));
+		return (highest_value(c1));
 	color = c1.c.b / (dist * value);
 	if (color >= 0 && color <= 255)
-		c1.c.b = color;
+		tmp.c.b = color;
 	else
-		return (ft_rgba(255, 255, 255, 255));
-	return (c1);
+		return (highest_value(c1));
+	return (tmp);
 }
 
 static t_rgba	color(const t_raycasting_scene *const self,
