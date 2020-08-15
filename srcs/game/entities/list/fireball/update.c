@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 17:47:50 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/16 00:23:32 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 00:42:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	fireball_entity_update(t_fireball_entity *const self)
 	if (self->anim.iter >= self->spritesheet_ref->grid_size.x *
 			(1 / self->anim.speed) - 1)
 	{
-		if (self->anim.anim > 3)
+		if (self->anim.anim > 2)
 			self->anim.anim = 0;
 		else
 			self->anim.anim++;

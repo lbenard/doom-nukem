@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 17:45:07 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/15 22:52:22 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 00:36:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ t_result		init_fireball_entity(t_fireball_entity *const self,
 		return (throw_result_str("init_fireball_entity()",
 			"failed to create fireball entity"));
 	}
+	module_add(&self->super.super.module, &self->anim, animation(0, 6, 0.8f));
 	self->spritesheet_ref = &scene->assets.fireball_spritesheet;
-	module_add(&self->super.super.module,
-		&self->anim.module, animation(0, 6, 0.8f));
 	self->super.super.transform.position = args->pos;
 	self->super.super.transform.position.z = 0.3f;
 	self->super.super.transform.direction = args->direction;
@@ -38,5 +37,11 @@ t_result		init_fireball_entity(t_fireball_entity *const self,
 	self->super.super.vtable.update = fireball_entity_update;
 	self->map_ref = &scene->map;
 	self->damage = 50;
+	if (self->super.super.module.has_error)
+	{
+		destroy_fireball_entity(self);
+		return (throw_result_str("init_fireball_entity()",
+			"failed to create fireball entity"));
+	}
 	return (OK);
 }
