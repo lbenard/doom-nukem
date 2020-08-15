@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 00:52:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 21:53:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,16 +112,14 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 			&& is_targeting(monster, crosshair_pos, wall))
 		{
 			if (self->entities.weapon_ref->specs.decay == 0.0f)
-			{
 				monster->health -= self->entities.weapon_ref->specs.damage
 					* ammo_amount;
-				monster->last_damage = get_wall_time();
-			}
 			else
 				monster->health -= (self->entities.weapon_ref->specs.damage
 					/ (distance_monster(self, monster)
 					* self->entities.weapon_ref->specs.decay + 1.0f))
 					* ammo_amount;
+			monster->last_damage = get_wall_time();
 			if (monster->health <= 0.0f)
 				raycasting_scene_kill_monster(self, (t_entity*)monster);
 			break ;
