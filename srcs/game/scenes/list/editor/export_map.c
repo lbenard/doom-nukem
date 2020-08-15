@@ -114,8 +114,8 @@ static t_result	write_map(t_editor_scene *const self,
 	{
 		block = (t_block_component_entity*)((t_entity_node*)pos)->entity;
 		map[(int)block->super.super.transform.position.y - origin.y]
-			[(int)block->super.super.transform.position.x - origin.x]
-			= block->block->id;
+			[(int)block->super.super.transform.position.x - origin.x] =
+			block->block->id;
 	}
 	errno = 0;
 	i.y = 0;
@@ -203,10 +203,6 @@ t_result		editor_scene_export_map(t_editor_scene *const self)
 	}
 	if ((fd = open(self->path, O_WRONLY | O_CREAT | O_TRUNC, 0600)) == -1)
 		return (throw_result("editor_export_map()"));
-	// if (!write_textures(game_singleton(), fd))
-	// 	return (throw_result("editor_export_map()"));
-	// if (!write_blocks(game_singleton(), fd))
-	// 	return (throw_result("editor_export_map()"));
 	origin = blocks_origin(self);
 	size = get_map_size(self, origin);
 	if (size.x < 3 || size.y < 3)

@@ -137,7 +137,6 @@ static void	add_entities(t_editor_scene *const self,
 			entity_list_add_entity(&self->super.entities,
 			player_component_entity(
 				"resources/textures/editor-player-spawn.bmp")));
-	// Tools
 	self->hud.tools_group.cursor_ref = create_checkbox_relative_pos(
 		&self->super.entities, "editor-cursor.bmp", ft_checkbox_position_pos(
 		ft_vec3f(self->editor_view.size.x + 30.0f, 30.0f, 0.0f)), args->screen);
@@ -149,15 +148,12 @@ static void	add_entities(t_editor_scene *const self,
 		&self->super.entities, "editor-save.bmp",
 		ft_checkbox_position_pos(ft_vec3f(args->screen->size.x - 30,
 		args->screen->size.y - 30, 0.0f)), args->screen);
-
 	self->hud.create_group.show_blocks_ref = create_checkbox_relative(
 		&self->super.entities, "editor-block.bmp", ft_checkbox_position(
 		self->hud.tools_group.create_ref, BELOW, 50.0f), args->screen);
 	self->hud.create_group.show_entities_ref = create_checkbox_relative(
 		&self->super.entities, "editor-entity.bmp", ft_checkbox_position(
 		self->hud.create_group.show_blocks_ref, RIGHT_TO, 50.0f), args->screen);
-
-	// Blocks
 	add_block_buttons(self, args, game);
 	add_entity_buttons(self, args, game);
 }

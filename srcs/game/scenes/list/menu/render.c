@@ -40,5 +40,4 @@ void	menu_scene_render(t_menu_scene *const self, t_frame *const fb)
 			ft_isize(10 - 2, fb->size.y - 5 - 2),
 			ft_vec2f(2.0f, 2.0f),
 			255));
-	// image_entity_render(self->credits_ref, fb);
 }

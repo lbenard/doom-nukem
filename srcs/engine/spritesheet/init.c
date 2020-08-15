@@ -15,7 +15,7 @@
 #include "sizes/usize.h"
 #include "engine/spritesheet.h"
 
-static void	grab_sprite(t_spritesheet *ss, int num)
+static void		grab_sprite(t_spritesheet *ss, int num)
 {
 	t_usize	i;
 	size_t	x;

@@ -47,13 +47,17 @@ void			block_component_entity_update(
 	{
 		self->was_not_moved = FALSE;
 		if (self->super.super.transform.position.x < 0.0f)
-			self->super.super.transform.position.x = (int)(self->super.super.transform.position.x - 0.5f);
+			self->super.super.transform.position.x =
+			(int)(self->super.super.transform.position.x - 0.5f);
 		else
-			self->super.super.transform.position.x = (int)(self->super.super.transform.position.x + 0.5f);
+			self->super.super.transform.position.x =
+			(int)(self->super.super.transform.position.x + 0.5f);
 		if (self->super.super.transform.position.y < 0.0f)
-			self->super.super.transform.position.y = (int)(self->super.super.transform.position.y - 0.5f);
+			self->super.super.transform.position.y =
+			(int)(self->super.super.transform.position.y - 0.5f);
 		else
-			self->super.super.transform.position.y = (int)(self->super.super.transform.position.y + 0.5f);
+			self->super.super.transform.position.y =
+			(int)(self->super.super.transform.position.y + 0.5f);
 		if (!is_position_free(self))
 			self->super.super.transform.position = self->pos_before_move;
 	}

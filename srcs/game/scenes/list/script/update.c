@@ -46,7 +46,7 @@ static void	write(t_script_scene *const self,
 		ft_smin(ft_strlen(paragraph), ft_strlen(writing) + strokes));
 }
 
-void	script_scene_update(t_script_scene *const self)
+void		script_scene_update(t_script_scene *const self)
 {
 	text_set_ref(&self->paragraph1_text,
 		static_string_as_ref(ft_static_string(self->writing_paragraph1)));

@@ -15,7 +15,6 @@
 #include "engine/error.h"
 #include "ft/str.h"
 
-
 static char	*create_path(const char *const path,
 				const char *const name,
 				const char *const suffix)
@@ -50,8 +49,8 @@ t_result	init_checkbox_entity_base(t_checkbox_entity *const self,
 		free(normal);
 		free(hover);
 		free(checked);
-		return throw_result_str("init_checkbox_entity_base()",
-			"failed to create paths");
+		return (throw_result_str("init_checkbox_entity_base()",
+			"failed to create paths"));
 	}
 	res = static_module_create(self, checkbox_entity(normal, hover, checked,
 		args->window));
@@ -60,8 +59,8 @@ t_result	init_checkbox_entity_base(t_checkbox_entity *const self,
 	free(checked);
 	if (res == ERROR)
 	{
-		return throw_result_str("init_checkbox_entity_base()",
-			"failed to init checkbox entity base");
+		return (throw_result_str("init_checkbox_entity_base()",
+			"failed to init checkbox entity base"));
 	}
 	return (OK);
 }

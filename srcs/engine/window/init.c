@@ -34,6 +34,7 @@ static void	init_vars(t_window *const self, const t_window_args *const args)
 ** SFML by default set the window position at the bottom of the screen, which is
 ** kinda annoying
 */
+
 static void	center_window(t_window *const self)
 {
 	sfVideoMode	desktop_mode;

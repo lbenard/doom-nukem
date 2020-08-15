@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_scene_from_file.c                       :+:      :+:    :+:   */
+/*   editor_scene_from_file.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -23,6 +23,5 @@ t_constructor	editor_scene_from_file(const t_usize window_size,
 		init_editor_scene_from_file,
 		destroy_editor_scene,
 		sizeof(t_editor_scene),
-		&args
-	));
+		&args));
 }

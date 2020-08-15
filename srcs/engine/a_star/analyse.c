@@ -12,14 +12,14 @@
 
 #include "engine/a_star.h"
 
-int		ft_isvalid(const ssize_t x, const ssize_t y, const t_map *const map)
+int			ft_isvalid(const ssize_t x, const ssize_t y, const t_map *const map)
 {
-	return ((x >= 0 && x < (ssize_t)map->size.x) && (y >= 0 && y < (ssize_t)map->size.y));
+	return ((x >= 0 && x < (ssize_t)map->size.x)
+		&& (y >= 0 && y < (ssize_t)map->size.y));
 }
 
-int		ft_analyse(int x, int y, t_star *star)
+int			ft_analyse(int x, int y, t_star *star)
 {
-	// if (star->map.map[y][x] >= star->wall ||
 	if (star->map->map[y * star->map->size.x + x].id != ' '
 		|| ft_find_node(&star->closel, x, y) == 1)
 		return (1);
@@ -28,7 +28,7 @@ int		ft_analyse(int x, int y, t_star *star)
 	return (0);
 }
 
-int		ft_validiag(int x, int y, t_star *star, t_node cur_node)
+int			ft_validiag(int x, int y, t_star *star, t_node cur_node)
 {
 	if (x < cur_node.pos.x && y < cur_node.pos.y)
 		if (ft_analyse(cur_node.pos.x, cur_node.pos.y - 1, star) == 0 &&
@@ -49,7 +49,7 @@ int		ft_validiag(int x, int y, t_star *star, t_node cur_node)
 	return (1);
 }
 
-void	ft_check_start_end(t_node start, t_node end, const t_map *const map)
+void		ft_check_start_end(t_node start, t_node end, const t_map *const map)
 {
 	if (ft_isvalid(start.pos.x, start.pos.y, map) == 0)
 	{

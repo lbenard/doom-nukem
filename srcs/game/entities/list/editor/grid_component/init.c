@@ -16,7 +16,6 @@
 t_result	init_grid_component_entity(t_grid_component_entity *const self,
 				const t_grid_component_entity_args *const args)
 {
-	
 	if (static_module_create(self, component_entity(0,
 		(struct s_component_entity_vtable){
 			grid_component_entity_render,

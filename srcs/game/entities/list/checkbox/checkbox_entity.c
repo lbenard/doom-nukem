@@ -27,6 +27,5 @@ t_constructor	checkbox_entity(const char *const normal_path,
 		init_checkbox_entity,
 		destroy_checkbox_entity,
 		sizeof(t_checkbox_entity),
-		&args
-	));
+		&args));
 }

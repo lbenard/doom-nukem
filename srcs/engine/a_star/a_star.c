@@ -13,7 +13,7 @@
 #include <math.h>
 #include "engine/a_star.h"
 
-t_node	ft_fill_node(int x, int y, int f)
+t_node		ft_fill_node(int x, int y, int f)
 {
 	t_node	node;
 
@@ -23,7 +23,7 @@ t_node	ft_fill_node(int x, int y, int f)
 	return (node);
 }
 
-t_node	ft_find_lower_f(t_star_list **list)
+t_node		ft_find_lower_f(t_star_list **list)
 {
 	t_node		ret;
 	t_star_list	*tmp;
@@ -39,7 +39,7 @@ t_node	ft_find_lower_f(t_star_list **list)
 	return (ret);
 }
 
-t_node	ft_closest_node(t_star_list **close, t_node end)
+t_node		ft_closest_node(t_star_list **close, t_node end)
 {
 	t_star_list	*tmp;
 	t_node		node;
@@ -76,17 +76,15 @@ t_result	ft_get_path(t_node cur_node, t_star *star)
 	{
 		find = ft_get_node(&star->closel,
 			find->father.pos.x, find->father.pos.y);
-		if (find->pos.x != star->start.pos.x || find->pos.y != star->start.pos.y)
+		if (find->pos.x != star->start.pos.x
+			|| find->pos.y != star->start.pos.y)
 			prev = find;
 		i++;
 	}
-	// star->map.map[prev.pos.y][prev.pos.x] = 8;
-	// ft_print_map(star->map);
 	star->next_pos.pos.x = prev->pos.x;
 	star->next_pos.pos.y = prev->pos.y;
 	ft_delist(&star->closel);
 	ft_delist(&star->openl);
-	// free(star);
 	return (OK);
 }
 

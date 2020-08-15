@@ -28,7 +28,8 @@ static void	render_character(t_text *const self,
 	letter_size.y = self->font.raster.size.y;
 	length = settings.height * ((float)letter_size.x / letter_size.y);
 	i.y = 0;
-	while (i.y < settings.height && settings.position.y + i.y < self->target.size.y)
+	while (i.y < settings.height
+		&& settings.position.y + i.y < self->target.size.y)
 	{
 		i.x = 0;
 		while (i.x < length && settings.position.x + i.x < self->target.size.x)

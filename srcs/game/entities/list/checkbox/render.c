@@ -24,14 +24,10 @@ void	checkbox_entity_render(t_checkbox_entity *const self,
 				ft_vec2f(0.5f, 0.5f),
 				ft_isize(
 					self->super.transform.position.x,
-					self->super.transform.position.y
-				),
+					self->super.transform.position.y),
 				ft_vec2f(
 					self->super.transform.scale.x,
-					self->super.transform.scale.y
-				),
-				COLOR_OPAQUE
-			)
-		);
+					self->super.transform.scale.y),
+				COLOR_OPAQUE));
 	}
 }

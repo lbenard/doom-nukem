@@ -24,7 +24,7 @@ static float	update_event(const t_input_event *const event,
 	{
 		if (sf_event->type == sfEvtKeyPressed
 			&& sf_event->key.code == event->code)
-				return (1.0f * multiplier);
+			return (1.0f * multiplier);
 		return (0.0f);
 	}
 	if (event->type == MOUSE && !event->mouse.hold)

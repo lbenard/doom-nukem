@@ -27,29 +27,22 @@ static void	update_buttons(t_menu_scene *const self)
 	mouse = sfMouse_getPositionRenderWindow(game_singleton()->window.window);
 	mid = ft_usize(self->window_size.x / 2, self->window_size.y / 2);
 	self->start_game_ref->super.transform.position = ft_vec3f(
-		cosine_lookup(wall - (int)wall) * 10.0f + mid.x
-			- (mouse.x - (int)mid.x) / 50.0f
-			- (self->start_game_ref->normal_texture.size.x / 2),
-		sine_lookup(wall - (int)wall) * 5.0f + mid.y
-			- (mouse.y - (int)mid.y) / 50.0f
-			- (self->start_game_ref->normal_texture.size.y / 2),
-		0.0f);
+		cosine_lookup(wall - (int)wall) * 10.0f + mid.x - (mouse.x - (int)mid.x)
+		/ 50.0f - (self->start_game_ref->normal_texture.size.x / 2),
+		sine_lookup(wall - (int)wall) * 5.0f + mid.y - (mouse.y - (int)mid.y)
+		/ 50.0f - (self->start_game_ref->normal_texture.size.y / 2), 0.0f);
 	self->editor_ref->super.transform.position = ft_vec3f(
-		sine_lookup(wall - (int)wall) * 10.0f + mid.x
-			- (mouse.x - (int)mid.x) / 50.0f
-			- (self->close_game_ref->normal_texture.size.x / 2),
+		sine_lookup(wall - (int)wall) * 10.0f + mid.x - (mouse.x - (int)mid.x)
+		/ 50.0f - (self->close_game_ref->normal_texture.size.x / 2),
 		sine_lookup(wall - (int)wall) * 5.0f + mid.y + 90
 			- (mouse.y - (int)mid.y) / 50.0f
-			- (self->close_game_ref->normal_texture.size.y / 2),
-		0.0f);	
+			- (self->close_game_ref->normal_texture.size.y / 2), 0.0f);
 	self->close_game_ref->super.transform.position = ft_vec3f(
-		cosine_lookup(wall - (int)wall) * 10.0f + mid.x
-			- (mouse.x - (int)mid.x) / 50.0f
-			- (self->close_game_ref->normal_texture.size.x / 2),
+		cosine_lookup(wall - (int)wall) * 10.0f + mid.x - (mouse.x - (int)mid.x)
+		/ 50.0f - (self->close_game_ref->normal_texture.size.x / 2),
 		sine_lookup(wall - (int)wall) * 5.0f + mid.y + 180
 			- (mouse.y - (int)mid.y) / 50.0f
-			- (self->close_game_ref->normal_texture.size.y / 2),
-		0.0f);
+			- (self->close_game_ref->normal_texture.size.y / 2), 0.0f);
 }
 
 static void	update_images(t_menu_scene *const self)

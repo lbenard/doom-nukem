@@ -48,4 +48,3 @@ void	sprite_entity_update(t_sprite_entity *const self)
 	self->perpendicular_distance = transform.y;
 	self->is_visible = transform.y > 0;
 }
-
