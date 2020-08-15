@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 19:46:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 01:28:20 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_result	init_pistol_entity(t_pistol_entity *const self,
 	pistol_specs.clip = 12;
 	pistol_specs.damage = 10.0f;
 	pistol_specs.name = "Pistol";
-	pistol_specs.shoot_time = 0.2f;
+	pistol_specs.shoot_time = 0.4f;
 	if (static_module_create(self,
 		weapon_entity(&ctx->assets.pistol_spritesheet,
 			"resources/textures/tom_nook.bmp",
