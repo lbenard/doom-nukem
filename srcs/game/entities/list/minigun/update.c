@@ -6,24 +6,21 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:40:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 20:50:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 21:43:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/minigun_entity.h"
-
-#include <stdio.h>
 
 void	minigun_entity_update(t_minigun_entity *const self)
 {
 	sprite_entity_update(&self->super.super);
 	animation_update(&self->animation, self->super.hud_ref);
 	self->super.just_reloaded = FALSE;
-	printf("update shooting: %d loading: %d\n", self->super.shooting, self->super.loading);
-	if (!(self->super.shooting || self->super.loading)
-		|| self->super.stopped_shooting)
+	if (self->super.stopped_shooting)
+		self->super.shooting = FALSE;
+	if (!(self->super.shooting || self->super.loading))
 	{
-		printf("reset\n");
 		self->animation.anim = 0;
 		self->animation.iter = 0;
 		self->animation.speed = 0.0f;

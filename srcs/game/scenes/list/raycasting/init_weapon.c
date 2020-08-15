@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 22:22:16 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 20:40:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 21:46:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	init_raycasting_scene_weapon(t_raycasting_scene *const self)
 	{
 		self->entities.weapon_ref = (t_weapon_entity*)entity_list_add_entity(
 			&self->super.entities,
-			minigun_entity((t_scene*)self, ft_vec2f(0.0f, 0.0f)));
+			pistol_entity((t_scene*)self, ft_vec2f(0.0f, 0.0f)));
 	}
 }
