@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/13 00:22:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/14 14:53:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct	s_raycasting_scene
 	t_entity_list	sprite_entities;
 	t_entity_list	monster_entities;
 	t_entity_list	weapon_entities;
+	t_entity_list	ammo_entities;
 	struct s_assets
 	{
 		t_frame			floor;
@@ -54,6 +55,9 @@ typedef struct	s_raycasting_scene
 		t_spritesheet	use_key_spritesheet;
 		t_animation		use_key_animation;
 		t_text			use_key_text;
+		t_spritesheet	weapon_key_spritesheet;
+		t_animation		weapon_key_animation;
+		t_text			weapon_key_text;
 		t_frame			game_over_background;
 		t_text			game_over;
 		t_frame			fireball;
