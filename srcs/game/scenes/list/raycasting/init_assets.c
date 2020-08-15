@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_assets.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 19:46:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:29:13 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static void	init_monsters(t_raycasting_scene *const self)
 			ft_usize(9, 4)));
 	module_add(&self->super.module, &self->assets.ghast_spritesheet,
 		spritesheet("resources/sprites/ghast.bmp", ft_usize(3, 5)));
-	module_add(&self->super.module, &self->assets.fireball,
-		frame_from_file("resources/sprites/fireball.bmp"));
+	module_add(&self->super.module, &self->assets.fireball_spritesheet,
+		spritesheet("resources/sprites/fireball_ss.bmp", ft_usize(6, 4)));
 	module_add(&self->super.module, &self->assets.nyarlathotep_spritesheet,
 		spritesheet("resources/sprites/nyarlathotep.bmp", ft_usize(3, 4)));
 }

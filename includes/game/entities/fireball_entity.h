@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fireball_entity.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 14:43:50 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/12 14:41:35 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:39:04 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef struct	s_fireball_entity
 {
 	t_sprite_entity		super;
 	t_raycasting_scene	*scene;
+	t_spritesheet		*spritesheet_ref;
+	t_animation			anim;
 	const t_map			*map_ref;
 	int					damage;
 }				t_fireball_entity;

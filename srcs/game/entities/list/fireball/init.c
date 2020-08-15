@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 17:45:07 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/12 14:41:51 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:52:22 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ t_result		init_fireball_entity(t_fireball_entity *const self,
 	scene = (t_raycasting_scene*)game_singleton()->scene;
 	if (static_module_create(self,
 		sprite_entity_size(args->pos,
-			scene->assets.fireball.size,
+			scene->assets.fireball_spritesheet.sprite_size,
 			scene)) == ERROR)
 	{
 		return (throw_result_str("init_fireball_entity()",
 			"failed to create fireball entity"));
 	}
-	frame_layer_opaque(&self->super.texture,
-		&scene->assets.fireball,
-		ft_isize(0, 0));
+	self->spritesheet_ref = &scene->assets.fireball_spritesheet;
+	module_add(&self->super.super.module,
+		&self->anim.module, animation(0, 6, 0.8f));
 	self->super.super.transform.position = args->pos;
 	self->super.super.transform.position.z = 0.3f;
 	self->super.super.transform.direction = args->direction;
