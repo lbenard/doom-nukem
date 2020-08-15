@@ -23,7 +23,7 @@ static t_father	ft_initfather(void)
 	return (ret);
 }
 
-t_result	init_astar(t_star *a_star,
+t_result		init_astar(t_star *a_star,
 				const t_map *const map,
 				t_entity monstre,
 				t_entity player)

@@ -25,7 +25,8 @@ void	script_scene_render(t_script_scene *const self,
 	if (!is_over)
 		tig_fade = 0.0f;
 	else
-		tig_fade = ft_fmin((get_wall_time() - self->text_finished_time) / 8.0f, 1.0f);
+		tig_fade = ft_fmin((get_wall_time() - self->text_finished_time) / 8.0f,
+		1.0f);
 	if (!is_over)
 		frame_fill_blend(fb, ft_rgba(0, 0, 0, 1), blend_add);
 	else

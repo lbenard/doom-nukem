@@ -12,7 +12,8 @@
 
 #include "game/hud_game.h"
 
-t_result	init_hud_game(t_hud_game *const self, t_hud_game_args *const args)
+t_result		init_hud_game(t_hud_game *const self,
+					t_hud_game_args *const args)
 {
 	init_module(&self->module);
 	module_add(&self->module, &self->heart_ss, spritesheet(args->heart_ss_path,
@@ -24,7 +25,7 @@ t_result	init_hud_game(t_hud_game *const self, t_hud_game_args *const args)
 	return (OK);
 }
 
-void		destroy_hud_game(t_hud_game *const self)
+void			destroy_hud_game(t_hud_game *const self)
 {
 	destroy_module(&self->module);
 }

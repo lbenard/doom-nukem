@@ -10,31 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   editor_camera_zoom_event.c                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/19 18:25:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/24 22:41:38 by lbenard          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "game/entities/editor/editor_camera_entity.h"
 #include "engine/error.h"
 #include "engine/input.h"
 #include "game/game.h"
 
-
-static t_vec2f		get_scroll_relative_to_camera(sfEvent *event,
-						const t_frame *const fb)
+static t_vec2f	get_scroll_relative_to_camera(sfEvent *event,
+					const t_frame *const fb)
 {
 	t_vec2f	mid;
 	t_usize	size;
 	t_vec2f	ret;
-	
+
 	size = fb->size;
 	mid = ft_vec2f((float)size.x / 2.0f, (float)size.y / 2.0f);
 	ret.x = ((float)event->mouseWheelScroll.x - mid.x);
@@ -42,12 +29,12 @@ static t_vec2f		get_scroll_relative_to_camera(sfEvent *event,
 	return (ret);
 }
 
-static t_vec2f		get_previous_position(t_vec2f scroll_relative,
-						t_transform camera, float unit)
+static t_vec2f	get_previous_position(t_vec2f scroll_relative,
+					t_transform camera, float unit)
 {
 	t_vec2f	ret;
 	float	zoom;
-	
+
 	zoom = camera.scale.x;
 	ret.x = (camera.position.x * unit * zoom + scroll_relative.x) / zoom;
 	ret.y = (camera.position.y * unit * zoom + scroll_relative.y) / zoom;
@@ -70,7 +57,7 @@ static void		update_camera_position(t_editor_camera_entity *const self,
 {
 	float	zoom;
 	float	unit;
-	
+
 	unit = self->grid_unit;
 	zoom = self->super.transform.scale.x;
 	self->super.transform.position.x = (pos.x - offset.x) / (zoom * unit);
@@ -84,7 +71,7 @@ static void		editor_camera_zoom_event(t_editor_camera_entity *const self,
 	t_vec2f	scroll_relative;
 	t_vec2f	scroll_previous;
 	t_vec2f	scroll_next;
-		
+
 	if (event->type == sfEvtMouseWheelScrolled)
 	{
 		scroll_relative = get_scroll_relative_to_camera(event, fb);

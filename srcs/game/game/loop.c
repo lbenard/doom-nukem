@@ -23,10 +23,9 @@ static void	fps_average(double spf)
 
 	total_fps += 1.0f / spf;
 	total_frames++;
-	// printf("average: %f\n", total_fps / total_frames);
 }
 
-void	game_loop(void)
+void		game_loop(void)
 {
 	t_game	*game;
 	double	last_time;
@@ -53,14 +52,6 @@ void	game_loop(void)
 	}
 	spf = get_wall_time() - last_time;
 	fps_average(spf);
-	if (spf > MAX_DELTA)
-	{
-		// ft_putstr("cpu just had a stroke (got ");
-		// ft_putnbr(1.0f / spf);
-		// ft_putstr("fps, expected at least ");
-		// ft_putnbr(1.0f / MAX_DELTA);
-		// ft_putstr("fps)\n");
-	}
 	set_last_delta(spf);
 	last_time = get_wall_time();
 	game->has_scene_changed = FALSE;

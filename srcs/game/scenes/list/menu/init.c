@@ -64,13 +64,6 @@ static void	add_images(t_menu_scene *const self, const t_usize window_size)
 				"lugibone, mribouch & ppetitea")));
 		text_render(&self->credits, ft_text_settings(ft_isize(0, 0), 9));
 	}
-	// self->credits_ref = (t_image_entity*)entity_list_add_entity(
-	// 	&self->super.entities,
-	// 	image_entity_from_file("resources/texts/credits-upscale.bmp",
-	// 		ft_frame_transform(ft_vec2f(.0f, 1.0f),
-	// 			ft_isize(5, window_size.y - 5),
-	// 			ft_vec2f(1.0f, 1.0f),
-	// 			COLOR_OPAQUE)));
 }
 
 t_result	init_menu_scene(t_menu_scene *const self,

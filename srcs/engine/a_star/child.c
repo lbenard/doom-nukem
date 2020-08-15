@@ -21,7 +21,8 @@ t_node	ft_get_f(int x, int y, t_star *star, t_node cur_node)
 		ret.g = 14 + cur_node.g;
 	else
 		ret.g = 10 + cur_node.g;
-	ret.h = (ft_ssabs(star->end.pos.x - x) + ft_ssabs(star->end.pos.y - y)) * 10;
+	ret.h = (ft_ssabs(star->end.pos.x - x) + ft_ssabs(star->end.pos.y - y))
+		* 10;
 	ret.f = ret.g + ret.h;
 	ret.pos.x = x;
 	ret.pos.y = y;

@@ -12,7 +12,7 @@
 
 #include "game/entities/editor/entity_checkbox_entity.h"
 
-void	entity_checkbox_set_pos(t_entity_checkbox_entity *const self, 
+void	entity_checkbox_set_pos(t_entity_checkbox_entity *const self,
 			const t_vec3f pos)
 {
 	checkbox_set_pos(&self->super, pos);

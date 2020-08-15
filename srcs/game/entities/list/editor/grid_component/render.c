@@ -34,9 +34,11 @@ static void		render_columns(t_grid_component_entity *const self,
 	int		sign;
 
 	camera_start = camera->super.transform.position.x * self->unit_size
-		* camera->super.transform.scale.x - self->super.super.transform.scale.x / 2.0f;
+		* camera->super.transform.scale.x -
+		self->super.super.transform.scale.x / 2.0f;
 	camera_end = camera->super.transform.position.x * self->unit_size
-		* camera->super.transform.scale.x + self->super.super.transform.scale.x / 2.0f;
+		* camera->super.transform.scale.x +
+		self->super.super.transform.scale.x / 2.0f;
 	sign = (camera_start >= 0) * 2 - 1;
 	x = 0;
 	if (sign == 1)
@@ -65,9 +67,11 @@ static void		render_rows(t_grid_component_entity *const self,
 	int		sign;
 
 	camera_start = camera->super.transform.position.y * self->unit_size
-		* camera->super.transform.scale.x - self->super.super.transform.scale.y / 2.0f;
+		* camera->super.transform.scale.x -
+		self->super.super.transform.scale.y / 2.0f;
 	camera_end = camera->super.transform.position.y * self->unit_size
-		* camera->super.transform.scale.x + self->super.super.transform.scale.y / 2.0f;
+		* camera->super.transform.scale.x +
+		self->super.super.transform.scale.y / 2.0f;
 	sign = (camera_start >= 0) * 2 - 1;
 	y = 0;
 	if (sign == 1)

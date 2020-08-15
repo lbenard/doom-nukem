@@ -52,7 +52,7 @@ static void	render_entity_buttons(t_editor_scene *const self,
 	}
 }
 
-void	editor_scene_render(t_editor_scene *const self,
+void		editor_scene_render(t_editor_scene *const self,
 			t_frame *const fb)
 {
 	t_list_head			*pos;
@@ -71,7 +71,8 @@ void	editor_scene_render(t_editor_scene *const self,
 	while ((pos = pos->next) != &self->components.list)
 	{
 		component = (t_component_entity*)((t_entity_node*)pos)->entity;
-		component->vtable.render(component, self->camera_ref, &self->editor_view);
+		component->vtable.render(component, self->camera_ref,
+			&self->editor_view);
 	}
 	frame_layer_add(fb, &self->editor_view, ft_isize(0, 0));
 	checkbox_entity_render(self->hud.tools_group.create_ref, fb);

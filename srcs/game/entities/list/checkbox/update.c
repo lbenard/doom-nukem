@@ -26,17 +26,11 @@ void	checkbox_entity_update(t_checkbox_entity *const self)
 		self->current_texture,
 		ft_frame_transform(
 			ft_vec2f(0.5f, 0.5f),
-			ft_isize(
-				self->super.transform.position.x,
-				self->super.transform.position.y
-			),
-			ft_vec2f(
-				self->super.transform.scale.x,
-				self->super.transform.scale.y
-			),
-			COLOR_OPAQUE
-		)
-	);
+			ft_isize(self->super.transform.position.x,
+				self->super.transform.position.y),
+			ft_vec2f(self->super.transform.scale.x,
+				self->super.transform.scale.y),
+			COLOR_OPAQUE));
 	if ((ssize_t)pos.x >= frame_coordinates.start.x
 		&& (ssize_t)pos.x < frame_coordinates.end.x
 		&& (ssize_t)pos.y >= frame_coordinates.start.y

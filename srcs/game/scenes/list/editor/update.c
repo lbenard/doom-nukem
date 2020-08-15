@@ -27,10 +27,10 @@ void	editor_scene_update(t_editor_scene *const self)
 		&self->screen_ref->frame, window_get_mouse_pos(self->screen_ref));
 	if (self->selected_component_ref)
 	{
-		self->selected_component_ref->super.transform.position.x
-			+= new_pos.x - old_pos.x;
-		self->selected_component_ref->super.transform.position.y
-			+= new_pos.y - old_pos.y;
+		self->selected_component_ref->super.transform.position.x +=
+		new_pos.x - old_pos.x;
+		self->selected_component_ref->super.transform.position.y +=
+		new_pos.y - old_pos.y;
 	}
 	old_pos = new_pos;
 	update_radio_group(&self->hud.tools);
