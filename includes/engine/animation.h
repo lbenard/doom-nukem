@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/29 19:55:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 18:52:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 03:14:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct	s_animation
 	int			nb_sprite;
 	float		speed;
 	int			iter;
+	float		delta_iter;
 }				t_animation;
 
 typedef struct	s_animation_args
