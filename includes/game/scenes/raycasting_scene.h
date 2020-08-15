@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_scene.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 14:53:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:11:58 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef struct	s_raycasting_scene
 		t_text			weapon_key_text;
 		t_frame			game_over_background;
 		t_text			game_over;
-		t_frame			fireball;
+		t_spritesheet	fireball_spritesheet;
 		t_spritesheet	alien_spritesheet;
 		t_spritesheet	onepunchman_spritesheet;
 		t_spritesheet	ghast_spritesheet;
