@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 19:27:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 03:55:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ static void	door_trigger(t_raycasting_scene *const self)
 	}
 }
 
-#include <stdio.h>
-
 void		raycasting_scene_update(t_raycasting_scene *const self)
 {
 	// printf("before entity update (%lu)\n", list_size(&self->super.entities.list));
@@ -115,7 +113,9 @@ void		raycasting_scene_update(t_raycasting_scene *const self)
 			if (input_get(&game_singleton()->input,
 				self->inputs.reload) > 0.0f
 				&& self->entities.weapon_ref->shooting == FALSE
-				&& !self->entities.weapon_ref->reloading)
+				&& !self->entities.weapon_ref->reloading
+				&& self->entities.weapon_ref->specs.clip
+					!= self->entities.weapon_ref->specs.clip_size)
 				self->entities.weapon_ref->trigger_reloading = TRUE;
 			if (self->entities.weapon_ref->just_reloaded)
 				raycasting_scene_weapon_reload(self);

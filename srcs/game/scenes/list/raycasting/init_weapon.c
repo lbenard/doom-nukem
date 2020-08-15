@@ -6,12 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 22:22:16 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/11 05:09:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 03:16:17 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/raycasting_scene.h"
 #include "game/entities/pistol_entity.h"
+#include "game/entities/shotgun_entity.h"
 
 void	init_raycasting_scene_weapon(t_raycasting_scene *const self)
 {
@@ -21,6 +22,6 @@ void	init_raycasting_scene_weapon(t_raycasting_scene *const self)
 	{
 		self->entities.weapon_ref = (t_weapon_entity*)entity_list_add_entity(
 			&self->super.entities,
-			pistol_entity((t_scene*)self, ft_vec2f(0.0f, 0.0f)));
+			shotgun_entity((t_scene*)self, ft_vec2f(0.0f, 0.0f)));
 	}
 }
