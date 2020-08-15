@@ -22,7 +22,7 @@ static void	ft_real_fd(float n, int fd)
 	}
 }
 
-void	ft_putfloat_fd(float n, int fd)
+void		ft_putfloat_fd(float n, int fd)
 {
 	if (n < 0)
 	{
