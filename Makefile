@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/12 19:04:06 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/14 21:01:18 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -239,6 +239,7 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/player/player_entity.c										\
 					game/entities/list/player/init.c												\
 					game/entities/list/player/update.c												\
+					game/entities/list/player/state.c												\
 					game/entities/list/player/take_damage.c											\
 					game/entities/list/player/is_colliding.c										\
 					game/entities/list/player/is_vertical_collide.c									\

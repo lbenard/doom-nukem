@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 21:24:15 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/14 17:32:47 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void		init_vars(t_monster_entity *const self,
 	self->agro = FALSE;
 	self->distance_agro = 30;
 	self->max_distance_agro = 50;
+	self->last_damage = 0.0;
 }
 
 t_result		init_monster_entity(t_monster_entity *const self,

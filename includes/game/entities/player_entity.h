@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/11 21:53:37 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/14 20:49:18 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ t_vec3f			north_east_rebound(const t_vec3f vel);
 t_vec3f			south_east_rebound(const t_vec3f vel);
 t_vec3f			south_west_rebound(const t_vec3f vel);
 t_vec3f			north_west_rebound(const t_vec3f vel);
+
+void			flying_player_state(t_player_entity *const self);
+void			moving_player_state(t_player_entity *const self);
 
 void			destroy_player_entity(t_player_entity *const self);
 

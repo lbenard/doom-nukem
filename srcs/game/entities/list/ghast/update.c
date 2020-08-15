@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 21:22:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/14 17:56:22 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void			ghast_entity_update(t_ghast_entity *const self)
 		ft_isize(0, 0));
 	if (self->just_shoot == FALSE && self->move_side == FALSE)
 		self->super.animation.speed = 0;
+	agro_if_take_damage(&self->super);
 	if (distance_monster_player(&self->super) < self->super.distance_agro)
 	{
 		self->super.agro = TRUE;
