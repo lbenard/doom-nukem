@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon_shoot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 17:34:15 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/15 00:52:17 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 	while ((pos = pos->prev) != &self->monster_entities.list)
 	{
 		monster = (t_monster_entity*)((t_entity_node*)pos)->entity;
-		if (is_targeting(monster, crosshair_pos, wall))
+		if (monster->super.is_visible
+			&& is_targeting(monster, crosshair_pos, wall))
 		{
 			if (self->entities.weapon_ref->specs.decay == 0.0f)
 			{

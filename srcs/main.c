@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 15:30:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 02:38:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@
 #include "engine/text.h"
 #include "game/scenes/menu_scene.h"
 #include "game/scenes/editor_scene.h"
-#include "game/scenes/noise_test_scene.h"
 #include "game/scenes/script_scene.h"
-// #include "game/scenes/sector_scene.h"
 #include "game/scenes/raycasting_scene.h"
 #include "game/events/events.h"
 

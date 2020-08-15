@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_sprites.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/13 00:10:30 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/15 01:25:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,33 +104,31 @@ static void	render_sprites(t_raycasting_scene *const self,
 }
 
 static void	monsters_health(const t_monster_entity *const monster,
-				t_frame *const fb)
+				t_frame *const fb,
+				const float distance_opacity)
 {
-	float	health_percentage;
-	t_usize	health_bar_size;
-	t_usize	i;
+	t_frame_coordinates	coordinates;
+	t_usize				i;
+	t_rgba				*bg;
 
-	health_percentage = monster->health / monster->full_health;
-	health_bar_size.x = monster->super.end_x - monster->super.start_x;
-	health_bar_size.y = health_bar_size.x / 20;
-	i.y = 0;
-	while (i.y < health_bar_size.y)
+	coordinates.start.x = monster->super.start_x;
+	coordinates.end.x = monster->super.end_x;
+	coordinates.start.y = monster->super.start_y;
+	coordinates.end.y = monster->super.start_y
+		+ (monster->super.end_x - monster->super.start_x) / 20;
+	i.y = (size_t)ft_ssmax(coordinates.start.y, 0);
+	while ((ssize_t)i.y < coordinates.end.y && i.y < fb->size.y)
 	{
-		i.x = 0;
-		while (i.x < health_bar_size.x)
+		i.x = (size_t)ft_ssmax(coordinates.start.x, 0);
+		while ((ssize_t)i.x < coordinates.end.x && i.x < fb->size.x)
 		{
-			if (!(monster->super.start_y + (ssize_t)i.y < 0
-				|| monster->super.start_y + i.y >= fb->size.y
-				|| monster->super.start_x + (ssize_t)i.x < 0
-				|| monster->super.start_x + i.x >= fb->size.x))
-			{
-				if ((float)(i.x + i.y) / (float)health_bar_size.x > health_percentage)
-					fb->pixels[(monster->super.start_y + i.y) * fb->size.x
-						+ monster->super.start_x + i.x] = ft_rgba(0, 31, 0, 255);
-				else
-					fb->pixels[(monster->super.start_y + i.y) * fb->size.x
-						+ monster->super.start_x + i.x] = ft_rgba(0, 255, 0, 255);
-			}
+			bg = &fb->pixels[i.y * fb->size.x + i.x];
+			if ((float)(i.x - coordinates.start.x + i.y - coordinates.start.y)
+				/ (float)(coordinates.end.x - coordinates.start.x)
+				> monster->health / monster->full_health)
+				*bg = blend_add(*bg, ft_rgba(0, 31, 0, distance_opacity));
+			else
+				*bg = blend_add(*bg, ft_rgba(0, 255, 0, distance_opacity));
 			i.x++;
 		}
 		i.y++;
@@ -162,7 +160,7 @@ static void	monsters(t_raycasting_scene *const self,
 					10.0f / monster->super.perpendicular_distance),
 				distance_opacity));
 		if (monster->health < monster->full_health)
-			monsters_health(monster, fb);
+			monsters_health(monster, fb, distance_opacity);
 	}
 }
 
