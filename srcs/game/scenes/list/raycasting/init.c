@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/12 01:37:16 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 20:59:12 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 	}
 	init_raycasting_scene_vars(self, args);
 	init_raycasting_scene_modules(self);
+	init_raycasting_scene_tooltips(self);
 	init_raycasting_scene_entity_lists(self);
 	init_raycasting_scene_assets(self);
 	init_raycasting_scene_inputs(self);

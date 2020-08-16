@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 04:46:40 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 20:45:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void	render_sprites(t_raycasting_scene *const self,
 	t_ray			*zbuffer;
 	t_usize			sprite_px;
 	t_frame			*sprite_texture;
+	t_rgba			sprite_color;
+	t_rgba			saturated_color;
 	float			darkness_value;
 	float			time;
 
@@ -86,16 +88,17 @@ static void	render_sprites(t_raycasting_scene *const self,
 			{
 				sprite_px.y = inverse_lerp(sprite->start_y, sprite->end_y, i.y)
 					* sprite_texture->size.y;
-				t_rgba	sprite_color = sprite_texture->pixels[sprite_px.y
+				sprite_color = sprite_texture->pixels[sprite_px.y
 					* sprite_texture->size.x + sprite_px.x];
 				if (time >= 0.0f && time <= 0.3f)
 					darkness_value = 2.0f * (time * 3.33f);
 				else
 					darkness_value = 2.0f;
-				sprite_color = ft_get_lerp_col(sprite_color, sprite->perpendicular_distance, darkness_value);
+				saturated_color = ft_get_lerp_col(sprite_color, sprite->perpendicular_distance, darkness_value);
+				saturated_color.c.a = sprite_color.c.a;
 				fb->pixels[i.y * fb->size.x + i.x] =
 					blend_add(fb->pixels[i.y * fb->size.x + i.x],
-					sprite_color);
+					saturated_color);
 				i.y++;
 			}
 			i.x++;

@@ -6,7 +6,7 @@
 #    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/17 00:20:44 by mribouch         ###   ########.fr        #
+#    Updated: 2020/08/17 00:23:06 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -457,6 +457,7 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/init.c												\
 					game/scenes/list/raycasting/init_vars.c											\
 					game/scenes/list/raycasting/init_modules.c										\
+					game/scenes/list/raycasting/init_tooltips.c										\
 					game/scenes/list/raycasting/init_entity_lists.c									\
 					game/scenes/list/raycasting/init_assets.c										\
 					game/scenes/list/raycasting/init_inputs.c										\

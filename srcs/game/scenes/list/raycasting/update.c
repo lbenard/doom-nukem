@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 04:02:18 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 20:57:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,8 @@ void		raycasting_scene_update(t_raycasting_scene *const self)
 		door_trigger(self);
 	}
 	pick_weapon(self);
-	animation_update(&self->assets.use_key_animation, &self->assets.use_key_spritesheet);
+	animation_update(&self->tooltips.use_key_animation, &self->assets.use_key_spritesheet);
+	animation_update(&self->tooltips.pick_key_animation, &self->assets.pick_key_spritesheet);
 	// cursor_set_pos(&self->window_ref->cursor, self->window_ref->window,
 	// 	ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2));
 }
