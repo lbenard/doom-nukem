@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/16 21:16:54 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/17 00:42:38 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -391,8 +391,10 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/nyarlathotep/rotate.c										\
 																									\
 					game/entities/list/sprite/sprite_entity.c										\
+					game/entities/list/sprite/sprite_entity_from.c									\
 					game/entities/list/sprite/sprite_entity_size.c									\
 					game/entities/list/sprite/init.c												\
+					game/entities/list/sprite/init_from.c											\
 					game/entities/list/sprite/init_size.c											\
 					game/entities/list/sprite/destroy.c												\
 					game/entities/list/sprite/update.c												\
@@ -418,6 +420,11 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/minigun/init.c												\
 					game/entities/list/minigun/update.c												\
 					game/entities/list/minigun/destroy.c											\
+																									\
+					game/entities/list/ammo/ammo_entity.c											\
+					game/entities/list/ammo/init.c													\
+					game/entities/list/ammo/update.c												\
+					game/entities/list/ammo/destroy.c												\
 																									\
 					game/events/close_game_event.c													\
 																									\

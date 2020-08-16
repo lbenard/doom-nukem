@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_entity_descriptors.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:21:42 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 18:24:54 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 21:55:57 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "game/entities/pistol_entity.h"
 #include "game/entities/shotgun_entity.h"
 #include "game/entities/minigun_entity.h"
+#include "game/entities/ammo_entity.h"
 
 static void	module_add_weapon(t_game *const self)
 {
@@ -33,6 +34,10 @@ static void	module_add_weapon(t_game *const self)
 		entity_descriptor("minigun",
 			"resources/sprites/minigun_sprite.bmp",
 			minigun_entity));
+	module_add(&self->module, &self->entities_list.ammo,
+		entity_descriptor("ammo",
+			"resources/sprites/ammo_sprite.bmp",
+			ammo_entity));
 }
 
 void		init_entity_descriptors(t_game *const self)

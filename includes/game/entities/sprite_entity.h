@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 23:33:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 03:02:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 21:36:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,23 @@ typedef struct			s_sprite_entity_args
 	t_vec3f					pos;
 	const char				*texture_path;
 	t_usize					sprite_size;
+	const t_frame			*from;
 	t_raycasting_scene		*ctx;
 }						t_sprite_entity_args;
 
 t_constructor			sprite_entity(const t_vec3f pos,
 							const char *texture_path,
 							t_raycasting_scene *const ctx);
+t_constructor			sprite_entity_from(const t_vec3f pos,
+							const t_frame *const from,
+							t_raycasting_scene *const ctx);
 t_constructor			sprite_entity_size(const t_vec3f pos,
 							const t_usize sprite_size,
 							t_raycasting_scene *const ctx);
 
 t_result				init_sprite_entity(t_sprite_entity *const self,
+							t_sprite_entity_args *const args);
+t_result				init_sprite_entity_from(t_sprite_entity *const self,
 							t_sprite_entity_args *const args);
 t_result				init_sprite_entity_size(t_sprite_entity *const self,
 							t_sprite_entity_args *const args);

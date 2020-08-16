@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 18:25:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 21:56:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static void	init_weapons(t_raycasting_scene *const self)
 		spritesheet("resources/sprites/shotgun_ss.bmp", ft_usize(5, 4)));
 	module_add(&self->super.module, &self->assets.minigun_spritesheet,
 		spritesheet("resources/sprites/minigun_ss.bmp", ft_usize(4, 2)));
+	module_add(&self->super.module, &self->assets.ammo_sprite,
+		frame_from_file("resources/sprites/ammo_sprite.bmp"));
 }
 
 void		init_raycasting_scene_assets(t_raycasting_scene *const self)

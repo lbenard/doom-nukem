@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 20:59:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/17 00:15:12 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct	s_raycasting_scene
 		t_sound			pistol_sound;
 		t_spritesheet	shotgun_spritesheet;
 		t_spritesheet	minigun_spritesheet;
+		t_frame			ammo_sprite;
 	}				assets;
 	struct	s_inputs
 	{
@@ -93,7 +94,6 @@ typedef struct	s_raycasting_scene
 		t_animation		use_key_animation;
 		t_text			use_key_text;
 		t_bool			use_triggered;
-		
 		t_animation		pick_key_animation;
 		char			pick_key_display[20];
 		t_text			pick_key_text;
