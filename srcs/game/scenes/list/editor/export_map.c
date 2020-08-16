@@ -93,7 +93,9 @@ static t_result	write_map(t_editor_scene *const self,
 	char						**map;
 	t_list_head					*pos;
 	t_block_component_entity	*block;
+	int							ret;
 
+	(void)ret;
 	if (!(map = (char**)malloc(sizeof(char*) * size.y)))
 		return (ERROR);
 	i.y = 0;
@@ -123,7 +125,7 @@ static t_result	write_map(t_editor_scene *const self,
 	while (i.y < size.y)
 	{
 		ft_putstr_fd(": ", fd);
-		write(fd, map[i.y], size.x);
+		ret = write(fd, map[i.y], size.x);
 		ft_putchar_fd('\n', fd);
 		i.y++;
 	}
