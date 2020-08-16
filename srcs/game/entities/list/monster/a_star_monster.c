@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 15:38:30 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/10 17:01:49 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 15:51:49 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	a_star_move(t_monster_entity *self, float speed)
 		self->player_ref->super);
 }
 
-void		a_star_attack(t_monster_entity *self, int distance, float speed)
+void		a_star_attack(t_monster_entity *self, float distance, float speed)
 {
 	t_vec3f	position;
 
@@ -56,7 +56,7 @@ void		a_star_attack(t_monster_entity *self, int distance, float speed)
 		self->is_star = FALSE;
 		if (self->player_ref->is_taking_damage == FALSE && distance < 1.5f)
 		{
-			player_entity_take_damage(self->player_ref, 1);
+			player_entity_take_damage(self->player_ref, self->damage);
 			self->player_ref->is_taking_damage = TRUE;
 		}
 		self->player_ref->is_taking_damage = FALSE;

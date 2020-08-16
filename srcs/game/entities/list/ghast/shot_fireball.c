@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shot_fireball.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 23:38:52 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/12 14:43:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 16:25:43 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 #include "game/entities/ghast_entity.h"
 #include "engine/delta.h"
 
-static void	go_fireball(t_ghast_entity *self)
+void	go_fireball(t_monster_entity *self)
 {
 	t_vec3f				monster_pos;
 	t_vec3f				direction;
 	t_raycasting_scene	*scene;
 
-	monster_pos = self->super.super.super.transform.position;
+	monster_pos = self->super.super.transform.position;
 	scene = (t_raycasting_scene*)game_singleton()->scene;
-	direction = ft_vec3f(self->super.player_ref->super.transform.position.x -
-		monster_pos.x, self->super.player_ref->super.transform.position.y -
-			monster_pos.y, self->super.player_ref->super.transform.position.z -
+	direction = ft_vec3f(self->player_ref->super.transform.position.x -
+		monster_pos.x, self->player_ref->super.transform.position.y -
+			monster_pos.y, self->player_ref->super.transform.position.z -
 				monster_pos.z);
 	direction = vec3f_normalize(direction);
 	entity_list_add_entity(&scene->super.entities,
@@ -41,7 +41,7 @@ void		shot_fireball(t_ghast_entity *self)
 		self->super.animation.iter = 0;
 		self->super.animation.anim = 4;
 		self->super.animation.speed = 0.1f;
-		go_fireball(self);
+		go_fireball(&self->super);
 		self->last_shot_time = get_wall_time();
 		self->move_side = FALSE;
 	}

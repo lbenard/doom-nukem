@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 01:23:22 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/13 16:36:28 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 15:52:40 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_result	init_nyarlathotep_entity(t_nyarlathotep_entity *const self,
 		monster_entity(
 			ft_monster_stats(args->pos,
 				150.0f,
-				5.0f,
+				1.0f,
 				"Nyarlathotep"),
 			&scene->assets.nyarlathotep_spritesheet,
 			scene)) == ERROR)

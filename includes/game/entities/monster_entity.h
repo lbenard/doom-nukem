@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:07:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 17:54:45 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 16:26:14 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,10 @@ void			update_agro_distance(t_monster_entity *self);
 float			get_distance_vec(t_vec3f source, t_vec3f target);
 int				get_orientate_sprite(t_monster_entity *self);
 void			a_star_attack(t_monster_entity *self,
-					int distance,
-					float speed);
+					float distance, float speed);
 void			agro_if_take_damage(t_monster_entity *self);
+
+void			go_fireball(t_monster_entity *self);
 
 void			destroy_monster_entity(t_monster_entity *const self);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   onepunchman_entity.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 02:06:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/27 18:14:05 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 16:15:22 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 typedef struct	s_onepunchman_entity
 {
 	t_monster_entity	super;
+	t_bool				is_moving;
+	double				last_shot;
+	int					count_fireball;
 }				t_onepunchman_entity;
 
 typedef struct	s_onepunchman_entity_args
