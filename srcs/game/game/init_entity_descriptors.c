@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_entity_descriptors.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:21:42 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 04:24:02 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 18:24:54 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,23 @@
 #include "game/entities/shotgun_entity.h"
 #include "game/entities/minigun_entity.h"
 
-void	init_entity_descriptors(t_game *const self)
+static void	module_add_weapon(t_game *const self)
+{
+	module_add(&self->module, &self->entities_list.pistol,
+		entity_descriptor("pistol",
+			"resources/sprites/pistol_sprite.bmp",
+			pistol_entity));
+	module_add(&self->module, &self->entities_list.shotgun,
+		entity_descriptor("shotgun",
+			"resources/sprites/shotgun_sprite.bmp",
+			shotgun_entity));
+	module_add(&self->module, &self->entities_list.minigun,
+		entity_descriptor("minigun",
+			"resources/sprites/minigun_sprite.bmp",
+			minigun_entity));
+}
+
+void		init_entity_descriptors(t_game *const self)
 {
 	module_add(&self->module, &self->entities_list.onepunchman,
 		entity_descriptor("one_punch_man",
@@ -37,16 +53,5 @@ void	init_entity_descriptors(t_game *const self)
 		entity_descriptor("nyarlathotep",
 			"resources/sprites/nyarlathotep_icon.bmp",
 			nyarlathotep_entity));
-	module_add(&self->module, &self->entities_list.pistol,
-		entity_descriptor("pistol",
-			"resources/sprites/pistol_sprite.bmp",
-			pistol_entity));
-	module_add(&self->module, &self->entities_list.shotgun,
-		entity_descriptor("shotgun",
-			"resources/sprites/shotgun_sprite.bmp",
-			shotgun_entity));
-	module_add(&self->module, &self->entities_list.minigun,
-		entity_descriptor("minigun",
-			"resources/sprites/minigun_sprite.bmp",
-			minigun_entity));
+	module_add_weapon(self);
 }
