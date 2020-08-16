@@ -6,12 +6,12 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/03 14:43:50 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/15 22:39:04 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 01:40:51 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIREBALL_ENTITY
-# define FIREBALL_ENTITY
+#ifndef FIREBALL_ENTITY_H
+# define FIREBALL_ENTITY_H
 # include "game/entities/monster_entity.h"
 # include "game/scenes/raycasting_scene.h"
 
@@ -40,6 +40,7 @@ void			fireball_entity_update(t_fireball_entity *const self);
 
 void			destroy_fireball_entity(t_fireball_entity *const self);
 
-void			render_fireball_entity(t_fireball_entity *const self, t_frame *fb);
+void			render_fireball_entity(t_fireball_entity *const self,
+					t_frame *fb);
 
 #endif

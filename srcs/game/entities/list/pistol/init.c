@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 01:33:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 03:08:03 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_result	init_pistol_entity(t_pistol_entity *const self,
 	pistol_specs.clip = 12;
 	pistol_specs.damage = 10.0f;
 	pistol_specs.name = "Pistol";
-	pistol_specs.shoot_time = 0.2f;
+	pistol_specs.shoot_time = 0.4f;
 	if (static_module_create(self,
 		weapon_entity(&ctx->assets.pistol_spritesheet,
 			"resources/sprites/pistol_sprite.bmp",
