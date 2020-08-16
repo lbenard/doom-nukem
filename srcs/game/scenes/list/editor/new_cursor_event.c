@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_cursor_event.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 20:25:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 06:21:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/17 00:05:18 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,16 @@ static void		select_component(t_editor_scene *const self,
 					const sfEvent *const event)
 {
 	t_list_head			*pos;
-	t_entity_node		*node;
 	t_component_entity	*component;
 
 	pos = &self->components.list;
 	while ((pos = pos->prev) != &self->components.list)
 	{
-		node = (t_entity_node*)pos;
-		component = (t_component_entity*)node->entity;
+		component = (t_component_entity*)((t_entity_node*)pos)->entity;
 		if (event->mouseButton.button == sfMouseLeft
 			|| event->mouseButton.button == sfMouseRight)
 		{
-			if (component->vtable.is_hovered(component,
-				self->camera_ref,
+			if (component->vtable.is_hovered(component, self->camera_ref,
 				&self->editor_view,
 				ft_isize(event->mouseButton.x, event->mouseButton.y)))
 			{

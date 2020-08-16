@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_scene.c                                     :+:      :+:    :+:   */
+/*   init_event_handler_callback.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/13 15:31:18 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 20:18:32 by mribouch         ###   ########.fr       */
+/*   Created: 2020/08/16 21:00:49 by mribouch          #+#    #+#             */
+/*   Updated: 2020/08/16 23:40:03 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/editor_scene.h"
 
-t_constructor	editor_scene(const t_window *const screen,
-					const char *const path)
+void	init_event_handler_callback(t_editor_scene *const self)
 {
-	static t_editor_scene_args	args;
-
-	args.screen = screen;
-	args.path = path;
-	return (ft_constructor(init_editor_scene,
-		destroy_editor_scene,
-		sizeof(t_editor_scene),
-		&args));
+	event_handler_add_callback(&self->super.input_manager, new_cursor_event());
+	event_handler_add_callback(&self->super.input_manager,
+		new_block_create_event());
+	event_handler_add_callback(&self->super.input_manager,
+		new_entity_create_event());
 }

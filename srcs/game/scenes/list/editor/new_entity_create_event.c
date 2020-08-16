@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_entity_create_event.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:38:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/22 01:56:36 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 20:17:56 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@ static void		entity_create(t_editor_scene *const self, sfEvent *event)
 	{
 		mouse_pos = ft_isize(event->mouseButton.x, event->mouseButton.y);
 		if (mouse_pos.x >= 0
-			&& mouse_pos.x < (ssize_t)self->editor_view.size.x
-			&& mouse_pos.y >= 0
-			&& mouse_pos.y < (ssize_t)self->editor_view.size.y)
+			&& mouse_pos.x < (ssize_t)self->editor_view.size.x &&
+			mouse_pos.y >= 0 && mouse_pos.y < (ssize_t)self->editor_view.size.y)
 		{
 			pos = editor_camera_entity_screen_to_editor_camera_pos(
 				self->camera_ref,
