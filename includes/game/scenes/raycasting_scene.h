@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 04:09:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 20:59:42 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,7 @@ typedef struct	s_raycasting_scene
 		t_frame			ceiling;
 		t_frame			crosshair;
 		t_spritesheet	use_key_spritesheet;
-		t_animation		use_key_animation;
-		t_text			use_key_text;
-		t_spritesheet	weapon_key_spritesheet;
-		t_animation		weapon_key_animation;
-		char			weapon_pick_display[20];
-		t_text			weapon_key_text;
+		t_spritesheet	pick_key_spritesheet;
 		t_frame			game_over_background;
 		t_text			game_over;
 		t_spritesheet	fireball_spritesheet;
@@ -93,6 +88,17 @@ typedef struct	s_raycasting_scene
 		t_text					display_text;
 		const t_weapon_entity	*nearest_weapon;
 	}				weapon;
+	struct	s_tooltips
+	{
+		t_animation		use_key_animation;
+		t_text			use_key_text;
+		t_bool			use_triggered;
+		
+		t_animation		pick_key_animation;
+		char			pick_key_display[20];
+		t_text			pick_key_text;
+		t_bool			pick_triggered;
+	}				tooltips;
 }				t_raycasting_scene;
 
 typedef struct	s_raycasting_scene_args
@@ -109,6 +115,8 @@ t_result		init_raycasting_scene(t_raycasting_scene *const self,
 void			init_raycasting_scene_vars(t_raycasting_scene *const self,
 					t_raycasting_scene_args *const args);
 void			init_raycasting_scene_modules(
+					t_raycasting_scene *const self);
+void			init_raycasting_scene_tooltips(
 					t_raycasting_scene *const self);
 void			init_raycasting_scene_entity_lists(
 					t_raycasting_scene *const self);

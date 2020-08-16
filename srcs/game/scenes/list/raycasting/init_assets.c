@@ -6,30 +6,19 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 04:11:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 18:25:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/raycasting_scene.h"
 #include "ft/str.h"
 
-static void	init_use_key_tooltip(t_raycasting_scene *const self)
+static void	init_hud(t_raycasting_scene *const self)
 {
 	module_add(&self->super.module, &self->assets.use_key_spritesheet,
 		spritesheet("resources/sprites/use_key.bmp", ft_usize(2, 1)));
-	module_add(&self->super.module, &self->assets.use_key_animation,
-		animation(0, 2, 0.1f));
-	module_add(&self->super.module, &self->assets.use_key_text,
-		text("haxorville.bmp", ft_usize(5 * ft_strlen("Press"), 9)));
-	if (self->super.module.has_error == FALSE)
-	{
-		text_set_ref(&self->assets.use_key_text,
-			static_string_as_ref(ft_static_string("Press")));
-		text_render(&self->assets.use_key_text,
-			ft_text_settings(ft_isize(0, 0), 9));
-		frame_fill_blend(&self->assets.use_key_text.target,
-			ft_rgba(255, 255, 255, 255), blend_colorize);
-	}
+	module_add(&self->super.module, &self->assets.pick_key_spritesheet,
+		spritesheet("resources/sprites/pick_key.bmp", ft_usize(2, 1)));
 }
 
 static void	init_game_over(t_raycasting_scene *const self)
@@ -71,8 +60,6 @@ static void	init_weapons(t_raycasting_scene *const self)
 		spritesheet("resources/sprites/shotgun_ss.bmp", ft_usize(5, 4)));
 	module_add(&self->super.module, &self->assets.minigun_spritesheet,
 		spritesheet("resources/sprites/minigun_ss.bmp", ft_usize(4, 2)));
-	module_add(&self->super.module, &self->assets.weapon_key_text,
-		text("haxorville.bmp", ft_usize(5 * 20, 9)));
 }
 
 void		init_raycasting_scene_assets(t_raycasting_scene *const self)
@@ -83,7 +70,7 @@ void		init_raycasting_scene_assets(t_raycasting_scene *const self)
 		frame_from_file("resources/textures/coarse_dirt.bmp"));
 	module_add(&self->super.module, &self->assets.crosshair,
 		frame_from_file("resources/textures/crosshair-downscale.bmp"));
-	init_use_key_tooltip(self);
+	init_hud(self);
 	init_game_over(self);
 	init_monsters(self);
 	init_weapons(self);
