@@ -68,7 +68,7 @@ void				free_entity_list(t_list_head *const self);
 typedef struct		s_map
 {
 	t_module		module;
-	t_list_head 	entities;
+	t_list_head		entities;
 	t_usize			size;
 	t_wall			*map;
 	t_vec2d			spawn;

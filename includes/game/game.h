@@ -36,7 +36,7 @@ typedef struct	s_game
 	t_input					input;
 	t_entity_index			entity_index;
 	t_event_handler			event_handler;
-	struct s_blocks
+	struct		s_blocks
 	{
 		t_block_descriptor	sandstone;
 		t_block_descriptor	metallic_wall;
@@ -51,7 +51,7 @@ typedef struct	s_game
 		t_block_descriptor	metallic_green_door;
 		t_block_descriptor	metallic_blue_door;
 	}						blocks_list;
-	struct s_entities
+	struct		s_entities
 	{
 		t_entity_descriptor	onepunchman;
 		t_entity_descriptor	weird_alien;

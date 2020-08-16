@@ -22,12 +22,12 @@
 */
 typedef struct			s_entity
 {
-	t_module		module;
-	t_transform		transform;
-	struct s_entity_vtable
+	t_module			module;
+	t_transform			transform;
+	struct				s_entity_vtable
 	{
-		void	(*update)();
-	}				vtable;
+		void			(*update)();
+	}					vtable;
 }						t_entity;
 
 t_result				init_entity(t_entity *const self,

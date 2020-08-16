@@ -75,7 +75,7 @@ t_result		init_monster_entity(t_monster_entity *const self,
 void			monster_entity_update(t_monster_entity *const self);
 int				distance_monster_player(t_monster_entity *self);
 void			update_agro_distance(t_monster_entity *self);
-float				get_distance_vec(t_vec3f source, t_vec3f target);
+float			get_distance_vec(t_vec3f source, t_vec3f target);
 int				get_orientate_sprite(t_monster_entity *self);
 void			a_star_attack(t_monster_entity *self,
 					int distance,

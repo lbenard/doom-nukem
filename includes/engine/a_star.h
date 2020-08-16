@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PATH_H
-# define PATH_H
+#ifndef A_STAR_H
+# define A_STAR_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -23,11 +23,7 @@
 # include "types.h"
 # include "engine/entity.h"
 
-// # include "game/entities/monster_entity.h"
-// # include "game/entities/player_entity.h"
 # define INT_MAX 2147483647
-// # define HEIGHT 500
-// # define WIDTH 500
 
 typedef struct			s_father
 {
@@ -78,7 +74,8 @@ int						ft_find_node(t_star_list **list, int x, int y);
 int						ft_count_node(t_star_list **list);
 void					ft_print_list(t_star_list *list);
 t_node					*ft_get_node(t_star_list **list, int x, int y);
-t_result				init_astar(t_star *a_star, const t_map *const map, t_entity monstre, t_entity player);
+t_result				init_astar(t_star *a_star, const t_map *const map,
+							t_entity monstre, t_entity player);
 void					ft_change_g(t_star_list **list, int g, t_father father,
 							t_node find);
 void					ft_diag(t_star *star, t_node c_node);
@@ -91,7 +88,8 @@ int						ft_isvalid(const ssize_t x,
 							const ssize_t y,
 							const t_map *const map);
 int						ft_analyse(int x, int y, t_star *star);
-void					ft_check_start_end(t_node start, t_node end, const t_map *const map);
+void					ft_check_start_end(t_node start, t_node end,
+							const t_map *const map);
 int						ft_validiag(int x, int y, t_star *star,
 							t_node cur_node);
 t_result				ft_is_openl_empty(t_star *star);

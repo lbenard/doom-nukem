@@ -55,8 +55,7 @@ void					block_checkbox_set_relative(
 							t_block_checkbox_entity *const self,
 							const t_checkbox_position position);
 void					block_checkbox_set_pos(
-							t_block_checkbox_entity *const self, 
+							t_block_checkbox_entity *const self,
 							const t_vec3f pos);
-
 
 #endif

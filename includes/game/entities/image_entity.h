@@ -29,7 +29,7 @@ typedef struct	s_image_entity
 
 typedef struct	s_image_entity_args
 {
-	const char 			*path;
+	const char			*path;
 	t_frame_transform	transform;
 	t_usize				size;
 }				t_image_entity_args;

@@ -53,7 +53,7 @@ typedef struct	s_weapon_entity
 	double			shoot_start;
 }				t_weapon_entity;
 
-typedef struct	s_raycasting_scene t_raycasting_scene;
+typedef struct s_raycasting_scene	t_raycasting_scene;
 
 typedef struct	s_weapon_entity_args
 {

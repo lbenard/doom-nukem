@@ -70,7 +70,7 @@ t_checkbox_entity	*create_checkbox(t_entity_list *const list,
 						const char *const name,
 						const t_window *const window);
 
-typedef enum		s_checkbox_side
+typedef enum		e_checkbox_side
 {
 	ON_TOP,
 	RIGHT_TO,
@@ -108,7 +108,7 @@ t_checkbox_entity	*create_checkbox_relative_pos(t_entity_list *const list,
 
 void				checkbox_set_relative(t_checkbox_entity *const self,
 						const t_checkbox_position position);
-void				checkbox_set_pos(t_checkbox_entity *const self, 
+void				checkbox_set_pos(t_checkbox_entity *const self,
 						const t_vec3f pos);
 
 /*

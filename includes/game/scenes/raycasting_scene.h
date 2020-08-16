@@ -47,7 +47,7 @@ typedef struct	s_raycasting_scene
 	t_entity_list	monster_entities;
 	t_entity_list	weapon_entities;
 	t_entity_list	ammo_entities;
-	struct s_assets
+	struct	s_assets
 	{
 		t_frame			floor;
 		t_frame			ceiling;
@@ -71,21 +71,21 @@ typedef struct	s_raycasting_scene
 		t_spritesheet	shotgun_spritesheet;
 		t_spritesheet	minigun_spritesheet;
 	}				assets;
-	struct s_inputs
+	struct	s_inputs
 	{
 		t_input_id	use;
 		t_input_id	shoot;
 		t_input_id	reload;
 		t_input_id	pick;
 	}				inputs;
-	struct s_entities_ref
+	struct	s_entities_ref
 	{
 		t_button_entity	*retry_button_ref;
 		t_button_entity	*give_up_button_ref;
 		t_player_entity	*player_ref;
 		t_weapon_entity	*weapon_ref;
 	}				entities;
-	struct s_weapon_infos
+	struct	s_weapon_infos
 	{
 		size_t					ammo;
 		double					last_shot;

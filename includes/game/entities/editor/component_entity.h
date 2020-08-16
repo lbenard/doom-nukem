@@ -19,7 +19,7 @@
 # include "sizes/usize.h"
 # include "game/entities/editor/editor_camera_entity.h"
 
-typedef enum	s_component_type
+typedef enum	e_component_type
 {
 	VERTEX,
 	SEGMENT,
@@ -42,7 +42,7 @@ typedef struct	s_component_entity
 	t_rgb				selected_color;
 	t_rgb				dragged_color;
 	t_rgb				error_color;
-	struct s_component_entity_vtable
+	struct	s_component_entity_vtable
 	{
 		void	(*render)(struct s_component_entity *const self,
 					t_editor_camera_entity *const camera,

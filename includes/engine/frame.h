@@ -45,14 +45,11 @@ typedef struct		s_frame_args
 
 t_constructor		frame(const t_usize size, const t_rgba fill_color);
 t_constructor		frame_from_file(const char *const path);
-// t_constructor		frame_from_bmp(const char *const path);
 
 t_result			init_frame(t_frame *const self,
 						const t_frame_args *const args);
 t_result			init_frame_from_file(t_frame *const self,
 						const t_frame_args *const args);
-// t_result			init_frame_from_bmp(t_frame *const self,
-// 						const t_frame_args *const args);
 
 void				frame_update(t_frame *const self);
 void				frame_clear(t_frame *const self);

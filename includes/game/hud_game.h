@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	HUD_GAME_H
+#ifndef HUD_GAME_H
 # define HUD_GAME_H
 
 # include "engine/animation.h"
@@ -31,11 +31,12 @@ typedef struct		s_hud_game_args
 	char			*direction_ss_path;
 }					t_hud_game_args;
 
-t_constructor	hud_game(char *heart_ss_path,
-	char *direction_ss_path);
+t_constructor		hud_game(char *heart_ss_path,
+						char *direction_ss_path);
 
-t_result		init_hud_game(t_hud_game *const self, t_hud_game_args *const args);
+t_result			init_hud_game(t_hud_game *const self,
+						t_hud_game_args *const args);
 
-void			destroy_hud_game(t_hud_game *const self);
+void				destroy_hud_game(t_hud_game *const self);
 
 #endif

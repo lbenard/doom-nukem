@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   editor_scene.h                                 :+:      :+:    :+:   */
+/*   editor_scene.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -55,23 +55,23 @@ typedef struct	s_editor_scene
 	t_frame						editor_view;
 	t_frame						editor_background;
 	t_grid_component_entity		*grid_ref;
-	struct s_hud
+	struct						s_hud
 	{
 		t_radio_group	tools;
-		struct s_tools_group
+		struct	s_tools_group
 		{
 			t_checkbox_entity	*cursor_ref;
 			t_checkbox_entity	*create_ref;
 			t_checkbox_entity	*save_ref;
 		}						tools_group;
 		t_radio_group	create;
-		struct s_create_group
+		struct	s_create_group
 		{
 			t_checkbox_entity	*show_blocks_ref;
 			t_checkbox_entity	*show_entities_ref;
 		}						create_group;
 		t_radio_group	blocks;
-		struct s_blocks_group
+		struct	s_blocks_group
 		{
 			t_block_checkbox_entity	*sandstone;
 			t_block_checkbox_entity	*metallic_wall;
@@ -87,7 +87,7 @@ typedef struct	s_editor_scene
 			t_block_checkbox_entity	*metallic_blue_door;
 		}						blocks_group;
 		t_radio_group	entities;
-		struct s_entities_group
+		struct	s_entities_group
 		{
 			t_entity_checkbox_entity	*onepunchman;
 			t_entity_checkbox_entity	*weird_alien;
@@ -110,16 +110,18 @@ typedef struct	s_editor_scene_args
 
 t_constructor	editor_scene(const t_window *const screen,
 					const char *const path);
-// t_constructor	editor_scene_from_file(const t_usize window_size,
-// 					const char *const path);
-
+/*
+** t_constructor	editor_scene_from_file(const t_usize window_size,
+** 					const char *const path);
+*/
 t_result		init_editor_scene(t_editor_scene *const self,
 					const t_editor_scene_args *const args);
 t_result		fill_from_map(t_editor_scene *const self,
 					const char *const path);
-// t_result		init_editor_scene_from_file(t_editor_scene *const self,
-// 					const t_editor_scene_args *const args);
-
+/*
+** t_result		init_editor_scene_from_file(t_editor_scene *const self,
+** 					const t_editor_scene_args *const args);
+*/
 void			editor_scene_update(t_editor_scene *const self);
 void			editor_scene_render(t_editor_scene *const self,
 					t_frame *const fb);
@@ -133,7 +135,6 @@ t_result		editor_scene_add_entity(t_editor_scene *const self,
 					const t_vec2f pos);
 
 void			destroy_editor_scene(t_editor_scene *const self);
-
 
 t_callback_node	*new_cursor_event(void);
 t_callback_node	*new_block_create_event(void);
