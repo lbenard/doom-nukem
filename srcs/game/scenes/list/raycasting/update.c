@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 19:27:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 04:02:18 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,48 @@ static void	door_trigger(t_raycasting_scene *const self)
 
 #include <stdio.h>
 
+static void	pick_weapon(t_raycasting_scene *const self)
+{
+	t_list_head		*node;
+	t_weapon_entity	*weapon;
+	float			distance;
+
+	node = &self->weapon_entities.list;
+	while ((node = node->next) != &self->weapon_entities.list)
+	{
+		weapon = (t_weapon_entity*)((t_entity_node*)node)->entity;
+		if (weapon->is_picked)
+		{
+			weapon = NULL;
+			continue ;
+		}
+		distance = vec3f_squared_distance(
+			weapon->super.super.transform.position,
+			self->entities.player_ref->super.transform.position);
+		if (distance < 1.0f)
+			break ;
+		weapon = NULL;
+	}
+	if (input_get(&game_singleton()->input, self->inputs.pick) > 0.0f)
+	{
+		if (self->entities.weapon_ref)
+		{
+			self->entities.weapon_ref->super.super.transform.position =
+				self->entities.player_ref->super.transform.position;
+			self->entities.weapon_ref->super.super.transform.position.z = 0.0f;
+		}
+		self->weapon.nearest_weapon = self->entities.weapon_ref;
+		self->entities.weapon_ref = weapon;
+		if (self->entities.weapon_ref)
+			self->entities.weapon_ref->first_render = TRUE;
+	}
+	else
+		self->weapon.nearest_weapon = weapon;
+}
+
 void		raycasting_scene_update(t_raycasting_scene *const self)
 {
+	// printf("weapons: %lu\n", list_size(&self->weapon_entities.list));
 	// printf("before entity update (%lu)\n", list_size(&self->super.entities.list));
 	entity_list_update(&self->super.entities);
 	// printf("after entity update  (%lu)\n", list_size(&self->super.entities.list));
@@ -115,16 +155,25 @@ void		raycasting_scene_update(t_raycasting_scene *const self)
 			if (input_get(&game_singleton()->input,
 				self->inputs.reload) > 0.0f
 				&& self->entities.weapon_ref->shooting == FALSE
-				&& !self->entities.weapon_ref->reloading)
+				&& !self->entities.weapon_ref->reloading
+				&& self->entities.weapon_ref->specs.clip
+					!= self->entities.weapon_ref->specs.clip_size)
 				self->entities.weapon_ref->trigger_reloading = TRUE;
 			if (self->entities.weapon_ref->just_reloaded)
 				raycasting_scene_weapon_reload(self);
 			else if (input_get(&game_singleton()->input, self->inputs.shoot) > 0.0f
 				&& !self->entities.weapon_ref->reloading)
 				raycasting_scene_weapon_use(self);
+			else
+			{
+				self->entities.weapon_ref->stopped_shooting = TRUE;
+				self->entities.weapon_ref->loading = FALSE;
+				self->entities.weapon_ref->load_start = 0.0;
+			}
 		}
 		door_trigger(self);
 	}
+	pick_weapon(self);
 	animation_update(&self->assets.use_key_animation, &self->assets.use_key_spritesheet);
 	// cursor_set_pos(&self->window_ref->cursor, self->window_ref->window,
 	// 	ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2));

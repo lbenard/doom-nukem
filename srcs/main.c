@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 02:38:28 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 01:45:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void	register_inputs(t_game *const game)
 	input_attach(&game->input, use, ft_key_event(sfKeyE, KEY_HOLD));
 	input_attach(&game->input, use, ft_button_event(0, XBOX_A, 0));
 
+	int pick = input_register(&game->input, "Pick");
+	input_attach(&game->input, pick, ft_key_event(sfKeyG, 0));
+	input_attach(&game->input, pick, ft_button_event(0, XBOX_Y, 0));
+
 	int shoot = input_register(&game->input, "Shoot");
 	input_attach(&game->input, shoot, ft_mouse_event(sfMouseLeft, MOUSE_HOLD));
 	input_attach(&game->input, shoot, ft_key_event(sfKeyEnter, KEY_HOLD));
@@ -84,7 +88,7 @@ void	register_inputs(t_game *const game)
 
 	int reload = input_register(&game->input, "Reload");
 	input_attach(&game->input, reload, ft_key_event(sfKeyR, 0));
-	input_attach(&game->input, reload, ft_button_event(0, XBOX_A, 0));
+	input_attach(&game->input, reload, ft_button_event(0, XBOX_X, 0));
 
 	int camera_right = input_register(&game->input, "CameraRight");
 	input_attach(&game->input, camera_right, ft_key_event(sfKeyRight, KEY_HOLD));

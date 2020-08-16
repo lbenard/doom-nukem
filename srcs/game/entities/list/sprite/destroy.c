@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 23:42:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 02:29:46 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 03:02:04 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 void	destroy_sprite_entity(t_sprite_entity *const self)
 {
-	t_raycasting_scene	*scene;
-
-	scene = (t_raycasting_scene*)game_singleton()->scene;
+	entity_list_remove(&self->ctx->sprite_entities, &self->super);
 	destroy_module(&self->super.module);
-	entity_list_remove(&scene->sprite_entities, &self->super);
 }

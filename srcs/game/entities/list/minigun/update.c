@@ -6,56 +6,37 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:40:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 22:29:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:31:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/pistol_entity.h"
+#include "game/entities/minigun_entity.h"
 
-void	pistol_entity_update(t_pistol_entity *const self)
+void	minigun_entity_update(t_minigun_entity *const self)
 {
 	weapon_entity_update(&self->super);
 	animation_update(&self->animation, self->super.hud_ref);
 	self->super.just_reloaded = FALSE;
-	if (self->super.trigger_reloading)
+	if (self->super.stopped_shooting)
+		self->super.shooting = FALSE;
+	if (!(self->super.shooting || self->super.loading))
 	{
-		self->super.reloading = TRUE;
-		self->animation.anim = 1;
-		self->animation.speed = 0.08;
+		self->animation.anim = 0;
 		self->animation.iter = 0;
+		self->animation.speed = 0.0f;
 	}
-	if (self->super.reloading)
-	{
-		if (self->animation.iter == self->super.hud_ref->grid_size.x
-			* (1 / 0.08f) - 1 && self->animation.speed != 0)
-		{
-			self->animation.iter = 0;
-			self->animation.anim++;
-			if (self->animation.anim >= 3)
-			{
-				self->animation.anim = 0;
-				self->animation.speed = 0;
-				self->super.just_reloaded = TRUE;
-				self->super.reloading = FALSE;
-			}
-		}
-	}
-	else if (self->super.just_shooted)
+	else
+		self->animation.speed = 0.5f;
+	if (self->super.shooting)
+		self->animation.anim = 1;
+	if (self->super.loading)
+		self->animation.anim = 0;
+	if (self->super.just_shooted)
 	{
 		self->super.just_shooted = FALSE;
 		self->super.shooting = TRUE;
-		self->animation.speed = 0.4;
+		self->super.loading = FALSE;
 		self->animation.iter = 0;
-	}
-	if (self->super.shooting == TRUE)
-	{
-		if (self->animation.iter
-			== self->super.hud_ref->grid_size.x * (1 / 0.4) - 1)
-		{
-			self->animation.speed = 0;
-			self->animation.anim = 0;
-			self->super.shooting = FALSE;
-		}
 	}
 	frame_fill(&self->super.hud, ft_rgba(0, 0, 0, 0));
 	frame_layer_transform_add(&self->super.hud,
@@ -66,4 +47,5 @@ void	pistol_entity_update(t_pistol_entity *const self)
 			ft_vec2f(3, 3),
 			255));
 	self->super.trigger_reloading = FALSE;
+	self->super.stopped_shooting = FALSE;
 }

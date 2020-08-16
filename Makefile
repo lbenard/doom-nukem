@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/14 21:01:18 by mribouch         ###   ########.fr        #
+#    Updated: 2020/08/15 19:39:27 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -409,6 +409,16 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/pistol/update.c												\
 					game/entities/list/pistol/destroy.c												\
 																									\
+					game/entities/list/shotgun/shotgun_entity.c										\
+					game/entities/list/shotgun/init.c												\
+					game/entities/list/shotgun/update.c												\
+					game/entities/list/shotgun/destroy.c											\
+																									\
+					game/entities/list/minigun/minigun_entity.c										\
+					game/entities/list/minigun/init.c												\
+					game/entities/list/minigun/update.c												\
+					game/entities/list/minigun/destroy.c											\
+																									\
 					game/events/close_game_event.c													\
 																									\
 					game/scenes/list/editor/editor_scene.c											\
@@ -502,7 +512,7 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto# -fsanitize=address # -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g3# -fsanitize=address # -Wno-deprecated
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill.c                                             :+:      :+:    :+:   */
+/*   vec3f_squared_distance.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 23:29:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 19:10:13 by lbenard          ###   ########.fr       */
+/*   Created: 2020/08/15 22:48:14 by lbenard           #+#    #+#             */
+/*   Updated: 2020/08/15 22:49:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine/frame.h"
+#include "maths/vec3f.h"
 
-void	frame_fill(t_frame *const self, const t_rgba fill_color)
+float	vec3f_squared_distance(t_vec3f a, t_vec3f b)
 {
-	size_t	i;
-	size_t	total_size;
-
-	i = 0;
-	total_size = self->size.x * self->size.y;
-	while (i < total_size)
-	{
-		((t_rgba*)self->frame.array)[i] = fill_color;
-		i++;
-	}
+	return ((a.x - b.x) * (a.x - b.x)
+		+ (a.y - b.y) * (a.y - b.y)
+		+ (a.z - b.z) * (a.z - b.z));
 }

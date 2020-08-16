@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:58:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/27 18:42:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 04:25:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static void	add_entity_buttons(t_editor_scene *const self,
 			&descriptors[i], args->screen);
 		if (buttons[i])
 		{
-			if (i % 6 == 0)
+			if (i % 5 == 0)
 			{
 				if (i == 0)
 					entity_checkbox_set_relative(buttons[i],
@@ -108,7 +108,7 @@ static void	add_entity_buttons(t_editor_scene *const self,
 						50.0f));
 				else
 					entity_checkbox_set_relative(buttons[i],
-						ft_checkbox_position((t_checkbox_entity*)buttons[i - 6],
+						ft_checkbox_position((t_checkbox_entity*)buttons[i - 5],
 						BELOW, 50.0f));
 			}
 			else

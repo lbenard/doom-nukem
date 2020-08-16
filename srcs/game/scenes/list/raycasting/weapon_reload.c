@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 20:30:16 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 19:21:31 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 03:27:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	raycasting_scene_weapon_reload(t_raycasting_scene *const self)
 		self->entities.weapon_ref->specs.clip += bullet_needed;
 		self->weapon.ammo -= bullet_needed;
 		self->entities.weapon_ref->just_reloaded = TRUE;
-		// if (ft_strcmp(self->weapon.weapon.name, "Shotgun") == 0)
-		// 	self->weapon.shotgun = bullet_needed;
 		return ;
 	}
 }

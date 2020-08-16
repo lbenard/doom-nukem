@@ -6,12 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 22:22:16 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/11 05:09:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 21:46:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/raycasting_scene.h"
 #include "game/entities/pistol_entity.h"
+#include "game/entities/shotgun_entity.h"
+#include "game/entities/minigun_entity.h"
 
 void	init_raycasting_scene_weapon(t_raycasting_scene *const self)
 {

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 21:24:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 01:49:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct	s_game
 		t_entity_descriptor	ghast;
 		t_entity_descriptor	nyarlathotep;
 		t_entity_descriptor	pistol;
+		t_entity_descriptor	shotgun;
+		t_entity_descriptor	minigun;
 	}						entities_list;
 }				t_game;
 

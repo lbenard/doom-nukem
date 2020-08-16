@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill.c                                             :+:      :+:    :+:   */
+/*   shotgun_entity.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/11 23:29:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 19:10:13 by lbenard          ###   ########.fr       */
+/*   Created: 2020/08/06 18:31:15 by lbenard           #+#    #+#             */
+/*   Updated: 2020/08/15 02:44:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine/frame.h"
+#include "game/entities/shotgun_entity.h"
 
-void	frame_fill(t_frame *const self, const t_rgba fill_color)
+t_constructor	shotgun_entity(t_scene *const scene, const t_vec2f pos)
 {
-	size_t	i;
-	size_t	total_size;
+	static t_shotgun_entity_args	args;
 
-	i = 0;
-	total_size = self->size.x * self->size.y;
-	while (i < total_size)
-	{
-		((t_rgba*)self->frame.array)[i] = fill_color;
-		i++;
-	}
+	args.scene = scene;
+	args.pos = pos;
+	return (ft_constructor(init_shotgun_entity,
+		destroy_shotgun_entity,
+		sizeof(t_shotgun_entity),
+		&args));
 }

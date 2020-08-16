@@ -6,13 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:40:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 22:29:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:29:53 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/pistol_entity.h"
+#include "game/entities/shotgun_entity.h"
 
-void	pistol_entity_update(t_pistol_entity *const self)
+void	shotgun_entity_update(t_shotgun_entity *const self)
 {
 	weapon_entity_update(&self->super);
 	animation_update(&self->animation, self->super.hud_ref);
@@ -20,17 +20,21 @@ void	pistol_entity_update(t_pistol_entity *const self)
 	if (self->super.trigger_reloading)
 	{
 		self->super.reloading = TRUE;
-		self->animation.anim = 1;
-		self->animation.speed = 0.08;
+		if (self->super.specs.clip == 1)
+			self->animation.anim = 3;
+		else
+			self->animation.anim = 1;
+		self->animation.speed = 0.08f;
 		self->animation.iter = 0;
 	}
 	if (self->super.reloading)
 	{
-		if (self->animation.iter == self->super.hud_ref->grid_size.x
-			* (1 / 0.08f) - 1 && self->animation.speed != 0)
+		if (self->animation.iter >= self->super.hud_ref->grid_size.x *
+			(1 / 0.08) - 1 && self->animation.speed >= 0.0f)
 		{
 			self->animation.iter = 0;
-			self->animation.anim++;
+			if (self->super.specs.clip == 0)
+				self->animation.anim++;
 			if (self->animation.anim >= 3)
 			{
 				self->animation.anim = 0;
@@ -44,13 +48,13 @@ void	pistol_entity_update(t_pistol_entity *const self)
 	{
 		self->super.just_shooted = FALSE;
 		self->super.shooting = TRUE;
-		self->animation.speed = 0.4;
+		self->animation.speed = 0.5;
 		self->animation.iter = 0;
 	}
 	if (self->super.shooting == TRUE)
 	{
 		if (self->animation.iter
-			== self->super.hud_ref->grid_size.x * (1 / 0.4) - 1)
+			>= self->super.hud_ref->grid_size.x * (1 / 0.5) - 1)
 		{
 			self->animation.speed = 0;
 			self->animation.anim = 0;
@@ -63,7 +67,7 @@ void	pistol_entity_update(t_pistol_entity *const self)
 		ft_frame_transform(ft_vec2f(1.0f, 1.0f),
 			ft_isize(self->super.hud.size.x - self->super.hud.size.x / 6,
 				self->super.hud.size.y),
-			ft_vec2f(3, 3),
+			ft_vec2f(3.0f, 3.0f),
 			255));
 	self->super.trigger_reloading = FALSE;
 }

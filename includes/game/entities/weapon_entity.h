@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 01:49:21 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 17:10:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/15 22:32:01 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_weapon_specs	ft_weapon_specs_default(void);
 typedef struct	s_weapon_entity
 {
 	t_sprite_entity	super;
+	t_bool			is_picked;
 	t_spritesheet	*hud_ref;
 	t_frame			hud;
 	t_sound			*sound_ref;
@@ -44,6 +45,7 @@ typedef struct	s_weapon_entity
 	t_bool			reloading;
 	t_bool			shooting;
 	t_bool			trigger_reloading;
+	t_bool			stopped_shooting;
 	t_bool			just_shooted;
 	t_bool			just_reloaded;
 	double			load_start;

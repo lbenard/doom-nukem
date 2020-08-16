@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/13 00:22:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 04:09:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct	s_raycasting_scene
 	t_entity_list	sprite_entities;
 	t_entity_list	monster_entities;
 	t_entity_list	weapon_entities;
+	t_entity_list	ammo_entities;
 	struct s_assets
 	{
 		t_frame			floor;
@@ -54,9 +55,13 @@ typedef struct	s_raycasting_scene
 		t_spritesheet	use_key_spritesheet;
 		t_animation		use_key_animation;
 		t_text			use_key_text;
+		t_spritesheet	weapon_key_spritesheet;
+		t_animation		weapon_key_animation;
+		char			weapon_pick_display[20];
+		t_text			weapon_key_text;
 		t_frame			game_over_background;
 		t_text			game_over;
-		t_frame			fireball;
+		t_spritesheet	fireball_spritesheet;
 		t_spritesheet	alien_spritesheet;
 		t_spritesheet	onepunchman_spritesheet;
 		t_spritesheet	ghast_spritesheet;
@@ -71,6 +76,7 @@ typedef struct	s_raycasting_scene
 		t_input_id	use;
 		t_input_id	shoot;
 		t_input_id	reload;
+		t_input_id	pick;
 	}				inputs;
 	struct s_entities_ref
 	{
@@ -78,14 +84,14 @@ typedef struct	s_raycasting_scene
 		t_button_entity	*give_up_button_ref;
 		t_player_entity	*player_ref;
 		t_weapon_entity	*weapon_ref;
-
 	}				entities;
 	struct s_weapon_infos
 	{
-		size_t	ammo;
-		double	last_shot;
-		char	display[10];
-		t_text	display_text;
+		size_t					ammo;
+		double					last_shot;
+		char					display[10];
+		t_text					display_text;
+		const t_weapon_entity	*nearest_weapon;
 	}				weapon;
 }				t_raycasting_scene;
 
