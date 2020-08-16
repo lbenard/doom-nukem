@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 02:21:51 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 19:17:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 03:29:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_result	init_sprite_entity_size(t_sprite_entity *const self,
 			ft_vec3f(0.0f, 0.0f, 0.0f),
 			ft_vec3f(1.0f, 1.0f, 1.0f)),
 		entity_vtable(sprite_entity_update));
+	self->ctx = args->ctx;
 	module_add(&self->super.module, &self->texture,
 		frame(args->sprite_size, ft_rgba(0, 0, 0, 0)));
 	self->player_ref = args->ctx->entities.player_ref;
