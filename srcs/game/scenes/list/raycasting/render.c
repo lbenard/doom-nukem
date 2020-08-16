@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 04:47:25 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 02:01:21 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ static t_rgba	color(const t_raycasting_scene *const self,
 	// 	* (1.0f + (ft_fmin((get_wall_time() - self->weapon.last_shot)
 	// 	* 10.0f, 1.0f) * 2))) + 1.0f;
 	if (time >= 0.0f && time <= 0.3f)
-		darkness_value = 2.0f * (time * 3.33f);
+		darkness_value = 1.5f * (time * 3.33f);
 	else
-		darkness_value = 2.0f;
+		darkness_value = 1.5f;
 	ret = ft_get_lerp_col(ret, ray->perpendicular_distance, darkness_value);
 	return (ret);
 }
@@ -141,9 +141,9 @@ static void	ceiling_raycasting(const t_raycasting_scene *const self,
 				/ target->size.x;
 			t_rgba	floor_color = self->assets.ceiling.pixels[self->assets.ceiling.size.x * t.y + t.x];
 			if (time >= 0.0f && time <= 0.3f)
-				darkness_value = 2.0f * (time * 3.33f);
+				darkness_value = 1.5f * (time * 3.33f);
 			else
-				darkness_value = 2.0f;
+				darkness_value = 1.5f;
 			floor_color = ft_get_lerp_col(floor_color, distance, darkness_value);
 			// floor_color.c.r *= ft_fmin(darkness_value, 1.0f);
 			// floor_color.c.g *= ft_fmin(darkness_value, 1.0f);
@@ -195,9 +195,9 @@ static void	floor_raycasting(t_raycasting_scene *const self,
 				/ target->size.x;
 			t_rgba	floor_color = self->assets.floor.pixels[self->assets.floor.size.x * t.y + t.x];
 			if (time >= 0.0f && time <= 0.3f)
-				darkness_value = 2.0f * (time * 3.33f);
+				darkness_value = 1.5f * (time * 3.33f);
 			else
-				darkness_value = 2.0f;
+				darkness_value = 1.5f;
 			floor_color = ft_get_lerp_col(floor_color, distance, darkness_value);
 			target->pixels[i.y * target->size.x + i.x] = floor_color;
 			i.x++;
