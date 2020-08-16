@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 20:21:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 03:04:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ t_result	init_minigun_entity(t_minigun_entity *const self,
 	minigun_specs.name = "Minigun";
 	minigun_specs.shoot_time = 1.0f / 20.0f;
 	minigun_specs.loading_time = 1.5f;
-
 	if (static_module_create(self,
 		weapon_entity(&ctx->assets.minigun_spritesheet,
-			"resources/textures/tom_nook.bmp",
+			"resources/sprites/minigun_sprite.bmp",
 			minigun_specs, ctx)) == ERROR)
 	{
 		return (throw_result_str("init_minigun_entity()",
@@ -51,7 +50,7 @@ t_result	init_minigun_entity(t_minigun_entity *const self,
 	self->super.super.super.transform.position.x = args->pos.x;
 	self->super.super.super.transform.position.y = args->pos.y;
 	self->super.super.super.transform.position.z = 0.0f;
-	self->super.super.super.transform.scale.x = 0.2f;
-	self->super.super.super.transform.scale.y = 0.2f;
+	self->super.super.super.transform.scale.x = 0.5f;
+	self->super.super.super.transform.scale.y = 0.5f;
 	return (OK);
 }

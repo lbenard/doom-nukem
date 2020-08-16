@@ -94,6 +94,8 @@ typedef struct	s_editor_scene
 			t_entity_checkbox_entity	*ghast;
 			t_entity_checkbox_entity	*nyarlathotep;
 			t_entity_checkbox_entity	*pistol;
+			t_entity_checkbox_entity	*shotgun;
+			t_entity_checkbox_entity	*minigun;
 		}						entities_group;
 	}							hud;
 	t_editor_camera_entity		*camera_ref;

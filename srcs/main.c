@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 22:16:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 01:45:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	register_inputs(t_game *const game)
 	input_attach(&game->input, use, ft_button_event(0, XBOX_A, 0));
 
 	int pick = input_register(&game->input, "Pick");
-	input_attach(&game->input, pick, ft_key_event(sfKeyG, KEY_HOLD));
+	input_attach(&game->input, pick, ft_key_event(sfKeyG, 0));
 	input_attach(&game->input, pick, ft_button_event(0, XBOX_Y, 0));
 
 	int shoot = input_register(&game->input, "Shoot");

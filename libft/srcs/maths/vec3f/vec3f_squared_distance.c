@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   vec3f_squared_distance.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/15 23:42:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 03:02:04 by lbenard          ###   ########.fr       */
+/*   Created: 2020/08/15 22:48:14 by lbenard           #+#    #+#             */
+/*   Updated: 2020/08/15 22:49:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/sprite_entity.h"
-#include "game/scenes/raycasting_scene.h"
+#include "maths/vec3f.h"
 
-void	destroy_sprite_entity(t_sprite_entity *const self)
+float	vec3f_squared_distance(t_vec3f a, t_vec3f b)
 {
-	entity_list_remove(&self->ctx->sprite_entities, &self->super);
-	destroy_module(&self->super.module);
+	return ((a.x - b.x) * (a.x - b.x)
+		+ (a.y - b.y) * (a.y - b.y)
+		+ (a.z - b.z) * (a.z - b.z));
 }

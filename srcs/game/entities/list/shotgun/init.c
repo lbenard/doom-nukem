@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 02:50:10 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 02:08:02 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_result	init_shotgun_entity(t_shotgun_entity *const self,
 	shotgun_specs.decay = 0.3f;
 	if (static_module_create(self,
 		weapon_entity(&ctx->assets.shotgun_spritesheet,
-			"resources/textures/tom_nook.bmp",
+			"resources/sprites/shotgun_sprite.bmp",
 			shotgun_specs, ctx)) == ERROR)
 	{
 		return (throw_result_str("init_shotgun_entity()",
@@ -50,7 +50,7 @@ t_result	init_shotgun_entity(t_shotgun_entity *const self,
 	self->super.super.super.transform.position.x = args->pos.x;
 	self->super.super.super.transform.position.y = args->pos.y;
 	self->super.super.super.transform.position.z = 0.0f;
-	self->super.super.super.transform.scale.x = 0.2f;
-	self->super.super.super.transform.scale.y = 0.2f;
+	self->super.super.super.transform.scale.x = 0.4f;
+	self->super.super.super.transform.scale.y = 0.4f;
 	return (OK);
 }

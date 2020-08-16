@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 19:46:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 01:33:06 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_result	init_pistol_entity(t_pistol_entity *const self,
 	pistol_specs.shoot_time = 0.2f;
 	if (static_module_create(self,
 		weapon_entity(&ctx->assets.pistol_spritesheet,
-			"resources/textures/tom_nook.bmp",
+			"resources/sprites/pistol_sprite.bmp",
 			pistol_specs, ctx)) == ERROR)
 	{
 		return (throw_result_str("init_pistol_entity()",

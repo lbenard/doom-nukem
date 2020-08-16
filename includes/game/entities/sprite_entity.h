@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 23:33:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/04 20:58:11 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 03:02:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct			s_sprite_entity_vtable
 typedef struct			s_sprite_entity
 {
 	t_entity				super;
+	t_raycasting_scene		*ctx;
 	t_frame					texture;
 	const t_player_entity	*player_ref;
 	const t_frame			*frame_ref;
