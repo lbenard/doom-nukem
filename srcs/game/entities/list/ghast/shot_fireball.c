@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 23:38:52 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/16 16:25:43 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 18:12:38 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	go_fireball(t_monster_entity *self)
 		fireball_entity(monster_pos, direction));
 }
 
-void		shot_fireball(t_ghast_entity *self)
+void	shot_fireball(t_ghast_entity *self)
 {
 	if (self->last_shot_time == 0.0)
 		self->last_shot_time = get_wall_time();

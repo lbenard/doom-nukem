@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 17:34:00 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 18:17:36 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,19 @@
 
 void			rage_opm(t_onepunchman_entity *const self)
 {
+	if (self->speed != 4.0f)
+		self->speed = 4.0f;
 	if (self->count_fireball >= 5)
 	{
 		if (get_wall_time() - self->last_shot > 5.0)
+		{
 			self->count_fireball = 0;
+		}
+	}
+	else
+	{
+		self->super.animation.speed = 0.0f;
+		self->is_moving = FALSE;
 	}
 	if (self->count_fireball < 5 && get_wall_time() - self->last_shot > 0.2f)
 	{
@@ -40,13 +49,13 @@ void			onepunchman_entity_update(t_onepunchman_entity *const self)
 		self->super.distance_agro)
 	{
 		self->super.agro = TRUE;
-		self->super.animation.speed = 0.4;
 		self->is_moving = TRUE;
-		a_star_attack(&self->super, distance, self->speed);
 		if (self->super.health <= self->super.full_health / 2)
-		{
-			self->speed = 3.5f;
 			rage_opm(self);
+		if (self->is_moving == TRUE)
+		{
+			self->super.animation.speed = 0.4;
+			a_star_attack(&self->super, distance, self->speed);
 		}
 	}
 	else
