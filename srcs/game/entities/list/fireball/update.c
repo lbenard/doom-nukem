@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 17:47:50 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/16 01:39:43 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 17:37:01 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static float	update_fireball_position(t_fireball_entity *const self)
 	player_pos = self->super.player_ref->super.transform.position;
 	distance = get_distance_vec(self->super.super.transform.position,
 		player_pos);
-	direction = vec3f_scalar(direction, get_last_delta() * 6);
+	direction = vec3f_scalar(direction, get_last_delta() * 6.5f);
 	self->super.super.transform.position = vec3f_addition(
 		self->super.super.transform.position, direction);
 	return (distance);
