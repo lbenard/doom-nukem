@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/15 19:39:27 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/17 00:20:44 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -423,10 +423,16 @@ SRCS_LIST		=	main.c																			\
 																									\
 					game/scenes/list/editor/editor_scene.c											\
 					game/scenes/list/editor/init.c													\
+					game/scenes/list/editor/init_event_handler_callback.c							\
+					game/scenes/list/editor/init_radio_groups.c										\
+					game/scenes/list/editor/add_entities.c											\
+					game/scenes/list/editor/add_block_buttons.c										\
 					game/scenes/list/editor/fill_from_map.c											\
 					game/scenes/list/editor/update.c												\
 					game/scenes/list/editor/render.c												\
 					game/scenes/list/editor/export_map.c											\
+					game/scenes/list/editor/write_map.c												\
+					game/scenes/list/editor/write_stuff.c												\
 					game/scenes/list/editor/add_block.c												\
 					game/scenes/list/editor/add_entity.c											\
 					game/scenes/list/editor/destroy.c												\
@@ -512,7 +518,7 @@ LIBS			=	-lft				\
 					-lcsfml-audio
 
 # CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g3# -fsanitize=address # -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -g3 -flto # -fsanitize=address # -Wno-deprecated
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)
