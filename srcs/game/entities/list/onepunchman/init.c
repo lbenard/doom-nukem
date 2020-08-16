@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 18:27:55 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 04:29:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
 	if (static_module_create(self,
 		monster_entity(
 			ft_monster_stats(args->pos,
-				100.0f,
+				500.0f,
 				10000.0f,
 				"One Punch Man"),
 			&raycasting->assets.onepunchman_spritesheet,
@@ -36,5 +36,7 @@ t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
 			"failed to create monster entity"));
 	}
 	self->super.super.super.vtable.update = onepunchman_entity_update;
+	self->super.super.super.transform.scale.x = 4.0f;
+	self->super.super.super.transform.scale.y = 1.4f;
 	return (OK);
 }

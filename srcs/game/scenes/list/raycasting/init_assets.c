@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_assets.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 22:29:13 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 04:11:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ static void	init_weapons(t_raycasting_scene *const self)
 	module_add(&self->super.module, &self->assets.pistol_spritesheet,
 		spritesheet("resources/sprites/pistol_spritesheet.bmp",
 			ft_usize(4, 4)));
-	// module_add(&self->super.module, &self->assets.pistol_sound,
-	// 	sound("resources/sound/ar15-pistol-shot.wav"));
 	module_add(&self->super.module, &self->assets.shotgun_spritesheet,
 		spritesheet("resources/sprites/shotgun_ss.bmp", ft_usize(5, 4)));
 	module_add(&self->super.module, &self->assets.minigun_spritesheet,
 		spritesheet("resources/sprites/minigun_ss.bmp", ft_usize(4, 2)));
+	module_add(&self->super.module, &self->assets.weapon_key_text,
+		text("haxorville.bmp", ft_usize(5 * 20, 9)));
 }
 
 void		init_raycasting_scene_assets(t_raycasting_scene *const self)

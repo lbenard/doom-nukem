@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:21:42 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 01:50:28 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 04:24:02 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	init_entity_descriptors(t_game *const self)
 			nyarlathotep_entity));
 	module_add(&self->module, &self->entities_list.pistol,
 		entity_descriptor("pistol",
-			"resources/textures/tom_nook.bmp",
+			"resources/sprites/pistol_sprite.bmp",
 			pistol_entity));
 	module_add(&self->module, &self->entities_list.shotgun,
 		entity_descriptor("shotgun",
-			"resources/textures/tom_nook.bmp",
+			"resources/sprites/shotgun_sprite.bmp",
 			shotgun_entity));
 	module_add(&self->module, &self->entities_list.minigun,
 		entity_descriptor("minigun",
-			"resources/textures/tom_nook.bmp",
+			"resources/sprites/minigun_sprite.bmp",
 			minigun_entity));
 }

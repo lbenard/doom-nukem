@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 03:06:51 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 04:02:18 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,7 @@ static void	pick_weapon(t_raycasting_scene *const self)
 			weapon->super.super.transform.position,
 			self->entities.player_ref->super.transform.position);
 		if (distance < 1.0f)
-			if (input_get(&game_singleton()->input, self->inputs.pick) > 0.0f)
-				break ;
+			break ;
 		weapon = NULL;
 	}
 	if (input_get(&game_singleton()->input, self->inputs.pick) > 0.0f)
@@ -120,10 +119,13 @@ static void	pick_weapon(t_raycasting_scene *const self)
 				self->entities.player_ref->super.transform.position;
 			self->entities.weapon_ref->super.super.transform.position.z = 0.0f;
 		}
+		self->weapon.nearest_weapon = self->entities.weapon_ref;
 		self->entities.weapon_ref = weapon;
 		if (self->entities.weapon_ref)
 			self->entities.weapon_ref->first_render = TRUE;
 	}
+	else
+		self->weapon.nearest_weapon = weapon;
 }
 
 void		raycasting_scene_update(t_raycasting_scene *const self)

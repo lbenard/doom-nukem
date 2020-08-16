@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 01:25:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 04:46:40 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,10 @@ static void	monsters(t_raycasting_scene *const self,
 			ft_frame_transform(ft_vec2f(0.5f, 1.0f),
 				ft_isize((monster->super.start_x + monster->super.end_x) / 2,
 					monster->super.start_y),
-				ft_vec2f(10.0f / monster->super.perpendicular_distance,
-					10.0f / monster->super.perpendicular_distance),
+				ft_vec2f(10.0f / monster->super.perpendicular_distance
+					* monster->super.super.transform.scale.x,
+					10.0f / monster->super.perpendicular_distance
+					* monster->super.super.transform.scale.y),
 				distance_opacity));
 		if (monster->health < monster->full_health)
 			monsters_health(monster, fb, distance_opacity);
