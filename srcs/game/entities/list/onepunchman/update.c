@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 16:32:45 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 17:29:36 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ void			onepunchman_entity_update(t_onepunchman_entity *const self)
 		self->super.agro = TRUE;
 		self->super.animation.speed = 0.4;
 		self->is_moving = TRUE;
-		a_star_attack(&self->super, distance, 2.0);
+		a_star_attack(&self->super, distance, self->speed);
 		if (self->super.health <= self->super.full_health / 2)
+		{
+			self->speed = 4.0f;
 			rage_opm(self);
+		}
 	}
 	else
 	{

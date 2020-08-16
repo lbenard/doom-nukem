@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 02:06:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 16:15:22 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 17:28:23 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct	s_onepunchman_entity
 	t_bool				is_moving;
 	double				last_shot;
 	int					count_fireball;
+	float				speed;
 }				t_onepunchman_entity;
 
 typedef struct	s_onepunchman_entity_args

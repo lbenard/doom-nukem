@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 16:14:39 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/16 17:29:40 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,8 @@ t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
 	self->is_moving = FALSE;
 	self->count_fireball = 0;
 	self->last_shot = get_wall_time();
+	self->super.max_distance_agro = 100;
+	self->super.distance_agro = 80;
+	self->speed = 2.0f;
 	return (OK);
 }
