@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:32:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/27 18:35:46 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 20:20:22 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ void		editor_scene_render(t_editor_scene *const self,
 
 	frame_fill(fb, ft_rgba(0, 0, 0, 255));
 	if (sfKeyboard_isKeyPressed(sfKeyB))
-		frame_layer_transform_add(fb,
-			&self->editor_background,
+		frame_layer_transform_add(fb, &self->editor_background,
 			ft_frame_transform(ft_vec2f(1.0f, 0.5f),
 				ft_isize(fb->size.x + 100, fb->size.y / 2),
-				ft_vec2f(2.0f, 2.0f),
-				64));
+				ft_vec2f(2.0f, 2.0f), 64));
 	frame_fill(&self->editor_view, ft_rgba(34, 75, 120, 255));
 	pos = &self->components.list;
 	while ((pos = pos->next) != &self->components.list)

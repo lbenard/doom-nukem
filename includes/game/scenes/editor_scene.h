@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 21:55:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/17 00:43:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "game/entities/editor/player_component_entity.h"
 # include "game/entities/checkbox_entity.h"
 # include "game/block_descriptor.h"
+#include "game/game.h"
 
 # define BUTTONS "resources/buttons/"
 
@@ -117,6 +118,13 @@ t_constructor	editor_scene(const t_window *const screen,
 */
 t_result		init_editor_scene(t_editor_scene *const self,
 					const t_editor_scene_args *const args);
+
+void			init_event_handler_callback(t_editor_scene *const self);
+void			init_radio_groups(t_editor_scene *const self);
+void		add_entities(t_editor_scene *const self,
+				const t_editor_scene_args *const args,
+				t_game *const game);
+
 t_result		fill_from_map(t_editor_scene *const self,
 					const char *const path);
 /*
@@ -126,8 +134,21 @@ t_result		fill_from_map(t_editor_scene *const self,
 void			editor_scene_update(t_editor_scene *const self);
 void			editor_scene_render(t_editor_scene *const self,
 					t_frame *const fb);
+void	add_block_buttons(t_editor_scene *const self,
+				const t_editor_scene_args *const args,
+				t_game *const game);
 
 t_result		editor_scene_export_map(t_editor_scene *const self);
+t_result		write_map(t_editor_scene *const self, const int fd,
+					const t_isize origin, const t_usize size);
+t_result		write_map_size(const int fd, const t_usize size);
+t_result		write_player_spawn(const int fd,
+					const t_player_component_entity *const player,
+					const t_isize origin);
+t_result	write_entities(t_editor_scene *const self,
+					const int fd,
+					const t_isize origin);
+
 t_result		editor_scene_add_block(t_editor_scene *const self,
 					const t_block_descriptor *const block,
 					const t_vec2f pos);

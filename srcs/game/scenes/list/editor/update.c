@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:25:39 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/16 20:15:42 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,8 @@
 #include "game/game.h"
 #include "game/scenes/menu_scene.h"
 
-void	editor_scene_update(t_editor_scene *const self)
+static void	update_group(t_editor_scene *const self)
 {
-	static t_vec2f	old_pos = (t_vec2f){0.0f, 0.0f};
-	t_vec2f			new_pos;
-
-	entity_list_update(&self->super.entities);
-	new_pos = editor_camera_entity_screen_to_editor_camera_pos(
-		self->camera_ref,
-		&self->screen_ref->frame, window_get_mouse_pos(self->screen_ref));
-	if (self->selected_component_ref)
-	{
-		self->selected_component_ref->super.transform.position.x +=
-		new_pos.x - old_pos.x;
-		self->selected_component_ref->super.transform.position.y +=
-		new_pos.y - old_pos.y;
-	}
-	old_pos = new_pos;
 	update_radio_group(&self->hud.tools);
 	update_radio_group(&self->hud.create);
 	update_radio_group(&self->hud.blocks);
@@ -46,12 +31,30 @@ void	editor_scene_update(t_editor_scene *const self)
 	radio_group_set_active(&self->hud.entities,
 		self->hud.create_group.show_entities_ref->is_checked
 		&& self->hud.create_group.show_entities_ref->is_active);
+}
+
+void		editor_scene_update(t_editor_scene *const self)
+{
+	static t_vec2f	old_pos = (t_vec2f){0.0f, 0.0f};
+	t_vec2f			new_pos;
+
+	entity_list_update(&self->super.entities);
+	new_pos = editor_camera_entity_screen_to_editor_camera_pos(self->camera_ref,
+		&self->screen_ref->frame, window_get_mouse_pos(self->screen_ref));
+	if (self->selected_component_ref)
+	{
+		self->selected_component_ref->super.transform.position.x +=
+		new_pos.x - old_pos.x;
+		self->selected_component_ref->super.transform.position.y +=
+		new_pos.y - old_pos.y;
+	}
+	old_pos = new_pos;
+	update_group(self);
 	if (self->hud.tools_group.save_ref->is_checked)
 	{
 		if (editor_scene_export_map(self) == ERROR)
 		{
-			throw_result_str("editor_scene_update()",
-				"failed to export map");
+			throw_result_str("editor_scene_update()", "failed to export map");
 			window_close(&game_singleton()->window);
 		}
 		else
