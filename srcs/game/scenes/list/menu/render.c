@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:19:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:11:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/17 19:41:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,22 @@ void	menu_scene_render(t_menu_scene *const self, t_frame *const fb)
 		&self->credits.target,
 		ft_frame_transform(ft_vec2f(0.0f, 1.0f),
 			ft_isize(10 - 2, fb->size.y - 5 - 2),
+			ft_vec2f(2.0f, 2.0f),
+			255));
+	frame_fill_blend(&self->git_id.target, ft_rgba(0, 0, 0, 255),
+		blend_colorize);
+	frame_layer_transform_add(fb,
+		&self->git_id.target,
+		ft_frame_transform(ft_vec2f(1.0f, 0.0f),
+			ft_isize(fb->size.x - 10, 5),
+			ft_vec2f(2.0f, 2.0f),
+			255));
+	frame_fill_blend(&self->git_id.target, ft_rgba(220, 220, 220, 255),
+		blend_colorize);
+	frame_layer_transform_add(fb,
+		&self->git_id.target,
+		ft_frame_transform(ft_vec2f(1.0f, 0.0f),
+			ft_isize(fb->size.x - 10 - 2, 5 - 2),
 			ft_vec2f(2.0f, 2.0f),
 			255));
 }
