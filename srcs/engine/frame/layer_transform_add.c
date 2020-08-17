@@ -78,8 +78,8 @@ void						frame_layer_transform_add(t_frame *const self,
 	if (transform.opacity == 0 || !is_visible(self, layer_coordinates))
 		return ;
 	normalized = normalize(crop(layer_coordinates, self->size));
-	i.y = normalized.start.y;
-	while (i.y < normalized.end.y)
+	i.y = normalized.start.y - 1;
+	while (++i.y < normalized.end.y)
 	{
 		i.x = normalized.start.x;
 		while (i.x < normalized.end.x)
@@ -93,6 +93,5 @@ void						frame_layer_transform_add(t_frame *const self,
 					blend_add(self->pixels[self->size.x * i.y + i.x], fg_pixel);
 			i.x++;
 		}
-		i.y++;
 	}
 }
