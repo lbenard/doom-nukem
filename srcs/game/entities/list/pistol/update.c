@@ -12,18 +12,31 @@
 
 #include "game/entities/pistol_entity.h"
 
-void	pistol_entity_update(t_pistol_entity *const self)
+static void	pistol_entity_update3(t_pistol_entity *const self)
 {
-	weapon_entity_update(&self->super);
-	animation_update(&self->animation, self->super.hud_ref);
-	self->super.just_reloaded = FALSE;
-	if (self->super.trigger_reloading)
+	if (self->super.shooting == TRUE)
 	{
-		self->super.reloading = TRUE;
-		self->animation.anim = 1;
-		self->animation.speed = 0.08;
-		self->animation.iter = 0;
+		if (self->animation.iter
+			== self->super.hud_ref->grid_size.x * (1 / 0.4) - 1)
+		{
+			self->animation.speed = 0;
+			self->animation.anim = 0;
+			self->super.shooting = FALSE;
+		}
 	}
+	frame_fill(&self->super.hud, ft_rgba(0, 0, 0, 0));
+	frame_layer_transform_add(&self->super.hud,
+		animation_current(&self->animation, self->super.hud_ref),
+		ft_frame_transform(ft_vec2f(1.0f, 1.0f),
+			ft_isize(self->super.hud.size.x - self->super.hud.size.x / 6,
+				self->super.hud.size.y),
+			ft_vec2f(3, 3),
+			255));
+	self->super.trigger_reloading = FALSE;
+}
+
+static void	pistol_entity_update2(t_pistol_entity *const self)
+{
 	if (self->super.reloading)
 	{
 		if (self->animation.iter == self->super.hud_ref->grid_size.x
@@ -47,23 +60,20 @@ void	pistol_entity_update(t_pistol_entity *const self)
 		self->animation.speed = 0.4;
 		self->animation.iter = 0;
 	}
-	if (self->super.shooting == TRUE)
+}
+
+void		pistol_entity_update(t_pistol_entity *const self)
+{
+	weapon_entity_update(&self->super);
+	animation_update(&self->animation, self->super.hud_ref);
+	self->super.just_reloaded = FALSE;
+	if (self->super.trigger_reloading)
 	{
-		if (self->animation.iter
-			== self->super.hud_ref->grid_size.x * (1 / 0.4) - 1)
-		{
-			self->animation.speed = 0;
-			self->animation.anim = 0;
-			self->super.shooting = FALSE;
-		}
+		self->super.reloading = TRUE;
+		self->animation.anim = 1;
+		self->animation.speed = 0.08;
+		self->animation.iter = 0;
 	}
-	frame_fill(&self->super.hud, ft_rgba(0, 0, 0, 0));
-	frame_layer_transform_add(&self->super.hud,
-		animation_current(&self->animation, self->super.hud_ref),
-		ft_frame_transform(ft_vec2f(1.0f, 1.0f),
-			ft_isize(self->super.hud.size.x - self->super.hud.size.x / 6,
-				self->super.hud.size.y),
-			ft_vec2f(3, 3),
-			255));
-	self->super.trigger_reloading = FALSE;
+	pistol_entity_update2(self);
+	pistol_entity_update3(self);
 }
