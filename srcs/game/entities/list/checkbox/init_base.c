@@ -31,6 +31,15 @@ static char	*create_path(const char *const path,
 	return (str);
 }
 
+static void	init_checkbox_entity_base_free(char *normal,
+				char *hover,
+				char *checked)
+{
+	free(normal);
+	free(hover);
+	free(checked);
+}
+
 t_result	init_checkbox_entity_base(t_checkbox_entity *const self,
 				const t_checkbox_entity_args *const args)
 {
@@ -46,17 +55,13 @@ t_result	init_checkbox_entity_base(t_checkbox_entity *const self,
 	checked = create_path(path, args->base_name, "-click");
 	if (!(normal && hover && checked))
 	{
-		free(normal);
-		free(hover);
-		free(checked);
+		init_checkbox_entity_base_free(normal, hover, checked);
 		return (throw_result_str("init_checkbox_entity_base()",
 			"failed to create paths"));
 	}
 	res = static_module_create(self, checkbox_entity(normal, hover, checked,
 		args->window));
-	free(normal);
-	free(hover);
-	free(checked);
+	init_checkbox_entity_base_free(normal, hover, checked);
 	if (res == ERROR)
 	{
 		return (throw_result_str("init_checkbox_entity_base()",
