@@ -13,10 +13,24 @@
 #include "engine/text.h"
 #include "maths/maths.h"
 
-static void	render_character(t_text *const self,
-				const t_text_settings settings,
-				const t_usize pos,
-				const char character)
+static t_usize	render_character2(t_text *const self,
+					const t_text_settings settings,
+					size_t *length,
+					t_usize *i)
+{
+	t_usize	letter_size;
+
+	letter_size.x = self->font.raster.size.x / 95;
+	letter_size.y = self->font.raster.size.y;
+	*length = settings.height * ((float)letter_size.x / letter_size.y);
+	*i = ft_usize(0, 0);
+	return (letter_size);
+}
+
+static void		render_character(t_text *const self,
+					const t_text_settings settings,
+					const t_usize pos,
+					const char character)
 {
 	t_usize	i;
 	t_usize	letter_size;
@@ -24,10 +38,7 @@ static void	render_character(t_text *const self,
 	t_usize	frame_pos;
 	size_t	pixel_pos;
 
-	letter_size.x = self->font.raster.size.x / 95;
-	letter_size.y = self->font.raster.size.y;
-	length = settings.height * ((float)letter_size.x / letter_size.y);
-	i.y = 0;
+	letter_size = render_character2(self, settings, &length, &i);
 	while (i.y < settings.height
 		&& settings.position.y + i.y < self->target.size.y)
 	{
@@ -48,7 +59,7 @@ static void	render_character(t_text *const self,
 	}
 }
 
-void		text_render(t_text *const self, const t_text_settings settings)
+void			text_render(t_text *const self, const t_text_settings settings)
 {
 	char	*string_ptr;
 	t_usize	pos;
