@@ -46,17 +46,24 @@ static void	center_window(t_window *const self)
 	sfRenderWindow_setPosition(self->window, desktop_pos);
 }
 
-t_result	init_window(t_window *const self, const t_window_args *const args)
+static void	init_window2(t_window *const self,
+					const t_window_args *const args)
 {
-	sfVideoMode	mode;
 	sfVideoMode	desktop_mode;
-	sfUint32	style;
 
 	init_module(&self->module);
 	desktop_mode = sfVideoMode_getDesktopMode();
 	self->size.x = (args->fullscreen) ? desktop_mode.width : args->size.x;
 	self->size.y = (args->fullscreen) ? desktop_mode.height : args->size.y;
 	self->is_fullscreen = args->fullscreen;
+}
+
+t_result	init_window(t_window *const self, const t_window_args *const args)
+{
+	sfVideoMode	mode;
+	sfUint32	style;
+
+	init_window2(self, args);
 	mode.width = self->size.x;
 	mode.height = self->size.y;
 	mode.bitsPerPixel = 32;
