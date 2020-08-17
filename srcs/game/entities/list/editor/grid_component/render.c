@@ -19,9 +19,29 @@ static t_rgba	color_from_zoom(const t_vec3f zoom, const t_bool is_zero_axis)
 	if (is_zero_axis)
 		return (ft_rgba(255, 255, 255, 255));
 	if (zoom.x < 0.1f)
+	{
 		return (ft_rgba(127, 127, 127,
 			(int)lerp(255, 0, inverse_lerp(0.1f, 0.01f, zoom.x))));
+	}
 	return (ft_rgba(127, 127, 127, 255));
+}
+
+static float	render_helper(t_grid_component_entity *const self,
+					t_editor_camera_entity *const camera,
+					float camera_start)
+{
+	int		sign;
+	float	x;
+
+	sign = (camera_start >= 0) * 2 - 1;
+	x = 0;
+	if (sign == 1)
+		while (x < camera_start)
+			x += self->unit_size * camera->super.transform.scale.x;
+	else
+		while (x > camera_start)
+			x -= self->unit_size * camera->super.transform.scale.x;
+	return (x);
 }
 
 static void		render_columns(t_grid_component_entity *const self,
@@ -31,7 +51,6 @@ static void		render_columns(t_grid_component_entity *const self,
 	float	camera_start;
 	float	camera_end;
 	float	x;
-	int		sign;
 
 	camera_start = camera->super.transform.position.x * self->unit_size
 		* camera->super.transform.scale.x -
@@ -39,14 +58,7 @@ static void		render_columns(t_grid_component_entity *const self,
 	camera_end = camera->super.transform.position.x * self->unit_size
 		* camera->super.transform.scale.x +
 		self->super.super.transform.scale.x / 2.0f;
-	sign = (camera_start >= 0) * 2 - 1;
-	x = 0;
-	if (sign == 1)
-		while (x < camera_start)
-			x += self->unit_size * camera->super.transform.scale.x;
-	else
-		while (x > camera_start)
-			x -= self->unit_size * camera->super.transform.scale.x;
+	x = render_helper(self, camera, camera_start);
 	while (x < camera_end)
 	{
 		render_column(frame, ft_usize((size_t)(x - camera_start),
@@ -64,7 +76,6 @@ static void		render_rows(t_grid_component_entity *const self,
 	float	camera_start;
 	float	camera_end;
 	float	y;
-	int		sign;
 
 	camera_start = camera->super.transform.position.y * self->unit_size
 		* camera->super.transform.scale.x -
@@ -72,14 +83,7 @@ static void		render_rows(t_grid_component_entity *const self,
 	camera_end = camera->super.transform.position.y * self->unit_size
 		* camera->super.transform.scale.x +
 		self->super.super.transform.scale.y / 2.0f;
-	sign = (camera_start >= 0) * 2 - 1;
-	y = 0;
-	if (sign == 1)
-		while (y < camera_start)
-			y += self->unit_size * camera->super.transform.scale.x;
-	else
-		while (y > camera_start)
-			y -= self->unit_size * camera->super.transform.scale.x;
+	y = render_helper(self, camera, camera_start);
 	while (y < camera_end)
 	{
 		render_row(frame, ft_usize(self->super.super.transform.position.x,
