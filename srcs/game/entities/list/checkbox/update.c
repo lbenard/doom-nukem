@@ -12,25 +12,11 @@
 
 #include "game/entities/checkbox_entity.h"
 
-void	checkbox_entity_update(t_checkbox_entity *const self)
+static void	checkbox_entity_update2(t_checkbox_entity *const self,
+				t_bool is_mouse_pressed,
+				sfVector2i pos,
+				t_frame_coordinates frame_coordinates)
 {
-	t_bool				is_mouse_pressed;
-	sfVector2i			pos;
-	t_frame_coordinates	frame_coordinates;
-
-	if (!self->is_active)
-		return ;
-	pos = sfMouse_getPositionRenderWindow(self->window->window);
-	is_mouse_pressed = sfMouse_isButtonPressed(sfMouseLeft);
-	frame_coordinates = coordinates(
-		self->current_texture,
-		ft_frame_transform(
-			ft_vec2f(0.5f, 0.5f),
-			ft_isize(self->super.transform.position.x,
-				self->super.transform.position.y),
-			ft_vec2f(self->super.transform.scale.x,
-				self->super.transform.scale.y),
-			COLOR_OPAQUE));
 	if ((ssize_t)pos.x >= frame_coordinates.start.x
 		&& (ssize_t)pos.x < frame_coordinates.end.x
 		&& (ssize_t)pos.y >= frame_coordinates.start.y
@@ -49,4 +35,26 @@ void	checkbox_entity_update(t_checkbox_entity *const self)
 	if (self->is_checked)
 		self->current_texture = &self->checked_texture;
 	self->was_mouse_pressed = is_mouse_pressed;
+}
+
+void		checkbox_entity_update(t_checkbox_entity *const self)
+{
+	t_bool				is_mouse_pressed;
+	sfVector2i			pos;
+	t_frame_coordinates	frame_coordinates;
+
+	if (!self->is_active)
+		return ;
+	pos = sfMouse_getPositionRenderWindow(self->window->window);
+	is_mouse_pressed = sfMouse_isButtonPressed(sfMouseLeft);
+	frame_coordinates = coordinates(
+		self->current_texture,
+		ft_frame_transform(
+			ft_vec2f(0.5f, 0.5f),
+			ft_isize(self->super.transform.position.x,
+				self->super.transform.position.y),
+			ft_vec2f(self->super.transform.scale.x,
+				self->super.transform.scale.y),
+			COLOR_OPAQUE));
+	checkbox_entity_update2(self, is_mouse_pressed, pos, frame_coordinates);
 }
