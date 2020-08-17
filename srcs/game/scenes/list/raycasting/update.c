@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/17 20:44:01 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/17 21:03:47 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "engine/delta.h"
 #include "game/game.h"
 
-void	zbuffer(t_raycasting_scene *const self,
+void		zbuffer(t_raycasting_scene *const self,
 				const t_vec2f dir,
 				const t_vec2f plane)
 {
@@ -99,8 +99,8 @@ static void	player_action(t_raycasting_scene *const self)
 				self->entities.weapon_ref->trigger_reloading = TRUE;
 			if (self->entities.weapon_ref->just_reloaded)
 				raycasting_scene_weapon_reload(self);
-			else if (input_get(&game_singleton()->input, self->inputs.shoot) > 0.0f
-				&& !self->entities.weapon_ref->reloading)
+			else if (input_get(&game_singleton()->input,
+			self->inputs.shoot) > 0.0f && !self->entities.weapon_ref->reloading)
 				raycasting_scene_weapon_use(self);
 			else
 			{
