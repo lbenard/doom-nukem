@@ -19,6 +19,7 @@
 #include "engine/render_texture.h"
 #include "engine/sprite.h"
 #include "ft/mem.h"
+#include "maths/vec2i.h"
 
 static t_result	bmp_fill(int fd, t_frame *bmp, t_u16 bpp)
 {
@@ -50,18 +51,17 @@ static t_result	bmp_parse(int fd, t_frame *self)
 {
 	t_u32	offset;
 	t_u16	bits_per_pixel;
-	int		width;
-	int		height;
+	t_vec2i	size;
 
 	lseek(fd, sizeof(t_u16) * 4, SEEK_CUR);
 	if (read(fd, &offset, sizeof(t_u32)) < 0)
 		return (throw_result_str(__func__, "read fail"));
 	lseek(fd, sizeof(t_u32), SEEK_CUR);
-	if (read(fd, &width, sizeof(t_i32)) < 0)
+	if (read(fd, &size.x, sizeof(t_i32)) < 0)
 		return (throw_result_str(__func__, "read fail"));
-	if (read(fd, &height, sizeof(t_i32)) < 0)
+	if (read(fd, &size.y, sizeof(t_i32)) < 0)
 		return (throw_result_str(__func__, "read fail"));
-	self->size = ft_usize((size_t)width, (size_t)height);
+	self->size = ft_usize((size_t)size.x, (size_t)size.y);
 	module_add(&self->module, &self->frame,
 		array(sizeof(t_u32) * self->size.x * self->size.y));
 	if (self->module.has_error)
