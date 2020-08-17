@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 17:56:22 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/17 18:10:43 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ void			move_side(t_ghast_entity *self)
 			self->move_side = TRUE;
 		}
 		self->super.animation.speed = 0.1f;
-		if (scene->map.map[(int)(position.x + self->side_move.x * 5) +
+		if (position.x > 1.0f && position.y > 1.0f
+			&& position.x < scene->map.size.x - 1
+			&& position.y < scene->map.size.y - 1
+			&& scene->map.map[(int)(position.x + self->side_move.x * 5) +
 			((int)(position.y + self->side_move.y * 5) *
 			scene->map.size.x)].id == ' ')
-		{
-			self->super.super.super.transform.position.x += self->side_move.x;
-			self->super.super.super.transform.position.y += self->side_move.y;
-			self->super.super.super.transform.position.z += self->side_move.z;
-		}
+			self->super.super.super.transform.position = vec3f_addition(
+			self->super.super.super.transform.position, self->side_move);
 	}
 }
 
