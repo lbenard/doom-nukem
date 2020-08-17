@@ -40,11 +40,31 @@ static void		grab_sprite(t_spritesheet *ss, int num)
 	}
 }
 
-t_result		init_spritesheet(t_spritesheet *const self,
-					t_spritesheet_args *const args)
+static t_result	init_spritesheet2(t_spritesheet *const self)
 {
 	size_t	i;
 
+	i = 0;
+	while (i < self->nb_sprite)
+	{
+		module_add(&self->module, &self->sprite[i],
+			frame(self->sprite_size, ft_rgba(0, 0, 0, 255)));
+		if (!self->module.has_error)
+			grab_sprite(self, i);
+		i++;
+	}
+	if (self->module.has_error)
+	{
+		destroy_spritesheet(self);
+		return (throw_result_str("init_spritesheet()",
+			"failed to create sprites"));
+	}
+	return (OK);
+}
+
+t_result		init_spritesheet(t_spritesheet *const self,
+					t_spritesheet_args *const args)
+{
 	init_module(&self->module);
 	self->sprite = NULL;
 	module_add(&self->module, &self->pixels, frame_from_file(args->path));
@@ -65,20 +85,5 @@ t_result		init_spritesheet(t_spritesheet *const self,
 		return (throw_result_str("init_spritesheet()",
 			"failed to malloc sprite"));
 	}
-	i = 0;
-	while (i < self->nb_sprite)
-	{
-		module_add(&self->module, &self->sprite[i],
-			frame(self->sprite_size, ft_rgba(0, 0, 0, 255)));
-		if (!self->module.has_error)
-			grab_sprite(self, i);
-		i++;
-	}
-	if (self->module.has_error)
-	{
-		destroy_spritesheet(self);
-		return (throw_result_str("init_spritesheet()",
-			"failed to create sprites"));
-	}
-	return (OK);
+	return (init_spritesheet2(self));
 }
