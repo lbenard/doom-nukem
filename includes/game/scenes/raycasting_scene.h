@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_scene.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/17 20:36:14 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/18 00:24:09 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ typedef struct	s_raycasting_scene
 	t_entity_list	sprite_entities;
 	t_entity_list	monster_entities;
 	t_entity_list	weapon_entities;
-	t_entity_list	ammo_entities;
 	struct	s_assets
 	{
 		t_frame			floor;
@@ -66,6 +65,7 @@ typedef struct	s_raycasting_scene
 		t_spritesheet	shotgun_spritesheet;
 		t_spritesheet	minigun_spritesheet;
 		t_frame			ammo_sprite;
+		t_frame			medikit_sprite;
 	}				assets;
 	struct	s_inputs
 	{

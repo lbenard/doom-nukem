@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
+#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/17 20:45:33 by mribouch         ###   ########.fr        #
+#    Updated: 2020/08/18 00:30:46 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -425,6 +425,11 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/ammo/init.c													\
 					game/entities/list/ammo/update.c												\
 					game/entities/list/ammo/destroy.c												\
+																									\
+					game/entities/list/medikit/medikit_entity.c										\
+					game/entities/list/medikit/init.c												\
+					game/entities/list/medikit/update.c												\
+					game/entities/list/medikit/destroy.c											\
 																									\
 					game/events/close_game_event.c													\
 																									\

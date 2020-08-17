@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/17 00:43:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 00:29:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ typedef struct	s_editor_scene
 			t_entity_checkbox_entity	*shotgun;
 			t_entity_checkbox_entity	*minigun;
 			t_entity_checkbox_entity	*ammo;
+			t_entity_checkbox_entity	*medikit;
 		}						entities_group;
 	}							hud;
 	t_editor_camera_entity		*camera_ref;

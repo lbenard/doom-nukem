@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_entity_lists.c                                :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/10 22:21:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 00:30:08 by lbenard          ###   ########.fr       */
+/*   Created: 2020/08/16 21:44:58 by lbenard           #+#    #+#             */
+/*   Updated: 2020/08/18 00:24:58 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/raycasting_scene.h"
+#include "game/entities/medikit_entity.h"
 
-void	init_raycasting_scene_entity_lists(t_raycasting_scene *const self)
+void	destroy_medikit_entity(t_medikit_entity *const self)
 {
-	module_add(&self->super.module, &self->sprite_entities, entity_list());
-	module_add(&self->super.module, &self->monster_entities, entity_list());
-	module_add(&self->super.module, &self->weapon_entities, entity_list());
+	destroy_sprite_entity(&self->super);
 }

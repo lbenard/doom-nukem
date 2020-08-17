@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_entity_lists.c                                :+:      :+:    :+:   */
+/*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/10 22:21:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 00:30:08 by lbenard          ###   ########.fr       */
+/*   Created: 2020/08/16 21:44:06 by lbenard           #+#    #+#             */
+/*   Updated: 2020/08/18 00:27:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "game/entities/medikit_entity.h"
 #include "game/scenes/raycasting_scene.h"
 
-void	init_raycasting_scene_entity_lists(t_raycasting_scene *const self)
+void	medikit_entity_update(t_medikit_entity *const self)
 {
-	module_add(&self->super.module, &self->sprite_entities, entity_list());
-	module_add(&self->super.module, &self->monster_entities, entity_list());
-	module_add(&self->super.module, &self->weapon_entities, entity_list());
+	sprite_entity_update(&self->super);
+	if (vec3f_squared_distance(self->super.super.transform.position,
+		self->super.ctx->entities.player_ref->super.transform.position) < 1.0f)
+	{
+		self->super.ctx->entities.player_ref->health += 30;
+		entity_list_remove(&self->super.ctx->super.entities,
+			(t_entity*)self);
+		return ;
+	}
 }

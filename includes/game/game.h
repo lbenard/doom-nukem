@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 21:55:21 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 00:29:10 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct	s_game
 		t_entity_descriptor	shotgun;
 		t_entity_descriptor	minigun;
 		t_entity_descriptor	ammo;
+		t_entity_descriptor	medikit;
 	}						entities_list;
 }				t_game;
 

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:21:42 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 21:55:57 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 00:29:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "game/entities/shotgun_entity.h"
 #include "game/entities/minigun_entity.h"
 #include "game/entities/ammo_entity.h"
+#include "game/entities/medikit_entity.h"
 
 static void	module_add_weapon(t_game *const self)
 {
@@ -38,6 +39,10 @@ static void	module_add_weapon(t_game *const self)
 		entity_descriptor("ammo",
 			"resources/sprites/ammo_sprite.bmp",
 			ammo_entity));
+	module_add(&self->module, &self->entities_list.medikit,
+		entity_descriptor("medikit",
+			"resources/sprites/medikit_sprite.bmp",
+			medikit_entity));
 }
 
 void		init_entity_descriptors(t_game *const self)
