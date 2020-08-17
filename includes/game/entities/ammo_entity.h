@@ -35,5 +35,4 @@ void			ammo_entity_update(t_ammo_entity *const self);
 
 void			destroy_ammo_entity(t_ammo_entity *const self);
 
-
 #endif

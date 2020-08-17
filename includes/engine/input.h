@@ -110,6 +110,6 @@ void				input_update(t_input *const self);
 
 void				destroy_input(t_input *const self);
 
-t_callback_node	*new_event_update_event(void);
+t_callback_node		*new_event_update_event(void);
 
 #endif
