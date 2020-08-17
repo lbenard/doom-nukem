@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:18 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 20:28:24 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/17 19:37:06 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "ft/str.h"
 #include "game/scenes/menu_scene.h"
 #include "game/entities/button_entity.h"
 #include "engine/entity_node.h"
@@ -66,6 +67,22 @@ static void	add_images(t_menu_scene *const self, const t_usize window_size)
 	}
 }
 
+static void	git_id(t_menu_scene *const self)
+{
+	char	id[7];
+
+	ft_strcpy(id, "#");
+	ft_strncat(id, GIT_ID, 5);
+	module_add(&self->super.module, &self->git_id,
+		text("haxorville.bmp", ft_usize(5 * 6, 9)));
+	if (self->super.module.has_error == FALSE)
+	{
+		text_set_ref(&self->git_id,
+			static_string_as_ref(ft_static_string(id)));
+		text_render(&self->git_id, ft_text_settings(ft_isize(0, 0), 9));
+	}
+}
+
 t_result	init_menu_scene(t_menu_scene *const self,
 				const t_menu_scene_args *const args)
 {
@@ -79,6 +96,7 @@ t_result	init_menu_scene(t_menu_scene *const self,
 	self->path = args->path;
 	add_buttons(self, args);
 	add_images(self, args->window->size);
+	git_id(self);
 	if (self->super.module.has_error || self->super.entities.module.has_error)
 	{
 		destroy_menu_scene(self);
