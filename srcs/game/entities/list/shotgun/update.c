@@ -12,21 +12,31 @@
 
 #include "game/entities/shotgun_entity.h"
 
-void	shotgun_entity_update(t_shotgun_entity *const self)
+static void	shotgun_entity_update3(t_shotgun_entity *const self)
 {
-	weapon_entity_update(&self->super);
-	animation_update(&self->animation, self->super.hud_ref);
-	self->super.just_reloaded = FALSE;
-	if (self->super.trigger_reloading)
+	if (self->super.shooting == TRUE)
 	{
-		self->super.reloading = TRUE;
-		if (self->super.specs.clip == 1)
-			self->animation.anim = 3;
-		else
-			self->animation.anim = 1;
-		self->animation.speed = 0.08f;
-		self->animation.iter = 0;
+		if (self->animation.iter
+			>= self->super.hud_ref->grid_size.x * (1 / 0.5) - 1)
+		{
+			self->animation.speed = 0;
+			self->animation.anim = 0;
+			self->super.shooting = FALSE;
+		}
 	}
+	frame_fill(&self->super.hud, ft_rgba(0, 0, 0, 0));
+	frame_layer_transform_add(&self->super.hud,
+		animation_current(&self->animation, self->super.hud_ref),
+		ft_frame_transform(ft_vec2f(1.0f, 1.0f),
+			ft_isize(self->super.hud.size.x - self->super.hud.size.x / 6,
+				self->super.hud.size.y),
+			ft_vec2f(3.0f, 3.0f),
+			255));
+	self->super.trigger_reloading = FALSE;
+}
+
+static void	shotgun_entity_update2(t_shotgun_entity *const self)
+{
 	if (self->super.reloading)
 	{
 		if (self->animation.iter >= self->super.hud_ref->grid_size.x *
@@ -51,23 +61,23 @@ void	shotgun_entity_update(t_shotgun_entity *const self)
 		self->animation.speed = 0.5;
 		self->animation.iter = 0;
 	}
-	if (self->super.shooting == TRUE)
+}
+
+void		shotgun_entity_update(t_shotgun_entity *const self)
+{
+	weapon_entity_update(&self->super);
+	animation_update(&self->animation, self->super.hud_ref);
+	self->super.just_reloaded = FALSE;
+	if (self->super.trigger_reloading)
 	{
-		if (self->animation.iter
-			>= self->super.hud_ref->grid_size.x * (1 / 0.5) - 1)
-		{
-			self->animation.speed = 0;
-			self->animation.anim = 0;
-			self->super.shooting = FALSE;
-		}
+		self->super.reloading = TRUE;
+		if (self->super.specs.clip == 1)
+			self->animation.anim = 3;
+		else
+			self->animation.anim = 1;
+		self->animation.speed = 0.08f;
+		self->animation.iter = 0;
 	}
-	frame_fill(&self->super.hud, ft_rgba(0, 0, 0, 0));
-	frame_layer_transform_add(&self->super.hud,
-		animation_current(&self->animation, self->super.hud_ref),
-		ft_frame_transform(ft_vec2f(1.0f, 1.0f),
-			ft_isize(self->super.hud.size.x - self->super.hud.size.x / 6,
-				self->super.hud.size.y),
-			ft_vec2f(3.0f, 3.0f),
-			255));
-	self->super.trigger_reloading = FALSE;
+	shotgun_entity_update2(self);
+	shotgun_entity_update3(self);
 }

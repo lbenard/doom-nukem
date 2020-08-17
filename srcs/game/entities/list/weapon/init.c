@@ -15,6 +15,27 @@
 #include "game/entities/weapon_entity.h"
 #include "game/scenes/raycasting_scene.h"
 
+t_result	init_weapon_entity2(t_weapon_entity *const self,
+				const t_weapon_entity_args *const args)
+{
+	self->hud_ref = NULL;
+	self->sound_ref = NULL;
+	self->first_render = TRUE;
+	self->specs = args->specs;
+	self->last_shot = 0.0;
+	self->loading = FALSE;
+	self->reloading = FALSE;
+	self->shooting = FALSE;
+	self->trigger_reloading = FALSE;
+	self->stopped_shooting = FALSE;
+	self->just_shooted = FALSE;
+	self->just_reloaded = FALSE;
+	self->load_start = 0.0;
+	self->reload_start = 0.0;
+	self->shoot_start = 0.0;
+	return (OK);
+}
+
 t_result	init_weapon_entity(t_weapon_entity *const self,
 				const t_weapon_entity_args *const args)
 {
@@ -40,20 +61,5 @@ t_result	init_weapon_entity(t_weapon_entity *const self,
 		return (throw_result_str("init_weapon_entity()",
 			"failed to add weapon to list"));
 	}
-	self->hud_ref = NULL;
-	self->sound_ref = NULL;
-	self->first_render = TRUE;
-	self->specs = args->specs;
-	self->last_shot = 0.0;
-	self->loading = FALSE;
-	self->reloading = FALSE;
-	self->shooting = FALSE;
-	self->trigger_reloading = FALSE;
-	self->stopped_shooting = FALSE;
-	self->just_shooted = FALSE;
-	self->just_reloaded = FALSE;
-	self->load_start = 0.0;
-	self->reload_start = 0.0;
-	self->shoot_start = 0.0;
-	return (OK);
+	return (init_weapon_entity2(self, args));
 }
