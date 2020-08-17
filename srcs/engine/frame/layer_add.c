@@ -33,6 +33,18 @@ static t_bool	is_visible(const t_frame *const bg,
 		|| pos.y + (ssize_t)fg->size.y <= 0));
 }
 
+static void		frame_layer_add2(t_frame *const bg,
+					const t_frame *const fg,
+					size_t bg_pos,
+					size_t fg_pos)
+{
+	if (fg->pixels[fg_pos].c.a == 255)
+		bg->pixels[bg_pos] = fg->pixels[fg_pos];
+	else
+		bg->pixels[bg_pos] = blend_add(bg->pixels[bg_pos],
+			fg->pixels[fg_pos]);
+}
+
 void			frame_layer_add(t_frame *const bg,
 					const t_frame *const fg,
 					const t_isize pos)
@@ -56,11 +68,7 @@ void			frame_layer_add(t_frame *const bg,
 			bg_pos = bg->size.x * (pos.y + shift.y + i.y)
 				+ (pos.x + shift.x + i.x);
 			fg_pos = fg->size.x * (shift.y + i.y) + (shift.x + i.x);
-			if (fg->pixels[fg_pos].c.a == 255)
-				bg->pixels[bg_pos] = fg->pixels[fg_pos];
-			else
-				bg->pixels[bg_pos] = blend_add(bg->pixels[bg_pos],
-					fg->pixels[fg_pos]);
+			frame_layer_add2(bg, fg, bg_pos, fg_pos);
 			i.x++;
 		}
 		i.y++;
