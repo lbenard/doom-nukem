@@ -32,6 +32,13 @@ static t_map_entity_node	*create_node(const char *const key,
 	return (new_node);
 }
 
+static t_result				add_entity_handle_error(char **entity_values,
+								char *message)
+{
+	dn_free_values(entity_values);
+	return (throw_result_str("add_entity()", message));
+}
+
 static t_result				add_entity(t_map *const self, char *const p)
 {
 	char				**entity_values;
@@ -41,15 +48,9 @@ static t_result				add_entity(t_map *const self, char *const p)
 	if (!(entity_values = dn_get_values(p, ' ')))
 		return (throw_result_str("add_entity()", "failed to get values"));
 	if (dn_strsplit_length(entity_values) != 2)
-	{
-		dn_free_values(entity_values);
-		return (throw_result_str("add_entity()", "incorrect values"));
-	}
+		return (add_entity_handle_error(entity_values, "incorrect values"));
 	if (!(key = dn_get_key(p)))
-	{
-		dn_free_values(entity_values);
-		return (throw_result_str("add_entity()", "failed to get key"));
-	}
+		return (add_entity_handle_error(entity_values, "failed to get key"));
 	if (!(new_node = create_node(key,
 		ft_vec2f(ft_atof(entity_values[0]), ft_atof(entity_values[1])))))
 	{
