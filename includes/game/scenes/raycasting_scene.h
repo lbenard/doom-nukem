@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_scene.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/17 00:15:12 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/17 20:36:14 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,15 @@ void			raycasting_scene_add_death_buttons(
 					t_raycasting_scene *const self);
 
 void			raycasting_scene_update(t_raycasting_scene *const self);
+
+void			remove_door(t_raycasting_scene *const self, char id);
+
+void			door_trigger(t_raycasting_scene *const self);
+
+void			zbuffer(t_raycasting_scene *const self,
+				const t_vec2f dir,
+				const t_vec2f plane);
+
 void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
 void			raycasting_scene_render_sprites(t_raycasting_scene *const self,

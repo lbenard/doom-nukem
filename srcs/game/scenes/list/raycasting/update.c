@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 20:57:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/17 20:44:01 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "engine/delta.h"
 #include "game/game.h"
 
-static void	zbuffer(t_raycasting_scene *const self,
+void	zbuffer(t_raycasting_scene *const self,
 				const t_vec2f dir,
 				const t_vec2f plane)
 {
@@ -39,55 +39,25 @@ static void	zbuffer(t_raycasting_scene *const self,
 	}
 }
 
-static void	remove_door(t_raycasting_scene *const self, char id)
+static void	switch_weapon(t_raycasting_scene *const self,
+	t_weapon_entity *weapon)
 {
-	t_usize	i;
-
-	i.y = 0;
-	while (i.y < self->map.size.y)
+	if (input_get(&game_singleton()->input, self->inputs.pick) > 0.0f)
 	{
-		i.x = 0;
-		while (i.x < self->map.size.x)
+		if (self->entities.weapon_ref)
 		{
-			if (self->map.map[self->map.size.x * i.y + i.x].id == id)
-			{
-				self->map.map[self->map.size.x * i.y + i.x].id = ' ';
-				self->map.map[self->map.size.x * i.y + i.x].texture_ref = NULL;
-				zbuffer(self, self->entities.player_ref->dir, self->entities.player_ref->plane);
-			}
-			i.x++;
+			self->entities.weapon_ref->super.super.transform.position =
+				self->entities.player_ref->super.transform.position;
+			self->entities.weapon_ref->super.super.transform.position.z = 0.0f;
 		}
-		i.y++;
+		self->weapon.nearest_weapon = self->entities.weapon_ref;
+		self->entities.weapon_ref = weapon;
+		if (self->entities.weapon_ref)
+			self->entities.weapon_ref->first_render = TRUE;
 	}
+	else
+		self->weapon.nearest_weapon = weapon;
 }
-
-static void	door_trigger(t_raycasting_scene *const self)
-{
-	t_game	*game;
-	t_ray	*zbuffer;
-	t_ray	*mid_ray;
-	t_wall	*wall;
-
-	game = game_singleton();
-	if (input_get(&game->input, self->inputs.use) > 0.0f)
-	{
-		zbuffer = (t_ray*)self->zbuffer.array;
-		mid_ray = &zbuffer[self->window_ref->size.x / 2];
-		if (mid_ray->perpendicular_distance < 2.0f)
-		{
-			wall = &self->map.map[(int)mid_ray->hit.y * self->map.size.x
-				+ (int)mid_ray->hit.x];
-			if (wall->id == game->blocks_list.metallic_red_button.id)
-				remove_door(self, game->blocks_list.metallic_red_door.id);
-			if (wall->id == game->blocks_list.metallic_green_button.id)
-				remove_door(self, game->blocks_list.metallic_green_door.id);
-			if (wall->id == game->blocks_list.metallic_blue_button.id)
-				remove_door(self, game->blocks_list.metallic_blue_door.id);
-		}
-	}
-}
-
-#include <stdio.h>
 
 static void	pick_weapon(t_raycasting_scene *const self)
 {
@@ -111,43 +81,11 @@ static void	pick_weapon(t_raycasting_scene *const self)
 			break ;
 		weapon = NULL;
 	}
-	if (input_get(&game_singleton()->input, self->inputs.pick) > 0.0f)
-	{
-		if (self->entities.weapon_ref)
-		{
-			self->entities.weapon_ref->super.super.transform.position =
-				self->entities.player_ref->super.transform.position;
-			self->entities.weapon_ref->super.super.transform.position.z = 0.0f;
-		}
-		self->weapon.nearest_weapon = self->entities.weapon_ref;
-		self->entities.weapon_ref = weapon;
-		if (self->entities.weapon_ref)
-			self->entities.weapon_ref->first_render = TRUE;
-	}
-	else
-		self->weapon.nearest_weapon = weapon;
+	switch_weapon(self, weapon);
 }
 
-void		raycasting_scene_update(t_raycasting_scene *const self)
+static void	player_action(t_raycasting_scene *const self)
 {
-	// printf("weapons: %lu\n", list_size(&self->weapon_entities.list));
-	// printf("before entity update (%lu)\n", list_size(&self->super.entities.list));
-	entity_list_update(&self->super.entities);
-	// printf("after entity update  (%lu)\n", list_size(&self->super.entities.list));
-	if (self->entities.retry_button_ref->is_clicked)
-	{
-		game_set_scene(raycasting_scene(self->window_ref, self->path));
-		return ;
-	}
-	if (self->entities.give_up_button_ref->is_clicked)
-	{
-		// printf("gave up lol\n");
-		game_set_scene(menu_scene(self->window_ref, self->path));
-		return ;
-	}
-	if (self->entities.player_ref->is_dead && self->death_time == 0.0f)
-		self->death_time = get_wall_time();
-	zbuffer(self, self->entities.player_ref->dir, self->entities.player_ref->plane);
 	if (!self->entities.player_ref->is_dead)
 	{
 		if (self->entities.weapon_ref)
@@ -173,9 +111,29 @@ void		raycasting_scene_update(t_raycasting_scene *const self)
 		}
 		door_trigger(self);
 	}
+}
+
+void		raycasting_scene_update(t_raycasting_scene *const self)
+{
+	entity_list_update(&self->super.entities);
+	if (self->entities.retry_button_ref->is_clicked)
+	{
+		game_set_scene(raycasting_scene(self->window_ref, self->path));
+		return ;
+	}
+	if (self->entities.give_up_button_ref->is_clicked)
+	{
+		game_set_scene(menu_scene(self->window_ref, self->path));
+		return ;
+	}
+	if (self->entities.player_ref->is_dead && self->death_time == 0.0f)
+		self->death_time = get_wall_time();
+	zbuffer(self, self->entities.player_ref->dir,
+		self->entities.player_ref->plane);
+	player_action(self);
 	pick_weapon(self);
-	animation_update(&self->tooltips.use_key_animation, &self->assets.use_key_spritesheet);
-	animation_update(&self->tooltips.pick_key_animation, &self->assets.pick_key_spritesheet);
-	// cursor_set_pos(&self->window_ref->cursor, self->window_ref->window,
-	// 	ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2));
+	animation_update(&self->tooltips.use_key_animation,
+		&self->assets.use_key_spritesheet);
+	animation_update(&self->tooltips.pick_key_animation,
+		&self->assets.pick_key_spritesheet);
 }
