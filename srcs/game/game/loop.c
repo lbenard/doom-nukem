@@ -25,6 +25,21 @@ static void	fps_average(double spf)
 	total_frames++;
 }
 
+static void	game_loop2(t_game *game, double last_time, double spf)
+{
+	if (window_is_focused(&game->window))
+	{
+		if (game->scene && !game->has_scene_changed)
+			game->scene->render_fn(game->scene, &game->window.frame);
+		window_update(&game->window);
+	}
+	spf = get_wall_time() - last_time;
+	fps_average(spf);
+	set_last_delta(spf);
+	last_time = get_wall_time();
+	game->has_scene_changed = FALSE;
+}
+
 void		game_loop(void)
 {
 	t_game	*game;
@@ -44,15 +59,5 @@ void		game_loop(void)
 		game_close();
 		return ;
 	}
-	if (window_is_focused(&game->window))
-	{
-		if (game->scene && !game->has_scene_changed)
-			game->scene->render_fn(game->scene, &game->window.frame);
-		window_update(&game->window);
-	}
-	spf = get_wall_time() - last_time;
-	fps_average(spf);
-	set_last_delta(spf);
-	last_time = get_wall_time();
-	game->has_scene_changed = FALSE;
+	game_loop2(game, last_time, spf);
 }
