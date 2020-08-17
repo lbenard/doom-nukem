@@ -73,6 +73,18 @@ void	ft_step_child(t_node child, t_node cur_node, t_star *star)
 		ft_add_node(&star->openl, child);
 }
 
+void	ft_diag2(t_star *star, t_node c_node)
+{
+	t_node	node;
+
+	if (ft_analyse(c_node.pos.x + 1, c_node.pos.y + 1, star) == 0 &&
+		ft_validiag(c_node.pos.x + 1, c_node.pos.y + 1, star, c_node) == 0)
+	{
+		node = ft_get_f(c_node.pos.x + 1, c_node.pos.y + 1, star, c_node);
+		ft_step_child(node, c_node, star);
+	}
+}
+
 void	ft_diag(t_star *star, t_node c_node)
 {
 	t_node	node;
@@ -95,10 +107,5 @@ void	ft_diag(t_star *star, t_node c_node)
 		node = ft_get_f(c_node.pos.x - 1, c_node.pos.y + 1, star, c_node);
 		ft_step_child(node, c_node, star);
 	}
-	if (ft_analyse(c_node.pos.x + 1, c_node.pos.y + 1, star) == 0 &&
-		ft_validiag(c_node.pos.x + 1, c_node.pos.y + 1, star, c_node) == 0)
-	{
-		node = ft_get_f(c_node.pos.x + 1, c_node.pos.y + 1, star, c_node);
-		ft_step_child(node, c_node, star);
-	}
+	ft_diag2(star, c_node);
 }
