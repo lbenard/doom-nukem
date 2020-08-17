@@ -55,5 +55,5 @@ void		sprite_entity_update(t_sprite_entity *const self)
 		+ self->player_ref->plane.x * sprite_pos.y);
 	sprite_screen_x = (ssize_t)((self->frame_ref->size.x / 2)
 		* (1 + transform.x / transform.y));
-	sprite_entity_update2(self, transform);
+	sprite_entity_update2(self, transform, sprite_screen_x);
 }

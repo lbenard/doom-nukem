@@ -25,8 +25,10 @@ static void	fps_average(double spf)
 	total_frames++;
 }
 
-static void	game_loop2(t_game *game, double last_time, double spf)
+static void	game_loop2(t_game *game, double last_time)
 {
+	double	spf;
+
 	if (window_is_focused(&game->window))
 	{
 		if (game->scene && !game->has_scene_changed)
@@ -45,7 +47,6 @@ void		game_loop(void)
 	t_game	*game;
 	double	last_time;
 	sfEvent	event;
-	double	spf;
 
 	game = game_singleton();
 	last_time = get_wall_time();
@@ -59,5 +60,5 @@ void		game_loop(void)
 		game_close();
 		return ;
 	}
-	game_loop2(game, last_time, spf);
+	game_loop2(game, last_time);
 }
