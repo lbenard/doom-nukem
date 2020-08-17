@@ -89,8 +89,7 @@ t_result	init_menu_scene(t_menu_scene *const self,
 	if (!init_scene(&self->super, "Main menu", (void(*)())menu_scene_update,
 		(void(*)())menu_scene_render))
 	{
-		return (throw_result_str("init_menu_scene()",
-			"failed to init menu scene"));
+		return (throw_result_str("init_menu_scene()", "init menu scene fail"));
 	}
 	self->window_size = args->window->size;
 	self->path = args->path;
