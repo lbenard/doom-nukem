@@ -52,6 +52,12 @@ static char	*join_next_line(char *text, char *next_line)
 	}
 }
 
+static void	*dn_read_handle_error(int file_descriptor)
+{
+	close(file_descriptor);
+	return (throw_error_str("dn_read_file()", "failed to create map string"));
+}
+
 char		*dn_read_file(const char *path)
 {
 	int		file_descriptor;
@@ -61,11 +67,7 @@ char		*dn_read_file(const char *path)
 	if ((file_descriptor = open(path, O_RDONLY)) <= 0)
 		return (throw_error_str("dn_read_file()", "failed to open file"));
 	if (!(map_str = ft_strdup("\n")))
-	{
-		close(file_descriptor);
-		return (throw_error_str("dn_read_file()",
-			"failed to create map string"));
-	}
+		return (dn_read_handle_error(file_descriptor));
 	while (ft_get_next_line(file_descriptor, &line))
 	{
 		if (!line || !dn_is_line_correct(line))
