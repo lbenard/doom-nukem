@@ -14,7 +14,29 @@
 #include "game/entities/weird_alien_entity.h"
 #include "engine/delta.h"
 
-void	weird_alien_entity_update(t_weird_alien_entity *const self)
+static void	weird_alien_entity_update2(t_weird_alien_entity *const self,
+				t_vec3f difference,
+				float distance,
+				t_vec3f velocity)
+{
+	if (distance < 75)
+	{
+		self->super.animation.speed = 1.0f;
+		velocity.x += difference.x;
+		velocity.y += difference.y;
+		velocity.z += difference.z;
+	}
+	else
+		self->super.animation.speed = 0.0f;
+	velocity = vec3f_normalize(velocity);
+	velocity = vec3f_scalar(velocity, 2.0f);
+	velocity = vec3f_scalar(velocity, get_last_delta());
+	self->super.super.super.transform.position.x += velocity.x;
+	self->super.super.super.transform.position.y += velocity.y;
+	self->super.super.super.transform.position.z += velocity.z;
+}
+
+void		weird_alien_entity_update(t_weird_alien_entity *const self)
 {
 	t_vec3f	position;
 	t_vec3f	player_pos;
@@ -35,19 +57,5 @@ void	weird_alien_entity_update(t_weird_alien_entity *const self)
 		+ difference.y * difference.y
 		+ difference.z * difference.z;
 	velocity = ft_vec3f(cos(get_wall_time()), sin(get_wall_time()), 0.0f);
-	if (distance < 75)
-	{
-		self->super.animation.speed = 1.0f;
-		velocity.x += difference.x;
-		velocity.y += difference.y;
-		velocity.z += difference.z;
-	}
-	else
-		self->super.animation.speed = 0.0f;
-	velocity = vec3f_normalize(velocity);
-	velocity = vec3f_scalar(velocity, 2.0f);
-	velocity = vec3f_scalar(velocity, get_last_delta());
-	self->super.super.super.transform.position.x += velocity.x;
-	self->super.super.super.transform.position.y += velocity.y;
-	self->super.super.super.transform.position.z += velocity.z;
+	weird_alien_entity_update2(self, difference, distance, velocity);
 }
