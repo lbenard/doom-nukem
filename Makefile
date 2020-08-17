@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/17 00:47:40 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/17 20:45:33 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -472,6 +472,7 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/add_entities.c										\
 					game/scenes/list/raycasting/add_death_buttons.c									\
 					game/scenes/list/raycasting/update.c											\
+					game/scenes/list/raycasting/door.c												\
 					game/scenes/list/raycasting/render.c											\
 					game/scenes/list/raycasting/render_sprites.c									\
 					game/scenes/list/raycasting/render_weapon_display.c								\

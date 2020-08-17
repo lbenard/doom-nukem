@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_tooltip.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 16:07:57 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 21:13:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/17 20:09:09 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ static void	render_weapon_tooltip(t_raycasting_scene *const self,
 				fb->size.y / 2 + 20 + 40 * self->tooltips.use_triggered),
 			ft_vec2f(2.0f, 2.0f),
 			255));
-
 }
 
 static void	weapon_tooltip(t_raycasting_scene *const self,
