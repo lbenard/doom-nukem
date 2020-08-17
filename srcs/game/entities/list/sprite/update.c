@@ -15,9 +15,10 @@
 
 static void	sprite_entity_update2(t_sprite_entity *const self,
 			t_vec2f transform,
-			ssize_t sprite_screen_x,
-			t_usize sprite_size)
+			ssize_t sprite_screen_x)
 {
+	t_usize sprite_size;
+
 	sprite_size.x = ft_ssabs((ssize_t)self->frame_ref->size.y / transform.y)
 		* ft_fabs(self->super.transform.scale.x);
 	sprite_size.y = ft_ssabs((ssize_t)self->frame_ref->size.y / transform.y)
@@ -41,7 +42,6 @@ void		sprite_entity_update(t_sprite_entity *const self)
 	double	inv_det;
 	t_vec2f	transform;
 	ssize_t	sprite_screen_x;
-	t_usize	sprite_size;
 
 	sprite_pos.x = self->super.transform.position.x
 		- self->player_ref->super.transform.position.x;
@@ -55,5 +55,5 @@ void		sprite_entity_update(t_sprite_entity *const self)
 		+ self->player_ref->plane.x * sprite_pos.y);
 	sprite_screen_x = (ssize_t)((self->frame_ref->size.x / 2)
 		* (1 + transform.x / transform.y));
-	sprite_entity_update2(self, transform, sprite_screen_x, sprite_size);
+	sprite_entity_update2(self, transform);
 }
