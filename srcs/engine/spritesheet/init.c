@@ -65,8 +65,6 @@ static t_result	init_spritesheet2(t_spritesheet *const self)
 t_result		init_spritesheet(t_spritesheet *const self,
 					t_spritesheet_args *const args)
 {
-	size_t	i;
-
 	init_module(&self->module);
 	self->sprite = NULL;
 	module_add(&self->module, &self->pixels, frame_from_file(args->path));
