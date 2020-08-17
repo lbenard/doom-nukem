@@ -12,21 +12,8 @@
 
 #include "game/entities/minigun_entity.h"
 
-void	minigun_entity_update(t_minigun_entity *const self)
+static void	minigun_entity_update2(t_minigun_entity *const self)
 {
-	weapon_entity_update(&self->super);
-	animation_update(&self->animation, self->super.hud_ref);
-	self->super.just_reloaded = FALSE;
-	if (self->super.stopped_shooting)
-		self->super.shooting = FALSE;
-	if (!(self->super.shooting || self->super.loading))
-	{
-		self->animation.anim = 0;
-		self->animation.iter = 0;
-		self->animation.speed = 0.0f;
-	}
-	else
-		self->animation.speed = 0.5f;
 	if (self->super.shooting)
 		self->animation.anim = 1;
 	if (self->super.loading)
@@ -48,4 +35,22 @@ void	minigun_entity_update(t_minigun_entity *const self)
 			255));
 	self->super.trigger_reloading = FALSE;
 	self->super.stopped_shooting = FALSE;
+}
+
+void		minigun_entity_update(t_minigun_entity *const self)
+{
+	weapon_entity_update(&self->super);
+	animation_update(&self->animation, self->super.hud_ref);
+	self->super.just_reloaded = FALSE;
+	if (self->super.stopped_shooting)
+		self->super.shooting = FALSE;
+	if (!(self->super.shooting || self->super.loading))
+	{
+		self->animation.anim = 0;
+		self->animation.iter = 0;
+		self->animation.speed = 0.0f;
+	}
+	else
+		self->animation.speed = 0.5f;
+	minigun_entity_update2(self);
 }
