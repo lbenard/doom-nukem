@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 22:20:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 03:54:38 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 19:05:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ void	init_raycasting_scene_vars(t_raycasting_scene *const self,
 	self->weapon.ammo = 100;
 	self->weapon.last_shot = 0.0;
 	self->weapon.nearest_weapon = NULL;
+	self->tooltips.ending_triggered = FALSE;
 }

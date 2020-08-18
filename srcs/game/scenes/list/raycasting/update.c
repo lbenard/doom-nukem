@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/17 21:03:47 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/18 18:51:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ static void	player_action(t_raycasting_scene *const self)
 			}
 		}
 		door_trigger(self);
+		ending_trigger(self);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 00:29:10 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 18:11:08 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_game
 		t_block_descriptor	metallic_red_door;
 		t_block_descriptor	metallic_green_door;
 		t_block_descriptor	metallic_blue_door;
+		t_block_descriptor	ending;
 	}						blocks_list;
 	struct		s_entities
 	{

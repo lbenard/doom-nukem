@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 00:24:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 19:17:04 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ typedef struct	s_raycasting_scene
 		t_animation		use_key_animation;
 		t_text			use_key_text;
 		t_bool			use_triggered;
+		t_text			ending_text;
+		t_bool			ending_triggered;
+		float			ending_text_opacity;
 		t_animation		pick_key_animation;
 		char			pick_key_display[20];
 		t_text			pick_key_text;
@@ -133,13 +136,12 @@ void			raycasting_scene_add_death_buttons(
 
 void			raycasting_scene_update(t_raycasting_scene *const self);
 
-void			remove_door(t_raycasting_scene *const self, char id);
-
 void			door_trigger(t_raycasting_scene *const self);
+void			ending_trigger(t_raycasting_scene *const self);
 
 void			zbuffer(t_raycasting_scene *const self,
-				const t_vec2f dir,
-				const t_vec2f plane);
+					const t_vec2f dir,
+					const t_vec2f plane);
 
 void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
@@ -151,6 +153,12 @@ void			raycasting_scene_render_weapon_display(
 void			raycasting_scene_render_weapon(t_raycasting_scene *const self,
 					t_frame *const fb);
 void			raycasting_scene_render_tooltip(t_raycasting_scene *const self,
+					t_frame *const fb);
+void			raycasting_scene_render_use_tooltip(
+					t_raycasting_scene *const self,
+					t_frame *const fb);
+void			raycasting_scene_render_weapon_tooltip(
+					t_raycasting_scene *const self,
 					t_frame *const fb);
 
 t_result		raycasting_scene_add_entity(t_raycasting_scene *const self,
@@ -175,6 +183,7 @@ void			raycasting_scene_weapon_reload(t_raycasting_scene *const self);
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
 
 t_rgba			ft_get_lerp_col(t_rgba color1, float dist, float value);
+
 /*
 ** Utils
 */
