@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 22:32:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:01:49 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 20:35:59 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,6 @@
 #include "engine/error.h"
 #include "engine/input.h"
 #include "game/game.h"
-
-static t_vec2f	get_scroll_relative_to_camera(sfEvent *event,
-					const t_frame *const fb)
-{
-	t_vec2f	mid;
-	t_usize	size;
-	t_vec2f	ret;
-
-	size = fb->size;
-	mid = ft_vec2f((float)size.x / 2.0f, (float)size.y / 2.0f);
-	ret.x = ((float)event->mouseWheelScroll.x - mid.x);
-	ret.y = ((float)event->mouseWheelScroll.y - mid.y);
-	return (ret);
-}
 
 static t_vec2f	get_previous_position(t_vec2f scroll_relative,
 					t_transform camera, float unit)
@@ -71,10 +57,13 @@ static void		editor_camera_zoom_event(t_editor_camera_entity *const self,
 	t_vec2f	scroll_relative;
 	t_vec2f	scroll_previous;
 	t_vec2f	scroll_next;
+	t_vec2f	mid;
 
 	if (event->type == sfEvtMouseWheelScrolled)
 	{
-		scroll_relative = get_scroll_relative_to_camera(event, fb);
+		mid = ft_vec2f((float)fb->size.x / 2.0f, (float)fb->size.y / 2.0f);
+		scroll_relative.x = ((float)event->mouseWheelScroll.x - mid.x);
+		scroll_relative.y = ((float)event->mouseWheelScroll.y - mid.y);
 		scroll_previous = get_previous_position(scroll_relative,
 			self->super.transform, self->grid_unit);
 		update_camera_scale(self, event);

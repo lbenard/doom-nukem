@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 20:45:11 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 20:43:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,26 @@
 #include "maths/maths.h"
 #include "engine/delta.h"
 
-static void	sort(t_raycasting_scene *const self)
+static void	list_swap_next(t_list_head *pos)
 {
-	t_list_head		*pos;
 	t_list_head		*next;
 	t_list_head		*left;
 	t_list_head		*right;
+
+	next = pos->next;
+	left = pos->prev;
+	right = next->next;
+	left->next = next;
+	right->prev = pos;
+	pos->prev = next;
+	pos->next = right;
+	next->prev = left;
+	next->next = pos;
+}
+
+static void	sort(t_raycasting_scene *const self)
+{
+	t_list_head		*pos;
 	t_sprite_entity	*sprite;
 	t_sprite_entity	*next_sprite;
 
@@ -30,19 +44,11 @@ static void	sort(t_raycasting_scene *const self)
 		if (pos->next == &self->sprite_entities.list)
 			break ;
 		sprite = (t_sprite_entity*)((t_entity_node*)pos)->entity;
-		next = pos->next;
-		next_sprite = (t_sprite_entity*)((t_entity_node*)next)->entity;
+		next_sprite = (t_sprite_entity*)((t_entity_node*)pos->next)->entity;
 		if (sprite->perpendicular_distance
 			< next_sprite->perpendicular_distance)
 		{
-			left = pos->prev;
-			right = next->next;
-			left->next = next;
-			right->prev = pos;
-			pos->prev = next;
-			pos->next = right;
-			next->prev = left;
-			next->next = pos;
+			list_swap_next(pos);
 			pos = &self->sprite_entities.list;
 			continue ;
 		}
