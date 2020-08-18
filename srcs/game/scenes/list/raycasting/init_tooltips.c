@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_tooltips.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 17:59:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 19:13:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 19:37:16 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	fill_texts(t_raycasting_scene *const self)
 		ft_rgba(255, 255, 255, 255), blend_colorize);
 }
 
-void	init_raycasting_scene_tooltips(t_raycasting_scene *const self)
+void		init_raycasting_scene_tooltips(t_raycasting_scene *const self)
 {
 	module_add(&self->super.module, &self->tooltips.use_key_animation,
 		animation(0, 2, 0.1f));

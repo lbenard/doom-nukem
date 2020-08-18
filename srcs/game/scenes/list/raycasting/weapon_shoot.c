@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapon_shoot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 21:53:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 20:47:50 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "game/entities/monster_entity.h"
 #include "ft/str.h"
 #include <math.h>
+#include "maths/vec3f.h"
 
 static t_bool	is_targeting(const t_monster_entity *const monster,
 					const t_isize crosshair_pos,
@@ -70,28 +71,56 @@ static void		sort(t_raycasting_scene *const self)
 	}
 }
 
-int				distance_monster(t_raycasting_scene *const self,
-					t_monster_entity *monster)
-{
-	t_vec3f	monster_pos;
-	t_vec3f	player_pos;
-	int		distance;
+// int				distance_monster(t_raycasting_scene *const self,
+// 					t_monster_entity *monster)
+// {
+// 	t_vec3f	monster_pos;
+// 	t_vec3f	player_pos;
+// 	int		distance;
 
-	monster_pos = monster->super.super.transform.position;
-	player_pos = self->entities.player_ref->super.transform.position;
-	distance = sqrt(pow(monster_pos.x - player_pos.x, 2) +
-		pow(monster_pos.y - player_pos.y, 2));
-	distance = abs(distance);
-	return (distance);
+// 	monster_pos = monster->super.super.transform.position;
+// 	player_pos = self->entities.player_ref->super.transform.position;
+// 	distance = sqrt(pow(monster_pos.x - player_pos.x, 2) +
+// 		pow(monster_pos.y - player_pos.y, 2));
+// 	distance = abs(distance);
+// 	return (distance);
+// }
+
+static void		iter_monster(t_raycasting_scene *const self,
+	t_monster_entity *monster, float wall, const size_t mu)
+{
+	t_list_head			*pos;
+	t_isize				cpos;
+
+	pos = &self->monster_entities.list;
+	cpos = ft_isize(self->window_ref->size.x / 2, self->window_ref->size.y / 2);
+	while ((pos = pos->prev) != &self->monster_entities.list)
+	{
+		monster = (t_monster_entity*)((t_entity_node*)pos)->entity;
+		if (monster->super.is_visible
+		&& is_targeting(monster, cpos, wall))
+		{
+			if (self->entities.weapon_ref->specs.decay == 0.0f)
+				monster->health -= self->entities.weapon_ref->specs.damage * mu;
+			else
+				monster->health -= (self->entities.weapon_ref->specs.damage /
+					(vec3f_distance(
+					self->entities.player_ref->super.transform.position,
+					monster->super.super.transform.position) *
+					self->entities.weapon_ref->specs.decay + 1.0f)) * mu;
+			monster->last_damage = get_wall_time();
+			if (monster->health <= 0.0f)
+				raycasting_scene_kill_monster(self, (t_entity*)monster);
+			break ;
+		}
+	}
 }
 
 t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 					const size_t ammo_amount)
 {
-	t_isize				crosshair_pos;
 	t_ray				*zbuffer;
 	float				wall;
-	t_list_head			*pos;
 	t_monster_entity	*monster;
 
 	if (use_ammo(self->entities.weapon_ref, ammo_amount) == FALSE)
@@ -100,31 +129,10 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 	self->weapon.last_shot = get_wall_time();
 	if (self->entities.weapon_ref->sound_ref)
 		sound_play(self->entities.weapon_ref->sound_ref);
-	crosshair_pos.x = self->window_ref->size.x / 2;
-	crosshair_pos.y = self->window_ref->size.y / 2;
 	zbuffer = (t_ray*)self->zbuffer.array;
 	wall = zbuffer[self->window_ref->size.x / 2].perpendicular_distance;
-	pos = &self->monster_entities.list;
-	while ((pos = pos->prev) != &self->monster_entities.list)
-	{
-		monster = (t_monster_entity*)((t_entity_node*)pos)->entity;
-		if (monster->super.is_visible
-			&& is_targeting(monster, crosshair_pos, wall))
-		{
-			if (self->entities.weapon_ref->specs.decay == 0.0f)
-				monster->health -= self->entities.weapon_ref->specs.damage
-					* ammo_amount;
-			else
-				monster->health -= (self->entities.weapon_ref->specs.damage
-					/ (distance_monster(self, monster)
-					* self->entities.weapon_ref->specs.decay + 1.0f))
-					* ammo_amount;
-			monster->last_damage = get_wall_time();
-			if (monster->health <= 0.0f)
-				raycasting_scene_kill_monster(self, (t_entity*)monster);
-			break ;
-		}
-	}
+	monster = NULL;
+	iter_monster(self, monster, wall, ammo_amount);
 	self->entities.weapon_ref->just_shooted = TRUE;
 	return (TRUE);
 }
