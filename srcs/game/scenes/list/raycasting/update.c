@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 18:51:41 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 20:39:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,32 +86,31 @@ static void	pick_weapon(t_raycasting_scene *const self)
 
 static void	player_action(t_raycasting_scene *const self)
 {
-	if (!self->entities.player_ref->is_dead)
+	if (self->entities.player_ref->is_dead)
+		return ;
+	if (self->entities.weapon_ref)
 	{
-		if (self->entities.weapon_ref)
+		if (input_get(&game_singleton()->input,
+			self->inputs.reload) > 0.0f
+			&& self->entities.weapon_ref->shooting == FALSE
+			&& !self->entities.weapon_ref->reloading
+			&& self->entities.weapon_ref->specs.clip
+				!= self->entities.weapon_ref->specs.clip_size)
+			self->entities.weapon_ref->trigger_reloading = TRUE;
+		if (self->entities.weapon_ref->just_reloaded)
+			raycasting_scene_weapon_reload(self);
+		else if (input_get(&game_singleton()->input,
+		self->inputs.shoot) > 0.0f && !self->entities.weapon_ref->reloading)
+			raycasting_scene_weapon_use(self);
+		else
 		{
-			if (input_get(&game_singleton()->input,
-				self->inputs.reload) > 0.0f
-				&& self->entities.weapon_ref->shooting == FALSE
-				&& !self->entities.weapon_ref->reloading
-				&& self->entities.weapon_ref->specs.clip
-					!= self->entities.weapon_ref->specs.clip_size)
-				self->entities.weapon_ref->trigger_reloading = TRUE;
-			if (self->entities.weapon_ref->just_reloaded)
-				raycasting_scene_weapon_reload(self);
-			else if (input_get(&game_singleton()->input,
-			self->inputs.shoot) > 0.0f && !self->entities.weapon_ref->reloading)
-				raycasting_scene_weapon_use(self);
-			else
-			{
-				self->entities.weapon_ref->stopped_shooting = TRUE;
-				self->entities.weapon_ref->loading = FALSE;
-				self->entities.weapon_ref->load_start = 0.0;
-			}
+			self->entities.weapon_ref->stopped_shooting = TRUE;
+			self->entities.weapon_ref->loading = FALSE;
+			self->entities.weapon_ref->load_start = 0.0;
 		}
-		door_trigger(self);
-		ending_trigger(self);
 	}
+	door_trigger(self);
+	ending_trigger(self);
 }
 
 void		raycasting_scene_update(t_raycasting_scene *const self)

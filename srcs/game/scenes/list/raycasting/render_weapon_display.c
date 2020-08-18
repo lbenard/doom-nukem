@@ -6,7 +6,11 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 21:04:04 by lbenard           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/08/18 22:11:06 by mribouch         ###   ########.fr       */
+=======
+/*   Updated: 2020/08/18 20:40:01 by lbenard          ###   ########.fr       */
+>>>>>>> 42cb8ffdd18e2bb1289ad7f548fa2628422e4726
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +59,8 @@ static void	update_display(t_raycasting_scene *const self)
 }
 
 void		raycasting_scene_render_weapon_display(
-			t_raycasting_scene *const self, t_frame *const fb)
+				t_raycasting_scene *const self,
+				t_frame *const fb)
 {
 	if (self->entities.weapon_ref)
 	{
