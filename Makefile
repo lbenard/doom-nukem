@@ -288,6 +288,7 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/camera/transform_camera_pos.c							\
 					game/entities/list/editor/camera/transform_screen_pos.c							\
 					game/entities/list/editor/camera/destroy.c										\
+					game/entities/list/editor/camera/new_editor_camera_zoom_event_tools.c					\
 					game/entities/list/editor/camera/new_editor_camera_zoom_event.c					\
 																									\
 					game/entities/list/editor/component/component_entity.c							\
