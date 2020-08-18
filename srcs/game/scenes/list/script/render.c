@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:36:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/30 21:28:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 20:23:06 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ static void	script_scene_render3(t_script_scene *const self,
 	{
 		if (self->text_finished_time == 0.0)
 			self->text_finished_time = get_wall_time();
-		frame_layer_transform_add(fb,
+		frame_layer_add(fb,
 			&self->tig,
-			ft_frame_transform(ft_vec2f(0.5f, 0.5f),
-				ft_isize(fb->size.x / 2, fb->size.y / 2 + 350 - tig_fade * 250),
-				ft_vec2f(1.0f, 1.0f),
-				tig_fade * 255));
+			ft_isize(fb->size.x / 2 - self->tig.size.x / 2,
+				fb->size.y / 2 - self->tig.size.y / 2 + 350 - tig_fade * 250));
 	}
 	frame_layer_transform_add(fb,
 		&self->skip_text.target,
