@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 00:29:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 18:11:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct	s_editor_scene
 			t_block_checkbox_entity	*metallic_red_door;
 			t_block_checkbox_entity	*metallic_green_door;
 			t_block_checkbox_entity	*metallic_blue_door;
+			t_block_checkbox_entity	*ending;
 		}						blocks_group;
 		t_radio_group	entities;
 		struct	s_entities_group
