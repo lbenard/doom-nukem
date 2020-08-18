@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_weapon_display.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 21:04:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/10 19:27:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 22:11:06 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void	itoa_limit(char *const dest, size_t n, size_t limit)
 	return ;
 }
 
-
 static void	update_display(t_raycasting_scene *const self)
 {
 	itoa_limit(self->weapon.display, self->entities.weapon_ref->specs.clip, 4);
@@ -55,8 +54,8 @@ static void	update_display(t_raycasting_scene *const self)
 		blend_colorize);
 }
 
-void	raycasting_scene_render_weapon_display(t_raycasting_scene *const self,
-			t_frame *const fb)
+void		raycasting_scene_render_weapon_display(
+			t_raycasting_scene *const self, t_frame *const fb)
 {
 	if (self->entities.weapon_ref)
 	{
