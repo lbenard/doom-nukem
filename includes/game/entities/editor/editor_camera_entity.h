@@ -70,6 +70,9 @@ t_isize			transform_screen_pos(
 void			destroy_editor_camera_entity(
 					t_editor_camera_entity *const self);
 
+void			editor_camera_zoom_event(t_editor_camera_entity *const self,
+					sfEvent *event,
+					const t_frame *const fb);
 t_callback_node	*new_editor_camera_zoom_event(const t_frame *const fb);
 
 #endif
