@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_vars.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 22:20:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 19:05:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 22:56:54 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_raycasting_scene_vars(t_raycasting_scene *const self,
 	self->fov = 90.0f * M_PI / 180.0f;
 	self->window_ref = args->window;
 	self->entities.weapon_ref = NULL;
-	self->weapon.ammo = 100;
+	self->weapon.ammo = 36;
 	self->weapon.last_shot = 0.0;
 	self->weapon.nearest_weapon = NULL;
 	self->tooltips.ending_triggered = FALSE;
