@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/24 15:42:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 20:49:18 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/18 22:32:57 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_player_entity
 	float			speed;
 	float			fov;
 	float			health;
+	float			max_health;
 	t_vec2f			dir;
 	t_vec2f			plane;
 	t_input_id		forward;

@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 12:57:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 20:42:32 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/18 22:34:05 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_result		init_player_entity(t_player_entity *const self,
 
 	init_entity_default(&self->super, entity_vtable(player_entity_update));
 	init_vars(self, args);
+	self->max_health = 150.0f;
 	rot_sin = sin(self->super.transform.rotation.y);
 	rot_cos = cos(self->super.transform.rotation.y);
 	self->dir = ft_vec2f(rot_cos, rot_sin);
