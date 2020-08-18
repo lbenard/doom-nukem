@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:26:40 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/30 21:43:23 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 17:49:06 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void		script_scene_update(t_script_scene *const self)
 	else
 		write(self, self->paragraph2, self->writing_paragraph2);
 	if (self->skip)
+	{
 		game_set_scene(raycasting_scene(self->window, self->path));
+		return ;
+	}
 	self->speed *= 0.8f;
 }
