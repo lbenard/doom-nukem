@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 20:21:32 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/17 20:22:26 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/18 18:51:06 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/raycasting_scene.h"
 
-void	remove_door(t_raycasting_scene *const self, char id)
+static void	remove_door(t_raycasting_scene *const self, char id)
 {
 	t_usize	i;
 
@@ -35,7 +35,7 @@ void	remove_door(t_raycasting_scene *const self, char id)
 	}
 }
 
-void	door_trigger(t_raycasting_scene *const self)
+void		door_trigger(t_raycasting_scene *const self)
 {
 	t_game	*game;
 	t_ray	*zbuffer;
