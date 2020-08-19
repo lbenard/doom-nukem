@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 01:49:21 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 22:32:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:33:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "game/entities/sprite_entity.h"
 # include "engine/spritesheet.h"
 # include "engine/animation.h"
-# include "engine/sound.h"
 
 typedef struct	s_weapon_specs
 {
@@ -37,7 +36,6 @@ typedef struct	s_weapon_entity
 	t_bool			is_picked;
 	t_spritesheet	*hud_ref;
 	t_frame			hud;
-	t_sound			*sound_ref;
 	t_weapon_specs	specs;
 	t_bool			first_render;
 	double			last_shot;

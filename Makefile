@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/19 04:21:08 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/19 04:36:17 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,13 +52,6 @@ SRCS_LIST		=	main.c																			\
 					engine/delta/get_last_delta.c													\
 					engine/delta/get_wall_time.c													\
 					engine/delta/set_last_delta.c													\
-																									\
-					engine/entity_index/new_entity_descriptor_node.c								\
-					engine/entity_index/entity_index.c												\
-					engine/entity_index/init.c														\
-					engine/entity_index/register.c													\
-					engine/entity_index/get.c														\
-					engine/entity_index/destroy.c													\
 																									\
 					engine/entities/entity_list/entity_list.c										\
 					engine/entities/entity_list/init.c												\
@@ -168,23 +161,6 @@ SRCS_LIST		=	main.c																			\
 					engine/sfml/sprite/sprite.c														\
 					engine/sfml/sprite/init.c														\
 					engine/sfml/sprite/destroy.c													\
-																									\
-					engine/shape/new_vertex_node.c													\
-					engine/shape/vertices_side.c													\
-					engine/shape/shape.c															\
-					engine/shape/init.c																\
-					engine/shape/push_vertex.c														\
-					engine/shape/update_box.c														\
-					engine/shape/sort.c																\
-					engine/shape/get_center.c														\
-					engine/shape/is_point_in_shape.c												\
-					engine/shape/render.c															\
-					engine/shape/destroy.c															\
-																									\
-					engine/sound/sound.c															\
-					engine/sound/init.c																\
-					engine/sound/play.c																\
-					engine/sound/destroy.c															\
 																									\
 					engine/render_utils/row.c														\
 					engine/render_utils/column.c													\
@@ -368,9 +344,9 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/monster/orientate_sprite.c									\
 					game/entities/list/monster/a_star_monster.c										\
 																									\
-					game/entities/list/widepunchman/widepunchman_entity.c								\
+					game/entities/list/widepunchman/widepunchman_entity.c							\
 					game/entities/list/widepunchman/init.c											\
-					game/entities/list/widepunchman/update.c											\
+					game/entities/list/widepunchman/update.c										\
 					game/entities/list/widepunchman/destroy.c										\
 																									\
 					game/entities/list/weird_alien/weird_alien_entity.c								\

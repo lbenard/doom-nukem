@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 02:08:02 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:36:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static t_result	init_shotgun_entity2(t_shotgun_entity *const self,
 			"failed to create shotgun animation"));
 	}
 	self->super.super.super.vtable.update = shotgun_entity_update;
-	self->super.sound_ref = NULL;
 	self->super.hud_ref = &ctx->assets.shotgun_spritesheet;
 	self->super.super.super.transform.position.x = args->pos.x;
 	self->super.super.super.transform.position.y = args->pos.y;

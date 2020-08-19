@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_scene.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 01:10:51 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/19 04:56:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "engine/window.h"
 # include "engine/frame.h"
 # include "engine/text.h"
-# include "engine/shape.h"
 # include "game/entities/editor/component_entity.h"
 # include "game/entities/editor/editor_camera_entity.h"
 # include "game/entities/editor/grid_component_entity.h"
@@ -27,7 +26,7 @@
 # include "game/entities/editor/player_component_entity.h"
 # include "game/entities/checkbox_entity.h"
 # include "game/block_descriptor.h"
-#include "game/game.h"
+# include "game/game.h"
 
 # define BUTTONS "resources/buttons/"
 
@@ -56,23 +55,23 @@ typedef struct	s_editor_scene
 	t_frame						editor_view;
 	t_frame						editor_background;
 	t_grid_component_entity		*grid_ref;
-	struct						s_hud
+	struct		s_hud
 	{
-		t_radio_group	tools;
-		struct	s_tools_group
+		t_radio_group			tools;
+		struct		s_tools_group
 		{
 			t_checkbox_entity	*cursor_ref;
 			t_checkbox_entity	*create_ref;
 			t_checkbox_entity	*save_ref;
 		}						tools_group;
-		t_radio_group	create;
-		struct	s_create_group
+		t_radio_group			create;
+		struct		s_create_group
 		{
 			t_checkbox_entity	*show_blocks_ref;
 			t_checkbox_entity	*show_entities_ref;
 		}						create_group;
-		t_radio_group	blocks;
-		struct	s_blocks_group
+		t_radio_group			blocks;
+		struct		s_blocks_group
 		{
 			t_block_checkbox_entity	*sandstone;
 			t_block_checkbox_entity	*metallic_wall;
@@ -88,8 +87,8 @@ typedef struct	s_editor_scene
 			t_block_checkbox_entity	*metallic_blue_door;
 			t_block_checkbox_entity	*ending;
 		}						blocks_group;
-		t_radio_group	entities;
-		struct	s_entities_group
+		t_radio_group			entities;
+		struct		s_entities_group
 		{
 			t_entity_checkbox_entity	*widepunchman;
 			t_entity_checkbox_entity	*weird_alien;
@@ -114,31 +113,25 @@ typedef struct	s_editor_scene_args
 
 t_constructor	editor_scene(const t_window *const screen,
 					const char *const path);
-/*
-** t_constructor	editor_scene_from_file(const t_usize window_size,
-** 					const char *const path);
-*/
+
 t_result		init_editor_scene(t_editor_scene *const self,
 					const t_editor_scene_args *const args);
 
 void			init_event_handler_callback(t_editor_scene *const self);
 void			init_radio_groups(t_editor_scene *const self);
-void		add_entities(t_editor_scene *const self,
-				const t_editor_scene_args *const args,
-				t_game *const game);
+void			add_entities(t_editor_scene *const self,
+					const t_editor_scene_args *const args,
+					t_game *const game);
 
 t_result		fill_from_map(t_editor_scene *const self,
 					const char *const path);
-/*
-** t_result		init_editor_scene_from_file(t_editor_scene *const self,
-** 					const t_editor_scene_args *const args);
-*/
+
 void			editor_scene_update(t_editor_scene *const self);
 void			editor_scene_render(t_editor_scene *const self,
 					t_frame *const fb);
-void	add_block_buttons(t_editor_scene *const self,
-				const t_editor_scene_args *const args,
-				t_game *const game);
+void			add_block_buttons(t_editor_scene *const self,
+					const t_editor_scene_args *const args,
+					t_game *const game);
 
 t_result		editor_scene_export_map(t_editor_scene *const self);
 t_result		write_map(t_editor_scene *const self, const int fd,
@@ -147,7 +140,7 @@ t_result		write_map_size(const int fd, const t_usize size);
 t_result		write_player_spawn(const int fd,
 					const t_player_component_entity *const player,
 					const t_isize origin);
-t_result	write_entities(t_editor_scene *const self,
+t_result		write_entities(t_editor_scene *const self,
 					const int fd,
 					const t_isize origin);
 

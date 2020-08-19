@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 23:07:35 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:37:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ t_bool			raycasting_scene_weapon_shoot(t_raycasting_scene *const self,
 		return (FALSE);
 	sort(self);
 	self->weapon.last_shot = get_wall_time();
-	if (self->entities.weapon_ref->sound_ref)
-		sound_play(self->entities.weapon_ref->sound_ref);
 	zbuffer = (t_ray*)self->zbuffer.array;
 	wall = zbuffer[self->window_ref->size.x / 2].perpendicular_distance;
 	monster = NULL;

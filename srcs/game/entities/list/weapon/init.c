@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 02:19:58 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 03:03:25 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:36:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_result	init_weapon_entity2(t_weapon_entity *const self,
 				const t_weapon_entity_args *const args)
 {
 	self->hud_ref = NULL;
-	self->sound_ref = NULL;
 	self->first_render = TRUE;
 	self->specs = args->specs;
 	self->last_shot = 0.0;

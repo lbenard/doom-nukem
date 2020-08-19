@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 23:33:50 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 21:36:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:49:01 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,7 @@
 # include "engine/frame.h"
 # include "game/entities/player_entity.h"
 
-typedef struct			s_sprite_entity t_sprite_entity;
-typedef struct			s_raycasting_scene t_raycasting_scene;
-
-typedef struct			s_sprite_entity_vtable
-{
-	void	(*sprite_entity_update_fn)(struct s_sprite_entity *const self);
-}						t_sprite_entity_vtable;
+typedef struct s_raycasting_scene	t_raycasting_scene;
 
 typedef struct			s_sprite_entity
 {
@@ -40,6 +34,11 @@ typedef struct			s_sprite_entity
 	float					perpendicular_distance;
 	t_bool					is_visible;
 }						t_sprite_entity;
+
+typedef struct			s_sprite_entity_vtable
+{
+	void	(*sprite_entity_update_fn)(t_sprite_entity *const self);
+}						t_sprite_entity_vtable;
 
 typedef struct			s_sprite_entity_args
 {

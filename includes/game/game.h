@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:16:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:33:04 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "engine/window.h"
 # include "engine/input.h"
 # include "engine/scene.h"
-# include "engine/entity_index.h"
 # include "engine/event_handler.h"
 # include "game/block_descriptor.h"
 # include "game/entity_descriptor.h"
@@ -34,7 +33,6 @@ typedef struct	s_game
 	void					(*scene_destructor_fn)();
 	t_bool					has_scene_changed;
 	t_input					input;
-	t_entity_index			entity_index;
 	t_event_handler			event_handler;
 	struct		s_blocks
 	{

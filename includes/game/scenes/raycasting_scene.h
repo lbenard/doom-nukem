@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 03:50:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:56:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "engine/window.h"
 # include "engine/frame.h"
 # include "engine/array.h"
-# include "engine/sound.h"
 # include "engine/text.h"
 # include "engine/animation.h"
 # include "engine/spritesheet.h"
@@ -46,7 +45,7 @@ typedef struct	s_raycasting_scene
 	t_entity_list	sprite_entities;
 	t_entity_list	monster_entities;
 	t_entity_list	weapon_entities;
-	struct	s_assets
+	struct		s_assets
 	{
 		t_frame			floor;
 		t_frame			ceiling;
@@ -61,27 +60,26 @@ typedef struct	s_raycasting_scene
 		t_spritesheet	ghast_spritesheet;
 		t_spritesheet	nyarlathotep_spritesheet;
 		t_spritesheet	pistol_spritesheet;
-		t_sound			pistol_sound;
 		t_spritesheet	shotgun_spritesheet;
 		t_spritesheet	minigun_spritesheet;
 		t_frame			ammo_sprite;
 		t_frame			medikit_sprite;
 	}				assets;
-	struct	s_inputs
+	struct		s_inputs
 	{
 		t_input_id	use;
 		t_input_id	shoot;
 		t_input_id	reload;
 		t_input_id	pick;
 	}				inputs;
-	struct	s_entities_ref
+	struct		s_entities_ref
 	{
 		t_button_entity	*retry_button_ref;
 		t_button_entity	*give_up_button_ref;
 		t_player_entity	*player_ref;
 		t_weapon_entity	*weapon_ref;
 	}				entities;
-	struct	s_weapon_infos
+	struct		s_weapon_infos
 	{
 		size_t					ammo;
 		double					last_shot;
@@ -89,7 +87,7 @@ typedef struct	s_raycasting_scene
 		t_text					display_text;
 		const t_weapon_entity	*nearest_weapon;
 	}				weapon;
-	struct	s_tooltips
+	struct		s_tooltips
 	{
 		t_animation		use_key_animation;
 		t_text			use_key_text;

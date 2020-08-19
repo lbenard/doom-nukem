@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:28:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 21:57:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:44:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,6 @@
 # include "colors/rgb.h"
 # include "sizes/usize.h"
 # include "game/entities/editor/editor_camera_entity.h"
-
-typedef enum	e_component_type
-{
-	VERTEX,
-	SEGMENT,
-	SECTOR,
-	GRID
-}				t_component_type;
 
 /*
 ** Abstract editor component entity, must be inherited in order to be used.
@@ -42,7 +34,7 @@ typedef struct	s_component_entity
 	t_rgb				selected_color;
 	t_rgb				dragged_color;
 	t_rgb				error_color;
-	struct	s_component_entity_vtable
+	struct		s_component_entity_vtable
 	{
 		void	(*render)(struct s_component_entity *const self,
 					t_editor_camera_entity *const camera,
