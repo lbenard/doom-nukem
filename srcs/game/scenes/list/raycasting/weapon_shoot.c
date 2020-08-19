@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   weapon_shoot.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 19:58:29 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 20:47:50 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/18 23:07:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "engine/delta.h"
 #include "game/scenes/raycasting_scene.h"
 #include "game/entities/monster_entity.h"
 #include "ft/str.h"
-#include <math.h>
 #include "maths/vec3f.h"
 
 static t_bool	is_targeting(const t_monster_entity *const monster,
@@ -40,9 +40,6 @@ static t_bool	use_ammo(t_weapon_entity *const weapon,
 static void		sort(t_raycasting_scene *const self)
 {
 	t_list_head			*pos;
-	t_list_head			*next;
-	t_list_head			*left;
-	t_list_head			*right;
 	t_monster_entity	*monster;
 	t_monster_entity	*next_monster;
 
@@ -52,39 +49,16 @@ static void		sort(t_raycasting_scene *const self)
 		if (pos->next == &self->monster_entities.list)
 			break ;
 		monster = (t_monster_entity*)((t_entity_node*)pos)->entity;
-		next = pos->next;
-		next_monster = (t_monster_entity*)((t_entity_node*)next)->entity;
+		next_monster = (t_monster_entity*)((t_entity_node*)pos->next)->entity;
 		if (monster->super.perpendicular_distance
 			< next_monster->super.perpendicular_distance)
 		{
-			left = pos->prev;
-			right = next->next;
-			left->next = next;
-			right->prev = pos;
-			pos->prev = next;
-			pos->next = right;
-			next->prev = left;
-			next->next = pos;
+			list_swap_next(pos);
 			pos = &self->monster_entities.list;
 			continue ;
 		}
 	}
 }
-
-// int				distance_monster(t_raycasting_scene *const self,
-// 					t_monster_entity *monster)
-// {
-// 	t_vec3f	monster_pos;
-// 	t_vec3f	player_pos;
-// 	int		distance;
-
-// 	monster_pos = monster->super.super.transform.position;
-// 	player_pos = self->entities.player_ref->super.transform.position;
-// 	distance = sqrt(pow(monster_pos.x - player_pos.x, 2) +
-// 		pow(monster_pos.y - player_pos.y, 2));
-// 	distance = abs(distance);
-// 	return (distance);
-// }
 
 static void		iter_monster(t_raycasting_scene *const self,
 	t_monster_entity *monster, float wall, const size_t mu)

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 19:17:04 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 22:25:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,16 @@ void			zbuffer(t_raycasting_scene *const self,
 
 void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
+void			raycasting_scene_render_floor(t_raycasting_scene *const self,
+					t_frame *const fb,
+					const t_vec2f dir,
+					const t_vec2f plane);
+void			raycasting_scene_render_ceiling(t_raycasting_scene *const self,
+					t_frame *const fb,
+					const t_vec2f dir,
+					const t_vec2f plane);
+void			raycasting_scene_render_walls(t_raycasting_scene *const self,
+					t_frame *const fb);
 void			raycasting_scene_render_sprites(t_raycasting_scene *const self,
 					t_frame *const fb);
 void			raycasting_scene_render_weapon_display(
@@ -182,7 +192,7 @@ void			raycasting_scene_weapon_reload(t_raycasting_scene *const self);
 
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
 
-t_rgba			ft_get_lerp_col(t_rgba color1, float dist, float value);
+t_rgba			get_lerp_col(t_rgba color1, float dist, float value);
 
 /*
 ** Utils

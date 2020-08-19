@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/31 12:57:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 22:34:05 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/19 03:49:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,8 @@ static t_bool	is_player_immured(const t_vec2f position,
 		+ (int)(position.y - 0.1) * map->size.x].texture_ref);
 }
 
-void			init_vars(t_player_entity *const self,
-					const t_player_entity_args *const args)
+static void		init_inputs(t_player_entity *const self)
 {
-	self->velocity = ft_vec3f(0.0f, 0.0f, 0.0f);
-	self->is_moving = FALSE;
-	self->is_flying = FALSE;
-	self->map_ref = args->map;
-	self->speed = 3.0f;
-	self->fov = args->fov;
 	self->forward = input_get_id(&game_singleton()->input, "Forward");
 	self->backward = input_get_id(&game_singleton()->input, "Backward");
 	self->left = input_get_id(&game_singleton()->input, "Left");
@@ -67,12 +60,25 @@ void			init_vars(t_player_entity *const self,
 		"ToggleFlight");
 	self->jump = input_get_id(&game_singleton()->input, "Jump");
 	self->crouch = input_get_id(&game_singleton()->input, "Crouch");
+}
+
+static void		init_vars(t_player_entity *const self,
+					const t_player_entity_args *const args)
+{
+	self->velocity = ft_vec3f(0.0f, 0.0f, 0.0f);
+	self->is_moving = FALSE;
+	self->is_flying = FALSE;
+	self->map_ref = args->map;
+	self->speed = 3.0f;
+	self->fov = args->fov;
 	self->is_crouching = FALSE;
 	self->health = 150.0f;
 	self->is_taking_damage = FALSE;
 	self->is_dead = FALSE;
 	self->is_jumping = FALSE;
 	self->just_jump = FALSE;
+	self->max_health = 150.0f;
+	init_inputs(self);
 }
 
 t_result		init_player_entity(t_player_entity *const self,
@@ -83,7 +89,6 @@ t_result		init_player_entity(t_player_entity *const self,
 
 	init_entity_default(&self->super, entity_vtable(player_entity_update));
 	init_vars(self, args);
-	self->max_health = 150.0f;
 	rot_sin = sin(self->super.transform.rotation.y);
 	rot_cos = cos(self->super.transform.rotation.y);
 	self->dir = ft_vec2f(rot_cos, rot_sin);

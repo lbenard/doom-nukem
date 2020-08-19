@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 18:29:38 by lbenard           #+#    #+#             */
-/*   Updated: 2019/05/07 17:28:14 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 23:06:06 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void			list_del(t_list_head *prev, t_list_head *next);
 void			list_del_entry(t_list_head *entry);
 void			list_move(t_list_head *list, t_list_head *head);
 void			list_move_tail(t_list_head *list, t_list_head *head);
+void			list_swap_next(t_list_head *pos);
 
 /*
 ** libft linked lists

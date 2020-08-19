@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/18 19:24:38 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/19 03:50:27 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -360,6 +360,8 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/monster/monster_entity.c										\
 					game/entities/list/monster/init.c												\
 					game/entities/list/monster/update.c												\
+					game/entities/list/monster/render_name.c										\
+					game/entities/list/monster/render_health.c										\
 					game/entities/list/monster/destroy.c											\
 					game/entities/list/monster/orientate_sprite.c									\
 					game/entities/list/monster/a_star_monster.c										\
@@ -481,11 +483,15 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/door.c												\
 					game/scenes/list/raycasting/ending.c											\
 					game/scenes/list/raycasting/render.c											\
+					game/scenes/list/raycasting/render_floor.c										\
+					game/scenes/list/raycasting/render_ceiling.c									\
+					game/scenes/list/raycasting/render_walls.c										\
 					game/scenes/list/raycasting/render_sprites.c									\
 					game/scenes/list/raycasting/render_weapon_display.c								\
 					game/scenes/list/raycasting/render_tooltip.c									\
 					game/scenes/list/raycasting/render_use_tooltip.c								\
 					game/scenes/list/raycasting/render_weapon_tooltip.c								\
+					game/scenes/list/raycasting/get_lerp_col.c										\
 					game/scenes/list/raycasting/add_entity.c										\
 					game/scenes/list/raycasting/kill_monster.c										\
 					game/scenes/list/raycasting/weapon_use.c										\
