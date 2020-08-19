@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 18:15:15 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 18:53:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,9 +204,9 @@ typedef struct	s_ray
 
 typedef struct	s_raycast
 {
-	t_vec2f	delta_distance;
-	t_vec2i	ray_position;
-	t_vec2f	distance_from_origin;
+	t_vec2f	delta_dist;
+	t_vec2i	ray_pos;
+	t_vec2f	origin_dist;
 	t_vec2i	step;
 }				t_raycast;
 
