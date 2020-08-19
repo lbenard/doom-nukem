@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_lerp_col.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:00:51 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 22:30:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:17:33 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,30 +33,28 @@ static t_rgba	highest_value(t_rgba color1)
 t_rgba			get_lerp_col(t_rgba color1, float dist, float value)
 {
 	t_rgba	c1;
-	t_rgba	tmp;
+	t_rgba	ret;
 	int		color;
 
 	c1 = color1;
 	dist /= 2;
-	tmp.c.a = c1.c.a;
-	if (value < 1.0f)
-		value = 1.0f;
-	if (dist <= 0.3)
-		dist = 0.3;
+	ret.c.a = c1.c.a;
+	value = value < 1.0f ? 1.0f : value;
+	dist = dist <= 0.3f ? 0.3f : dist;
 	color = c1.c.r / (dist * value);
 	if (color >= 0 && color <= 255)
-		tmp.c.r = color;
+		ret.c.r = color;
 	else
 		return (highest_value(c1));
 	color = c1.c.g / (dist * value);
 	if (color >= 0 && color <= 255)
-		tmp.c.g = color;
+		ret.c.g = color;
 	else
 		return (highest_value(c1));
 	color = c1.c.b / (dist * value);
 	if (color >= 0 && color <= 255)
-		tmp.c.b = color;
+		ret.c.b = color;
 	else
 		return (highest_value(c1));
-	return (tmp);
+	return (ret);
 }
