@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/19 03:51:08 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/19 04:21:08 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -220,6 +220,8 @@ SRCS_LIST		=	main.c																			\
 					game/game/start.c																\
 					game/game/init_block_descriptors.c												\
 					game/game/init_entity_descriptors.c												\
+					game/game/register_inputs.c														\
+					game/game/attach_inputs.c														\
 					game/game/set_scene.c															\
 					game/game/loop.c																\
 					game/game/close.c																\

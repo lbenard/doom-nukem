@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:04:22 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/30 20:28:55 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:20:27 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ t_result	start_game(const t_game_args *const args)
 		return (throw_result_str("start_game()",
 			"error while creating game module"));
 	}
+	game_register_inputs(game);
+	game_attach_inputs(game);
 	event_handler_add_sub_handler(&game->event_handler, &game->input.handler);
 	return (OK);
 }

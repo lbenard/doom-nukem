@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 03:41:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 03:47:14 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 03:52:03 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static t_frame_coordinates	health_bar_coordinates(
 {
 	t_frame_coordinates	coordinates;
 
-	coordinates.start.x = monster->super.start_x;
-	coordinates.end.x = monster->super.end_x;
-	coordinates.start.y = monster->super.start_y;
-	coordinates.end.y = monster->super.start_y
-		+ (monster->super.end_x - monster->super.start_x) / 20;
+	coordinates.start.x = self->super.start_x;
+	coordinates.end.x = self->super.end_x;
+	coordinates.start.y = self->super.start_y;
+	coordinates.end.y = self->super.start_y
+		+ (self->super.end_x - self->super.start_x) / 20;
 	return (coordinates);
 }
 
@@ -44,7 +44,7 @@ void						monster_entity_render_health(
 			bg = &fb->pixels[i.y * fb->size.x + i.x];
 			if ((float)(i.x - coordinates.start.x + i.y - coordinates.start.y)
 				/ (float)(coordinates.end.x - coordinates.start.x)
-				> monster->health / monster->full_health)
+				> self->health / self->full_health)
 				*bg = blend_add(*bg, ft_rgba(0, 31, 0, distance_opacity));
 			else
 				*bg = blend_add(*bg, ft_rgba(0, 255, 0, distance_opacity));

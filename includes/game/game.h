@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 01:10:51 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/19 04:16:01 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,32 @@ typedef struct	s_game
 		t_entity_descriptor	ammo;
 		t_entity_descriptor	medikit;
 	}						entities_list;
+	struct		s_game_inputs
+	{
+		t_input_id	forward;
+		t_input_id	backward;
+		t_input_id	left;
+		t_input_id	right;
+		t_input_id	sprint;
+		t_input_id	jump;
+		t_input_id	crouch;
+		t_input_id	toggle_flight;
+		t_input_id	use;
+		t_input_id	pick;
+		t_input_id	shoot;
+		t_input_id	reload;
+		t_input_id	camera_right;
+		t_input_id	camera_left;
+		t_input_id	camera_up;
+		t_input_id	camera_down;
+		t_input_id	editor_camera_up;
+		t_input_id	editor_camera_right;
+		t_input_id	editor_camera_down;
+		t_input_id	editor_camera_left;
+		t_input_id	editor_camera_dezoom;
+		t_input_id	editor_camera_zoom;
+		t_input_id	quit;
+	}						inputs;
 }				t_game;
 
 typedef struct	s_game_args
@@ -82,6 +108,8 @@ t_game			*game_singleton(void);
 t_result		start_game(const t_game_args *const args);
 void			init_block_descriptors(t_game *const self);
 void			init_entity_descriptors(t_game *const self);
+void			game_register_inputs(t_game *const self);
+void			game_attach_inputs(t_game *const self);
 
 t_result		game_set_scene(t_constructor constructor);
 void			game_loop(void);

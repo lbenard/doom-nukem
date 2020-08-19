@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 22:13:08 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 03:42:17 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 03:55:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "maths/maths.h"
 #include "engine/delta.h"
 
-static void	sort(t_raycasting_scene *const self)
+static void		sort(t_raycasting_scene *const self)
 {
 	t_list_head		*pos;
 	t_sprite_entity	*sprite;
@@ -61,9 +61,9 @@ static t_rgba	get_sprite_color(t_raycasting_scene *const self,
 	return (saturated_color);
 }
 
-static void	render_sprite(t_raycasting_scene *const self,
-				t_frame *const fb,
-				const t_sprite_entity *const sprite)
+static void		render_sprite(t_raycasting_scene *const self,
+					t_frame *const fb,
+					const t_sprite_entity *const sprite)
 {
 	t_usize	i;
 	t_usize	sprite_px;
@@ -91,8 +91,8 @@ static void	render_sprite(t_raycasting_scene *const self,
 	}
 }
 
-static void	render_sprites(t_raycasting_scene *const self,
-				t_frame *const fb)
+static void		render_sprites(t_raycasting_scene *const self,
+					t_frame *const fb)
 {
 	t_list_head		*pos;
 	t_sprite_entity	*sprite;
@@ -106,13 +106,15 @@ static void	render_sprites(t_raycasting_scene *const self,
 	}
 }
 
-static void	monsters(t_raycasting_scene *const self,
-				t_frame *const fb)
+void			raycasting_scene_render_sprites(t_raycasting_scene *const self,
+					t_frame *const fb)
 {
 	t_list_head			*pos;
 	t_monster_entity	*monster;
 	t_u8				distance_opacity;
 
+	sort(self);
+	render_sprites(self, fb);
 	pos = &self->monster_entities.list;
 	while ((pos = pos->next) != &self->monster_entities.list)
 	{
@@ -126,12 +128,4 @@ static void	monsters(t_raycasting_scene *const self,
 		if (monster->health < monster->full_health)
 			monster_entity_render_health(monster, fb, distance_opacity);
 	}
-}
-
-void		raycasting_scene_render_sprites(t_raycasting_scene *const self,
-				t_frame *const fb)
-{
-	sort(self);
-	render_sprites(self, fb);
-	monsters(self, fb);
 }
