@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 20:39:41 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 04:43:00 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,12 @@ static void	player_action(t_raycasting_scene *const self)
 		return ;
 	if (self->entities.weapon_ref)
 	{
-		if (input_get(&game_singleton()->input,
-			self->inputs.reload) > 0.0f
+		if (input_get(&game_singleton()->input, self->inputs.reload) > 0.0f
 			&& self->entities.weapon_ref->shooting == FALSE
 			&& !self->entities.weapon_ref->reloading
 			&& self->entities.weapon_ref->specs.clip
-				!= self->entities.weapon_ref->specs.clip_size)
+			!= self->entities.weapon_ref->specs.clip_size
+			&& self->weapon.ammo > 0)
 			self->entities.weapon_ref->trigger_reloading = TRUE;
 		if (self->entities.weapon_ref->just_reloaded)
 			raycasting_scene_weapon_reload(self);
