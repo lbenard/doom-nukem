@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monster_entity.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:07:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 16:26:14 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/19 03:42:57 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,15 @@ void			a_star_attack(t_monster_entity *self,
 void			agro_if_take_damage(t_monster_entity *self);
 
 void			go_fireball(t_monster_entity *self);
+
+void			monster_entity_render_name(
+					const t_monster_entity *const self,
+					t_frame *const fb,
+					const float distance_opacity);
+void			monster_entity_render_health(
+					const t_monster_entity *const self,
+					t_frame *const fb,
+					const float distance_opacity);
 
 void			destroy_monster_entity(t_monster_entity *const self);
 

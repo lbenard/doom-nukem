@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/05 18:02:14 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/15 22:48:57 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/18 23:07:11 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS_LIST		=	containers/list/init_list_head.c		\
 					containers/list/list_del_entry.c		\
 					containers/list/list_move.c				\
 					containers/list/list_move_tail.c		\
+					containers/list/list_swap_next.c		\
 					containers/list/new_lst.c				\
 					containers/list/new_lstcpy.c			\
 					containers/list/new_lstmap.c			\
