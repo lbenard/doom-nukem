@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
+#    By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/18 19:24:38 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/19 03:36:13 by mribouch         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -364,10 +364,10 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/monster/orientate_sprite.c									\
 					game/entities/list/monster/a_star_monster.c										\
 																									\
-					game/entities/list/onepunchman/onepunchman_entity.c								\
-					game/entities/list/onepunchman/init.c											\
-					game/entities/list/onepunchman/update.c											\
-					game/entities/list/onepunchman/destroy.c										\
+					game/entities/list/widepunchman/widepunchman_entity.c								\
+					game/entities/list/widepunchman/init.c											\
+					game/entities/list/widepunchman/update.c											\
+					game/entities/list/widepunchman/destroy.c										\
 																									\
 					game/entities/list/weird_alien/weird_alien_entity.c								\
 					game/entities/list/weird_alien/init.c											\

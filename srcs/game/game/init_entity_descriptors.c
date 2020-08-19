@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init_entity_descriptors.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:21:42 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 00:29:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 01:12:12 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/game.h"
-#include "game/entities/onepunchman_entity.h"
+#include "game/entities/widepunchman_entity.h"
 #include "game/entities/weird_alien_entity.h"
 #include "game/entities/ghast_entity.h"
 #include "game/entities/nyarlathotep_entity.h"
@@ -47,10 +47,10 @@ static void	module_add_weapon(t_game *const self)
 
 void		init_entity_descriptors(t_game *const self)
 {
-	module_add(&self->module, &self->entities_list.onepunchman,
-		entity_descriptor("one_punch_man",
-			"resources/sprites/onepunchman-icon.bmp",
-			onepunchman_entity));
+	module_add(&self->module, &self->entities_list.widepunchman,
+		entity_descriptor("wide_punch_man",
+			"resources/sprites/widepunchman-icon.bmp",
+			widepunchman_entity));
 	module_add(&self->module, &self->entities_list.weird_alien,
 		entity_descriptor("weird_alien",
 			"resources/sprites/weird_alien_icon.bmp",

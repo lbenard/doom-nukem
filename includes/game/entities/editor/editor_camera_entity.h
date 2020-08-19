@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_camera_entity.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:21:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/12 01:03:44 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/18 22:45:12 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,6 @@ t_isize			transform_screen_pos(
 void			destroy_editor_camera_entity(
 					t_editor_camera_entity *const self);
 
-void			editor_camera_zoom_event(t_editor_camera_entity *const self,
-					sfEvent *event,
-					const t_frame *const fb);
 t_callback_node	*new_editor_camera_zoom_event(const t_frame *const fb);
 
 #endif

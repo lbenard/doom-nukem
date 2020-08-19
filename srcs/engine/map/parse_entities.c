@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_entities.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/19 00:19:55 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 21:22:27 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 01:22:39 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_map_entity_node	*create_node(const char *const key,
 
 	if (!entity_descriptor_from_name(
 		(t_entity_descriptor*)&game_singleton()->entities_list,
-		sizeof(game_singleton()->entities_list),
+		sizeof(game_singleton()->entities_list) / sizeof(t_entity_descriptor),
 		key))
 		return (throw_error_str("create_node()", "failed to find descriptor"));
 	if (!(new_node = static_module_allocate(map_entity_node(key, pos))))

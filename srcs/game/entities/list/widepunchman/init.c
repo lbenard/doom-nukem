@@ -6,11 +6,11 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 17:29:40 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/19 01:12:53 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/onepunchman_entity.h"
+#include "game/entities/widepunchman_entity.h"
 #include "game/scenes/raycasting_scene.h"
 #include "game/game.h"
 #include "engine/error.h"
@@ -18,8 +18,8 @@
 
 #include <stdio.h>
 
-t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
-				const t_onepunchman_entity_args *const args)
+t_result	init_widepunchman_entity(t_widepunchman_entity *const self,
+				const t_widepunchman_entity_args *const args)
 {
 	t_raycasting_scene	*raycasting;
 
@@ -27,17 +27,17 @@ t_result	init_onepunchman_entity(t_onepunchman_entity *const self,
 	if (static_module_create(self,
 		monster_entity(
 			ft_monster_stats(args->pos,
-				500.0f,
+				5000.0f,
 				10000.0f,
-				"One Punch Man"),
-			&raycasting->assets.onepunchman_spritesheet,
+				"Wide Punch Man"),
+			&raycasting->assets.widepunchman_spritesheet,
 			raycasting)) == ERROR)
 	{
-		return (throw_result_str("init_onepunchman_entity()",
+		return (throw_result_str("init_widepunchman_entity()",
 			"failed to create monster entity"));
 	}
-	self->super.super.super.vtable.update = onepunchman_entity_update;
-	self->super.super.super.transform.scale.x = 4.0f;
+	self->super.super.super.vtable.update = widepunchman_entity_update;
+	self->super.super.super.transform.scale.x = 6.0f;
 	self->super.super.super.transform.scale.y = 1.4f;
 	self->is_moving = FALSE;
 	self->count_fireball = 0;
