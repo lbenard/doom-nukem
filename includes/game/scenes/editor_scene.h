@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:56:07 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 17:56:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,52 @@ typedef struct	s_editor_entity_node
 	t_frame			icon;
 }				t_editor_entity_node;
 
+/*
+** Buttons groups
+*/
+typedef struct	s_tools_group
+{
+	t_checkbox_entity	*cursor_ref;
+	t_checkbox_entity	*create_ref;
+	t_checkbox_entity	*save_ref;
+}				t_tools_group;
+
+typedef struct	s_create_group
+{
+	t_checkbox_entity	*show_blocks_ref;
+	t_checkbox_entity	*show_entities_ref;
+}				t_create_group;
+
+typedef struct	s_blocks_group
+{
+	t_block_checkbox_entity	*sandstone;
+	t_block_checkbox_entity	*metallic_wall;
+	t_block_checkbox_entity	*metallic_crate;
+	t_block_checkbox_entity	*metallic_door;
+	t_block_checkbox_entity	*metallic_light_tile;
+	t_block_checkbox_entity	*metallic_dark_tile;
+	t_block_checkbox_entity	*metallic_red_button;
+	t_block_checkbox_entity	*metallic_green_button;
+	t_block_checkbox_entity	*metallic_blue_button;
+	t_block_checkbox_entity	*metallic_red_door;
+	t_block_checkbox_entity	*metallic_green_door;
+	t_block_checkbox_entity	*metallic_blue_door;
+	t_block_checkbox_entity	*ending;
+}				t_blocks_group;
+
+typedef struct	s_entities_group
+{
+	t_entity_checkbox_entity	*widepunchman;
+	t_entity_checkbox_entity	*weird_alien;
+	t_entity_checkbox_entity	*ghast;
+	t_entity_checkbox_entity	*nyarlathotep;
+	t_entity_checkbox_entity	*pistol;
+	t_entity_checkbox_entity	*shotgun;
+	t_entity_checkbox_entity	*minigun;
+	t_entity_checkbox_entity	*ammo;
+	t_entity_checkbox_entity	*medikit;
+}				t_entities_group;
+
 typedef struct	s_editor_scene
 {
 	t_scene						super;
@@ -58,48 +104,13 @@ typedef struct	s_editor_scene
 	struct		s_hud
 	{
 		t_radio_group			tools;
-		struct		s_tools_group
-		{
-			t_checkbox_entity	*cursor_ref;
-			t_checkbox_entity	*create_ref;
-			t_checkbox_entity	*save_ref;
-		}						tools_group;
+		t_tools_group			tools_group;
 		t_radio_group			create;
-		struct		s_create_group
-		{
-			t_checkbox_entity	*show_blocks_ref;
-			t_checkbox_entity	*show_entities_ref;
-		}						create_group;
+		t_create_group			create_group;
 		t_radio_group			blocks;
-		struct		s_blocks_group
-		{
-			t_block_checkbox_entity	*sandstone;
-			t_block_checkbox_entity	*metallic_wall;
-			t_block_checkbox_entity	*metallic_crate;
-			t_block_checkbox_entity	*metallic_door;
-			t_block_checkbox_entity	*metallic_light_tile;
-			t_block_checkbox_entity	*metallic_dark_tile;
-			t_block_checkbox_entity	*metallic_red_button;
-			t_block_checkbox_entity	*metallic_green_button;
-			t_block_checkbox_entity	*metallic_blue_button;
-			t_block_checkbox_entity	*metallic_red_door;
-			t_block_checkbox_entity	*metallic_green_door;
-			t_block_checkbox_entity	*metallic_blue_door;
-			t_block_checkbox_entity	*ending;
-		}						blocks_group;
+		t_blocks_group			blocks_group;
 		t_radio_group			entities;
-		struct		s_entities_group
-		{
-			t_entity_checkbox_entity	*widepunchman;
-			t_entity_checkbox_entity	*weird_alien;
-			t_entity_checkbox_entity	*ghast;
-			t_entity_checkbox_entity	*nyarlathotep;
-			t_entity_checkbox_entity	*pistol;
-			t_entity_checkbox_entity	*shotgun;
-			t_entity_checkbox_entity	*minigun;
-			t_entity_checkbox_entity	*ammo;
-			t_entity_checkbox_entity	*medikit;
-		}						entities_group;
+		t_entities_group		entities_group;
 	}							hud;
 	t_editor_camera_entity		*camera_ref;
 	const t_window				*screen_ref;

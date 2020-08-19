@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 22:30:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/09 00:36:39 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 17:49:57 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 t_result	init_block_component_entity(t_block_component_entity *const self,
 				t_block_component_entity_args *const args)
 {
-	if (static_module_create(self, component_entity(0,
+	if (static_module_create(self, component_entity(
 		(struct s_component_entity_vtable){
 			block_component_entity_render,
 			block_component_entity_is_hovered})) == ERROR)

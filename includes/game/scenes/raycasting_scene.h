@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:56:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 18:15:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,14 @@ typedef struct	s_ray
 	float	perpendicular_distance;
 	float	horizontal_ratio;
 }				t_ray;
+
+typedef struct	s_raycast
+{
+	t_vec2f	delta_distance;
+	t_vec2i	ray_position;
+	t_vec2f	distance_from_origin;
+	t_vec2i	step;
+}				t_raycast;
 
 t_ray			cast(const t_map *const map,
 					const t_vec2f pos,

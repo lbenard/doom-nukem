@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 19:52:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/30 21:59:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 17:49:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ t_result	init_component_entity(t_component_entity *const self,
 				t_component_entity_args *const args)
 {
 	init_entity_default(&self->super, entity_vtable(component_entity_update));
-	self->type = args->type;
 	self->selectable = FALSE;
 	self->is_selected = FALSE;
 	self->movable = FALSE;
