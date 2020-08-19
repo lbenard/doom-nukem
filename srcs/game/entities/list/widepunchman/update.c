@@ -6,17 +6,17 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:55:04 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 18:17:36 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/19 01:11:52 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/onepunchman_entity.h"
+#include "game/entities/widepunchman_entity.h"
 #include "game/entities/player_entity.h"
 #include "engine/delta.h"
 #include "engine/a_star.h"
 #include <math.h>
 
-void			rage_opm(t_onepunchman_entity *const self)
+void			rage_opm(t_widepunchman_entity *const self)
 {
 	if (self->speed != 4.0f)
 		self->speed = 4.0f;
@@ -40,7 +40,7 @@ void			rage_opm(t_onepunchman_entity *const self)
 	}
 }
 
-void			onepunchman_entity_update(t_onepunchman_entity *const self)
+void			widepunchman_entity_update(t_widepunchman_entity *const self)
 {
 	float	distance;
 
@@ -54,8 +54,8 @@ void			onepunchman_entity_update(t_onepunchman_entity *const self)
 			rage_opm(self);
 		if (self->is_moving == TRUE)
 		{
-			self->super.animation.speed = 0.4;
 			a_star_attack(&self->super, distance, self->speed);
+			self->super.animation.speed = 0.2;
 		}
 	}
 	else

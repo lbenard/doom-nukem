@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor_scene.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 18:11:29 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 01:10:51 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct	s_editor_scene
 		t_radio_group	entities;
 		struct	s_entities_group
 		{
-			t_entity_checkbox_entity	*onepunchman;
+			t_entity_checkbox_entity	*widepunchman;
 			t_entity_checkbox_entity	*weird_alien;
 			t_entity_checkbox_entity	*ghast;
 			t_entity_checkbox_entity	*nyarlathotep;

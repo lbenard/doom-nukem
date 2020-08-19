@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:40:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 22:29:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 00:58:01 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	pistol_entity_update3(t_pistol_entity *const self)
 	if (self->super.shooting == TRUE)
 	{
 		if (self->animation.iter
-			== self->super.hud_ref->grid_size.x * (1 / 0.4) - 1)
+			>= self->super.hud_ref->grid_size.x * (1 / 0.6) - 1)
 		{
 			self->animation.speed = 0;
 			self->animation.anim = 0;
@@ -39,8 +39,8 @@ static void	pistol_entity_update2(t_pistol_entity *const self)
 {
 	if (self->super.reloading)
 	{
-		if (self->animation.iter == self->super.hud_ref->grid_size.x
-			* (1 / 0.08f) - 1 && self->animation.speed != 0)
+		if (self->animation.iter >= self->super.hud_ref->grid_size.x
+			* (1 / 0.16f) - 1 && self->animation.speed != 0)
 		{
 			self->animation.iter = 0;
 			self->animation.anim++;
@@ -71,7 +71,7 @@ void		pistol_entity_update(t_pistol_entity *const self)
 	{
 		self->super.reloading = TRUE;
 		self->animation.anim = 1;
-		self->animation.speed = 0.08;
+		self->animation.speed = 0.16;
 		self->animation.iter = 0;
 	}
 	pistol_entity_update2(self);

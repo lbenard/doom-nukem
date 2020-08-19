@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   onepunchman_entity.c                               :+:      :+:    :+:   */
+/*   widepunchman_entity.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/entities/onepunchman_entity.h"
+#include "game/entities/widepunchman_entity.h"
 
-t_constructor	onepunchman_entity(t_scene *const scene, const t_vec2f pos)
+t_constructor	widepunchman_entity(t_scene *const scene, const t_vec2f pos)
 {
-	static t_onepunchman_entity_args	args;
+	static t_widepunchman_entity_args	args;
 
 	args.scene = scene;
 	args.pos = pos;
-	return (ft_constructor(init_onepunchman_entity,
-		destroy_onepunchman_entity,
-		sizeof(t_onepunchman_entity),
+	return (ft_constructor(init_widepunchman_entity,
+		destroy_widepunchman_entity,
+		sizeof(t_widepunchman_entity),
 		&args));
 }

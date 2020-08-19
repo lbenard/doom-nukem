@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:40:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/15 22:29:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 00:49:11 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	shotgun_entity_update2(t_shotgun_entity *const self)
 	if (self->super.reloading)
 	{
 		if (self->animation.iter >= self->super.hud_ref->grid_size.x *
-			(1 / 0.08) - 1 && self->animation.speed >= 0.0f)
+			(1 / 0.2) - 1 && self->animation.speed >= 0.0f)
 		{
 			self->animation.iter = 0;
 			if (self->super.specs.clip == 0)
@@ -75,7 +75,7 @@ void		shotgun_entity_update(t_shotgun_entity *const self)
 			self->animation.anim = 3;
 		else
 			self->animation.anim = 1;
-		self->animation.speed = 0.08f;
+		self->animation.speed = 0.2f;
 		self->animation.iter = 0;
 	}
 	shotgun_entity_update2(self);

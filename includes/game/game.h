@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 18:11:08 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 01:10:51 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct	s_game
 	}						blocks_list;
 	struct		s_entities
 	{
-		t_entity_descriptor	onepunchman;
+		t_entity_descriptor	widepunchman;
 		t_entity_descriptor	weird_alien;
 		t_entity_descriptor	ghast;
 		t_entity_descriptor	nyarlathotep;

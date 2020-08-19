@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_assets.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 00:45:14 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/19 01:27:45 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	init_monsters(t_raycasting_scene *const self)
 {
 	module_add(&self->super.module, &self->assets.alien_spritesheet,
 		spritesheet("resources/sprites/wow.bmp", ft_usize(17, 8)));
-	module_add(&self->super.module, &self->assets.onepunchman_spritesheet,
-		spritesheet("resources/sprites/sprite-sheet-png-walking-2.bmp",
+	module_add(&self->super.module, &self->assets.widepunchman_spritesheet,
+		spritesheet("resources/sprites/widepunchman_spritesheet.bmp",
 			ft_usize(9, 4)));
 	module_add(&self->super.module, &self->assets.ghast_spritesheet,
 		spritesheet("resources/sprites/ghast.bmp", ft_usize(3, 5)));
