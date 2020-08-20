@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/07 01:43:57 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/14 17:56:28 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/20 18:39:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include "game/entities/fireball_entity.h"
 #include "game/entities/monster_entity.h"
 #include <math.h>
-#include <stdio.h>
 
 void	move_dir(t_nyarlathotep_entity *self,
 			t_vec3f velocity,

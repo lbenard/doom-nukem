@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_weapon.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 22:22:16 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 22:54:42 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/20 20:36:28 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 void	init_raycasting_scene_weapon(t_raycasting_scene *const self)
 {
 	module_add(&self->super.module, &self->weapon.display_text,
-		text("haxorville.bmp", ft_usize(self->window_ref->size.x, 9)));
+		text("resources/fonts/haxorville.bmp",
+			ft_usize(self->window_ref->size.x, 9)));
 	if (self->super.module.has_error == FALSE)
 		self->entities.weapon_ref = NULL;
 }

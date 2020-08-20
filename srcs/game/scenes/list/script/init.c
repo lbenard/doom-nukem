@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 00:49:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/30 21:39:53 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/20 20:34:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ static t_result		paragraphs(t_script_scene *const self)
 			"failed to create paragraphs"));
 	}
 	module_add(&self->super.module, &self->paragraph1_text,
-		text("haxorville.bmp", ft_usize(5 * 67, 9 * 5)));
+		text("resources/fonts/haxorville.bmp", ft_usize(5 * 67, 9 * 5)));
 	module_add(&self->super.module, &self->paragraph2_text,
-		text("haxorville.bmp", ft_usize(5 * 66, 9 * 3)));
+		text("resources/fonts/haxorville.bmp", ft_usize(5 * 66, 9 * 3)));
 	module_add(&self->super.module, &self->skip_text,
-		text("haxorville.bmp", ft_usize(5 * 21, 9 * 1)));
+		text("resources/fonts/haxorville.bmp", ft_usize(5 * 21, 9 * 1)));
 	return (self->super.module.has_error ? ERROR : OK);
 }
 

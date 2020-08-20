@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 17:56:41 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/20 17:28:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include "game/block_descriptor.h"
 # include "game/game.h"
 
-# define BUTTONS "resources/buttons/"
+# define BUTTONS "resources/buttons/editor/"
 
 /*
 ** Block and entity lists

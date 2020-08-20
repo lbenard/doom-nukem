@@ -6,14 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 14:35:50 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/12 18:25:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/20 18:39:20 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/entities/player_entity.h"
 #include "engine/delta.h"
 #include <math.h>
-#include <stdio.h>
 
 void	jump(t_player_entity *self)
 {

@@ -6,24 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:07:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/30 20:32:26 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/20 18:39:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/game.h"
 #include "engine/delta.h"
 #include "ft/io.h"
-
-#include <stdio.h>
-
-static void	fps_average(double spf)
-{
-	static double	total_fps = 0;
-	static size_t	total_frames = 0.0f;
-
-	total_fps += 1.0f / spf;
-	total_frames++;
-}
 
 static void	game_loop2(t_game *game, double last_time)
 {
@@ -36,7 +25,6 @@ static void	game_loop2(t_game *game, double last_time)
 		window_update(&game->window);
 	}
 	spf = get_wall_time() - last_time;
-	fps_average(spf);
 	set_last_delta(spf);
 	last_time = get_wall_time();
 	game->has_scene_changed = FALSE;

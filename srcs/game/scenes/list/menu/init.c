@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:18 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/17 19:37:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/20 20:33:49 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ static void	add_buttons(t_menu_scene *const scene,
 {
 	scene->start_game_ref = (t_button_entity*)entity_list_add_entity(
 		&scene->super.entities,
-		dynamic_button_entity("resources/buttons/start-game-upscale.bmp",
-			"resources/buttons/start-game-hover-upscale.bmp",
-			"resources/buttons/start-game-click-upscale.bmp",
+		dynamic_button_entity("resources/buttons/menu/start-game.bmp",
+			"resources/buttons/menu/start-game-hover.bmp",
+			"resources/buttons/menu/start-game-click.bmp",
 			args->window));
 	scene->editor_ref = (t_button_entity*)entity_list_add_entity(
 		&scene->super.entities,
-		dynamic_button_entity("resources/buttons/editor-upscale.bmp",
-			"resources/buttons/editor-hover-upscale.bmp",
-			"resources/buttons/editor-click-upscale.bmp",
+		dynamic_button_entity("resources/buttons/menu/editor.bmp",
+			"resources/buttons/menu/editor-hover.bmp",
+			"resources/buttons/menu/editor-click.bmp",
 			args->window));
 	scene->close_game_ref = (t_button_entity*)entity_list_add_entity(
 		&scene->super.entities,
-		dynamic_button_entity("resources/buttons/close-game-upscale.bmp",
-			"resources/buttons/close-game-hover-upscale.bmp",
-			"resources/buttons/close-game-click-upscale.bmp",
+		dynamic_button_entity("resources/buttons/menu/close-game.bmp",
+			"resources/buttons/menu/close-game-hover.bmp",
+			"resources/buttons/menu/close-game-click.bmp",
 			args->window));
 }
 
@@ -54,10 +54,10 @@ static void	add_images(t_menu_scene *const self, const t_usize window_size)
 				window_size.y / 2))));
 	self->title_ref = (t_image_entity*)entity_list_add_entity(
 		&self->super.entities,
-		image_entity_from_file("resources/texts/doum-upscale.bmp",
+		image_entity_from_file("resources/textures/doum.bmp",
 			ft_frame_transform_default()));
 	module_add(&self->super.module, &self->credits,
-		text("haxorville.bmp", ft_usize(window_size.x, 9)));
+		text("resources/fonts/haxorville.bmp", ft_usize(window_size.x, 9)));
 	if (!self->super.module.has_error)
 	{
 		text_set_ref(&self->credits,
@@ -74,7 +74,7 @@ static void	git_id(t_menu_scene *const self)
 	ft_strcpy(id, "#");
 	ft_strncat(id, GIT_ID, 5);
 	module_add(&self->super.module, &self->git_id,
-		text("haxorville.bmp", ft_usize(5 * 6, 9)));
+		text("resources/fonts/haxorville.bmp", ft_usize(5 * 6, 9)));
 	if (self->super.module.has_error == FALSE)
 	{
 		text_set_ref(&self->git_id,

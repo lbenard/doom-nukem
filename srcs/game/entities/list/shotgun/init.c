@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:36:54 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/20 18:09:12 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_result		init_shotgun_entity(t_shotgun_entity *const self,
 	shotgun_specs.decay = 0.3f;
 	if (static_module_create(self,
 		weapon_entity(&ctx->assets.shotgun_spritesheet,
-			"resources/sprites/shotgun_sprite.bmp",
+			"resources/sprites/shotgun-sprite.bmp",
 			shotgun_specs, ctx)) == ERROR)
 	{
 		return (throw_result_str("init_shotgun_entity()",

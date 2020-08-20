@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_entity_descriptors.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:21:42 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 01:12:12 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/20 18:06:56 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,23 @@ static void	module_add_weapon(t_game *const self)
 {
 	module_add(&self->module, &self->entities_list.pistol,
 		entity_descriptor("pistol",
-			"resources/sprites/pistol_sprite.bmp",
+			"resources/sprites/pistol-sprite.bmp",
 			pistol_entity));
 	module_add(&self->module, &self->entities_list.shotgun,
 		entity_descriptor("shotgun",
-			"resources/sprites/shotgun_sprite.bmp",
+			"resources/sprites/shotgun-sprite.bmp",
 			shotgun_entity));
 	module_add(&self->module, &self->entities_list.minigun,
 		entity_descriptor("minigun",
-			"resources/sprites/minigun_sprite.bmp",
+			"resources/sprites/minigun-sprite.bmp",
 			minigun_entity));
 	module_add(&self->module, &self->entities_list.ammo,
 		entity_descriptor("ammo",
-			"resources/sprites/ammo_sprite.bmp",
+			"resources/sprites/ammo-sprite.bmp",
 			ammo_entity));
 	module_add(&self->module, &self->entities_list.medikit,
 		entity_descriptor("medikit",
-			"resources/sprites/medikit_sprite.bmp",
+			"resources/sprites/medikit-sprite.bmp",
 			medikit_entity));
 }
 
@@ -52,16 +52,16 @@ void		init_entity_descriptors(t_game *const self)
 			"resources/sprites/widepunchman-icon.bmp",
 			widepunchman_entity));
 	module_add(&self->module, &self->entities_list.weird_alien,
-		entity_descriptor("weird_alien",
-			"resources/sprites/weird_alien_icon.bmp",
+		entity_descriptor("weirdalien",
+			"resources/sprites/weirdalien-icon.bmp",
 			weird_alien_entity));
 	module_add(&self->module, &self->entities_list.ghast,
 		entity_descriptor("ghast",
-			"resources/sprites/ghast_icon.bmp",
+			"resources/sprites/ghast-icon.bmp",
 			ghast_entity));
 	module_add(&self->module, &self->entities_list.nyarlathotep,
 		entity_descriptor("nyarlathotep",
-			"resources/sprites/nyarlathotep_icon.bmp",
+			"resources/sprites/nyarlathotep-icon.bmp",
 			nyarlathotep_entity));
 	module_add_weapon(self);
 }

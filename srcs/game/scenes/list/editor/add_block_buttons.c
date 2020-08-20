@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_block_buttons.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 23:24:18 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/16 23:38:42 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/20 17:46:12 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		add_block_buttons(t_editor_scene *const self,
 	while (i < ft_smin(descriptors_size, buttons_size))
 	{
 		buttons[i] = create_block_checkbox(
-			&self->super.entities, "editor-button.bmp",
+			&self->super.entities, "editor/editor-button.bmp",
 			&descriptors[i], args->screen);
 		if (buttons[i])
 			check_box_position(self, buttons, i);

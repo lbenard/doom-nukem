@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:37:01 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/20 18:09:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_result		init_minigun_entity(t_minigun_entity *const self,
 	minigun_specs.loading_time = 1.5f;
 	if (static_module_create(self,
 		weapon_entity(&ctx->assets.minigun_spritesheet,
-			"resources/sprites/minigun_sprite.bmp",
+			"resources/sprites/minigun-sprite.bmp",
 			minigun_specs, ctx)) == ERROR)
 	{
 		return (throw_result_str("init_minigun_entity()",

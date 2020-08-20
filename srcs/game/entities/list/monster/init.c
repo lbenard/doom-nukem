@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/19 19:24:05 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 17:32:47 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/20 20:33:40 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_result	init_add_module(t_monster_entity *const self,
 	module_add(&self->super.super.module, &self->animation,
 		animation(0, args->spritesheet_ref->nb_sprite, 1.0f));
 	module_add(&self->super.super.module, &self->name_text,
-		text("haxorville.bmp",
+		text("resources/fonts/haxorville.bmp",
 			ft_usize(5 * ft_strlen(args->name), 9)));
 	if (self->super.super.module.has_error == TRUE)
 	{

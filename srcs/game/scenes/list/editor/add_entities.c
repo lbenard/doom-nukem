@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_entities.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 21:33:14 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/16 23:41:42 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/20 17:45:18 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	add_entity_buttons(t_editor_scene *const self,
 	while (i < ft_smin(descriptors_size, buttons_size))
 	{
 		buttons[i] = create_entity_checkbox(
-			&self->super.entities, "editor-button.bmp",
+			&self->super.entities, "editor/editor-button.bmp",
 			&descriptors[i], args->screen);
 		if (buttons[i])
 			checkbox_position(self, buttons, i);
@@ -64,21 +64,22 @@ static void	add_groups(t_editor_scene *const self,
 					const t_editor_scene_args *const args)
 {
 	self->hud.tools_group.cursor_ref = create_checkbox_relative_pos(
-		&self->super.entities, "editor-cursor.bmp", ft_checkbox_position_pos(
-		ft_vec3f(self->editor_view.size.x + 30.0f, 30.0f, 0.0f)), args->screen);
+		&self->super.entities, "editor/editor-cursor.bmp",
+		ft_checkbox_position_pos(ft_vec3f(
+			self->editor_view.size.x + 30.0f, 30.0f, 0.0f)), args->screen);
 	self->hud.tools_group.create_ref = create_checkbox_relative(
-		&self->super.entities, "editor-create.bmp",
+		&self->super.entities, "editor/editor-create.bmp",
 		ft_checkbox_position(self->hud.tools_group.cursor_ref, RIGHT_TO, 50.0f),
 		args->screen);
 	self->hud.tools_group.save_ref = create_checkbox_relative_pos(
-		&self->super.entities, "editor-save.bmp",
+		&self->super.entities, "editor/editor-save.bmp",
 		ft_checkbox_position_pos(ft_vec3f(args->screen->size.x - 30,
 		args->screen->size.y - 30, 0.0f)), args->screen);
 	self->hud.create_group.show_blocks_ref = create_checkbox_relative(
-		&self->super.entities, "editor-block.bmp", ft_checkbox_position(
+		&self->super.entities, "editor/editor-block.bmp", ft_checkbox_position(
 		self->hud.tools_group.create_ref, BELOW, 50.0f), args->screen);
 	self->hud.create_group.show_entities_ref = create_checkbox_relative(
-		&self->super.entities, "editor-entity.bmp", ft_checkbox_position(
+		&self->super.entities, "editor/editor-entity.bmp", ft_checkbox_position(
 		self->hud.create_group.show_blocks_ref, RIGHT_TO, 50.0f), args->screen);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:48:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 01:12:53 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/20 18:39:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 #include "game/game.h"
 #include "engine/error.h"
 #include "engine/delta.h"
-
-#include <stdio.h>
 
 t_result	init_widepunchman_entity(t_widepunchman_entity *const self,
 				const t_widepunchman_entity_args *const args)

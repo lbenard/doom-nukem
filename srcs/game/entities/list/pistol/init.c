@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:36:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/20 18:09:05 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_result		init_pistol_entity(t_pistol_entity *const self,
 	pistol_specs.shoot_time = 0.4f;
 	if (static_module_create(self,
 		weapon_entity(&ctx->assets.pistol_spritesheet,
-			"resources/sprites/pistol_sprite.bmp",
+			"resources/sprites/pistol-sprite.bmp",
 			pistol_specs, ctx)) == ERROR)
 	{
 		return (throw_result_str("init_pistol_entity()",
