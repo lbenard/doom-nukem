@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 17:59:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/20 20:34:31 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/24 19:23:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		init_raycasting_scene_tooltips(t_raycasting_scene *const self)
 	module_add(&self->super.module, &self->tooltips.ending_text,
 		text("resources/fonts/haxorville.bmp",
 			ft_usize(5 * ft_strlen("There are still monsters..."), 9)));
+	self->tooltips.ending_text_opacity = 0.0f;
 	if (self->super.module.has_error == FALSE)
 		fill_texts(self);
 }

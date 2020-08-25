@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/19 04:36:17 by lbenard          ###   ########.fr        #
+#    Updated: 2020/08/25 19:49:55 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -519,8 +519,8 @@ LIBS			=	-lft				\
 					-lcsfml-system		\
 					-lcsfml-audio
 
-# CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -flto -g
-CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast -DGIT_ID=\"$(shell git log --format="%H" -n 1)\" -g3 -flto # -fsanitize=address # -Wno-deprecated
+CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast \
+					-DGIT_ID=\"$(shell git log --format="%H" -n 1)\" -flto
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 ifneq ($(UNAME), Linux)

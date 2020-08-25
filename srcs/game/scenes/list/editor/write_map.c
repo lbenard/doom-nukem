@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 23:44:38 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/17 00:04:02 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/24 20:05:03 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@
 #include "ft/str.h"
 #include "ft/io.h"
 #include "ft/mem.h"
+
+static void	free_map(char **map, const t_usize size)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < size.y)
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
 
 static char	**create_map(const t_usize size)
 {
@@ -84,6 +97,7 @@ t_result	write_map(t_editor_scene *const self,
 		ft_putchar_fd('\n', fd);
 		i++;
 	}
+	free_map(map, size);
 	ft_putchar_fd('\n', fd);
 	if (errno)
 		return (throw_result("write_blocks()"));
