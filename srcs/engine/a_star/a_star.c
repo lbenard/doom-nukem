@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a_star.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:02:04 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/25 21:21:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/25 23:49:50 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ t_result		ft_a_star(t_star *star)
 	t_node	c_node;
 	int		count;
 
-	ft_check_start_end(star->start, star->end, star->map);
 	while (star->openl)
 	{
 		c_node = ft_find_lower_f(&star->openl);

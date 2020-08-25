@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 13:54:13 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/20 19:27:39 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/25 23:49:42 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,6 @@ int			ft_validiag(int x, int y, t_star *star, t_node cur_node)
 			ft_analyse(cur_node.pos.x - 1, cur_node.pos.y, star) == 0)
 			return (0);
 	return (1);
-}
-
-void		ft_check_start_end(t_node start, t_node end, const t_map *const map)
-{
-	if (ft_isvalid(start.pos.x, start.pos.y, map) == 0)
-	{
-		ft_putendl("Start point invalid !");
-		exit(0);
-	}
-	if (ft_isvalid(end.pos.x, end.pos.y, map) == 0)
-	{
-		ft_putendl("Destination point is invalid !");
-		exit(0);
-	}
 }
 
 t_result	ft_is_openl_empty(t_star *star)

@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 22:44:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 18:28:50 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/25 23:50:49 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ int						ft_isvalid(const ssize_t x,
 							const ssize_t y,
 							const t_map *const map);
 int						ft_analyse(int x, int y, t_star *star);
-void					ft_check_start_end(t_node start, t_node end,
-							const t_map *const map);
 int						ft_validiag(int x, int y, t_star *star,
 							t_node cur_node);
 t_result				ft_is_openl_empty(t_star *star);

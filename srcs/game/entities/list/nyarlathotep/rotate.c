@@ -6,7 +6,7 @@
 /*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 15:52:24 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/10 16:16:21 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/25 23:48:06 by mribouch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,28 @@ static t_vec3f	dir_according_na(int na)
 	return (ret);
 }
 
-static t_vec3f	get_dir_move(t_nyarlathotep_entity *self, t_map map)
+static t_result	get_dir_move(t_nyarlathotep_entity *self, t_map map,
+					t_vec3f *dir_move)
 {
 	t_vec3f	verif;
-	t_vec3f	ret;
 	t_vec3f	position;
 	int		na;
 
 	position = self->super.super.super.transform.position;
 	na = (int)((get_wall_time() - (int)get_wall_time()) * 1000) % 7;
-	ret = ft_vec3f(0, 0, 0);
-	ret = dir_according_na(na);
-	verif = vec3f_normalize(ret);
-	verif = vec3f_scalar(ret, get_last_delta() * 2);
+	*dir_move = ft_vec3f(0, 0, 0);
+	*dir_move = dir_according_na(na);
+	verif = vec3f_normalize(*dir_move);
+	verif = vec3f_scalar(*dir_move, get_last_delta() * 2);
+	if ((position.x + verif.x * 6) + ((int)(position.y + verif.y * 6)
+		* map.size.x) > map.size.x * map.size .y - 1
+		|| (position.x + verif.x * 6) + ((int)(position.y + verif.y * 6)
+		* map.size.x) < 1)
+		return (OK);
 	if (map.map[(int)(position.x + verif.x * 6) +
-		((int)(position.y + verif.y * 6) * map.size.x)].id == ' ')
-		ret = vec3f_scalar(ret, -1.0f);
-	return (ret);
+		((int)(position.y + verif.y * 6) * map.size.x)].id != ' ')
+		*dir_move = vec3f_scalar(*dir_move, -1.0f);
+	return (OK);
 }
 
 void			rotate_nyarlathotep(t_nyarlathotep_entity *self,
@@ -72,7 +77,7 @@ void			rotate_nyarlathotep(t_nyarlathotep_entity *self,
 		self->is_moving == FALSE)
 	{
 		self->last_pos = self->super.super.super.transform.position;
-		self->dir_move = get_dir_move(self, scene->map);
+		get_dir_move(self, scene->map, &self->dir_move);
 		self->is_moving = TRUE;
 	}
 }
