@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 22:48:36 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/16 18:20:42 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/08/25 21:28:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/a_star.h"
 
-t_node	ft_get_f(int x, int y, t_star *star, t_node cur_node)
+static t_node	ft_get_f(int x, int y, t_star *star, t_node cur_node)
 {
 	t_node	ret;
 
@@ -29,7 +29,7 @@ t_node	ft_get_f(int x, int y, t_star *star, t_node cur_node)
 	return (ret);
 }
 
-void	ft_check_child(t_star *star, t_node cur_node)
+void			ft_check_child(t_star *star, t_node cur_node)
 {
 	t_node node;
 
@@ -56,7 +56,7 @@ void	ft_check_child(t_star *star, t_node cur_node)
 	}
 }
 
-void	ft_step_child(t_node child, t_node cur_node, t_star *star)
+void			ft_step_child(t_node child, t_node cur_node, t_star *star)
 {
 	if (child.pos.x == star->end.pos.x && child.pos.y == star->end.pos.y)
 	{
@@ -73,7 +73,7 @@ void	ft_step_child(t_node child, t_node cur_node, t_star *star)
 		ft_add_node(&star->openl, child);
 }
 
-void	ft_diag2(t_star *star, t_node c_node)
+static void		ft_diag2(t_star *star, t_node c_node)
 {
 	t_node	node;
 
@@ -85,7 +85,7 @@ void	ft_diag2(t_star *star, t_node c_node)
 	}
 }
 
-void	ft_diag(t_star *star, t_node c_node)
+void			ft_diag(t_star *star, t_node c_node)
 {
 	t_node	node;
 

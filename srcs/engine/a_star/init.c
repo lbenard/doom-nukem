@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/14 23:48:17 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 02:21:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/25 21:28:39 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static t_father	ft_initfather(void)
 }
 
 t_result		init_astar(t_star *a_star,
-				const t_map *const map,
-				t_entity monstre,
-				t_entity player)
+					const t_map *const map,
+					t_entity monstre,
+					t_entity player)
 {
 	if (!(a_star->closel = malloc(sizeof(t_star_list))))
 		return (ERROR);

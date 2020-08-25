@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 00:13:32 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/11 21:03:31 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/25 21:36:51 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	window_update(t_window *const self)
 {
 	t_isize	mouse_pos;
 
-	frame_update(&self->frame);
 	if (self->cursor.is_visible)
 	{
 		mouse_pos.x = sfMouse_getPositionRenderWindow(self->window).x;

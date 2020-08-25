@@ -6,24 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 15:02:04 by mribouch          #+#    #+#             */
-/*   Updated: 2020/07/19 02:24:04 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/25 21:21:42 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "engine/a_star.h"
 
-t_node		ft_fill_node(int x, int y, int f)
-{
-	t_node	node;
-
-	node.pos.x = x;
-	node.pos.y = y;
-	node.f = f;
-	return (node);
-}
-
-t_node		ft_find_lower_f(t_star_list **list)
+static t_node	ft_find_lower_f(t_star_list **list)
 {
 	t_node		ret;
 	t_star_list	*tmp;
@@ -39,7 +29,7 @@ t_node		ft_find_lower_f(t_star_list **list)
 	return (ret);
 }
 
-t_node		ft_closest_node(t_star_list **close, t_node end)
+t_node			ft_closest_node(t_star_list **close, t_node end)
 {
 	t_star_list	*tmp;
 	t_node		node;
@@ -63,7 +53,7 @@ t_node		ft_closest_node(t_star_list **close, t_node end)
 	return (node);
 }
 
-t_result	ft_get_path(t_node cur_node, t_star *star)
+static t_result	ft_get_path(t_node cur_node, t_star *star)
 {
 	t_node	*find;
 	t_node	*prev;
@@ -88,7 +78,7 @@ t_result	ft_get_path(t_node cur_node, t_star *star)
 	return (OK);
 }
 
-t_result	ft_a_star(t_star *star)
+t_result		ft_a_star(t_star *star)
 {
 	t_node	c_node;
 	int		count;
