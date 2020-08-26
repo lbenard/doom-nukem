@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:45:58 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 14:56:20 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/08/26 17:33:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ t_result	init_map_split(t_map *const self, char *map_file_str)
 	}
 	if (!map_parse_map(self, dn_select_flag(map_file_str, "map")))
 	{
+		free_entity_list(&self->entities);
 		free(map_file_str);
 		return (throw_result_str("init_map()", "failed to parse map"));
 	}
