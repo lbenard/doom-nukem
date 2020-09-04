@@ -50,6 +50,7 @@ void		ft_del_node(t_star_list **list, int x, int y)
 	t_star_list	*previous;
 
 	tmp = *list;
+	previous = NULL;
 	if ((tmp != NULL) && (tmp->node.pos.x == x && tmp->node.pos.y == y) && list)
 	{
 		*list = tmp->next;
@@ -63,7 +64,8 @@ void		ft_del_node(t_star_list **list, int x, int y)
 	}
 	if (tmp == NULL)
 		return ;
-	previous->next = tmp->next;
+	if (previous)
+		previous->next = tmp->next;
 	free(tmp);
 }
 

@@ -83,6 +83,7 @@ t_result	write_map(t_editor_scene *const self,
 {
 	char	**map;
 	size_t	i;
+	int		ret;
 
 	if (!(map = create_map(size)))
 		return (throw_result_str("write_map()", "failed to create map array"));
@@ -90,10 +91,11 @@ t_result	write_map(t_editor_scene *const self,
 	errno = 0;
 	i = 0;
 	ft_putstr_fd("-map\n", fd);
+	(void)ret;
 	while (i < size.y)
 	{
 		ft_putstr_fd(": ", fd);
-		write(fd, map[i], size.x);
+		ret = write(fd, map[i], size.x);
 		ft_putchar_fd('\n', fd);
 		i++;
 	}
