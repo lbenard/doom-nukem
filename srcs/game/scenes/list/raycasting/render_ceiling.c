@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:21:43 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 10:45:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 13:03:05 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ static t_rgba	get_ceiling_color(t_raycasting_scene *const self,
 		& (self->assets.ceiling.size.y - 1);
 	c = self->assets.ceiling.pixels[self->assets.ceiling.size.x * t.y + t.x];
 	result = get_lerp_col(c, distance, darkness);
+	if (ceiling.x < 0.0f || ceiling.x > self->map.size.x
+		|| ceiling.y < 0.0f || ceiling.y > self->map.size.y)
+		return (result);
 	luminosity = raycasting_scene_luminosity_from_light_sources(self,
 		ft_vec3f(ceiling.x, ceiling.y, 1.0f));
 	result.c.r += (255 - result.c.r) * luminosity / 6.0f * 0.984f;
