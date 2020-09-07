@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   update.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 19:05:27 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/14 20:57:24 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/09/07 10:35:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,18 @@ static void		wasd(t_player_entity *const self, t_vec3f rotation)
 	}
 }
 
+static void		clamp_player_pos(t_player_entity *const self)
+{
+	if (self->super.transform.position.x < 0.0f)
+		self->super.transform.position.x = 0.0f;
+	if (self->super.transform.position.y < 0.0f)
+		self->super.transform.position.y = 0.0f;
+	if (self->super.transform.position.x > self->map_ref->size.x)
+		self->super.transform.position.x = self->map_ref->size.x - 0.01f;
+	if (self->super.transform.position.y > self->map_ref->size.y)
+		self->super.transform.position.y = self->map_ref->size.y - 0.01f;
+}
+
 void			player_entity_update(t_player_entity *const self)
 {
 	float	rot_sin;
@@ -103,10 +115,12 @@ void			player_entity_update(t_player_entity *const self)
 		wasd(self, self->super.transform.rotation);
 		flying_player_state(self);
 		moving_player_state(self);
-		self->velocity = move(self->map_ref, self->super.transform.position,
-			self->velocity);
+		if (!self->is_flying)
+			self->velocity = move(self->map_ref, self->super.transform.position,
+				self->velocity);
 		self->super.transform.position.x += self->velocity.x;
 		self->super.transform.position.y += self->velocity.y;
+		clamp_player_pos(self);
 	}
 	rot_sin = sin(self->super.transform.rotation.y);
 	rot_cos = cos(self->super.transform.rotation.y);

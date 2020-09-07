@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 17:45:18 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/20 18:13:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/06 04:32:38 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,29 @@ static void	add_ending_button(t_game *const self)
 			"resources/textures/blocks/metallic-ending-button.bmp"));
 }
 
+static void	add_glasses(t_game *const self)
+{
+	module_add(&self->module, &self->blocks_list.white_glass,
+		block_descriptor('D', "White glass",
+			"resources/textures/blocks/white_glass.bmp"));
+	module_add(&self->module, &self->blocks_list.black_glass,
+		block_descriptor('E', "Black glass",
+			"resources/textures/blocks/black_glass.bmp"));
+	module_add(&self->module, &self->blocks_list.red_glass,
+		block_descriptor('F', "Red glass",
+			"resources/textures/blocks/red_glass.bmp"));
+	module_add(&self->module, &self->blocks_list.green_glass,
+		block_descriptor('G', "Green glass",
+			"resources/textures/blocks/green_glass.bmp"));
+	module_add(&self->module, &self->blocks_list.blue_glass,
+		block_descriptor('H', "Blue glass",
+			"resources/textures/blocks/blue_glass.bmp"));
+}
+
 void		init_block_descriptors(t_game *const self)
 {
 	add_blocks(self);
 	add_button_door(self);
 	add_ending_button(self);
+	add_glasses(self);
 }

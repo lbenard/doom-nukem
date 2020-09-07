@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/20 20:34:14 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 04:09:42 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,6 @@ void		init_raycasting_scene_assets(t_raycasting_scene *const self)
 	init_game_over(self);
 	init_monsters(self);
 	init_weapons(self);
+	module_add(&self->super.module, &self->assets.lamp_sprite,
+		frame_from_file("resources/sprites/lamp.bmp"));
 }

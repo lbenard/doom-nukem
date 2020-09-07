@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/20 20:21:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 10:50:00 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	display_hud(t_raycasting_scene *self, t_frame *const fb)
 			ft_frame_transform(ft_vec2f(0.5f, 0.5f),
 				ft_isize(fb->size.x / 2 -
 					self->hud_ray.heart_ss.grid_size.x / 2,
-					fb->size.y - self->hud_ray.heart_ss.sprite_size.y * 2),
-						ft_vec2f(fx, fx), 255), blend_add);
+					fb->size.y - self->hud_ray.heart_ss.sprite_size.y * 3),
+						ft_vec2f(fx * 2, fx * 2), 255), blend_add);
 	raycasting_scene_render_tooltip(self, fb);
 }
 
@@ -115,8 +115,8 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 		self->entities.player_ref->dir, self->entities.player_ref->plane);
 	raycasting_scene_render_ceiling(self, fb,
 		self->entities.player_ref->dir, self->entities.player_ref->plane);
-	raycasting_scene_render_walls(self, fb);
-	raycasting_scene_render_sprites(self, fb);
+	raycasting_scene_render_map(self, fb);
+	raycasting_scene_render_monster_infos(self, fb);
 	if (!self->entities.player_ref->is_dead)
 	{
 		frame_layer_transform(fb, &self->assets.crosshair,

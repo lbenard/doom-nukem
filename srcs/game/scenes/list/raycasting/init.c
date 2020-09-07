@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/20 20:36:24 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 10:12:16 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 	raycasting_scene_add_entities(self);
 	init_raycasting_scene_weapon(self);
 	raycasting_scene_add_death_buttons(self);
+	cursor_set_visibility(&self->window_ref->cursor, FALSE);
 	if (self->super.module.has_error || self->super.entities.module.has_error)
 	{
 		destroy_raycasting_scene(self);

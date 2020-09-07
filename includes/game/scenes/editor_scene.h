@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/20 17:28:54 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 04:52:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ typedef struct	s_blocks_group
 	t_block_checkbox_entity	*metallic_green_door;
 	t_block_checkbox_entity	*metallic_blue_door;
 	t_block_checkbox_entity	*ending;
+	t_block_checkbox_entity	*white_glass;
+	t_block_checkbox_entity	*black_glass;
+	t_block_checkbox_entity	*red_glass;
+	t_block_checkbox_entity	*green_glass;
+	t_block_checkbox_entity	*blue_glass;
 }				t_blocks_group;
 
 typedef struct	s_entities_group
@@ -81,6 +86,7 @@ typedef struct	s_entities_group
 	t_entity_checkbox_entity	*weird_alien;
 	t_entity_checkbox_entity	*ghast;
 	t_entity_checkbox_entity	*nyarlathotep;
+	t_entity_checkbox_entity	*lamp;
 	t_entity_checkbox_entity	*pistol;
 	t_entity_checkbox_entity	*shotgun;
 	t_entity_checkbox_entity	*minigun;

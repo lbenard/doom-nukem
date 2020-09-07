@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/08/25 19:49:55 by lbenard          ###   ########.fr        #
+#    Updated: 2020/09/07 11:42:55 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -334,6 +334,10 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/image/render.c												\
 					game/entities/list/image/destroy.c												\
 																									\
+					game/entities/list/lamp/lamp_entity.c											\
+					game/entities/list/lamp/init.c													\
+					game/entities/list/lamp/destroy.c												\
+																									\
 					game/entities/list/monster/ft_monster_stats.c									\
 					game/entities/list/monster/monster_entity.c										\
 					game/entities/list/monster/init.c												\
@@ -460,11 +464,15 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/update.c											\
 					game/scenes/list/raycasting/door.c												\
 					game/scenes/list/raycasting/ending.c											\
+					game/scenes/list/raycasting/sort_sprites.c										\
 					game/scenes/list/raycasting/render.c											\
+					game/scenes/list/raycasting/luminosity_from_light_sources.c						\
 					game/scenes/list/raycasting/render_floor.c										\
 					game/scenes/list/raycasting/render_ceiling.c									\
-					game/scenes/list/raycasting/render_walls.c										\
-					game/scenes/list/raycasting/render_sprites.c									\
+					game/scenes/list/raycasting/render_map.c										\
+					game/scenes/list/raycasting/render_wall_column.c								\
+					game/scenes/list/raycasting/render_sprite_column.c								\
+					game/scenes/list/raycasting/render_monster_infos.c								\
 					game/scenes/list/raycasting/render_weapon_display.c								\
 					game/scenes/list/raycasting/render_tooltip.c									\
 					game/scenes/list/raycasting/render_use_tooltip.c								\
@@ -477,6 +485,8 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/weapon_reload.c										\
 					game/scenes/list/raycasting/render_weapon.c										\
 					game/scenes/list/raycasting/destroy.c											\
+					game/scenes/list/raycasting/ft_ray.c											\
+					game/scenes/list/raycasting/init_raycast.c										\
 					game/scenes/list/raycasting/cast.c												\
 																									\
 					game/hud/hud_game.c

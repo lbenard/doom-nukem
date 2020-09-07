@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_entity_lists.c                                :+:      :+:    :+:   */
+/*   lamp_entity.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/10 22:21:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 04:54:16 by lbenard          ###   ########.fr       */
+/*   Created: 2020/08/16 21:32:47 by lbenard           #+#    #+#             */
+/*   Updated: 2020/09/07 04:11:26 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/scenes/raycasting_scene.h"
+#include "game/entities/lamp_entity.h"
 
-void	init_raycasting_scene_entity_lists(t_raycasting_scene *const self)
+t_constructor	lamp_entity(t_scene *const scene, const t_vec2f pos)
 {
-	module_add(&self->super.module, &self->sprite_entities, entity_list());
-	module_add(&self->super.module, &self->monster_entities, entity_list());
-	module_add(&self->super.module, &self->weapon_entities, entity_list());
-	module_add(&self->super.module, &self->light_entities, entity_list());
+	static t_lamp_entity_args	args;
+
+	args.scene = scene;
+	args.pos = pos;
+	return (ft_constructor(init_lamp_entity,
+		destroy_lamp_entity,
+		sizeof(t_lamp_entity),
+		&args));
 }

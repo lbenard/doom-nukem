@@ -6,22 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:21:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 10:34:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "types.h"
 #include "engine/error.h"
-#include "engine/controller.h"
 #include "game/game.h"
-#include "engine/lookup_table.h"
-#include "engine/delta.h"
-#include "engine/ascii_font.h"
-#include "engine/text.h"
 #include "game/scenes/menu_scene.h"
-#include "game/scenes/editor_scene.h"
-#include "game/scenes/script_scene.h"
-#include "game/scenes/raycasting_scene.h"
 #include "game/events/events.h"
 
 int	main(int ac, char **av)

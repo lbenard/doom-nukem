@@ -6,11 +6,12 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:06:59 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 23:06:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 10:47:42 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/delta.h"
+#include "maths/maths.h"
 #include "game/scenes/raycasting_scene.h"
 
 static float	darkness(t_raycasting_scene *const self)
@@ -57,13 +58,21 @@ static t_rgba	get_floor_color(t_raycasting_scene *const self,
 {
 	t_vec2i	t;
 	t_rgba	color;
+	t_rgba	result;
+	float	luminosity;
 
 	t.x = (int)(self->assets.floor.size.x * (floor.x - (int)(floor.x)))
 		& (self->assets.floor.size.x - 1);
 	t.y = (int)(self->assets.floor.size.y * (floor.y - (int)(floor.y)))
 		& (self->assets.floor.size.y - 1);
 	color = self->assets.floor.pixels[self->assets.floor.size.x * t.y + t.x];
-	return (get_lerp_col(color, distance, darkness));
+	result = get_lerp_col(color, distance, darkness);
+	luminosity = raycasting_scene_luminosity_from_light_sources(self,
+		ft_vec3f(floor.x, floor.y, 0.0f));
+	result.c.r += (255 - result.c.r) * luminosity / 6.0f * 0.984f;
+	result.c.g += (255 - result.c.g) * luminosity / 6.0f * 0.949f;
+	result.c.b += (255 - result.c.b) * luminosity / 6.0f * 0.8f;
+	return (result);
 }
 
 void			raycasting_scene_render_floor(t_raycasting_scene *const self,
@@ -90,8 +99,8 @@ void			raycasting_scene_render_floor(t_raycasting_scene *const self,
 		{
 			floor.x += dst * (dir.x + plane.x - (dir.x - plane.x)) / fb->size.x;
 			floor.y += dst * (dir.y + plane.y - (dir.y - plane.y)) / fb->size.x;
-			fb->pixels[i.y * fb->size.x + i.x] = get_floor_color(self, floor,
-				dst, darkness_value);
+			fb->pixels[i.y * fb->size.x + i.x] =
+				get_floor_color(self, floor, dst, darkness_value);
 			i.x++;
 		}
 		i.y++;

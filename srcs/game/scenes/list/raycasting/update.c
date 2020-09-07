@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/04 22:19:04 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 10:14:15 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ static void	player_action(t_raycasting_scene *const self)
 void		raycasting_scene_update(t_raycasting_scene *const self)
 {
 	entity_list_update(&self->super.entities);
+	cursor_set_visibility(&self->window_ref->cursor,
+		self->entities.player_ref->is_dead);
 	if (self->entities.retry_button_ref->is_clicked)
 	{
 		game_set_scene(raycasting_scene(self->window_ref, self->path));

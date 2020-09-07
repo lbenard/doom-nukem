@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 18:21:42 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/20 18:06:56 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 04:51:30 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "game/entities/weird_alien_entity.h"
 #include "game/entities/ghast_entity.h"
 #include "game/entities/nyarlathotep_entity.h"
+#include "game/entities/lamp_entity.h"
 #include "game/entities/pistol_entity.h"
 #include "game/entities/shotgun_entity.h"
 #include "game/entities/minigun_entity.h"
@@ -63,5 +64,9 @@ void		init_entity_descriptors(t_game *const self)
 		entity_descriptor("nyarlathotep",
 			"resources/sprites/nyarlathotep-icon.bmp",
 			nyarlathotep_entity));
+	module_add(&self->module, &self->entities_list.lamp,
+		entity_descriptor("lamp",
+			"resources/sprites/lamp-icon.bmp",
+			lamp_entity));
 	module_add_weapon(self);
 }

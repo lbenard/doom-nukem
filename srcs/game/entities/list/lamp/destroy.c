@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_entity_lists.c                                :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/10 22:21:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 04:54:16 by lbenard          ###   ########.fr       */
+/*   Created: 2020/08/16 21:44:58 by lbenard           #+#    #+#             */
+/*   Updated: 2020/09/07 04:13:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/raycasting_scene.h"
+#include "game/entities/lamp_entity.h"
 
-void	init_raycasting_scene_entity_lists(t_raycasting_scene *const self)
+void	destroy_lamp_entity(t_lamp_entity *const self)
 {
-	module_add(&self->super.module, &self->sprite_entities, entity_list());
-	module_add(&self->super.module, &self->monster_entities, entity_list());
-	module_add(&self->super.module, &self->weapon_entities, entity_list());
-	module_add(&self->super.module, &self->light_entities, entity_list());
+	destroy_sprite_entity(&self->super);
 }

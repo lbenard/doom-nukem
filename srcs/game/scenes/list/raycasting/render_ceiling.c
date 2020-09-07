@@ -6,11 +6,12 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/18 22:21:43 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 23:01:02 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 10:45:48 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/delta.h"
+#include "maths/maths.h"
 #include "game/scenes/raycasting_scene.h"
 
 static float	darkness(t_raycasting_scene *const self)
@@ -57,13 +58,21 @@ static t_rgba	get_ceiling_color(t_raycasting_scene *const self,
 {
 	t_vec2i	t;
 	t_rgba	c;
+	t_rgba	result;
+	float	luminosity;
 
 	t.x = (int)(self->assets.ceiling.size.x * (ceiling.x - (int)(ceiling.x)))
 		& (self->assets.ceiling.size.x - 1);
 	t.y = (int)(self->assets.ceiling.size.y * (ceiling.y - (int)(ceiling.y)))
 		& (self->assets.ceiling.size.y - 1);
 	c = self->assets.ceiling.pixels[self->assets.ceiling.size.x * t.y + t.x];
-	return (get_lerp_col(c, distance, darkness));
+	result = get_lerp_col(c, distance, darkness);
+	luminosity = raycasting_scene_luminosity_from_light_sources(self,
+		ft_vec3f(ceiling.x, ceiling.y, 1.0f));
+	result.c.r += (255 - result.c.r) * luminosity / 6.0f * 0.984f;
+	result.c.g += (255 - result.c.g) * luminosity / 6.0f * 0.949f;
+	result.c.b += (255 - result.c.b) * luminosity / 6.0f * 0.8f;
+	return (result);
 }
 
 void			raycasting_scene_render_ceiling(t_raycasting_scene *const self,

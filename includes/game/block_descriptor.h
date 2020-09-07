@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:27:33 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/19 21:28:37 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/05 18:30:24 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct		s_block_descriptor
 	const char	*name;
 	const char	*path;
 	t_frame		texture;
+	t_bool		translucent;
 }					t_block_descriptor;
 
 typedef struct		s_block_descriptor_args

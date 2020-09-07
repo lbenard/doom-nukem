@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 18:53:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 11:44:51 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,40 @@
 # include "game/hud_game.h"
 
 /*
+** Utils
+*/
+typedef struct	s_ray
+{
+	t_vec2f	hit;
+	t_vec2f	wall_hit;
+	float	perpendicular_distance;
+	float	horizontal_ratio;
+}				t_ray;
+
+typedef struct	s_raycast
+{
+	t_vec2f	start_pos;
+	t_vec2f	dir;
+	t_vec2f	delta_dist;
+	t_vec2i	ray_pos;
+	t_vec2f	origin_dist;
+	t_vec2i	step;
+}				t_raycast;
+
+t_ray			ft_ray(const t_raycast *const raycast,
+					const t_u8 side);
+
+void			init_raycast(t_raycast *const self,
+					const t_vec2f pos,
+					const t_vec2f dir);
+
+t_u8			progress(const t_map *const map, t_raycast *const raycast);
+
+t_ray			cast(const t_map *const map,
+					const t_vec2f pos,
+					const t_vec2f dir);
+
+/*
 ** Raycasting level scene
 */
 typedef struct	s_raycasting_scene
@@ -45,6 +79,7 @@ typedef struct	s_raycasting_scene
 	t_entity_list	sprite_entities;
 	t_entity_list	monster_entities;
 	t_entity_list	weapon_entities;
+	t_entity_list	light_entities;
 	struct		s_assets
 	{
 		t_frame			floor;
@@ -64,6 +99,7 @@ typedef struct	s_raycasting_scene
 		t_spritesheet	minigun_spritesheet;
 		t_frame			ammo_sprite;
 		t_frame			medikit_sprite;
+		t_frame			lamp_sprite;
 	}				assets;
 	struct		s_inputs
 	{
@@ -100,6 +136,11 @@ typedef struct	s_raycasting_scene
 		t_text			pick_key_text;
 		t_bool			pick_triggered;
 	}				tooltips;
+	struct		s_raycasting
+	{
+		t_raycast	column;
+		size_t		x;
+	}				raycasting;
 }				t_raycasting_scene;
 
 typedef struct	s_raycasting_scene_args
@@ -141,8 +182,13 @@ void			zbuffer(t_raycasting_scene *const self,
 					const t_vec2f dir,
 					const t_vec2f plane);
 
+void			raycasting_scene_sort_sprites(t_raycasting_scene *const self);
+
 void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
+float			raycasting_scene_luminosity_from_light_sources(
+					const t_raycasting_scene *const self,
+					const t_vec3f pos);
 void			raycasting_scene_render_floor(t_raycasting_scene *const self,
 					t_frame *const fb,
 					const t_vec2f dir,
@@ -151,9 +197,20 @@ void			raycasting_scene_render_ceiling(t_raycasting_scene *const self,
 					t_frame *const fb,
 					const t_vec2f dir,
 					const t_vec2f plane);
-void			raycasting_scene_render_walls(t_raycasting_scene *const self,
+void			raycasting_scene_render_map(t_raycasting_scene *const self,
 					t_frame *const fb);
-void			raycasting_scene_render_sprites(t_raycasting_scene *const self,
+void			raycasting_scene_render_wall_column(
+					const t_raycasting_scene *const self,
+					t_frame *const fb,
+					t_ray *const ray,
+					const t_frame *const texture);
+void			raycasting_scene_render_sprite_column(
+					const t_raycasting_scene *const self,
+					t_frame *const fb,
+					t_ray *const ray,
+					const float last_distance);
+void			raycasting_scene_render_monster_infos(
+					t_raycasting_scene *const self,
 					t_frame *const fb);
 void			raycasting_scene_render_weapon_display(
 					t_raycasting_scene *const self,
@@ -191,27 +248,5 @@ void			raycasting_scene_weapon_reload(t_raycasting_scene *const self);
 void			destroy_raycasting_scene(t_raycasting_scene *const self);
 
 t_rgba			get_lerp_col(t_rgba color1, float dist, float value);
-
-/*
-** Utils
-*/
-typedef struct	s_ray
-{
-	t_vec2f	hit;
-	float	perpendicular_distance;
-	float	horizontal_ratio;
-}				t_ray;
-
-typedef struct	s_raycast
-{
-	t_vec2f	delta_dist;
-	t_vec2i	ray_pos;
-	t_vec2f	origin_dist;
-	t_vec2i	step;
-}				t_raycast;
-
-t_ray			cast(const t_map *const map,
-					const t_vec2f pos,
-					const t_vec2f dir);
 
 #endif

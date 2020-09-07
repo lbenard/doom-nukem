@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:33:04 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 04:51:30 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ typedef struct	s_game
 		t_block_descriptor	metallic_green_door;
 		t_block_descriptor	metallic_blue_door;
 		t_block_descriptor	ending;
+		t_block_descriptor	white_glass;
+		t_block_descriptor	black_glass;
+		t_block_descriptor	red_glass;
+		t_block_descriptor	green_glass;
+		t_block_descriptor	blue_glass;
 	}						blocks_list;
 	struct		s_entities
 	{
@@ -56,6 +61,7 @@ typedef struct	s_game
 		t_entity_descriptor	weird_alien;
 		t_entity_descriptor	ghast;
 		t_entity_descriptor	nyarlathotep;
+		t_entity_descriptor	lamp;
 		t_entity_descriptor	pistol;
 		t_entity_descriptor	shotgun;
 		t_entity_descriptor	minigun;
