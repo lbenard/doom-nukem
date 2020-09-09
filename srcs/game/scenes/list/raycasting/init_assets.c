@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 04:09:42 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/08 10:32:43 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ static void	init_weapons(t_raycasting_scene *const self)
 
 void		init_raycasting_scene_assets(t_raycasting_scene *const self)
 {
-	module_add(&self->super.module, &self->assets.floor,
-		frame_from_file("resources/textures/blocks/andesite.bmp"));
-	module_add(&self->super.module, &self->assets.ceiling,
-		frame_from_file("resources/textures/blocks/coarse-dirt.bmp"));
+	module_add(&self->super.module, &self->assets.fallback_texture,
+		frame_from_file("resources/textures/fallback.bmp"));
 	module_add(&self->super.module, &self->assets.crosshair,
 		frame_from_file("resources/textures/crosshair.bmp"));
 	init_hud(self);

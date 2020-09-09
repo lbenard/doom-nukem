@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 15:17:45 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 04:52:50 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 10:55:19 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,11 @@ typedef struct	s_blocks_group
 	t_block_checkbox_entity	*red_glass;
 	t_block_checkbox_entity	*green_glass;
 	t_block_checkbox_entity	*blue_glass;
+	t_block_checkbox_entity	*andesite;
+	t_block_checkbox_entity	*coarse_dirt;
+	t_block_checkbox_entity	*wood_screen;
+	t_block_checkbox_entity	*red_brick;
+	t_block_checkbox_entity	*granite;
 }				t_blocks_group;
 
 typedef struct	s_entities_group
@@ -102,6 +107,14 @@ typedef struct	s_editor_scene
 	t_entity_list				components;
 	t_entity_list				blocks;
 	t_entity_list				entities;
+	t_text						set_floor;
+	t_frame						set_floor_key;
+	t_input_id					set_floor_input;
+	t_text						set_ceiling;
+	t_frame						set_ceiling_key;
+	t_input_id					set_ceiling_input;
+	const t_block_descriptor	*floor;
+	const t_block_descriptor	*ceiling;
 	t_component_entity			*selected_component_ref;
 	t_player_component_entity	*player_spawn_ref;
 	t_frame						editor_view;
@@ -160,6 +173,7 @@ t_result		write_player_spawn(const int fd,
 t_result		write_entities(t_editor_scene *const self,
 					const int fd,
 					const t_isize origin);
+t_result		write_room(t_editor_scene *const self, const int fd);
 
 t_result		editor_scene_add_block(t_editor_scene *const self,
 					const t_block_descriptor *const block,

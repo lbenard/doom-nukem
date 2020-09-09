@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:38:15 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/05 21:39:07 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/08 10:22:12 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 typedef struct		s_wall
 {
 	const t_frame	*texture_ref;
+	const t_frame	*overlay_texture_ref;
 	t_bool			translucent;
 	char			id;
 }					t_wall;
@@ -72,6 +73,8 @@ typedef struct		s_map
 	t_list_head		entities;
 	t_usize			size;
 	t_wall			*map;
+	char			floor;
+	char			ceiling;
 	t_vec2d			spawn;
 }					t_map;
 
@@ -89,7 +92,9 @@ t_result			map_parse_size(t_map *const self,
 t_result			map_parse_player(t_map *const self,
 						char *player_flag_str);
 t_result			map_parse_entities(t_map *const self,
-						char *player_flag_str);
+						char *entities_flag_str);
+t_result			map_parse_room(t_map *const self,
+						char *room_flag_str);
 t_result			map_parse_map(t_map *const self,
 						char *map_flag_str);
 

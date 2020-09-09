@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/09/07 11:42:55 by lbenard          ###   ########.fr        #
+#    Updated: 2020/09/09 11:06:52 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,6 +137,7 @@ SRCS_LIST		=	main.c																			\
 					engine/map/parse_size.c															\
 					engine/map/parse_map.c															\
 					engine/map/parse_player.c														\
+					engine/map/parse_room.c															\
 					engine/map/parse_entities.c														\
 					engine/map/destroy.c															\
 																									\
@@ -462,10 +463,12 @@ SRCS_LIST		=	main.c																			\
 					game/scenes/list/raycasting/add_entities.c										\
 					game/scenes/list/raycasting/add_death_buttons.c									\
 					game/scenes/list/raycasting/update.c											\
+					game/scenes/list/raycasting/update_darkness.c									\
 					game/scenes/list/raycasting/door.c												\
 					game/scenes/list/raycasting/ending.c											\
 					game/scenes/list/raycasting/sort_sprites.c										\
 					game/scenes/list/raycasting/render.c											\
+					game/scenes/list/raycasting/render_screen.c										\
 					game/scenes/list/raycasting/luminosity_from_light_sources.c						\
 					game/scenes/list/raycasting/render_floor.c										\
 					game/scenes/list/raycasting/render_ceiling.c									\

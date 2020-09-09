@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/03 15:17:09 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/17 00:09:44 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/09/09 01:49:07 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ t_result		editor_scene_export_map(t_editor_scene *const self)
 		return (throw_result("editor_export_map()"));
 	if (!write_entities(self, fd, origin))
 		return (throw_result("editor_export_map()"));
-	if (!write_map(self, fd, origin, size))
+	if (!write_room(self, fd) || !write_map(self, fd, origin, size))
 		return (throw_result("editor_export_map()"));
 	return (OK);
 }

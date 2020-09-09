@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 10:50:00 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 10:12:33 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,10 +111,13 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
 	frame_fill(fb, ft_rgba(42, 0, 0, 255));
-	raycasting_scene_render_floor(self, fb,
-		self->entities.player_ref->dir, self->entities.player_ref->plane);
-	raycasting_scene_render_ceiling(self, fb,
-		self->entities.player_ref->dir, self->entities.player_ref->plane);
+	raycasting_scene_render_screen(self);
+	if (self->map.floor)
+		raycasting_scene_render_floor(self, fb,
+			self->entities.player_ref->dir, self->entities.player_ref->plane);
+	if (self->map.ceiling)
+		raycasting_scene_render_ceiling(self, fb,
+			self->entities.player_ref->dir, self->entities.player_ref->plane);
 	raycasting_scene_render_map(self, fb);
 	raycasting_scene_render_monster_infos(self, fb);
 	if (!self->entities.player_ref->is_dead)
@@ -131,4 +134,5 @@ void		raycasting_scene_render(t_raycasting_scene *const self,
 	}
 	else
 		render_game_over(self, fb);
+	frame_layer_opaque(&self->last_frame, fb, ft_isize(0, 0));
 }

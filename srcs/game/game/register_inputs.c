@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 03:57:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:23:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/07 14:37:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ static void	register_player(t_game *const self)
 
 static void	register_editor(t_game *const self)
 {
+	self->inputs.editor_set_floor =
+		input_register(&self->input, "EditorSetFloor");
+	self->inputs.editor_set_ceiling =
+		input_register(&self->input, "EditorSetCeiling");
 	self->inputs.editor_camera_up =
 		input_register(&self->input, "EditorCameraUp");
 	self->inputs.editor_camera_right =

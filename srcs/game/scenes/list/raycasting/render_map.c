@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/05 00:42:54 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 11:35:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/08 10:32:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static float		render_column(t_raycasting_scene *const self,
 	ray = ft_ray(&self->raycasting.column,
 		progress(&self->map, &self->raycasting.column));
 	if (!(wall = wall_at_pos(self, ray.hit)))
-		texture = &self->assets.floor;
+		texture = &self->assets.fallback_texture;
 	else
 	{
 		texture = wall->texture_ref;

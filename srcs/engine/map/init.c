@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/24 16:45:58 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/26 17:33:15 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 00:32:03 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,24 @@
 #include "engine/error.h"
 #include "engine/parsing.h"
 
-t_result	init_map_split(t_map *const self, char *map_file_str)
+static t_result	init_map_room(t_map *const self, char *map_file_str)
+{
+	if (!map_parse_room(self, dn_select_flag(map_file_str, "room")))
+	{
+		free_entity_list(&self->entities);
+		free(map_file_str);
+		return (throw_result_str("init_map()", "failed to parse room"));
+	}
+	if (!map_parse_map(self, dn_select_flag(map_file_str, "map")))
+	{
+		free_entity_list(&self->entities);
+		free(map_file_str);
+		return (throw_result_str("init_map()", "failed to parse map"));
+	}
+	return (OK);
+}
+
+static t_result	init_map_split(t_map *const self, char *map_file_str)
 {
 	if (!map_parse_size(self, dn_select_flag(map_file_str, "size")))
 	{
@@ -37,16 +54,12 @@ t_result	init_map_split(t_map *const self, char *map_file_str)
 		free(map_file_str);
 		return (throw_result_str("init_map()", "failed to parse player"));
 	}
-	if (!map_parse_map(self, dn_select_flag(map_file_str, "map")))
-	{
-		free_entity_list(&self->entities);
-		free(map_file_str);
-		return (throw_result_str("init_map()", "failed to parse map"));
-	}
+	if (!init_map_room(self, map_file_str))
+		return (ERROR);
 	return (OK);
 }
 
-t_result	init_map(t_map *const self, const t_map_args *const args)
+t_result		init_map(t_map *const self, const t_map_args *const args)
 {
 	char	*map_file_str;
 

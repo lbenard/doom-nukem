@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 11:44:51 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 11:04:52 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,16 @@ typedef struct	s_raycasting_scene
 	t_hud_game		hud_ray;
 	double			death_time;
 	float			fov;
+	float			darkness;
 	t_array			zbuffer;
+	t_frame			last_frame;
 	t_entity_list	sprite_entities;
 	t_entity_list	monster_entities;
 	t_entity_list	weapon_entities;
 	t_entity_list	light_entities;
 	struct		s_assets
 	{
-		t_frame			floor;
-		t_frame			ceiling;
+		t_frame			fallback_texture;
 		t_frame			crosshair;
 		t_spritesheet	use_key_spritesheet;
 		t_spritesheet	pick_key_spritesheet;
@@ -174,6 +175,8 @@ void			raycasting_scene_add_death_buttons(
 					t_raycasting_scene *const self);
 
 void			raycasting_scene_update(t_raycasting_scene *const self);
+void			raycasting_scene_update_darkness(
+					t_raycasting_scene *const self);
 
 void			door_trigger(t_raycasting_scene *const self);
 void			ending_trigger(t_raycasting_scene *const self);
@@ -186,6 +189,7 @@ void			raycasting_scene_sort_sprites(t_raycasting_scene *const self);
 
 void			raycasting_scene_render(t_raycasting_scene *const self,
 					t_frame *const fb);
+void			raycasting_scene_render_screen(t_raycasting_scene *const self);
 float			raycasting_scene_luminosity_from_light_sources(
 					const t_raycasting_scene *const self,
 					const t_vec3f pos);

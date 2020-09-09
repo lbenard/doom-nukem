@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_stuff.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/17 00:07:51 by mribouch          #+#    #+#             */
-/*   Updated: 2020/08/17 00:13:22 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/09/08 10:16:13 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,29 @@ t_result	write_entities(t_editor_scene *const self,
 	ft_putchar_fd('\n', fd);
 	if (errno)
 		return (throw_result("write_size()"));
+	return (OK);
+}
+
+t_result	write_room(t_editor_scene *const self, const int fd)
+{
+	errno = 0;
+	ft_putstr_fd("-room\n", fd);
+	if (self->floor)
+	{
+		ft_putstr_fd("floor", fd);
+		ft_putstr_fd(": ", fd);
+		ft_putchar_fd(self->floor->id, fd);
+		ft_putchar_fd('\n', fd);
+	}
+	if (self->ceiling)
+	{
+		ft_putstr_fd("ceiling", fd);
+		ft_putstr_fd(": ", fd);
+		ft_putchar_fd(self->ceiling->id, fd);
+		ft_putchar_fd('\n', fd);
+	}
+	ft_putchar_fd('\n', fd);
+	if (errno)
+		return (throw_result("write_room()"));
 	return (OK);
 }

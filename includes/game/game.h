@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 15:39:38 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 04:51:30 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 10:55:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ typedef struct	s_game
 		t_block_descriptor	red_glass;
 		t_block_descriptor	green_glass;
 		t_block_descriptor	blue_glass;
+		t_block_descriptor	andesite;
+		t_block_descriptor	coarse_dirt;
+		t_block_descriptor	wood_screen;
+		t_block_descriptor	red_brick;
+		t_block_descriptor	granite;
 	}						blocks_list;
 	struct		s_entities
 	{
@@ -86,6 +91,8 @@ typedef struct	s_game
 		t_input_id	camera_left;
 		t_input_id	camera_up;
 		t_input_id	camera_down;
+		t_input_id	editor_set_floor;
+		t_input_id	editor_set_ceiling;
 		t_input_id	editor_camera_up;
 		t_input_id	editor_camera_right;
 		t_input_id	editor_camera_down;

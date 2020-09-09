@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:32:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 20:20:22 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/09/09 01:46:45 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,46 @@ static void	render_entity_buttons(t_editor_scene *const self,
 	}
 }
 
+static void	render_floor_ceiling(t_editor_scene *const self, t_frame *const fb)
+{
+	frame_layer_transform_add(fb, &self->set_floor_key, ft_frame_transform(
+		ft_vec2f(0.5f, 0.5f), ft_isize(self->editor_view.size.x + 20, fb->size.y
+		- 20), ft_vec2f(2.0f, 2.0f), 255));
+	frame_layer_transform_add(fb, &self->set_ceiling_key, ft_frame_transform(
+		ft_vec2f(0.5f, 0.5f), ft_isize(self->editor_view.size.x + 20, fb->size.y
+		- 60), ft_vec2f(2.0f, 2.0f), 255));
+	frame_layer_transform_add(fb, &self->set_floor.target, ft_frame_transform(
+		ft_vec2f(0.0f, 0.5f), ft_isize(self->editor_view.size.x + 40, fb->size.y
+		- 20), ft_vec2f(2.0f, 2.0f), 255));
+	frame_layer_transform_add(fb, &self->set_ceiling.target, ft_frame_transform(
+		ft_vec2f(0.0f, 0.5f), ft_isize(self->editor_view.size.x + 40, fb->size.y
+		- 60), ft_vec2f(2.0f, 2.0f), 255));
+	if (self->floor)
+		frame_layer_transform_add(fb, &self->floor->texture, ft_frame_transform(
+			ft_vec2f(0.5f, 0.5f), ft_isize(self->editor_view.size.x + 180,
+			fb->size.y - 20), ft_vec2f(32.0f / self->floor->texture.size.x,
+			32.0f / self->floor->texture.size.y), 255));
+	if (self->ceiling)
+		frame_layer_transform_add(fb, &self->ceiling->texture,
+			ft_frame_transform(ft_vec2f(0.5f, 0.5f),
+			ft_isize(self->editor_view.size.x + 180, fb->size.y - 60), ft_vec2f(
+			32.0f / self->ceiling->texture.size.x, 32.0f
+			/ self->ceiling->texture.size.y), 255));
+}
+
+static void	render_buttons(t_editor_scene *const self, t_frame *const fb)
+{
+	checkbox_entity_render(self->hud.tools_group.create_ref, fb);
+	checkbox_entity_render(self->hud.tools_group.cursor_ref, fb);
+	checkbox_entity_render(self->hud.tools_group.save_ref, fb);
+	checkbox_entity_render(self->hud.create_group.show_blocks_ref, fb);
+	checkbox_entity_render(self->hud.create_group.show_entities_ref, fb);
+	render_preview_buttons(self, fb);
+	render_entity_buttons(self, fb);
+}
+
 void		editor_scene_render(t_editor_scene *const self,
-			t_frame *const fb)
+				t_frame *const fb)
 {
 	t_list_head			*pos;
 	t_component_entity	*component;
@@ -73,11 +111,8 @@ void		editor_scene_render(t_editor_scene *const self,
 			&self->editor_view);
 	}
 	frame_layer_add(fb, &self->editor_view, ft_isize(0, 0));
-	checkbox_entity_render(self->hud.tools_group.create_ref, fb);
-	checkbox_entity_render(self->hud.tools_group.cursor_ref, fb);
-	checkbox_entity_render(self->hud.tools_group.save_ref, fb);
-	checkbox_entity_render(self->hud.create_group.show_blocks_ref, fb);
-	checkbox_entity_render(self->hud.create_group.show_entities_ref, fb);
-	render_preview_buttons(self, fb);
-	render_entity_buttons(self, fb);
+	render_buttons(self, fb);
+	if (self->hud.create_group.show_blocks_ref->is_active
+		&& self->hud.create_group.show_blocks_ref->is_checked)
+		render_floor_ceiling(self, fb);
 }

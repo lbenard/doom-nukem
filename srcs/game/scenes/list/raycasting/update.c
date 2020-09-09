@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:41:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 10:14:15 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 11:06:14 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,4 +138,5 @@ void		raycasting_scene_update(t_raycasting_scene *const self)
 		&self->assets.use_key_spritesheet);
 	animation_update(&self->tooltips.pick_key_animation,
 		&self->assets.pick_key_spritesheet);
+	raycasting_scene_update_darkness(self);
 }

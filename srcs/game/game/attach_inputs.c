@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 04:09:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/19 04:23:32 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 00:35:47 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,16 @@ static void	player_actions(t_game *const self)
 
 static void	editor_inputs(t_game *const self)
 {
-	input_attach(&self->input, self->inputs.editor_camera_up,
-		ft_key_event(sfKeyUp, KEY_HOLD));
+	input_attach(&self->input, self->inputs.editor_set_floor,
+		ft_key_event(sfKeyNum1, 0));
+	input_attach(&self->input, self->inputs.editor_set_ceiling,
+		ft_key_event(sfKeyNum2, 0));
 	input_attach(&self->input, self->inputs.editor_camera_up,
 		ft_key_event(sfKeyW, KEY_HOLD));
 	input_attach(&self->input, self->inputs.editor_camera_right,
-		ft_key_event(sfKeyRight, KEY_HOLD));
-	input_attach(&self->input, self->inputs.editor_camera_right,
 		ft_key_event(sfKeyD, KEY_HOLD));
 	input_attach(&self->input, self->inputs.editor_camera_down,
-		ft_key_event(sfKeyDown, KEY_HOLD));
-	input_attach(&self->input, self->inputs.editor_camera_down,
 		ft_key_event(sfKeyS, KEY_HOLD));
-	input_attach(&self->input, self->inputs.editor_camera_left,
-		ft_key_event(sfKeyLeft, KEY_HOLD));
 	input_attach(&self->input, self->inputs.editor_camera_left,
 		ft_key_event(sfKeyA, KEY_HOLD));
 	input_attach(&self->input, self->inputs.editor_camera_dezoom,
