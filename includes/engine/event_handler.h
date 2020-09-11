@@ -6,16 +6,16 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 15:53:03 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/04 22:55:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 07:41:44 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EVENT_HANDLER_H
 # define EVENT_HANDLER_H
 
+# include "SDL.h"
 # include "containers/module.h"
 # include "containers/list.h"
-# include <SFML/Window.h>
 
 /*
 ** Event node
@@ -61,7 +61,7 @@ void			event_handler_remove_sub_handler(
 					t_event_handler *const self,
 					t_event_handler *const sub_handler);
 void			event_handler_call(t_event_handler *const self,
-					sfEvent *const event);
+					SDL_Event *const event);
 
 void			destroy_event_handler(t_event_handler *const self);
 

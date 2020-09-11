@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 00:25:15 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/03 19:16:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 18:11:06 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 t_bool	window_is_focused(const t_window *const self)
 {
-	return (sfRenderWindow_hasFocus(self->window));
+	return (SDL_GetWindowFlags(self->window) | SDL_WINDOW_MOUSE_FOCUS);
 }

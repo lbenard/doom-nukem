@@ -6,10 +6,11 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:16:58 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/29 04:22:47 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 09:08:11 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "maths/vec2i.h"
 #include "game/scenes/menu_scene.h"
 #include "game/game.h"
 #include "engine/delta.h"
@@ -19,12 +20,12 @@
 
 static void	update_buttons(t_menu_scene *const self)
 {
-	double		wall;
-	t_usize		mid;
-	sfVector2i	mouse;
+	double	wall;
+	t_usize	mid;
+	t_vec2i	mouse;
 
 	wall = get_wall_time() / 5.0f;
-	mouse = sfMouse_getPositionRenderWindow(game_singleton()->window.window);
+	SDL_GetMouseState(&mouse.x, &mouse.y);
 	mid = ft_usize(self->window_size.x / 2, self->window_size.y / 2);
 	self->start_game_ref->super.transform.position = ft_vec3f(
 		cosine_lookup(wall - (int)wall) * 10.0f + mid.x - (mouse.x - (int)mid.x)
@@ -47,12 +48,12 @@ static void	update_buttons(t_menu_scene *const self)
 
 static void	update_images(t_menu_scene *const self)
 {
-	double		wall;
-	t_usize		mid;
-	sfVector2i	mouse;
+	double	wall;
+	t_usize	mid;
+	t_vec2i	mouse;
 
 	wall = get_wall_time() / 5.0f;
-	mouse = sfMouse_getPositionRenderWindow(game_singleton()->window.window);
+	SDL_GetMouseState(&mouse.x, &mouse.y);
 	mid = ft_usize(self->window_size.x / 2, self->window_size.y / 2);
 	self->title_ref->transform.position = ft_isize(
 		cosine_lookup(wall - (int)wall) * 5.0f + mid.x

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 23:38:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/07 20:10:07 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 18:01:38 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,6 @@ t_result		init_cursor_from_file(t_cursor *const self,
 
 void			cursor_set_visibility(t_cursor *const self,
 					const t_bool is_visible);
-void			cursor_set_pos(t_cursor *const self,
-					const sfRenderWindow *const window,
-					const t_isize pos);
 
 void			destroy_cursor(t_cursor *const self);
 

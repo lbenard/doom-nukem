@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 20:07:46 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/20 18:39:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 08:27:17 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ static void	game_loop2(t_game *game, double last_time)
 
 void		game_loop(void)
 {
-	t_game	*game;
-	double	last_time;
-	sfEvent	event;
+	t_game		*game;
+	double		last_time;
+	SDL_Event	event;
 
 	game = game_singleton();
 	last_time = get_wall_time();
 	input_update(&game->input);
-	while (sfRenderWindow_pollEvent(game->window.window, &event))
+	while (SDL_PollEvent(&event))
 		event_handler_call(&game->event_handler, &event);
 	if (game->scene)
 		game->scene->update_fn(game->scene);

@@ -6,10 +6,11 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/08 22:32:24 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/18 21:59:09 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 08:56:21 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "maths/vec2i.h"
 #include "game/entities/editor/editor_camera_entity.h"
 #include "engine/error.h"
 #include "engine/input.h"
@@ -28,11 +29,11 @@ static t_vec2f	get_previous_position(t_vec2f scroll_relative,
 }
 
 static void		update_camera_scale(t_editor_camera_entity *const self,
-					sfEvent *event)
+					SDL_Event *event)
 {
 	float	delta;
 
-	delta = (event->mouseWheelScroll.delta > 0.0f) ? 1.1f : 1.0f / 1.1f;
+	delta = (event->wheel.y > 0.0f) ? 1.1f : 1.0f / 1.1f;
 	self->super.transform.scale.x *= delta;
 	self->super.transform.scale.y *= delta;
 	self->super.transform.scale.z *= delta;
@@ -51,19 +52,21 @@ static void		update_camera_position(t_editor_camera_entity *const self,
 }
 
 static void		editor_camera_zoom_event(t_editor_camera_entity *const self,
-					sfEvent *event,
+					SDL_Event *event,
 					const t_frame *const fb)
 {
 	t_vec2f	scroll_relative;
 	t_vec2f	scroll_previous;
 	t_vec2f	scroll_next;
 	t_vec2f	mid;
+	t_vec2i	mouse;
 
-	if (event->type == sfEvtMouseWheelScrolled)
+	if (event->type == SDL_MOUSEWHEEL)
 	{
 		mid = ft_vec2f((float)fb->size.x / 2.0f, (float)fb->size.y / 2.0f);
-		scroll_relative.x = ((float)event->mouseWheelScroll.x - mid.x);
-		scroll_relative.y = ((float)event->mouseWheelScroll.y - mid.y);
+		SDL_GetMouseState(&mouse.x, &mouse.y);
+		scroll_relative.x = ((float)mouse.x - mid.x);
+		scroll_relative.y = ((float)mouse.y - mid.y);
 		scroll_previous = get_previous_position(scroll_relative,
 			self->super.transform, self->grid_unit);
 		update_camera_scale(self, event);

@@ -6,14 +6,14 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/11 23:40:12 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/12 00:12:06 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 10:52:12 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WINDOW_H
 # define WINDOW_H
 
-# include <SFML/Graphics.h>
+# include <SDL.h>
 # include "containers/module.h"
 # include "sizes/usize.h"
 # include "types.h"
@@ -22,19 +22,21 @@
 # include "engine/cursor.h"
 
 /*
-** Window module wrapped around SFML RenderWindow object.
+** Window module
 */
 typedef struct	s_window
 {
-	t_module		module;
-	sfRenderWindow	*window;
-	const char		*base_name;
-	t_string		name;
-	t_frame			frame;
-	t_bool			is_cleared;
-	t_cursor		cursor;
-	t_usize			size;
-	t_bool			is_fullscreen;
+	t_module	module;
+	SDL_Window	*window;
+	SDL_Surface	*surface;
+	const char	*base_name;
+	t_string	name;
+	t_frame		frame;
+	t_bool		is_cleared;
+	t_cursor	cursor;
+	t_usize		size;
+	t_bool		is_fullscreen;
+	t_bool		is_opened;
 }				t_window;
 
 typedef struct	s_window_args

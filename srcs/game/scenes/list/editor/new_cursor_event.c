@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_cursor_event.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 20:25:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/17 00:05:18 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/09/11 09:04:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void		unselect_component(t_editor_scene *const self)
 }
 
 static void		select_component(t_editor_scene *const self,
-					const sfEvent *const event)
+					const SDL_Event *const event)
 {
 	t_list_head			*pos;
 	t_component_entity	*component;
@@ -46,12 +46,12 @@ static void		select_component(t_editor_scene *const self,
 	while ((pos = pos->prev) != &self->components.list)
 	{
 		component = (t_component_entity*)((t_entity_node*)pos)->entity;
-		if (event->mouseButton.button == sfMouseLeft
-			|| event->mouseButton.button == sfMouseRight)
+		if (event->button.button == SDL_BUTTON_LEFT
+			|| event->button.button == SDL_BUTTON_RIGHT)
 		{
 			if (component->vtable.is_hovered(component, self->camera_ref,
 				&self->editor_view,
-				ft_isize(event->mouseButton.x, event->mouseButton.y)))
+				ft_isize(event->button.x, event->button.y)))
 			{
 				unselect_component(self);
 				self->selected_component_ref = component;
@@ -66,20 +66,22 @@ static void		select_component(t_editor_scene *const self,
 		unselect_component(self);
 }
 
-static void		component_cursor(t_editor_scene *const self, sfEvent *event)
+static void		component_cursor(t_editor_scene *const self, SDL_Event *event)
 {
 	if (self->hud.tools_group.cursor_ref->is_checked)
 	{
-		if (event->type == sfEvtMouseButtonPressed
-			&& event->mouseButton.x < (ssize_t)self->editor_view.size.x
-			&& event->mouseButton.y < (ssize_t)self->editor_view.size.y)
+		if (event->type == SDL_MOUSEBUTTONDOWN
+			&& event->button.x < (ssize_t)self->editor_view.size.x
+			&& event->button.y < (ssize_t)self->editor_view.size.y)
 			select_component(self, event);
-		if (event->type == sfEvtMouseButtonReleased
+		if (event->type == SDL_MOUSEBUTTONUP
 			&& self->selected_component_ref)
 			unselect_component(self);
-		if (event->type == sfEvtKeyPressed && event->key.code == sfKeySpace)
+		if (event->type == SDL_KEYDOWN
+			&& event->key.keysym.scancode == SDL_SCANCODE_SPACE)
 			unselect_component(self);
-		if (event->type == sfEvtKeyPressed && event->key.code == sfKeyDelete)
+		if (event->type == SDL_KEYDOWN
+			&& event->key.keysym.scancode == SDL_SCANCODE_DELETE)
 			remove_component(self);
 	}
 }

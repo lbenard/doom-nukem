@@ -6,18 +6,18 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 16:47:44 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/30 21:43:48 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 09:08:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/scenes/script_scene.h"
 #include "engine/error.h"
 
-static void		skip(t_script_scene *const self, sfEvent *event)
+static void		skip(t_script_scene *const self, SDL_Event *event)
 {
-	if (event->type == sfEvtKeyPressed)
+	if (event->type == SDL_KEYDOWN)
 		self->skip = TRUE;
-	if (event->type == sfEvtMouseWheelScrolled)
+	if (event->type == SDL_MOUSEWHEEL)
 		self->speed = 4.0f;
 }
 

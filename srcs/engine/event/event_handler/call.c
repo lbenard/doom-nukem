@@ -6,13 +6,13 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 19:19:26 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/08 19:40:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 07:42:51 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "engine/event_handler.h"
 
-static void	call(t_event_handler *const self, sfEvent *const event)
+static void	call(t_event_handler *const self, SDL_Event *const event)
 {
 	t_list_head		*pos;
 	t_callback_node	*node;
@@ -30,7 +30,7 @@ static void	call(t_event_handler *const self, sfEvent *const event)
 }
 
 void		event_handler_call(t_event_handler *const self,
-				sfEvent *const event)
+				SDL_Event *const event)
 {
 	t_list_head		*pos;
 	t_event_handler	*sub_handler;

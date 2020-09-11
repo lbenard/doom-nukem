@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 00:26:03 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/27 01:44:43 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 18:17:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_result	window_set_name(t_window *const self, const char *const name)
 	ft_strcat(name_dup, self->base_name);
 	ft_strcat(name_dup, " - ");
 	ft_strcat(name_dup, name);
-	sfRenderWindow_setTitle(self->window, name_dup);
+	SDL_SetWindowTitle(self->window, name_dup);
 	free((char*)self->name.str);
 	self->name.str = name_dup;
 	return (OK);

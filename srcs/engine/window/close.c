@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 00:38:53 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/03 19:16:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 18:07:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	window_close(t_window *const self)
 {
-	sfRenderWindow_close(self->window);
+	self->is_opened = FALSE;
 }

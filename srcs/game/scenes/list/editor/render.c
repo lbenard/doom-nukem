@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 16:32:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/09 01:46:45 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 09:54:54 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		editor_scene_render(t_editor_scene *const self,
 	t_component_entity	*component;
 
 	frame_fill(fb, ft_rgba(0, 0, 0, 255));
-	if (sfKeyboard_isKeyPressed(sfKeyB))
+	if (SDL_GetKeyboardState(NULL)[SDL_SCANCODE_B])
 		frame_layer_transform_add(fb, &self->editor_background,
 			ft_frame_transform(ft_vec2f(1.0f, 0.5f),
 				ft_isize(fb->size.x + 100, fb->size.y / 2),

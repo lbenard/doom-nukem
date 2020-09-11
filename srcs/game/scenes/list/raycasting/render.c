@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/09 10:12:33 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 09:08:58 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,11 @@ static void	render_game_over_background(t_raycasting_scene *const self,
 static void	render_game_over_buttons(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
-	t_usize		mid;
-	sfVector2i	mouse;
-	double		wall;
+	t_usize	mid;
+	t_vec2i	mouse;
+	double	wall;
 
-	mouse = sfMouse_getPositionRenderWindow(game_singleton()->window.window);
+	SDL_GetMouseState(&mouse.x, &mouse.y);
 	mid = ft_usize(self->window_ref->size.x / 2, self->window_ref->size.y / 2);
 	wall = get_wall_time() / 5.0f;
 	self->entities.retry_button_ref->super.transform.position = ft_vec3f(

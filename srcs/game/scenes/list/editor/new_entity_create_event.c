@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_entity_create_event.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mribouch <mribouch@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/01 00:38:06 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/16 20:17:56 by mribouch         ###   ########.fr       */
+/*   Updated: 2020/09/11 09:07:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 #include "engine/error.h"
 #include "maths/maths.h"
 
-static void		entity_create(t_editor_scene *const self, sfEvent *event)
+static void		entity_create(t_editor_scene *const self, SDL_Event *event)
 {
 	t_isize						mouse_pos;
 	t_entity_checkbox_entity	*checkbox;
 	t_vec2f						pos;
 
-	if (event->type == sfEvtMouseButtonPressed
-		&& event->mouseButton.x < (ssize_t)self->editor_view.size.x
-		&& event->mouseButton.y < (ssize_t)self->editor_view.size.y)
+	if (event->type == SDL_MOUSEBUTTONDOWN
+		&& event->button.x < (ssize_t)self->editor_view.size.x
+		&& event->button.y < (ssize_t)self->editor_view.size.y)
 	{
-		mouse_pos = ft_isize(event->mouseButton.x, event->mouseButton.y);
+		mouse_pos = ft_isize(event->button.x, event->button.y);
 		if (mouse_pos.x >= 0
 			&& mouse_pos.x < (ssize_t)self->editor_view.size.x &&
 			mouse_pos.y >= 0 && mouse_pos.y < (ssize_t)self->editor_view.size.y)

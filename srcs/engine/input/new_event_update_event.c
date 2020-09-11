@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/30 20:13:14 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/30 20:41:18 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 10:56:12 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,22 @@
 #include "maths/maths.h"
 
 static float	update_event(const t_input_event *const event,
-					const sfEvent *const sf_event)
+					const SDL_Event *const sdl_event)
 {
 	int	multiplier;
 
 	multiplier = (event->invert) ? -1 : 1;
 	if (event->type == KEY && !event->key.hold)
 	{
-		if (sf_event->type == sfEvtKeyPressed
-			&& sf_event->key.code == event->code)
+		if (sdl_event->type == SDL_KEYDOWN
+			&& sdl_event->key.keysym.scancode == (SDL_Scancode)event->code)
 			return (1.0f * multiplier);
 		return (0.0f);
 	}
 	if (event->type == MOUSE && !event->mouse.hold)
 	{
-		if (sfMouse_isButtonPressed(event->code))
+		if (sdl_event->type == SDL_MOUSEBUTTONDOWN
+			&& sdl_event->button.button == event->code)
 			return (1.0f * multiplier);
 		return (0.0f);
 	}
@@ -38,7 +39,7 @@ static float	update_event(const t_input_event *const event,
 
 static void		update_set(t_input_set *const set,
 					t_vector *const events,
-					const sfEvent *const sf_event)
+					const SDL_Event *const sdl_event)
 {
 	size_t			i;
 	size_t			events_size;
@@ -52,13 +53,14 @@ static void		update_set(t_input_set *const set,
 	{
 		event = (t_input_event*)events->data + i;
 		if (event->id == set->id)
-			result += update_event(event, sf_event);
+			result += update_event(event, sdl_event);
 		i++;
 	}
 	set->value = ft_fmin(ft_fmax(result, -1.0f), 1.0f);
 }
 
-static void		event_update(t_input *const self, const sfEvent *const sf_event)
+static void		event_update(t_input *const self,
+					const SDL_Event *const sdl_event)
 {
 	size_t		i;
 	size_t		table_size;
@@ -69,7 +71,7 @@ static void		event_update(t_input *const self, const sfEvent *const sf_event)
 	while (i < table_size)
 	{
 		set = (t_input_set*)self->table.data + i;
-		update_set(set, &self->events, sf_event);
+		update_set(set, &self->events, sdl_event);
 		i++;
 	}
 }

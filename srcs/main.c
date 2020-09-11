@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 22:17:01 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 10:34:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 10:56:18 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int ac, char **av)
 {
 	t_game	*game;
 
+	(void)av;
 	if (ac != 2)
 		return (!throw_error_str("main()", "a map path must be given"));
 	game = game_singleton();

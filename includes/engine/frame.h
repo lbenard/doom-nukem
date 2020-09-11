@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/23 17:02:59 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 22:23:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/09 18:21:34 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@
 # include "sizes/isize.h"
 # include "maths/vec2f.h"
 # include "engine/array.h"
-# include "engine/render_texture.h"
-# include "engine/sprite.h"
 # include "colors/rgba.h"
 # include "engine/blend.h"
 
@@ -32,8 +30,6 @@ typedef struct		s_frame
 	t_usize				size;
 	t_array				frame;
 	t_rgba				*pixels;
-	t_render_texture	render_texture;
-	t_sprite			sprite;
 }					t_frame;
 
 typedef struct		s_frame_args
@@ -51,7 +47,6 @@ t_result			init_frame(t_frame *const self,
 t_result			init_frame_from_file(t_frame *const self,
 						const t_frame_args *const args);
 
-void				frame_update(t_frame *const self);
 void				frame_clear(t_frame *const self);
 void				frame_fill(t_frame *const self,
 						const t_rgba fill_color);

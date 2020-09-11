@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/09/09 11:06:52 by lbenard          ###   ########.fr        #
+#    Updated: 2020/09/11 15:04:50 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,14 +38,11 @@ SRCS_LIST		=	main.c																			\
 					engine/blend/colorize.c															\
 					engine/blend/invert.c															\
 																									\
-					engine/controller/xbox/perpendicular_axis.c										\
-																									\
 					engine/cursor/cursor.c															\
 					engine/cursor/cursor_from_file.c												\
 					engine/cursor/init.c															\
 					engine/cursor/init_from_file.c													\
 					engine/cursor/set_visibility.c													\
-					engine/cursor/set_pos.c															\
 					engine/cursor/destroy.c															\
 																									\
 					engine/delta/get_delta_ptr.c													\
@@ -91,7 +88,6 @@ SRCS_LIST		=	main.c																			\
 					engine/frame/frame_from_file.c													\
 					engine/frame/init.c																\
 					engine/frame/init_from_file.c													\
-					engine/frame/update.c															\
 					engine/frame/clear.c															\
 					engine/frame/fill.c																\
 					engine/frame/fill_blend.c														\
@@ -108,8 +104,6 @@ SRCS_LIST		=	main.c																			\
 																									\
 					engine/input/ft_key_event.c														\
 					engine/input/ft_mouse_event.c													\
-					engine/input/ft_stick_event.c													\
-					engine/input/ft_button_event.c													\
 					engine/input/ft_input_set.c														\
 					engine/input/input_set_get_uid.c												\
 					engine/input/input.c															\
@@ -152,16 +146,6 @@ SRCS_LIST		=	main.c																			\
 					engine/parsing/dn_get_values.c													\
 					engine/parsing/dn_free_values.c													\
 					engine/parsing/dn_strsplit_length.c												\
-																									\
-					engine/sfml/image/image.c														\
-					engine/sfml/image/init.c														\
-					engine/sfml/image/destroy.c														\
-					engine/sfml/render_texture/render_texture.c										\
-					engine/sfml/render_texture/init.c												\
-					engine/sfml/render_texture/destroy.c											\
-					engine/sfml/sprite/sprite.c														\
-					engine/sfml/sprite/init.c														\
-					engine/sfml/sprite/destroy.c													\
 																									\
 					engine/render_utils/row.c														\
 					engine/render_utils/column.c													\
@@ -267,7 +251,6 @@ SRCS_LIST		=	main.c																			\
 					game/entities/list/editor/camera/transform_camera_pos.c							\
 					game/entities/list/editor/camera/transform_screen_pos.c							\
 					game/entities/list/editor/camera/destroy.c										\
-					game/entities/list/editor/camera/new_editor_camera_zoom_event_tools.c			\
 					game/entities/list/editor/camera/new_editor_camera_zoom_event.c					\
 																									\
 					game/entities/list/editor/component/component_entity.c							\
@@ -506,13 +489,6 @@ OBJS			=	$(addprefix $(OBJS_FOLDER), $(OBJS_LIST))
 LIBFT_FOLDER	=	libft
 LIBFT			=	$(LIBFT_FOLDER)/libft.a
 
-ifneq ($(UNAME), Linux)
-	SFML_FOLDER		=	SFML
-	SFML_ABSOLUTE	=	$(addprefix $(shell pwd)/, $(SFML_FOLDER))
-	CSFML_FOLDER	=	CSFML
-	CSFML			=	$(CSFML_FOLDER)/lib
-endif
-
 CXX				=	gcc
 LD				=	gcc
 
@@ -520,30 +496,18 @@ INCLUDES		:=	-I includes					\
 					-I $(LIBFT_FOLDER)/includes
 LIB_FOLDERS		:=	-L$(LIBFT_FOLDER)
 
-ifneq ($(UNAME), Linux)
-	INCLUDES		:=	$(INCLUDES) -I $(CSFML_FOLDER)/include
-	LIB_FOLDERS		:=	$(LIB_FOLDERS) -L $(CSFML_FOLDER)/lib
-endif
+SDL_FOLDER		=	SDL2
+SDL				=	$(SDL_FOLDER)/build/.libs/libSDL2.a
+INCLUDES		:=	$(INCLUDES) -I $(SDL_FOLDER)/include
 
-LIBS			=	-lft				\
-					-lm					\
-					-lcsfml-graphics	\
-					-lcsfml-window		\
-					-lcsfml-system		\
-					-lcsfml-audio
+LIBS			=	-lft	\
+					-lm		\
+					-lSDL2
 
 CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast \
 					-DGIT_ID=\"$(shell git log --format="%H" -n 1)\" -flto
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
-ifneq ($(UNAME), Linux)
-	LDFLAGS			:=  $(LDFLAGS) \
-						-Wl,-rpath,$(SFML_FOLDER)/extlibs/libs-osx/Frameworks \
-						-Wl,-rpath,$(SFML_FOLDER)/lib \
-						-Wl,-rpath,$(CSFML_FOLDER)/lib
-	RUN_PREFIX		:=	LD_LIBRARY_PATH=CSFML/lib:SFML/lib
-	CFLAGS := $(CFLAGS) -Wno-deprecated-declarations
-endif
 
 # Colors
 BOLD			=	\e[1m
@@ -573,7 +537,7 @@ RANDOM			=	$(shell echo $$RANDOM)
 
 PREFIX			=	$(BOLD)$(LIGHT_CYAN)[$(NAME)]$(RESET):
 
-all: $(CSFML) $(LIBFT) $(NAME)
+all: $(SDL) $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
 	@$(LD) $(OBJS) -o $(NAME) $(LDFLAGS)
@@ -595,17 +559,14 @@ $(LIBFT):
 	@printf "\e[2A\e[0K"
 	@printf "$(PREFIX) libft all done\n";
 
-$(CSFML):
+$(SDL):
 	@printf "\e[0K"
-	@printf "$(PREFIX) CSFML\n";
-	@cd $(SFML_FOLDER); \
-		cmake .; \
-		make
-	@cd $(CSFML_FOLDER); \
-		cmake -DSFML_DIR=$(SFML_ABSOLUTE); \
+	@printf "$(PREFIX) SDL\n";
+	@cd $(SDL_FOLDER); \
+		./configure; \
 		make
 	@printf "\e[1A\e[0K"
-	@printf "$(PREFIX) CSFML done\n";
+	@printf "$(PREFIX) SDL done\n";
 
 libft-clean:
 	@printf "\e[0K"
@@ -621,31 +582,31 @@ libft-fclean:
 	@printf "\e[1A\e[0K"
 	@printf "$(PREFIX) libft fclean done\n";
 
-csfml-clean:
+sdl-clean:
 	@printf "\e[0K"
-	@printf "$(PREFIX) CSFML clean\n";
-	@if test "$(CSFML_FOLDER)" != "" ; then \
-		make -C $(CSFML_FOLDER) clean >/dev/null; \
+	@printf "$(PREFIX) SDL clean\n";
+	@if test "$(SDL_FOLDER)" != "" ; then \
+		make -C $(SDL_FOLDER) clean >/dev/null; \
 	fi
 	@printf "\e[1A\e[0K"
-	@printf "$(PREFIX) CSFML clean done\n";
+	@printf "$(PREFIX) SDL clean done\n";
 
-csfml-fclean:
+sdl-fclean:
 	@printf "\e[0K"
-	@printf "$(PREFIX) CSFML fclean\n";
-	@if test "$(CSFML_FOLDER)" != ""; then \
-		make -C $(CSFML_FOLDER) clean >/dev/null; \
-		rm -rf $(CSFML_FOLDER)/lib; \
+	@printf "$(PREFIX) SDL fclean\n";
+	@if test "$(SDL_FOLDER)" != ""; then \
+		make -C $(SDL_FOLDER) clean >/dev/null; \
+		rm -rf $(SDL_FOLDER)/build; \
 	fi
 	@printf "\e[1A\e[0K"
-	@printf "$(PREFIX) CSFML fclean done\n";
+	@printf "$(PREFIX) SDL fclean done\n";
 
-clean: libft-clean csfml-clean
+clean: libft-clean sdl-clean
 	@printf "\e[0K"
 	@printf "$(PREFIX) cleaned object files\n"
 	@rm -rf $(OBJS_FOLDER)
 
-fclean: clean libft-fclean csfml-fclean
+fclean: clean libft-fclean sdl-fclean
 	@printf "\e[0K"
 	@printf "$(PREFIX) cleaned binary file\n"
 	@rm -rf $(NAME)
@@ -655,4 +616,4 @@ separator:
 
 re: fclean separator $(LIBFT) all
 
-.PHONY: norm libft-clean libft-fclean csfml-clean csfml-fclean clean fclean re
+.PHONY: norm libft-clean libft-fclean sdl-clean sdl-fclean clean fclean re

@@ -6,21 +6,22 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 20:04:54 by lbenard           #+#    #+#             */
-/*   Updated: 2020/07/26 18:01:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 08:57:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "maths/vec2i.h"
 #include "game/entities/editor/preview_checkbox_entity.h"
 #include "game/game.h"
 
 void	preview_checkbox_entity_render(t_preview_checkbox_entity *const self,
 			t_frame *const frame)
 {
-	sfVector2i	mouse;
-	t_usize		cursor_size;
-	t_vec2f		scale;
+	t_vec2i	mouse;
+	t_usize	cursor_size;
+	t_vec2f	scale;
 
-	mouse = sfMouse_getPositionRenderWindow(self->super.window->window);
+	SDL_GetMouseState(&mouse.x, &mouse.y);
 	cursor_size = game_singleton()->window.cursor.cursor.size;
 	checkbox_entity_render(&self->super, frame);
 	scale.x = 200.0f / self->preview->size.x;

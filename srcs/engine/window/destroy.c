@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/13 00:27:51 by lbenard           #+#    #+#             */
-/*   Updated: 2019/10/27 01:38:25 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 07:39:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@
 void	destroy_window(t_window *const self)
 {
 	destroy_module(&self->module);
-	sfRenderWindow_destroy(self->window);
+	SDL_DestroyWindow(self->window);
 }

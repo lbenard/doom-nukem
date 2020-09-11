@@ -6,15 +6,16 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:05:07 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/26 20:03:34 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 08:49:29 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "maths/vec2i.h"
 #include "game/entities/checkbox_entity.h"
 
 static void	checkbox_entity_update2(t_checkbox_entity *const self,
 				t_bool is_mouse_pressed,
-				sfVector2i pos,
+				t_vec2i pos,
 				t_frame_coordinates frame_coordinates)
 {
 	if ((ssize_t)pos.x >= frame_coordinates.start.x
@@ -40,13 +41,13 @@ static void	checkbox_entity_update2(t_checkbox_entity *const self,
 void		checkbox_entity_update(t_checkbox_entity *const self)
 {
 	t_bool				is_mouse_pressed;
-	sfVector2i			pos;
+	t_vec2i				pos;
 	t_frame_coordinates	frame_coordinates;
 
 	if (!self->is_active)
 		return ;
-	pos = sfMouse_getPositionRenderWindow(self->window->window);
-	is_mouse_pressed = sfMouse_isButtonPressed(sfMouseLeft);
+	SDL_GetMouseState(&pos.x, &pos.y);
+	is_mouse_pressed = SDL_GetMouseState(NULL, NULL) & SDL_BUTTON_LMASK;
 	frame_coordinates = coordinates(
 		self->current_texture,
 		ft_frame_transform(

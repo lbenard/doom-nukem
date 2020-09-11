@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 20:15:00 by lbenard           #+#    #+#             */
-/*   Updated: 2020/06/08 19:49:59 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/11 08:13:35 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "engine/error.h"
 #include "engine/input.h"
 
-static void		close_game_event(t_game *game, sfEvent *event)
+static void		close_game_event(t_game *game, SDL_Event *event)
 {
 	if (input_get(&game_singleton()->input,
 			input_get_id(&game_singleton()->input, "Quit")) > 0.0f
-			|| event->type == sfEvtClosed)
+			|| event->type == SDL_QUIT)
 		window_close(&game->window);
 }
 
