@@ -45,7 +45,7 @@ lamp: 27.0127 17.9675
 lamp: 52.5030 18.1078
 
 -room
-floor: 6
+floor: F
 
 -map
 :                               5555                              
