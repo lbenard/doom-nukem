@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 04:36:35 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/12 17:44:13 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/12 19:35:23 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,11 @@ t_result	init_window(t_window *const self, const t_window_args *const args)
 {
 	init_module(&self->module);
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) == -1)
+	if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024)
+		== -1)
 		return (throw_result_str("init_window()", "failed to init SDL Mixer"));
-	if (!(self->window = SDL_CreateWindow(args->name,
-		SDL_WINDOWPOS_UNDEFINED,
-		SDL_WINDOWPOS_UNDEFINED,
-		args->size.x,
-		args->size.y,
+	if (!(self->window = SDL_CreateWindow(args->name, SDL_WINDOWPOS_UNDEFINED,
+		SDL_WINDOWPOS_UNDEFINED, args->size.x, args->size.y,
 		(args->fullscreen) ? SDL_WINDOW_FULLSCREEN : 0)))
 	{
 		return (throw_result_str("init_window()", "cannot create window"));
