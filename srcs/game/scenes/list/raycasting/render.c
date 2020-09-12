@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:42:30 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/11 09:08:58 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/12 15:10:38 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,67 @@ static void	render_game_over(t_raycasting_scene *const self,
 	render_game_over_buttons(self, fb);
 }
 
+// #include <stdio.h>
+
+// static void	render_skybox(t_raycasting_scene *const self,
+// 				t_frame *const fb, float p_hView, float p_vView)
+// {
+// 	t_usize	i;
+// 	float	offset;
+// 	t_vec2f	ratio;
+
+// 	(void)p_vView;
+// 	offset = self->assets.skybox.size.x / 2 * M_PI;
+// 	offset *= p_hView;
+// 	ratio.x = fb->size.x / (float)self->assets.skybox.size.x / 1.0f;
+// 	ratio.y = (fb->size.y + 200.0f) / (float)self->assets.skybox.size.y;
+// 	printf("ratio %f %f\n", ratio.x, ratio.y);
+// 	i.y = 0;
+// 	while (i.y < fb->size.y / 2 + self->entities.player_ref->super.transform.rotation.x)
+// 	{
+// 		i.x = 0;
+// 		while (i.x < fb->size.x)
+// 		{
+// 			fb->pixels[i.y * fb->size.x + i.x] =
+// 				self->assets.skybox.pixels[(int)((int)((float)i.y / ratio.y) * self->assets.skybox.size.x + (int)(i.x / ratio.x + offset))];
+// 			i.x++;
+// 		}
+// 		i.y++;
+// 	}
+// }
+
+void	render_skybox(t_raycasting_scene *const self,
+			t_frame *const fb,
+			float p_hView,
+			float p_vView)
+{
+	float	offset;
+	int		scale;
+	t_usize	i;
+
+	(void)p_vView;
+	scale = 1;
+	offset = self->assets.skybox.size.x / 2 * M_PI * scale;
+	offset *= p_hView;
+	i.y = 0;
+	while (i.y < fb->size.y)
+	{
+		i.x = 0;
+		while (i.x < fb->size.x)
+		{
+			fb->pixels[i.y * fb->size.x + i.x] = self->assets.skybox.pixels[(int)(i.y * self->assets.skybox.size.x + i.x + offset) % self->assets.skybox.size.x];
+			i.x++;
+		}
+		i.y++;
+	}
+}
+
 void		raycasting_scene_render(t_raycasting_scene *const self,
 				t_frame *const fb)
 {
 	frame_fill(fb, ft_rgba(42, 0, 0, 255));
 	raycasting_scene_render_screen(self);
+	render_skybox(self, fb, self->entities.player_ref->super.transform.rotation.y, 100.0f);
 	if (self->map.floor)
 		raycasting_scene_render_floor(self, fb,
 			self->entities.player_ref->dir, self->entities.player_ref->plane);

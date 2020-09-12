@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/09 11:04:52 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/12 13:56:31 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ typedef struct	s_raycasting_scene
 	struct		s_assets
 	{
 		t_frame			fallback_texture;
+		t_frame			skybox;
 		t_frame			crosshair;
 		t_spritesheet	use_key_spritesheet;
 		t_spritesheet	pick_key_spritesheet;
