@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/09/11 15:04:50 by lbenard          ###   ########.fr        #
+#    Updated: 2020/09/12 13:34:14 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -496,15 +496,21 @@ INCLUDES		:=	-I includes					\
 					-I $(LIBFT_FOLDER)/includes
 LIB_FOLDERS		:=	-L $(LIBFT_FOLDER)
 
-SDL_FOLDER		=	SDL2
-SDL				=	$(SDL_FOLDER)/build/.libs/libSDL2.a
-INCLUDES		:=	$(INCLUDES) -I $(SDL_FOLDER)/include
-LIB_FOLDERS		:=	$(LIB_FOLDERS) -L $(SDL_FOLDER)/build/.libs
+SDL_FOLDER			=	SDL2
+SDL_ABSOLUTE_FOLDER	=	$(shell pwd)
+SDL					=	$(SDL_FOLDER)/build/.libs/libSDL2.a
+INCLUDES			:=	$(INCLUDES) -I $(SDL_FOLDER)/include
+LIB_FOLDERS			:=	$(LIB_FOLDERS) -L$(SDL_FOLDER)/build/.libs
 
-LIBS			=	-lft	\
-					-lm		\
-					-lSDL2		\
-					-Wl,-rpath,$(SDL_FOLDER)/build/.libs
+SDL_MIXER_FOLDER	=	SDL_mixer
+SDL_MIXER			=	$(SDL_MIXER_FOLDER)/build/.libs/libSDL2_mixer.a
+INCLUDES			:=	$(INCLUDES) -I $(SDL_MIXER_FOLDER)
+LIB_FOLDERS			:=	$(LIB_FOLDERS) -L$(SDL_MIXER_FOLDER)/build/.libs
+
+LIBS			=	-lft \
+					-lm \
+					-lSDL2 -Wl,-rpath,$(SDL_FOLDER)/build/.libs \
+					-lSDL2_mixer -Wl,-rpath,$(SDL_MIXER_FOLDER)/build/.libs
 
 CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast \
 					-DGIT_ID=\"$(shell git log --format="%H" -n 1)\"
@@ -539,7 +545,7 @@ RANDOM			=	$(shell echo $$RANDOM)
 
 PREFIX			=	$(BOLD)$(LIGHT_CYAN)[$(NAME)]$(RESET):
 
-all: $(SDL) $(LIBFT) $(NAME)
+all: $(SDL) $(SDL_MIXER) $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
 	$(LD) $(OBJS) -o $(NAME) $(LDFLAGS)
@@ -565,10 +571,21 @@ $(SDL):
 	@printf "\e[0K"
 	@printf "$(PREFIX) SDL\n";
 	@cd $(SDL_FOLDER); \
-		./configure; \
-		make
+		./configure --prefix $(SDL_ABSOLUTE_FOLDER)/install; \
+		make; \
+		mkdir -p install; \
+		make install
 	@printf "\e[1A\e[0K"
 	@printf "$(PREFIX) SDL done\n";
+
+$(SDL_MIXER):
+	@printf "\e[0K"
+	@printf "$(PREFIX) SDL Mixer\n";
+	@cd $(SDL_MIXER_FOLDER); \
+		./configure --with-sdl-prefix=$(SDL_ABSOLUTE_FOLDER)/install; \
+		make
+	@printf "\e[1A\e[0K"
+	@printf "$(PREFIX) SDL Mixer done\n";
 
 libft-clean:
 	@printf "\e[0K"
