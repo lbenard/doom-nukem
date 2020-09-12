@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/12 15:51:49 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/12 13:56:31 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/12 17:58:41 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "engine/text.h"
 # include "engine/animation.h"
 # include "engine/spritesheet.h"
+# include "engine/sound.h"
+# include "engine/music.h"
 # include "game/entities/player_entity.h"
 # include "game/entities/image_entity.h"
 # include "game/entities/button_entity.h"
@@ -102,6 +104,10 @@ typedef struct	s_raycasting_scene
 		t_frame			ammo_sprite;
 		t_frame			medikit_sprite;
 		t_frame			lamp_sprite;
+		t_sound			pistol_sound;
+		t_sound			shotgun_sound;
+		t_sound			minigun_sound;
+		t_music			music;
 	}				assets;
 	struct		s_inputs
 	{

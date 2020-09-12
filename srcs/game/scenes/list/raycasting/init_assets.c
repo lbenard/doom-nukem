@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 22:00:19 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/12 13:56:58 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/12 19:14:14 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,12 @@ void		init_raycasting_scene_assets(t_raycasting_scene *const self)
 	init_weapons(self);
 	module_add(&self->super.module, &self->assets.lamp_sprite,
 		frame_from_file("resources/sprites/lamp.bmp"));
+	module_add(&self->super.module, &self->assets.pistol_sound,
+		sound("resources/sounds/pistol.wav"));
+	module_add(&self->super.module, &self->assets.shotgun_sound,
+		sound("resources/sounds/shotgun.wav"));
+	module_add(&self->super.module, &self->assets.minigun_sound,
+		sound("resources/sounds/minigun.wav"));
+	module_add(&self->super.module, &self->assets.music,
+		music("resources/sounds/quinns-song-first-night.wav"));
 }

@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 18:32:23 by lbenard           #+#    #+#             */
-/*   Updated: 2020/08/20 18:09:19 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/12 17:39:46 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static t_result	init_minigun_entity2(t_minigun_entity *const self,
 	}
 	self->super.super.super.vtable.update = minigun_entity_update;
 	self->super.hud_ref = &ctx->assets.minigun_spritesheet;
+	self->super.sound_ref = &ctx->assets.minigun_sound;
 	self->super.super.super.transform.position.x = args->pos.x;
 	self->super.super.super.transform.position.y = args->pos.y;
 	self->super.super.super.transform.position.z = 0.0f;

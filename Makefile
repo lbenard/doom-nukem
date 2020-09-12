@@ -6,7 +6,7 @@
 #    By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/21 19:33:38 by lbenard           #+#    #+#              #
-#    Updated: 2020/09/12 13:34:14 by lbenard          ###   ########.fr        #
+#    Updated: 2020/09/12 17:58:18 by lbenard          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -135,6 +135,11 @@ SRCS_LIST		=	main.c																			\
 					engine/map/parse_entities.c														\
 					engine/map/destroy.c															\
 																									\
+					engine/music/music.c															\
+					engine/music/init.c																\
+					engine/music/play.c																\
+					engine/music/destroy.c															\
+																									\
 					engine/parsing/dn_read_file.c													\
 					engine/parsing/dn_is_flag_correct.c												\
 					engine/parsing/dn_is_kv_correct.c												\
@@ -153,6 +158,11 @@ SRCS_LIST		=	main.c																			\
 																									\
 					engine/scene/init.c																\
 					engine/scene/destroy.c															\
+																									\
+					engine/sound/sound.c															\
+					engine/sound/init.c																\
+					engine/sound/play.c																\
+					engine/sound/destroy.c															\
 																									\
 					engine/spritesheet/spritesheet.c												\
 					engine/spritesheet/init.c														\
@@ -548,7 +558,7 @@ PREFIX			=	$(BOLD)$(LIGHT_CYAN)[$(NAME)]$(RESET):
 all: $(SDL) $(SDL_MIXER) $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
-	$(LD) $(OBJS) -o $(NAME) $(LDFLAGS)
+	@$(LD) $(OBJS) -o $(NAME) $(LDFLAGS)
 	@printf "\e[0K$(PREFIX) done\n"
 
 $(OBJS_FOLDER)%.o: $(SRCS_FOLDER)%.c

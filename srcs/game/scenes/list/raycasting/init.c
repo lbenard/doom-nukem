@@ -6,7 +6,7 @@
 /*   By: lbenard <lbenard@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 19:26:02 by lbenard           #+#    #+#             */
-/*   Updated: 2020/09/07 10:12:16 by lbenard          ###   ########.fr       */
+/*   Updated: 2020/09/12 18:57:50 by lbenard          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 	init_raycasting_scene_tooltips(self);
 	init_raycasting_scene_entity_lists(self);
 	init_raycasting_scene_assets(self);
+	if (self->super.module.has_error)
+	{
+		destroy_raycasting_scene(self);
+		return (throw_result_str("init_raycasting_scene()",
+			"failed to create scene"));
+	}
 	init_raycasting_scene_inputs(self);
 	raycasting_scene_add_entities(self);
 	init_raycasting_scene_weapon(self);
@@ -38,5 +44,6 @@ t_result	init_raycasting_scene(t_raycasting_scene *const self,
 		return (throw_result_str("init_raycasting_scene()",
 			"failed to create"));
 	}
+	music_play(&self->assets.music);
 	return (OK);
 }
