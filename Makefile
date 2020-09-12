@@ -489,23 +489,25 @@ OBJS			=	$(addprefix $(OBJS_FOLDER), $(OBJS_LIST))
 LIBFT_FOLDER	=	libft
 LIBFT			=	$(LIBFT_FOLDER)/libft.a
 
-CXX				=	gcc
-LD				=	gcc
+CXX				=	clang
+LD				=	clang
 
 INCLUDES		:=	-I includes					\
 					-I $(LIBFT_FOLDER)/includes
-LIB_FOLDERS		:=	-L$(LIBFT_FOLDER)
+LIB_FOLDERS		:=	-L $(LIBFT_FOLDER)
 
 SDL_FOLDER		=	SDL2
 SDL				=	$(SDL_FOLDER)/build/.libs/libSDL2.a
 INCLUDES		:=	$(INCLUDES) -I $(SDL_FOLDER)/include
+LIB_FOLDERS		:=	$(LIB_FOLDERS) -L $(SDL_FOLDER)/build/.libs
 
 LIBS			=	-lft	\
 					-lm		\
-					-lSDL2
+					-lSDL2		\
+					-Wl,-rpath,$(SDL_FOLDER)/build/.libs
 
 CFLAGS			=	-Wall -Wextra -Werror -O3 -Ofast \
-					-DGIT_ID=\"$(shell git log --format="%H" -n 1)\" -flto
+					-DGIT_ID=\"$(shell git log --format="%H" -n 1)\"
 
 LDFLAGS			:=	$(LIB_FOLDERS) $(LIBS)
 
@@ -540,7 +542,7 @@ PREFIX			=	$(BOLD)$(LIGHT_CYAN)[$(NAME)]$(RESET):
 all: $(SDL) $(LIBFT) $(NAME)
 
 $(NAME): $(OBJS)
-	@$(LD) $(OBJS) -o $(NAME) $(LDFLAGS)
+	$(LD) $(OBJS) -o $(NAME) $(LDFLAGS)
 	@printf "\e[0K$(PREFIX) done\n"
 
 $(OBJS_FOLDER)%.o: $(SRCS_FOLDER)%.c
